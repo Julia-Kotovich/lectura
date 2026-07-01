@@ -1,0 +1,273 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum DifficultyLevel {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+  GRADUATE
+}
+
+enum LectureStatus {
+  DRAFT
+  OUTLINE_READY
+  SLIDES_READY
+  PUBLISHED
+}
+
+enum GenerationJobType {
+  OUTLINE
+  SLIDES
+  IMAGE
+  EVALUATION
+  SINGLE_SLIDE
+}
+
+enum GenerationJobStatus {
+  PENDING
+  RUNNING
+  COMPLETED
+  FAILED
+}
+
+enum ShareRole {
+  VIEWER
+  EDITOR
+}
+
+enum OrgRole {
+  OWNER
+  ADMIN
+  MEMBER
+}
+
+model User {
+  id            String               @id @default(cuid())
+  email         String?              @unique
+  name          String?
+  image         String?
+  emailVerified DateTime?
+  createdAt     DateTime             @default(now())
+  updatedAt     DateTime             @updatedAt
+  accounts      Account[]
+  sessions      Session[]
+  lectures      Lecture[]
+  orgMembers    OrganizationMember[]
+  comments      SlideComment[]
+  shares        LectureShare[]       @relation("SharedWith")
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model Organization {
+  id        String               @id @default(cuid())
+  name      String
+  slug      String               @unique
+  createdAt DateTime             @default(now())
+  updatedAt DateTime             @updatedAt
+  members   OrganizationMember[]
+  lectures  Lecture[]
+}
+
+model OrganizationMember {
+  id             String       @id @default(cuid())
+  organizationId String
+  userId         String
+  role           OrgRole      @default(MEMBER)
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([organizationId, userId])
+}
+
+model Lecture {
+  id              String          @id @default(cuid())
+  userId          String
+  user            User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  organizationId  String?
+  organization    Organization?   @relation(fields: [organizationId], references: [id], onDelete: SetNull)
+  title           String
+  description     String?
+  targetAudience  String?
+  durationMinutes Int             @default(60)
+  difficulty      DifficultyLevel @default(INTERMEDIATE)
+  status          LectureStatus   @default(DRAFT)
+  templateId      String?
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+
+  outlineVersions OutlineVersion[]
+  slideVersions   SlideDeckVersion[]
+  slides          Slide[]
+  generationJobs  GenerationJob[]
+  evaluations     SlideEvaluation[]
+  shares          LectureShare[]
+  comments        SlideComment[]
+
+  @@index([userId])
+  @@index([organizationId])
+}
+
+model LectureShare {
+  id        String    @id @default(cuid())
+  lectureId String
+  lecture   Lecture   @relation(fields: [lectureId], references: [id], onDelete: Cascade)
+  userId    String
+  user      User      @relation("SharedWith", fields: [userId], references: [id], onDelete: Cascade)
+  role      ShareRole @default(VIEWER)
+  createdAt DateTime  @default(now())
+
+  @@unique([lectureId, userId])
+}
+
+model OutlineVersion {
+  id        String   @id @default(cuid())
+  lectureId String
+  lecture   Lecture  @relation(fields: [lectureId], references: [id], onDelete: Cascade)
+  version   Int      @default(1)
+  content   Json
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+
+  @@unique([lectureId, version])
+  @@index([lectureId])
+}
+
+model SlideDeckVersion {
+  id        String   @id @default(cuid())
+  lectureId String
+  lecture   Lecture  @relation(fields: [lectureId], references: [id], onDelete: Cascade)
+  version   Int      @default(1)
+  snapshot  Json
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+
+  @@unique([lectureId, version])
+  @@index([lectureId])
+}
+
+model Slide {
+  id           String   @id @default(cuid())
+  lectureId    String
+  lecture      Lecture  @relation(fields: [lectureId], references: [id], onDelete: Cascade)
+  orderIndex   Int
+  title        String
+  layout       String   @default("content")
+  content      Json
+  speakerNotes String?
+  metadata     Json?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  blocks      SlideBlock[]
+  evaluations SlideEvaluation[]
+  comments    SlideComment[]
+
+  @@index([lectureId, orderIndex])
+}
+
+model SlideBlock {
+  id         String   @id @default(cuid())
+  slideId    String
+  slide      Slide    @relation(fields: [slideId], references: [id], onDelete: Cascade)
+  orderIndex Int
+  type       String
+  content    Json
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([slideId, orderIndex])
+}
+
+model SlideComment {
+  id        String   @id @default(cuid())
+  slideId   String
+  slide     Slide    @relation(fields: [slideId], references: [id], onDelete: Cascade)
+  lectureId String
+  lecture   Lecture  @relation(fields: [lectureId], references: [id], onDelete: Cascade)
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  body      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([slideId])
+}
+
+model GenerationJob {
+  id        String              @id @default(cuid())
+  lectureId String
+  lecture   Lecture             @relation(fields: [lectureId], references: [id], onDelete: Cascade)
+  type      GenerationJobType
+  status    GenerationJobStatus @default(PENDING)
+  input     Json?
+  output    Json?
+  error     String?
+  createdAt DateTime            @default(now())
+  updatedAt DateTime            @updatedAt
+
+  @@index([lectureId, status])
+}
+
+model SlideEvaluation {
+  id        String   @id @default(cuid())
+  lectureId String
+  lecture   Lecture  @relation(fields: [lectureId], references: [id], onDelete: Cascade)
+  slideId   String?
+  slide     Slide?   @relation(fields: [slideId], references: [id], onDelete: SetNull)
+  scores    Json
+  feedback  Json
+  overall   Float
+  createdAt DateTime @default(now())
+
+  @@index([lectureId])
+}
+
+model LectureTemplate {
+  id          String          @id @default(cuid())
+  slug        String          @unique
+  title       String
+  description String?
+  category    String
+  difficulty  DifficultyLevel @default(INTERMEDIATE)
+  outline     Json
+  createdAt   DateTime        @default(now())
+}
