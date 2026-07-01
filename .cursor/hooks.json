@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "hooks": {
+    "stop": [
+      {
+        "command": ".cursor/hooks/prompt-git-push.sh",
+        "timeout": 15,
+        "loop_limit": 1
+      }
+    ],
+    "beforeShellExecution": [
+      {
+        "command": ".cursor/hooks/ask-before-git-push.sh",
+        "matcher": "git push"
+      }
+    ]
+  }
+}
