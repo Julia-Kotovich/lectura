@@ -38,6 +38,8 @@ docs/project-structure.pdf
 *.pem
 .env
 .env*.local
+.lectura-dev.pid
+.lectura-dev.log
 
 # debug
 npm-debug.log*

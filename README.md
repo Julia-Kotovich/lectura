@@ -61,6 +61,14 @@ npm run worker
 
 Open [http://localhost:3000](http://localhost:3000).
 
+### Jupyter notebook (all-in-one)
+
+```bash
+jupyter notebook run-lectura.ipynb
+```
+
+Run cells top-to-bottom to install deps, start Docker, migrate, seed, and launch the dev server.
+
 ## Environment variables
 
 | Variable | Description | Default |
