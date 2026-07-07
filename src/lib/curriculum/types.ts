@@ -47,6 +47,7 @@ export type ProgramModule = {
   track: string;
   status: "mandatory" | "elective";
   sourcePdf: string;
+  syllabusPath?: string;
 };
 
 /**

@@ -16,10 +16,16 @@ type ModuleSpec = {
   learningObjectives: string[];
   sections: LectureOutline["sections"];
   resources?: string[];
+  syllabusPath?: string;
+  targetSlideCount?: number;
+  estimatedPresentationMinutes?: number;
+  estimatedStudyMinutes?: number;
 };
 
 function makeOutline(spec: ModuleSpec): LectureOutline {
-  const slideCount = spec.cp >= 5 ? 14 : 10;
+  const slideCount = spec.targetSlideCount ?? (spec.cp >= 5 ? 14 : 10);
+  const presentationMinutes = spec.estimatedPresentationMinutes ?? LECTURE_MIN;
+  const studyMinutes = spec.estimatedStudyMinutes ?? slideCount * 8;
   return {
     title: spec.title,
     summary: spec.summary,
@@ -34,8 +40,8 @@ function makeOutline(spec: ModuleSpec): LectureOutline {
       "Applied project or lab report tied to module ILOs",
     ],
     targetSlideCount: slideCount,
-    estimatedPresentationMinutes: LECTURE_MIN,
-    estimatedStudyMinutes: slideCount * 8,
+    estimatedPresentationMinutes: presentationMinutes,
+    estimatedStudyMinutes: studyMinutes,
     courseFrameworkSlug: "default",
     semesterWeek: spec.semester,
   };
@@ -54,6 +60,7 @@ function toModule(spec: ModuleSpec): ProgramModule {
     track: spec.track,
     status: spec.status,
     sourcePdf: HANDBOOK,
+    syllabusPath: spec.syllabusPath,
   };
 }
 
@@ -63,53 +70,251 @@ const MODULES: ModuleSpec[] = [
     code: "MCSSE-SE-01",
     title: "Software Construction, Architecture and Engineering",
     summary:
-      "Mandatory Semester 1 (5 CP). OOP construction, architecture patterns, and software engineering practices — coordinated by Prof. Bertrand Meyer. Foundation for the CSSE software engineering track.",
+      "Mandatory Semester 1 (5 CP). Foundational Software Engineering module spanning object-oriented construction, abstraction, contracts, design patterns, architecture, and engineering process. Recommended delivery model: 10 lectures x 90 minutes.",
     semester: 1,
     cp: 5,
     track: "Software Engineering",
     status: "mandatory",
     learningObjectives: [
-      "Use object-oriented techniques to produce high-quality programs",
-      "Apply inheritance, genericity, information hiding, and Design by Contract",
-      "Apply fundamental design patterns (Observer, Visitor, …)",
-      "Apply agile methods and requirements engineering basics",
+      "Use object-oriented techniques to produce high-quality software",
+      "Apply inheritance, genericity, information hiding, and Design by Contract appropriately",
+      "Reason about software reuse, modularity, and maintainability",
+      "Apply fundamental design patterns in context rather than mechanically",
+      "Connect class design decisions with architectural structure",
+      "Understand how agile methods and requirements engineering influence construction choices",
     ],
     sections: [
       {
-        title: "Construction — object-oriented programming",
-        durationMinutes: 30,
-        learningGoals: ["Master OOP mechanisms for industrial-quality code"],
+        title: "Lecture 1. Course Framing and the Role of Software Construction",
+        durationMinutes: 90,
+        learningGoals: [
+          "Explain what software construction covers within software engineering",
+          "Relate code quality to architecture, process, and maintainability",
+        ],
         subsections: [
           {
-            title: "Inheritance, polymorphism, dynamic binding",
-            keyPoints: ["Multiple inheritance", "Contracts and reliability", "Eiffel as reference notation"],
+            title: "Why construction matters",
+            keyPoints: [
+              "Software quality is more than functional correctness",
+              "Construction, architecture, and engineering reinforce each other",
+              "Long-term maintainability drives design choices",
+            ],
+            suggestedDiagram: "Software lifecycle overview showing code, design, architecture, and process",
           },
+        ],
+        exercises: [
+          "Compare two working code snippets and discuss which one is more readable and evolvable",
         ],
       },
       {
-        title: "Architecture — structuring large systems",
-        durationMinutes: 25,
-        learningGoals: ["Structure programs with proven architectural techniques"],
+        title: "Lecture 2. Abstraction, ADTs, and Class Design",
+        durationMinutes: 90,
+        learningGoals: [
+          "Use abstraction to control complexity",
+          "Separate interface design from implementation decisions",
+        ],
         subsections: [
           {
-            title: "Design patterns",
-            keyPoints: ["Observer, Visitor and related patterns", "Coupling and cohesion at scale"],
+            title: "Encapsulation and class responsibilities",
+            keyPoints: [
+              "Abstract data types express stable responsibilities",
+              "Classes are design tools, not just syntax",
+              "Information hiding supports safe change",
+            ],
+            suggestedDiagram: "ADT-to-class mapping and interface versus implementation boundary",
           },
+        ],
+        exercises: [
+          "Redesign a poorly structured class into a cleaner abstraction with clearer responsibilities",
         ],
       },
       {
-        title: "Engineering — process beyond code",
-        durationMinutes: 20,
-        learningGoals: ["Connect coding to software production discipline"],
+        title: "Lecture 3. Inheritance, Polymorphism, and Dynamic Binding",
+        durationMinutes: 90,
+        learningGoals: [
+          "Distinguish subtyping from inheritance",
+          "Evaluate when inheritance helps and when composition is safer",
+        ],
         subsections: [
           {
-            title: "Agile and requirements",
-            keyPoints: ["Agile development introduction", "Requirements engineering overview"],
+            title: "Variation mechanisms in OOP",
+            keyPoints: [
+              "Dynamic binding and substitution shape behavior reuse",
+              "Extension and specialization must preserve behavioral consistency",
+              "Composition can avoid fragile inheritance hierarchies",
+            ],
+            suggestedDiagram: "Inheritance hierarchy with dynamic dispatch and subclassing versus composition",
           },
+        ],
+        exercises: [
+          "Review an inheritance-heavy design and propose a composition-based alternative",
+        ],
+      },
+      {
+        title: "Lecture 4. Genericity, Reuse, and Component Thinking",
+        durationMinutes: 90,
+        learningGoals: [
+          "Design abstractions for reuse without losing clarity",
+          "Balance extension points with stable interfaces",
+        ],
+        subsections: [
+          {
+            title: "Reusable component design",
+            keyPoints: [
+              "Genericity enables parameterized abstractions",
+              "Reuse requires thoughtful API and component design",
+              "Libraries and frameworks embody reusable contracts",
+            ],
+            suggestedDiagram: "Generic container abstraction and reusable component model",
+          },
+        ],
+        exercises: [
+          "Identify which parts of a small module should be generalized and which should remain concrete",
+        ],
+      },
+      {
+        title: "Lecture 5. Design by Contract and Correctness",
+        durationMinutes: 90,
+        learningGoals: [
+          "Use contracts to specify and reason about behavior precisely",
+          "Relate correctness arguments to software design decisions",
+        ],
+        subsections: [
+          {
+            title: "Precise software behavior",
+            keyPoints: [
+              "Preconditions, postconditions, and invariants formalize responsibilities",
+              "Contracts clarify client and supplier obligations",
+              "Eiffel provides a reference notation for precise design",
+            ],
+            suggestedDiagram: "Contract relationship between caller and callee with invariant-preserving states",
+          },
+        ],
+        exercises: [
+          "Write contracts for a stack, queue, or bank-account abstraction",
+        ],
+      },
+      {
+        title: "Lecture 6. Designing for Reliability and Maintainability",
+        durationMinutes: 90,
+        learningGoals: [
+          "Connect local code decisions with long-term maintainability",
+          "Use quality attributes such as coupling and cohesion to guide refactoring",
+        ],
+        subsections: [
+          {
+            title: "Code quality under change",
+            keyPoints: [
+              "Coupling and cohesion shape maintainability",
+              "Refactoring improves structure without changing intent",
+              "Code smells reveal risks to readability and evolvability",
+            ],
+            suggestedDiagram: "Tight versus loose coupling and cohesion comparison across class designs",
+          },
+        ],
+        exercises: [
+          "Review a code fragment and identify maintainability risks and refactoring opportunities",
+        ],
+      },
+      {
+        title: "Lecture 7. Fundamental Design Patterns I",
+        durationMinutes: 90,
+        learningGoals: [
+          "Explain why patterns exist as reusable design knowledge",
+          "Choose patterns according to concrete variation points",
+        ],
+        subsections: [
+          {
+            title: "Observer, Strategy, and behavioral flexibility",
+            keyPoints: [
+              "Patterns capture recurring solutions without replacing judgment",
+              "Observer and Strategy manage change in different ways",
+              "Template Method or Command can encode stable workflows",
+            ],
+            suggestedDiagram: "Observer collaboration flow and Strategy substitution diagram",
+          },
+        ],
+        exercises: [
+          "Match a short problem statement to a suitable pattern and justify the choice",
+        ],
+      },
+      {
+        title: "Lecture 8. Fundamental Design Patterns II",
+        durationMinutes: 90,
+        learningGoals: [
+          "Deepen pattern literacy with structural and creational patterns",
+          "Recognize when patterns add clarity and when they cause overengineering",
+        ],
+        subsections: [
+          {
+            title: "Creational and structural trade-offs",
+            keyPoints: [
+              "Visitor, Factory, and Adapter solve different sources of rigidity",
+              "Facade and related patterns can simplify architectural boundaries",
+              "Patterns must justify their abstraction cost",
+            ],
+            suggestedDiagram: "Factory creation flow, Visitor traversal structure, and Adapter versus Facade comparison",
+          },
+        ],
+        exercises: [
+          "Decide whether a proposed pattern use adds value or unnecessary complexity",
+        ],
+      },
+      {
+        title: "Lecture 9. Software Architecture for Large Systems",
+        durationMinutes: 90,
+        learningGoals: [
+          "Connect class-level design with system-level architecture",
+          "Use architectural decomposition to support quality attributes",
+        ],
+        subsections: [
+          {
+            title: "From modules to systems",
+            keyPoints: [
+              "Layers, components, and boundaries organize large systems",
+              "Architectural choices shape modifiability and communication",
+              "Documentation is part of architectural design",
+            ],
+            suggestedDiagram: "Layered architecture, component-and-connector view, and architectural boundary map",
+          },
+        ],
+        exercises: [
+          "Sketch a high-level architecture for a medium-size product and explain its main boundaries",
+        ],
+      },
+      {
+        title: "Lecture 10. Engineering Beyond Code: Agile, Requirements, and Delivery",
+        durationMinutes: 90,
+        learningGoals: [
+          "Connect construction practices with delivery and coordination",
+          "Relate requirements to implementation and iterative development",
+        ],
+        subsections: [
+          {
+            title: "Process as part of engineering",
+            keyPoints: [
+              "Correct code alone is insufficient without requirements and delivery discipline",
+              "Agile development and requirements engineering guide implementation choices",
+              "Traceability links requirements, design decisions, and delivered software",
+            ],
+            suggestedDiagram: "Requirements-to-code traceability path and iterative feedback loops",
+          },
+        ],
+        exercises: [
+          "Take a small feature request and trace it from requirement to design decision to implementation task",
         ],
       },
     ],
-    resources: ["Meyer — Touch of Class", "Ghezzi, Jazayeri, Mandrioli — Fundamentals of SE"],
+    resources: [
+      "Bertrand Meyer — Touch of Class",
+      "Carlo Ghezzi, Mehdi Jazayeri, Dino Mandrioli — Fundamentals of Software Engineering",
+      "Frank Buschmann et al. — Pattern-Oriented Software Architecture",
+      "Len Bass, Paul Clements, Rick Kazman — Software Architecture in Practice",
+    ],
+    syllabusPath: "docs/syllabi/software-construction-architecture-engineering.md",
+    targetSlideCount: 200,
+    estimatedPresentationMinutes: 900,
+    estimatedStudyMinutes: 1600,
   },
   {
     slug: "mcsse-se-02-quality-engineering",

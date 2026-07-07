@@ -35,6 +35,7 @@ export const programsRouter = router({
           track: m.track,
           status: m.status,
           sourcePdf: m.sourcePdf,
+          hasSyllabus: Boolean(m.syllabusPath),
           targetSlideCount: m.outline.targetSlideCount,
           sectionCount: m.outline.sections.length,
           learningObjectives: m.outline.learningObjectives,

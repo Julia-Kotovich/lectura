@@ -15,6 +15,7 @@ import {
   ChevronDown,
   ChevronRight,
   Dumbbell,
+  ExternalLink,
   FileText,
   GraduationCap,
   ImageIcon,
@@ -183,6 +184,15 @@ export default function ProgramPage({
                   </div>
 
                   <div className="flex flex-col items-end gap-2">
+                    {mod.hasSyllabus && (
+                      <Link
+                        href={`/programs/${slug}/modules/${mod.slug}/syllabus`}
+                        className="inline-flex items-center gap-1 text-xs font-medium text-violet-600 hover:underline"
+                      >
+                        View syllabus
+                        <ExternalLink className="h-3.5 w-3.5" />
+                      </Link>
+                    )}
                     <Button
                       size="sm"
                       disabled={busySlug === mod.slug}
