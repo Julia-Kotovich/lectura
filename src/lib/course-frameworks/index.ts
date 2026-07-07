@@ -1,35 +1,17 @@
-import {
-  matchesOopCourse,
-  OOP_BACHELOR_AI_FRAMEWORK,
-  OOP_BACHELOR_SLUG,
-  OOP_TARGET_SLIDES_PER_LECTURE,
-} from "./oop-bachelor";
-
-export {
-  OOP_BACHELOR_SLUG,
-  OOP_SEMESTER_WEEKS,
-  OOP_LECTURE_SECTIONS,
-  OOP_TARGET_SLIDES_PER_LECTURE,
-} from "./oop-bachelor";
-
-export type CourseFrameworkSlug = "default" | typeof OOP_BACHELOR_SLUG;
+export type CourseFrameworkSlug = "default";
 
 export function resolveCourseFrameworkSlug(
-  title: string,
-  description?: string | null,
+  _title: string,
+  _description?: string | null,
   explicit?: string | null,
 ): CourseFrameworkSlug {
-  if (explicit === OOP_BACHELOR_SLUG) return OOP_BACHELOR_SLUG;
-  if (matchesOopCourse(title, description)) return OOP_BACHELOR_SLUG;
-  return "default";
+  return explicit === "default" || !explicit ? "default" : "default";
 }
 
-export function getCourseFrameworkPrompt(slug: CourseFrameworkSlug): string | null {
-  if (slug === OOP_BACHELOR_SLUG) return OOP_BACHELOR_AI_FRAMEWORK;
+export function getCourseFrameworkPrompt(_slug: CourseFrameworkSlug): string | null {
   return null;
 }
 
-export function getDefaultTargetSlides(slug: CourseFrameworkSlug): number {
-  if (slug === OOP_BACHELOR_SLUG) return OOP_TARGET_SLIDES_PER_LECTURE;
+export function getDefaultTargetSlides(_slug: CourseFrameworkSlug): number {
   return 10;
 }

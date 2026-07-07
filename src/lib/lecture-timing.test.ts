@@ -6,7 +6,7 @@ describe("lecture-timing", () => {
   it("defaults to ~10 slides and computes study time", () => {
     const outline = enrichOutlineMetadata(
       lectureOutlineSchema.parse({
-        title: "OOP",
+        title: "Quality Engineering",
         summary: "Summary",
         learningObjectives: ["Goal"],
         sections: [

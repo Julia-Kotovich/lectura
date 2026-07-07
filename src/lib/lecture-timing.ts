@@ -1,16 +1,11 @@
 import type { LectureOutline } from "@/lib/schemas/outline";
-import { OOP_BACHELOR_SLUG, OOP_TARGET_SLIDES_PER_LECTURE } from "@/lib/course-frameworks";
 
 export const DEFAULT_TARGET_SLIDES = 10;
 /** Self-study: reading, notes, light exercises per slide */
 const MINUTES_PER_SLIDE_STUDY = 7;
 
 export function enrichOutlineMetadata(outline: LectureOutline): LectureOutline {
-  const frameworkDefault =
-    outline.courseFrameworkSlug === OOP_BACHELOR_SLUG
-      ? OOP_TARGET_SLIDES_PER_LECTURE
-      : DEFAULT_TARGET_SLIDES;
-  const targetSlideCount = outline.targetSlideCount ?? frameworkDefault;
+  const targetSlideCount = outline.targetSlideCount ?? DEFAULT_TARGET_SLIDES;
 
   const estimatedStudyMinutes =
     outline.estimatedStudyMinutes ??

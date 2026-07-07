@@ -1,5 +1,5 @@
 import { db } from "@/lib/db";
-import { getCourse, listCourses } from "@/lib/courses";
+import { getCourse, listCourses } from "@/lib/curriculum";
 
 export function listCourseSummaries() {
   return listCourses();
@@ -9,7 +9,7 @@ export function getCourseBySlug(slug: string) {
   return getCourse(slug);
 }
 
-/** Spawn a lecture in the user's library from a course's curated outline. */
+/** Spawn a user Lecture from a catalog course lecture outline. */
 export async function createLectureFromCourseEntry(
   userId: string,
   courseSlug: string,

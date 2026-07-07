@@ -7,9 +7,9 @@ import { aiRouter } from "./routers/ai";
 import { exportRouter } from "./routers/export";
 import { shareRouter } from "./routers/share";
 import { commentsRouter } from "./routers/comments";
-import { templatesRouter } from "./routers/templates";
 import { versionsRouter } from "./routers/versions";
 import { coursesRouter } from "./routers/courses";
+import { programsRouter } from "./routers/programs";
 
 export const appRouter = router({
   lecture: lectureRouter,
@@ -20,8 +20,8 @@ export const appRouter = router({
   export: exportRouter,
   share: shareRouter,
   comments: commentsRouter,
-  templates: templatesRouter,
   courses: coursesRouter,
+  programs: programsRouter,
   versions: versionsRouter,
 });
 

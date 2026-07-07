@@ -4,7 +4,6 @@ import { slideDeckDraftSchema } from "@/lib/schemas/slide";
 import { deckEvaluationSchema } from "@/lib/schemas/evaluation";
 import { enrichOutlineMetadata } from "@/lib/lecture-timing";
 import {
-  buildMockOopOutline,
   buildMockOutline,
   buildMockSlidesFromOutline,
 } from "../mock-deck";
@@ -90,14 +89,7 @@ export class MockTextProvider implements TextProvider {
       const title = extractTitle(input.userPrompt) ?? "Lecture";
       const durationMinutes = extractDuration(input.userPrompt) ?? 60;
       const description = extractDescription(input.userPrompt);
-      const semesterWeek = extractSemesterWeek(input.userPrompt);
-      const isOopFramework =
-        user.includes("course framework") ||
-        user.includes("object-oriented programming") ||
-        user.includes("introduction & context");
-      const raw = isOopFramework
-        ? buildMockOopOutline({ title, description, durationMinutes, semesterWeek })
-        : buildMockOutline({ title, description, durationMinutes });
+      const raw = buildMockOutline({ title, description, durationMinutes });
       const outline = enrichOutlineMetadata(raw);
 
       return {
@@ -124,11 +116,6 @@ function extractQuotedTitle(prompt: string): string | null {
 function extractDuration(prompt: string): number | null {
   const match = prompt.match(/duration:\s*(\d+)/i);
   return match ? parseInt(match[1], 10) : null;
-}
-
-function extractSemesterWeek(prompt: string): number | undefined {
-  const match = prompt.match(/semester week:\s*(\d+)/i);
-  return match ? parseInt(match[1], 10) : undefined;
 }
 
 function extractDescription(prompt: string): string | undefined {

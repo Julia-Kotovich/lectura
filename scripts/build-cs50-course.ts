@@ -15,7 +15,7 @@ import {
 } from "./lib/cs50-pdf-parser";
 
 const SOURCE_FOLDER = join(process.cwd(), "CS50");
-const JSON_OUT = join(process.cwd(), "src/lib/courses/data/cs50-structure.json");
+const JSON_OUT = join(process.cwd(), "src/lib/curriculum/courses/data/cs50-structure.json");
 const PDF_OUT = join(SOURCE_FOLDER, "course-plan.pdf");
 
 const LECTURES = [

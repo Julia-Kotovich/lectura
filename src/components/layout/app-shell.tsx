@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { GraduationCap, Plus, LayoutTemplate, BookOpen } from "lucide-react";
+import { GraduationCap, Plus, BookOpen, Layers } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 export function AppShell({ children }: { children: React.ReactNode }) {
@@ -13,18 +13,18 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           </Link>
           <nav className="flex items-center gap-1">
             <Link
+              href="/programs"
+              className="inline-flex h-8 items-center gap-2 rounded-md px-3 text-xs font-medium hover:bg-zinc-100 dark:hover:bg-zinc-800"
+            >
+              <Layers className="h-4 w-4" />
+              Programs
+            </Link>
+            <Link
               href="/courses"
               className="inline-flex h-8 items-center gap-2 rounded-md px-3 text-xs font-medium hover:bg-zinc-100 dark:hover:bg-zinc-800"
             >
               <BookOpen className="h-4 w-4" />
               Courses
-            </Link>
-            <Link
-              href="/templates"
-              className="inline-flex h-8 items-center gap-2 rounded-md px-3 text-xs font-medium hover:bg-zinc-100 dark:hover:bg-zinc-800"
-            >
-              <LayoutTemplate className="h-4 w-4" />
-              Templates
             </Link>
             <Link
               href="/lectures/new"

@@ -10,7 +10,7 @@ test("new lecture form", async ({ page }) => {
   await expect(page.getByRole("heading", { name: /new lecture/i })).toBeVisible();
 });
 
-test("templates page", async ({ page }) => {
-  await page.goto("/templates");
-  await expect(page.getByRole("heading", { name: /lecture templates/i })).toBeVisible();
+test("programs page", async ({ page }) => {
+  await page.goto("/programs");
+  await expect(page.getByRole("heading", { name: /^programs$/i })).toBeVisible();
 });

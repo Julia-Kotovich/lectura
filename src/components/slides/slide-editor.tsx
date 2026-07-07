@@ -10,7 +10,6 @@ import { SlideList } from "./slide-list";
 import { SlideCanvas } from "./slide-canvas";
 import { OutlineEditor } from "@/components/lecture/outline-editor";
 import { OutlinePlanView } from "@/components/lecture/outline-plan-view";
-import { CourseSemesterPlan } from "@/components/lecture/course-semester-plan";
 import { ScorePanel } from "@/components/evaluation/score-panel";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -21,7 +20,6 @@ import { SlideComments } from "./slide-comments";
 import { VersionPanel } from "./version-panel";
 import { SharePanel } from "@/components/lecture/share-panel";
 import { cn } from "@/lib/utils";
-import { OOP_BACHELOR_SLUG, resolveCourseFrameworkSlug } from "@/lib/course-frameworks";
 
 type Tab = "plan" | "slides";
 
@@ -112,10 +110,6 @@ export function SlideEditor({ lectureId }: { lectureId: string }) {
             </p>
           ) : (
             <>
-              <CourseSemesterPlan
-                frameworkSlug={outline.courseFrameworkSlug}
-                currentWeek={outline.semesterWeek}
-              />
               <OutlinePlanView outline={outline} />
 
               <div className="flex flex-wrap gap-2">
@@ -124,17 +118,7 @@ export function SlideEditor({ lectureId }: { lectureId: string }) {
                   size="sm"
                   disabled={regenerateOutline.isPending}
                   onClick={async () => {
-                    const slug = resolveCourseFrameworkSlug(
-                      data.title,
-                      outline.summary,
-                      outline.courseFrameworkSlug,
-                    );
-                    await regenerateOutline.mutateAsync({
-                      lectureId,
-                      courseFrameworkSlug:
-                        slug === "default" ? undefined : OOP_BACHELOR_SLUG,
-                      semesterWeek: outline.semesterWeek,
-                    });
+                    await regenerateOutline.mutateAsync({ lectureId });
                     await refetch();
                   }}
                 >

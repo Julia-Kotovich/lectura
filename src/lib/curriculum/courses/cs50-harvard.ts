@@ -1,5 +1,5 @@
 import type { LectureOutline } from "@/lib/schemas/outline";
-import type { Course, CourseLectureEntry } from "./coop-eth-mueller";
+import type { CatalogLecture, Course } from "../types";
 import courseData from "./data/cs50-structure.json";
 
 /**
@@ -19,7 +19,7 @@ type RawLecture = {
   outline: LectureOutline;
 };
 
-const lectures: CourseLectureEntry[] = (courseData.lectures as RawLecture[]).map((l) => ({
+const lectures: CatalogLecture[] = (courseData.lectures as RawLecture[]).map((l) => ({
   slug: l.slug,
   sourcePdf: l.sourcePdf,
   title: l.title,

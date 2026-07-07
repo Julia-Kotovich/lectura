@@ -1,11 +1,5 @@
 import type { LectureOutline } from "@/lib/schemas/outline";
 import type { SlideDeckDraft, SlideDocument } from "@/lib/schemas/slide";
-import {
-  OOP_BACHELOR_SLUG,
-  OOP_LECTURE_SECTIONS,
-  OOP_SEMESTER_WEEKS,
-  OOP_TARGET_SLIDES_PER_LECTURE,
-} from "@/lib/course-frameworks";
 import { DEFAULT_TARGET_SLIDES, formatStudyDuration } from "@/lib/lecture-timing";
 
 export function buildMockOutline(params: {
@@ -70,65 +64,6 @@ export function buildMockOutline(params: {
     targetSlideCount: target,
     estimatedStudyMinutes: studyMinutes,
     estimatedPresentationMinutes: params.durationMinutes,
-  };
-}
-
-export function buildMockOopOutline(params: {
-  title: string;
-  description?: string;
-  durationMinutes: number;
-  semesterWeek?: number;
-}): LectureOutline {
-  const week = params.semesterWeek ?? 1;
-  const weekPlan = OOP_SEMESTER_WEEKS.find((w) => w.week === week) ?? OOP_SEMESTER_WEEKS[0];
-  const target = OOP_TARGET_SLIDES_PER_LECTURE;
-
-  const sections = OOP_LECTURE_SECTIONS.map((section) => ({
-    title: section.title,
-    durationMinutes: section.durationMinutes,
-    learningGoals: [`Cover ${weekPlan.lecture} — ${section.title}`],
-    subsections: [
-      {
-        title: section.title,
-        keyPoints: [
-          `Topic: ${weekPlan.lecture}`,
-          section.title.includes("Example")
-            ? "Code walkthrough and UML"
-            : "Definitions and intuition",
-        ],
-        examples: [`${params.title} — ${section.title}`],
-        suggestedDiagram: section.title.includes("Visualization")
-          ? "UML class diagram or object diagram"
-          : undefined,
-      },
-    ],
-    exercises:
-      section.title === "Summary & Transition"
-        ? [`Lab prep: ${weekPlan.lab}`, "Preview next week"]
-        : [`Think-pair: ${section.title}`],
-  }));
-
-  return {
-    title: params.title,
-    summary:
-      params.description ??
-      `Week ${week}: ${weekPlan.lecture}. Lab: ${weekPlan.lab}. Bachelor OOP course (60 min lecture + lab).`,
-    learningObjectives: [
-      `Explain core ideas of ${weekPlan.lecture}`,
-      "Connect concepts to prior weeks",
-      `Prepare for lab: ${weekPlan.lab}`,
-    ],
-    sections,
-    suggestedResources: ["Course textbook — OOP chapter", "Official language docs"],
-    assessmentIdeas: [
-      `Lab: ${weekPlan.lab}`,
-      "5-minute conceptual recap quiz",
-    ],
-    targetSlideCount: target,
-    estimatedStudyMinutes: target * 7,
-    estimatedPresentationMinutes: params.durationMinutes,
-    courseFrameworkSlug: OOP_BACHELOR_SLUG,
-    semesterWeek: week,
   };
 }
 
