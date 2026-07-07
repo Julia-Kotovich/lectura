@@ -23,7 +23,7 @@ function createTextProvider(model?: string): TextProvider {
     case "anthropic":
     case "claude":
       return new AnthropicTextProvider(
-        model ?? process.env.ANTHROPIC_TEXT_MODEL ?? "claude-sonnet-4-20250514",
+        model ?? process.env.ANTHROPIC_TEXT_MODEL ?? "claude-sonnet-4-5-20250929",
       );
     default:
       return new MockTextProvider();
@@ -66,7 +66,7 @@ export function getSlideTextProvider(): TextProvider {
     return new AnthropicTextProvider(
       process.env.ANTHROPIC_SLIDE_MODEL ??
         process.env.ANTHROPIC_TEXT_MODEL ??
-        "claude-sonnet-4-20250514",
+        "claude-sonnet-4-5-20250929",
     );
   }
 

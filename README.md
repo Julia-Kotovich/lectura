@@ -77,7 +77,7 @@ Run cells top-to-bottom to install deps, start Docker, migrate, seed, and launch
 | `AI_TEXT_PROVIDER` | `mock`, `openai`, `anthropic` (alias: `claude`) | `mock` |
 | `AI_IMAGE_PROVIDER` | `openai`, `mock`, `stability`, `replicate` | `mock` |
 | `ANTHROPIC_API_KEY` | Required when using Claude | — |
-| `ANTHROPIC_TEXT_MODEL` | Model for outlines | `claude-sonnet-4-20250514` |
+| `ANTHROPIC_TEXT_MODEL` | Model for outlines | `claude-sonnet-4-5-20250929` |
 | `ANTHROPIC_SLIDE_MODEL` | Model for slides | same as text model |
 | `OPENAI_API_KEY` | Required when using OpenAI | — |
 | `AUTH_DISABLED` | Skip OAuth, use guest user | `true` |

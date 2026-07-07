@@ -41,12 +41,14 @@ export default function ProgramPage({
     setExpanded((prev) => ({ ...prev, [moduleSlug]: !prev[moduleSlug] }));
   }
 
-  async function adoptModule(moduleSlug: string) {
-    setBusySlug(moduleSlug);
+  async function adoptSection(moduleSlug: string, sectionIndex: number) {
+    const actionKey = `${moduleSlug}:${sectionIndex}`;
+    setBusySlug(actionKey);
     try {
       const lecture = await createLecture.mutateAsync({
         programSlug: slug,
         moduleSlug,
+        sectionIndex,
       });
       router.push(`/lectures/${lecture.id}`);
     } finally {
@@ -124,8 +126,8 @@ export default function ProgramPage({
 
       <h2 className="mb-3 text-lg font-semibold">Program modules</h2>
       <p className="mb-4 text-sm text-zinc-500">
-        Each module is a handbook unit (typically 5 CP). Adopting creates a lecture draft with a
-        pre-built outline you can turn into slides.
+        Each module is a handbook unit (typically 5 CP). Open a module to create lecture drafts
+        from individual lecture-sized sections of its outline.
       </p>
 
       <ol className="space-y-3">
@@ -193,13 +195,6 @@ export default function ProgramPage({
                         <ExternalLink className="h-3.5 w-3.5" />
                       </Link>
                     )}
-                    <Button
-                      size="sm"
-                      disabled={busySlug === mod.slug}
-                      onClick={() => adoptModule(mod.slug)}
-                    >
-                      {busySlug === mod.slug ? "Adding…" : "Use as lecture"}
-                    </Button>
                     <button
                       type="button"
                       onClick={() => toggleExpanded(mod.slug)}
@@ -247,10 +242,20 @@ export default function ProgramPage({
                           key={si}
                           className="rounded-lg border border-zinc-200 bg-white p-3 dark:border-zinc-800 dark:bg-zinc-950"
                         >
-                          <h4 className="text-sm font-semibold text-zinc-800 dark:text-zinc-100">
-                            <span className="mr-2 text-zinc-400">{si + 1}.</span>
-                            {section.title}
-                          </h4>
+                          <div className="flex flex-wrap items-start justify-between gap-3">
+                            <h4 className="text-sm font-semibold text-zinc-800 dark:text-zinc-100">
+                              <span className="mr-2 text-zinc-400">{si + 1}.</span>
+                              {section.title}
+                            </h4>
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              disabled={busySlug === `${mod.slug}:${si}`}
+                              onClick={() => adoptSection(mod.slug, si)}
+                            >
+                              {busySlug === `${mod.slug}:${si}` ? "Adding…" : "Use as lecture"}
+                            </Button>
+                          </div>
                           {section.learningGoals.length > 0 && (
                             <ul className="mt-2 list-disc space-y-0.5 pl-5 text-xs text-zinc-600 dark:text-zinc-400">
                               {section.learningGoals.map((g, gi) => (

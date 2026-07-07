@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { router, protectedProcedure } from "../trpc";
 import {
-  createLectureFromProgramModule,
+  createLectureFromProgramSection,
   getProgramBySlug,
   listProgramSummaries,
 } from "../../services/programs";
@@ -59,9 +59,15 @@ export const programsRouter = router({
       z.object({
         programSlug: z.string(),
         moduleSlug: z.string(),
+        sectionIndex: z.number().int().min(0),
       }),
     )
     .mutation(({ ctx, input }) =>
-      createLectureFromProgramModule(ctx.user.id, input.programSlug, input.moduleSlug),
+      createLectureFromProgramSection(
+        ctx.user.id,
+        input.programSlug,
+        input.moduleSlug,
+        input.sectionIndex,
+      ),
     ),
 });

@@ -276,7 +276,10 @@ export async function reorderSlides(
 export async function evaluateLectureDeck(lectureId: string, userId: string) {
   const lecture = await db.lecture.findFirst({
     where: { id: lectureId },
-    include: { slides: { orderBy: { orderIndex: "asc" } } },
+    include: {
+      slides: { orderBy: { orderIndex: "asc" } },
+      outlineVersions: { where: { isActive: true }, take: 1 },
+    },
   });
   if (!(await canAccessLecture(userId, lectureId))) {
     throw new Error("Lecture not found");
@@ -285,21 +288,25 @@ export async function evaluateLectureDeck(lectureId: string, userId: string) {
   if (lecture.slides.length === 0) throw new Error("No slides to evaluate");
 
   const slides = lecture.slides.map((s) => slideDocumentSchema.parse(s.content));
+  const outlineContent = lecture.outlineVersions[0]?.content;
+  const outline = outlineContent
+    ? lectureOutlineSchema.safeParse(outlineContent)
+    : null;
+  const learningObjectives =
+    outline?.success ? outline.data.learningObjectives : undefined;
+
   const evaluation = await evaluateDeck({
     lectureTitle: lecture.title,
     slides,
+    learningObjectives,
   });
 
   return db.slideEvaluation.create({
     data: {
       lectureId,
-      scores: evaluation.dimensions,
-      feedback: {
-        strengths: evaluation.strengths,
-        warnings: evaluation.warnings,
-        suggestions: evaluation.suggestions,
-      },
-      overall: evaluation.overallScore,
+      scores: [],
+      feedback: { bloomAnalysis: evaluation },
+      overall: evaluation.alignmentScore,
     },
   });
 }

@@ -47,10 +47,9 @@ export function SlideEditor({ lectureId }: { lectureId: string }) {
   const regenerateOutline = trpc.outline.generate.useMutation();
 
   useEffect(() => {
-    if (data?.slides?.length) {
-      const slides = data.slides.map((s) => slideDocumentSchema.parse(s.content));
-      setLocalSlides(slides);
-    }
+    if (!data) return;
+    const slides = data.slides.map((s) => slideDocumentSchema.parse(s.content));
+    setLocalSlides(slides);
   }, [data, setLocalSlides]);
 
   if (isLoading || !data) {
@@ -62,7 +61,7 @@ export function SlideEditor({ lectureId }: { lectureId: string }) {
     : null;
 
   const selectedSlide = localSlides.find((s) => s.id === selectedSlideId) ?? localSlides[0];
-  const slideCount = localSlides.length;
+  const slideCount = data.slides.length;
   const evaluation = data.evaluations[0];
 
   async function saveSlide(slide: SlideDocument) {
@@ -178,13 +177,15 @@ export function SlideEditor({ lectureId }: { lectureId: string }) {
               variant="outline"
               size="sm"
               onClick={async () => {
+                if (slideCount === 0) return;
                 await evaluateDeck.mutateAsync({ lectureId });
                 await refetch();
               }}
-              disabled={evaluateDeck.isPending || !slideCount}
+              disabled={evaluateDeck.isPending || slideCount === 0}
+              title={slideCount === 0 ? "Generate slides before evaluating" : undefined}
             >
               <Sparkles className="h-4 w-4" />
-              Evaluate
+              Evaluate Bloom
             </Button>
             <Button
               variant="outline"
@@ -220,8 +221,9 @@ export function SlideEditor({ lectureId }: { lectureId: string }) {
 
           {slideCount === 0 ? (
             <CardEmptySlides onOpenPlan={() => setTab("plan")} />
-          ) : (
-            selectedSlide && (
+          ) : localSlides.length === 0 ? (
+            <p className="text-sm text-zinc-500">Loading slides…</p>
+          ) : selectedSlide ? (
               <div className="grid gap-6 lg:grid-cols-[240px_1fr]">
                 <SlideList
                   slides={localSlides}
@@ -304,8 +306,7 @@ export function SlideEditor({ lectureId }: { lectureId: string }) {
                   </details>
                 </div>
               </div>
-            )
-          )}
+            ) : null}
         </div>
       )}
     </div>

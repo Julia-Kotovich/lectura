@@ -44,22 +44,51 @@ export class MockTextProvider implements TextProvider {
       };
     }
 
-    // Quality evaluation (prompt also mentions "slide deck")
-    if (system.includes("instructional designer") || user.includes("evaluate this slide deck")) {
+    // Bloom evaluation (prompt also mentions "slide deck")
+    if (system.includes("bloom") || user.includes("evaluate this slide deck")) {
       const evaluation = deckEvaluationSchema.parse({
-        overallScore: 82,
-        dimensions: [
-          { name: "clarity", score: 85, rationale: "Headings and bullets are well structured." },
-          { name: "information_density", score: 78, rationale: "Good balance; slide 2 could be split." },
-          { name: "readability", score: 88, rationale: "Short bullet points, clear hierarchy." },
-          { name: "teaching_effectiveness", score: 80, rationale: "Learning goals map to slides." },
-          { name: "visual_balance", score: 75, rationale: "Add more diagrams on technical slides." },
+        alignmentScore: 72,
+        dominantLevel: "understand",
+        distribution: {
+          remember: 10,
+          understand: 35,
+          apply: 30,
+          analyze: 15,
+          evaluate: 5,
+          create: 5,
+        },
+        objectiveAlignments: [
+          {
+            objective: "Explain core concepts",
+            expectedLevel: "understand",
+            observedLevel: "understand",
+            status: "aligned",
+            rationale: "Definitions and explanations are well covered.",
+          },
+          {
+            objective: "Apply concepts to practical problems",
+            expectedLevel: "apply",
+            observedLevel: "understand",
+            status: "partially_aligned",
+            rationale: "Examples are present but lack guided application exercises.",
+          },
         ],
-        strengths: ["Clear progression from definition to processes", "Speaker notes support delivery"],
-        warnings: ["Slide 2 has dense bullets for a 60-min intro"],
+        slideTags: [
+          {
+            slideTitle: "Introduction",
+            primaryLevel: "remember",
+            evidence: "Terminology and course framing.",
+          },
+          {
+            slideTitle: "Core concepts",
+            primaryLevel: "understand",
+            evidence: "Explains relationships between ideas.",
+          },
+        ],
+        gaps: ["Limited analyze-level comparison of design alternatives"],
         suggestions: [
-          "Add a code demo slide for fork() example",
-          "Regenerate diagram on slide 3 for higher contrast",
+          "Add one slide requiring students to compare two design approaches",
+          "Include a short exercise at apply level before the recap",
         ],
       });
 

@@ -16,7 +16,7 @@ export class AnthropicTextProvider implements TextProvider {
   private client: Anthropic;
   private model: string;
 
-  constructor(model = process.env.ANTHROPIC_TEXT_MODEL ?? "claude-sonnet-4-20250514") {
+  constructor(model = process.env.ANTHROPIC_TEXT_MODEL ?? "claude-sonnet-4-5-20250929") {
     const apiKey = process.env.ANTHROPIC_API_KEY;
     if (!apiKey) {
       throw new Error("ANTHROPIC_API_KEY is required when AI_TEXT_PROVIDER=anthropic");

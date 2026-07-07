@@ -7,12 +7,14 @@ import type { SlideDocument } from "@/lib/schemas/slide";
 export async function evaluateDeck(params: {
   lectureTitle: string;
   slides: SlideDocument[];
+  learningObjectives?: string[];
 }): Promise<DeckEvaluation> {
   const provider = getTextProvider();
   const slidesJson = JSON.stringify(params.slides, null, 2);
   const userPrompt = buildEvaluationUserPrompt({
     lectureTitle: params.lectureTitle,
     slidesJson,
+    learningObjectives: params.learningObjectives,
   });
 
   const generateRaw = async () => {
