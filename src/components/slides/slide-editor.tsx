@@ -11,6 +11,7 @@ import { SlideCanvas } from "./slide-canvas";
 import { OutlineEditor } from "@/components/lecture/outline-editor";
 import { OutlinePlanView } from "@/components/lecture/outline-plan-view";
 import { ScorePanel } from "@/components/evaluation/score-panel";
+import { bloomAnalysisSchema } from "@/lib/schemas/evaluation";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Download, Presentation, RefreshCw, Sparkles } from "lucide-react";
@@ -40,6 +41,7 @@ export function SlideEditor({ lectureId }: { lectureId: string }) {
   const updateSlide = trpc.slides.update.useMutation();
   const reorderSlides = trpc.slides.reorder.useMutation();
   const evaluateDeck = trpc.evaluation.evaluateDeck.useMutation();
+  const improveFromBloom = trpc.evaluation.improveDeckFromBloom.useMutation();
   const regenerateImage = trpc.ai.regenerateImage.useMutation();
   const regenerateSlide = trpc.ai.regenerateSlide.useMutation();
   const exportPptx = trpc.export.getPptxBase64.useMutation();
@@ -63,6 +65,11 @@ export function SlideEditor({ lectureId }: { lectureId: string }) {
   const selectedSlide = localSlides.find((s) => s.id === selectedSlideId) ?? localSlides[0];
   const slideCount = data.slides.length;
   const evaluation = data.evaluations[0];
+  const hasBloomEvaluation =
+    evaluation != null &&
+    bloomAnalysisSchema.safeParse(
+      (evaluation.feedback as { bloomAnalysis?: unknown } | null)?.bloomAnalysis,
+    ).success;
 
   async function saveSlide(slide: SlideDocument) {
     updateLocalSlide(slide);
@@ -186,6 +193,29 @@ export function SlideEditor({ lectureId }: { lectureId: string }) {
             >
               <Sparkles className="h-4 w-4" />
               Evaluate Bloom
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={async () => {
+                if (slideCount === 0 || !hasBloomEvaluation) return;
+                await improveFromBloom.mutateAsync({ lectureId });
+                await refetch();
+              }}
+              disabled={
+                improveFromBloom.isPending ||
+                slideCount === 0 ||
+                !hasBloomEvaluation ||
+                evaluateDeck.isPending
+              }
+              title={
+                !hasBloomEvaluation
+                  ? "Run Evaluate Bloom first"
+                  : "Regenerate all slides using Bloom gaps and suggestions"
+              }
+            >
+              <RefreshCw className="h-4 w-4" />
+              {improveFromBloom.isPending ? "Improving deck…" : "Improve deck from Bloom"}
             </Button>
             <Button
               variant="outline"

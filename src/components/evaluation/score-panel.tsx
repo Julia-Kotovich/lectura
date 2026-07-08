@@ -105,6 +105,11 @@ export function ScorePanel({ evaluation }: { evaluation: EvaluationRecord }) {
           <FeedbackList title="Suggestions" items={bloom.suggestions} tone="neutral" />
         </div>
       )}
+
+      <p className="mt-4 text-xs text-zinc-500">
+        Use <span className="font-medium">Improve deck from Bloom</span> to regenerate slides using
+        these gaps and suggestions.
+      </p>
     </Card>
   );
 }
