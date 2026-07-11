@@ -1,6 +1,7 @@
 export const EVALUATION_SYSTEM_PROMPT = `You are an expert instructional designer evaluating CS lecture slides using Revised Bloom's taxonomy only.
 Analyze cognitive level alignment between learning objectives and slide content.
-Be constructive and specific. Output ONLY valid JSON.`;
+Be constructive and specific.
+Output ONLY a single valid JSON object. No markdown, no trailing commas, no comments, no text before/after JSON.`;
 
 const BLOOM_LEVELS_DOC = `
 Revised Bloom levels (low → high):
@@ -24,7 +25,7 @@ export function buildEvaluationUserPrompt(params: {
 
   return `Evaluate this slide deck for "${params.lectureTitle}" using Revised Bloom's taxonomy only.
 ${objectivesBlock}
-Slides:
+Slides (compact):
 ${params.slidesJson}
 
 ${BLOOM_LEVELS_DOC}
@@ -50,6 +51,9 @@ Return JSON:
 }
 
 Rules:
+- Valid JSON only: double quotes, no trailing commas, complete all arrays/objects
+- Keep rationale/evidence/gaps/suggestions concise (1 sentence each)
+- Include 3–8 slideTags max
 - distribution values are percentages of deck cognitive demand and should sum to 100
 - For each learning objective, infer expectedLevel from its wording, then compare to what slides actually teach
 - status = aligned when observedLevel matches expectedLevel; partially_aligned when one level off; misaligned when two or more levels off

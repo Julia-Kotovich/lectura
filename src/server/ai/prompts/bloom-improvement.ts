@@ -13,19 +13,22 @@ export function buildBloomImprovementInstructions(params: {
   bloom: BloomAnalysis;
   slideTitle: string;
   slideTag?: BloomSlideTag;
+  selectionReason?: string;
 }): string {
-  const { bloom, slideTitle, slideTag } = params;
+  const { bloom, slideTitle, slideTag, selectionReason } = params;
   const misaligned = bloom.objectiveAlignments.filter((o) => o.status !== "aligned");
 
   const lines: string[] = [
     "Improve this slide using the Bloom taxonomy evaluation of the full deck.",
+    "Only this slide was selected as a problem area — focus changes here, keep title/topic.",
     "",
     `Deck alignment score: ${bloom.alignmentScore}/100. Dominant level: ${bloom.dominantLevel}.`,
+    selectionReason ? `Why this slide was selected: ${selectionReason}` : "",
     "",
     "Current deck cognitive distribution (%):",
     ...Object.entries(bloom.distribution).map(([level, pct]) => `- ${level}: ${pct}%`),
     "",
-  ];
+  ].filter(Boolean);
 
   if (bloom.gaps.length > 0) {
     lines.push("Gaps to address:", ...bloom.gaps.map((g) => `- ${g}`), "");

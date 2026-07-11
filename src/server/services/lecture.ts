@@ -45,7 +45,7 @@ export async function getLecture(userId: string, lectureId: string) {
     include: {
       outlineVersions: { where: { isActive: true }, take: 1 },
       slides: { orderBy: { orderIndex: "asc" }, include: { blocks: { orderBy: { orderIndex: "asc" } } } },
-      evaluations: { orderBy: { createdAt: "desc" }, take: 1 },
+      evaluations: { orderBy: { createdAt: "desc" }, take: 12 },
     },
   });
 }

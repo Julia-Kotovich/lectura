@@ -12,6 +12,10 @@ import { OutlineEditor } from "@/components/lecture/outline-editor";
 import { OutlinePlanView } from "@/components/lecture/outline-plan-view";
 import { ScorePanel } from "@/components/evaluation/score-panel";
 import { bloomAnalysisSchema } from "@/lib/schemas/evaluation";
+import {
+  BLOOM_MAX_IMPROVE_ROUNDS,
+  BLOOM_TARGET_SCORE,
+} from "@/lib/bloom/problem-slides";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Download, Presentation, RefreshCw, Sparkles } from "lucide-react";
@@ -37,11 +41,23 @@ export function SlideEditor({ lectureId }: { lectureId: string }) {
   const [tab, setTab] = useState<Tab>("plan");
   const [editPlanOpen, setEditPlanOpen] = useState(false);
   const [aiInstructions, setAiInstructions] = useState("");
+  const [trackImprove, setTrackImprove] = useState(false);
 
   const updateSlide = trpc.slides.update.useMutation();
   const reorderSlides = trpc.slides.reorder.useMutation();
   const evaluateDeck = trpc.evaluation.evaluateDeck.useMutation();
-  const improveFromBloom = trpc.evaluation.improveDeckFromBloom.useMutation();
+  const improveAndReevaluate = trpc.evaluation.improveAndReevaluate.useMutation();
+  const { data: bloomHistory } = trpc.evaluation.listBloomHistory.useQuery({ lectureId });
+  const { data: improveProgress } = trpc.evaluation.getImproveProgress.useQuery(
+    { lectureId },
+    {
+      refetchInterval: (query) => {
+        const status = query.state.data?.status;
+        if (improveAndReevaluate.isPending || status === "running" || trackImprove) return 800;
+        return false;
+      },
+    },
+  );
   const regenerateImage = trpc.ai.regenerateImage.useMutation();
   const regenerateSlide = trpc.ai.regenerateSlide.useMutation();
   const exportPptx = trpc.export.getPptxBase64.useMutation();
@@ -54,6 +70,16 @@ export function SlideEditor({ lectureId }: { lectureId: string }) {
     setLocalSlides(slides);
   }, [data, setLocalSlides]);
 
+  useEffect(() => {
+    if (
+      improveProgress?.status === "completed" ||
+      improveProgress?.status === "skipped" ||
+      improveProgress?.status === "failed"
+    ) {
+      setTrackImprove(false);
+    }
+  }, [improveProgress?.status]);
+
   if (isLoading || !data) {
     return <p className="text-sm text-zinc-500">Loading lecture…</p>;
   }
@@ -64,12 +90,22 @@ export function SlideEditor({ lectureId }: { lectureId: string }) {
 
   const selectedSlide = localSlides.find((s) => s.id === selectedSlideId) ?? localSlides[0];
   const slideCount = data.slides.length;
-  const evaluation = data.evaluations[0];
+  const evaluations = data.evaluations ?? [];
+  const evaluation = evaluations[0];
   const hasBloomEvaluation =
     evaluation != null &&
     bloomAnalysisSchema.safeParse(
       (evaluation.feedback as { bloomAnalysis?: unknown } | null)?.bloomAnalysis,
     ).success;
+  const latestBloom = hasBloomEvaluation
+    ? bloomAnalysisSchema.parse(
+        (evaluation.feedback as { bloomAnalysis?: unknown }).bloomAnalysis,
+      )
+    : null;
+  const improveRounds = improveProgress?.roundsUsed ?? 0;
+  const atTarget = (latestBloom?.alignmentScore ?? 0) >= BLOOM_TARGET_SCORE;
+  const atLimit = improveRounds >= BLOOM_MAX_IMPROVE_ROUNDS;
+  const improveBusy = improveAndReevaluate.isPending || improveProgress?.status === "running";
 
   async function saveSlide(slide: SlideDocument) {
     updateLocalSlide(slide);
@@ -83,6 +119,17 @@ export function SlideEditor({ lectureId }: { lectureId: string }) {
       .filter(Boolean) as SlideDocument[];
     setLocalSlides(reordered);
     await reorderSlides.mutateAsync({ lectureId, slideIds: ids });
+  }
+
+  async function runImproveAndReevaluate() {
+    if (slideCount === 0 || !hasBloomEvaluation || atTarget || atLimit) return;
+    setTrackImprove(true);
+    try {
+      await improveAndReevaluate.mutateAsync({ lectureId, reevaluate: true });
+      await refetch();
+    } finally {
+      setTrackImprove(false);
+    }
   }
 
   return (
@@ -177,7 +224,14 @@ export function SlideEditor({ lectureId }: { lectureId: string }) {
 
       {tab === "slides" && (
         <div className="space-y-6">
-          {evaluation && <ScorePanel evaluation={evaluation} />}
+          {evaluation && (
+            <ScorePanel
+              evaluation={evaluation}
+              history={bloomHistory ?? []}
+              progress={improveProgress}
+              improveRounds={improveRounds}
+            />
+          )}
 
           <div className="flex flex-wrap gap-2">
             <Button
@@ -188,7 +242,7 @@ export function SlideEditor({ lectureId }: { lectureId: string }) {
                 await evaluateDeck.mutateAsync({ lectureId });
                 await refetch();
               }}
-              disabled={evaluateDeck.isPending || slideCount === 0}
+              disabled={evaluateDeck.isPending || slideCount === 0 || improveBusy}
               title={slideCount === 0 ? "Generate slides before evaluating" : undefined}
             >
               <Sparkles className="h-4 w-4" />
@@ -197,25 +251,33 @@ export function SlideEditor({ lectureId }: { lectureId: string }) {
             <Button
               variant="outline"
               size="sm"
-              onClick={async () => {
-                if (slideCount === 0 || !hasBloomEvaluation) return;
-                await improveFromBloom.mutateAsync({ lectureId });
-                await refetch();
-              }}
+              onClick={() => void runImproveAndReevaluate()}
               disabled={
-                improveFromBloom.isPending ||
+                improveBusy ||
                 slideCount === 0 ||
                 !hasBloomEvaluation ||
-                evaluateDeck.isPending
+                evaluateDeck.isPending ||
+                atTarget ||
+                atLimit
               }
               title={
                 !hasBloomEvaluation
                   ? "Run Evaluate Bloom first"
-                  : "Regenerate all slides using Bloom gaps and suggestions"
+                  : atTarget
+                    ? `Already at target (≥ ${BLOOM_TARGET_SCORE})`
+                    : atLimit
+                      ? `Improve limit reached (${BLOOM_MAX_IMPROVE_ROUNDS})`
+                      : "Improve problem slides, then re-evaluate Bloom"
               }
             >
               <RefreshCw className="h-4 w-4" />
-              {improveFromBloom.isPending ? "Improving deck…" : "Improve deck from Bloom"}
+              {improveBusy
+                ? improveProgress?.phase === "reevaluating"
+                  ? "Re-evaluating…"
+                  : improveProgress?.total
+                    ? `Improving ${improveProgress.current}/${improveProgress.total}…`
+                    : "Improving…"
+                : "Improve & re-evaluate"}
             </Button>
             <Button
               variant="outline"

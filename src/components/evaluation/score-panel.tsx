@@ -2,15 +2,53 @@
 
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { BLOOM_LEVELS, bloomAnalysisSchema, type BloomLevel } from "@/lib/schemas/evaluation";
+import {
+  BLOOM_LEVELS,
+  bloomAnalysisSchema,
+  type BloomLevel,
+} from "@/lib/schemas/evaluation";
+import { BLOOM_MAX_IMPROVE_ROUNDS, BLOOM_TARGET_SCORE } from "@/lib/bloom/problem-slides";
 
 interface EvaluationRecord {
+  id?: string;
   overall: number;
   scores: unknown;
   feedback: unknown;
+  createdAt?: string | Date;
 }
 
-export function ScorePanel({ evaluation }: { evaluation: EvaluationRecord }) {
+interface HistoryItem {
+  id: string;
+  createdAt: string | Date;
+  alignmentScore: number;
+  dominantLevel: string | null;
+  gapCount: number;
+}
+
+interface ImproveProgress {
+  status: string;
+  phase: string;
+  current: number;
+  total: number;
+  currentSlideTitle?: string;
+  beforeScore?: number;
+  afterScore?: number;
+  improvedCount?: number;
+  skippedReason?: string;
+  error?: string;
+}
+
+export function ScorePanel({
+  evaluation,
+  history = [],
+  progress,
+  improveRounds = 0,
+}: {
+  evaluation: EvaluationRecord;
+  history?: HistoryItem[];
+  progress?: ImproveProgress | null;
+  improveRounds?: number;
+}) {
   const feedback = (evaluation.feedback ?? {}) as { bloomAnalysis?: unknown };
   const bloomParsed = bloomAnalysisSchema.safeParse(feedback.bloomAnalysis);
   const bloom = bloomParsed.success ? bloomParsed.data : null;
@@ -19,11 +57,17 @@ export function ScorePanel({ evaluation }: { evaluation: EvaluationRecord }) {
     return (
       <Card className="p-6">
         <p className="text-sm text-zinc-500">
-          No Bloom evaluation yet. Press Evaluate to analyze cognitive level alignment.
+          No Bloom evaluation yet. Press Evaluate Bloom to analyze cognitive level alignment.
         </p>
       </Card>
     );
   }
+
+  const previous = history[1];
+  const scoreDelta =
+    previous != null ? bloom.alignmentScore - previous.alignmentScore : null;
+  const atTarget = bloom.alignmentScore >= BLOOM_TARGET_SCORE;
+  const atLimit = improveRounds >= BLOOM_MAX_IMPROVE_ROUNDS;
 
   return (
     <Card className="p-6">
@@ -37,7 +81,93 @@ export function ScorePanel({ evaluation }: { evaluation: EvaluationRecord }) {
             Dominant: {bloom.dominantLevel}
           </Badge>
           <Badge className="text-base">{bloom.alignmentScore}/100</Badge>
+          {scoreDelta != null && scoreDelta !== 0 && (
+            <Badge
+              className={
+                scoreDelta > 0
+                  ? "border border-emerald-300 bg-transparent text-emerald-700 dark:border-emerald-700 dark:text-emerald-300"
+                  : "border border-amber-300 bg-transparent text-amber-700 dark:border-amber-700 dark:text-amber-300"
+              }
+            >
+              {scoreDelta > 0 ? `+${scoreDelta}` : scoreDelta} vs previous
+            </Badge>
+          )}
         </div>
+      </div>
+
+      {history.length > 1 && (
+        <div className="mb-4 rounded-lg border border-zinc-200 bg-zinc-50 p-3 dark:border-zinc-800 dark:bg-zinc-900">
+          <p className="mb-2 text-xs font-medium uppercase tracking-wide text-zinc-500">
+            Score history
+          </p>
+          <div className="flex flex-wrap items-center gap-2 text-sm">
+            {[...history].reverse().map((item, i, arr) => (
+              <span key={item.id} className="inline-flex items-center gap-2">
+                <span className="font-semibold tabular-nums">{item.alignmentScore}</span>
+                {i < arr.length - 1 && <span className="text-zinc-400">→</span>}
+              </span>
+            ))}
+          </div>
+          {previous && (
+            <p className="mt-1 text-xs text-zinc-500">
+              Latest {bloom.alignmentScore} ← previous {previous.alignmentScore}
+            </p>
+          )}
+        </div>
+      )}
+
+      {progress && (progress.status === "running" || progress.status === "skipped") && (
+        <div className="mb-4 rounded-lg border border-violet-200 bg-violet-50/60 p-3 text-sm dark:border-violet-900 dark:bg-violet-950/30">
+          {progress.status === "running" && progress.phase === "improving" && (
+            <p>
+              Improving problem slides…{" "}
+              <span className="font-medium">
+                {progress.current}/{progress.total}
+              </span>
+              {progress.currentSlideTitle ? ` — ${progress.currentSlideTitle}` : ""}
+            </p>
+          )}
+          {progress.status === "running" && progress.phase === "reevaluating" && (
+            <p>Re-evaluating Bloom alignment after improve…</p>
+          )}
+          {progress.status === "skipped" && progress.skippedReason && (
+            <p className="text-amber-800 dark:text-amber-200">{progress.skippedReason}</p>
+          )}
+          {progress.total > 0 && progress.status === "running" && (
+            <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-violet-200 dark:bg-violet-900">
+              <div
+                className="h-full rounded-full bg-violet-500 transition-all"
+                style={{
+                  width: `${Math.round((progress.current / progress.total) * 100)}%`,
+                }}
+              />
+            </div>
+          )}
+        </div>
+      )}
+
+      {progress?.status === "completed" &&
+        progress.beforeScore != null &&
+        progress.afterScore != null && (
+          <div className="mb-4 rounded-lg border border-emerald-200 bg-emerald-50/50 p-3 text-sm dark:border-emerald-900 dark:bg-emerald-950/20">
+            Improved {progress.improvedCount ?? 0} slide
+            {(progress.improvedCount ?? 0) === 1 ? "" : "s"}:{" "}
+            <span className="font-semibold">{progress.beforeScore}</span>
+            {" → "}
+            <span className="font-semibold">{progress.afterScore}</span>
+          </div>
+        )}
+
+      <div className="mb-4 flex flex-wrap gap-2 text-xs text-zinc-500">
+        <span>
+          Target score ≥ {BLOOM_TARGET_SCORE}
+          {atTarget ? " · reached" : ""}
+        </span>
+        <span>·</span>
+        <span>
+          Improve rounds {improveRounds}/{BLOOM_MAX_IMPROVE_ROUNDS}
+          {atLimit ? " · limit reached" : ""}
+        </span>
       </div>
 
       <div className="mb-4 grid gap-2 sm:grid-cols-3 lg:grid-cols-6">
@@ -107,8 +237,8 @@ export function ScorePanel({ evaluation }: { evaluation: EvaluationRecord }) {
       )}
 
       <p className="mt-4 text-xs text-zinc-500">
-        Use <span className="font-medium">Improve deck from Bloom</span> to regenerate slides using
-        these gaps and suggestions.
+        Use <span className="font-medium">Improve &amp; re-evaluate</span> to regenerate only
+        problem slides, then run Bloom again automatically.
       </p>
     </Card>
   );

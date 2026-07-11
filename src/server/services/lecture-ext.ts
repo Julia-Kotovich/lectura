@@ -2,12 +2,7 @@ import { db } from "@/lib/db";
 import { lectureOutlineSchema } from "@/lib/schemas/outline";
 import { slideDocumentSchema, type SlideDocument } from "@/lib/schemas/slide";
 import { canAccessLecture } from "./access";
-import { bloomAnalysisSchema } from "@/lib/schemas/evaluation";
 import { regenerateSingleSlide } from "../ai/pipelines/single-slide";
-import {
-  buildBloomImprovementInstructions,
-  findBloomSlideTag,
-} from "../ai/prompts/bloom-improvement";
 import { exportDeckToPptx } from "../export/pptx-exporter";
 import { syncLectureFiles } from "../storage/lecture-files";
 import type { ShareRole } from "@prisma/client";
@@ -169,88 +164,6 @@ export async function regenerateOneSlide(
   });
 
   return regenerated;
-}
-
-export async function improveDeckFromBloom(lectureId: string, userId: string) {
-  const lecture = await canAccessLecture(userId, lectureId, "EDITOR");
-  if (!lecture) throw new Error("Access denied");
-
-  const slides = await db.slide.findMany({
-    where: { lectureId },
-    orderBy: { orderIndex: "asc" },
-  });
-  if (slides.length === 0) throw new Error("No slides to improve");
-
-  const evaluation = await db.slideEvaluation.findFirst({
-    where: { lectureId },
-    orderBy: { createdAt: "desc" },
-  });
-  if (!evaluation) throw new Error("Run Bloom evaluation before improving the deck");
-
-  const feedback = evaluation.feedback as { bloomAnalysis?: unknown };
-  const bloomParsed = bloomAnalysisSchema.safeParse(feedback.bloomAnalysis);
-  if (!bloomParsed.success) {
-    throw new Error("No Bloom evaluation found. Run Evaluate Bloom first.");
-  }
-  const bloom = bloomParsed.data;
-
-  await saveDeckSnapshot(lectureId, userId);
-
-  const outlineVersion = await db.outlineVersion.findFirst({
-    where: { lectureId, isActive: true },
-  });
-  const outline = outlineVersion
-    ? lectureOutlineSchema.parse(outlineVersion.content)
-    : null;
-
-  const improved: SlideDocument[] = [];
-
-  for (let i = 0; i < slides.length; i++) {
-    const slideRow = slides[i]!;
-    const current = slideDocumentSchema.parse(slideRow.content);
-    const slideTag = findBloomSlideTag(bloom, current.title);
-    const instructions = buildBloomImprovementInstructions({
-      bloom,
-      slideTitle: current.title,
-      slideTag,
-    });
-
-    const adjacentSlides: SlideDocument[] = [];
-    if (i > 0) adjacentSlides.push(improved[i - 1]!);
-    if (i < slides.length - 1) {
-      adjacentSlides.push(slideDocumentSchema.parse(slides[i + 1]!.content));
-    }
-
-    const regenerated = await regenerateSingleSlide({
-      lectureTitle: lecture.title,
-      outlineSummary: outline?.summary ?? lecture.description ?? "",
-      adjacentSlides,
-      currentSlide: current,
-      instructions,
-    });
-
-    await db.slide.update({
-      where: { id: slideRow.id },
-      data: {
-        title: regenerated.title,
-        layout: regenerated.layout,
-        content: regenerated,
-        speakerNotes: regenerated.speakerNotes,
-        metadata: regenerated.metadata ?? undefined,
-      },
-    });
-
-    improved.push(regenerated);
-  }
-
-  await syncLectureFiles({
-    lectureId,
-    title: lecture.title,
-    outline: outline ?? undefined,
-    slides: improved,
-  });
-
-  return { improvedCount: improved.length };
 }
 
 export async function getExportBuffer(lectureId: string, userId: string) {
