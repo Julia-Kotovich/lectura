@@ -1,0 +1,27 @@
+---
+description: Keep course-generation notebook in sync with Lectura web app pipeline
+globs: course-generation-algorithm.ipynb,src/lib/bloom/**,src/server/services/bloom-improve.ts,src/server/ai/prompts/**
+alwaysApply: false
+---
+
+# Notebook ↔ Web app parity
+
+When changing **Bloom evaluation**, **improve & re-evaluate**, or **course-generation pipeline** logic:
+
+1. Update **both** the web app and `course-generation-algorithm.ipynb` unless the user explicitly scopes one side only.
+2. Keep these in sync (same constants, same behavior):
+
+| Web app | Notebook |
+|---------|----------|
+| `src/lib/bloom/problem-slides.ts` | Step 3.5 constants + `select_problem_slides` |
+| `src/server/services/bloom-improve.ts` | Step 3.5 `improve_and_reevaluate_from_bloom` |
+| `src/server/ai/prompts/bloom-improvement.ts` | Step 3.5 `build_bloom_improvement_instructions` |
+| `src/server/ai/prompts/single-slide.ts` | Step 3.5 `regenerate_single_slide` |
+| `src/server/ai/prompts/evaluation.ts` | Step 3 `evaluate_deck` prompts |
+
+3. Shared limits (change in both places):
+   - `BLOOM_TARGET_SCORE = 85`
+   - `BLOOM_MAX_IMPROVE_ROUNDS = 5`
+   - `BLOOM_MAX_PROBLEM_SLIDES = 8`
+
+4. After edits, note in the commit/PR if notebook and app were updated together.
