@@ -52,3 +52,6 @@ yarn-error.log*
 next-env.d.ts
 
 .ipynb_checkpoints
+
+# notebook algorithm outputs (regenerate by running course-generation-algorithm.ipynb)
+/output/course-generation/
