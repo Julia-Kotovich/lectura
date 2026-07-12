@@ -22,8 +22,8 @@ When changing **Bloom evaluation**, **improve & re-evaluate**, or **course-gener
 | `src/server/ai/prompts/cqi-engagement.ts` | Step 5 `evaluate_engagement_metrics` |
 
 3. Shared limits (change in both places):
-   - `BLOOM_TARGET_SCORE = 85`
-   - `BLOOM_MAX_IMPROVE_ROUNDS = 5`
+   - `BLOOM_TARGET_SCORE = 95`
+   - `BLOOM_MAX_IMPROVE_ROUNDS = 3`
    - `BLOOM_MAX_PROBLEM_SLIDES = 8`
 
 4. After edits, note in the commit/PR if notebook and app were updated together.

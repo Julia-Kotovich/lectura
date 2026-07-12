@@ -7,10 +7,10 @@ import type { SlideDocument } from "@/lib/schemas/slide";
 import { findBloomSlideTag } from "@/server/ai/prompts/bloom-improvement";
 
 /** Stop improving once alignment reaches this score. */
-export const BLOOM_TARGET_SCORE = 85;
+export const BLOOM_TARGET_SCORE = 95;
 
 /** Max Improve runs per lecture (prevents endless loops). */
-export const BLOOM_MAX_IMPROVE_ROUNDS = 5;
+export const BLOOM_MAX_IMPROVE_ROUNDS = 3;
 
 /** Cap how many slides one Improve pass regenerates. */
 export const BLOOM_MAX_PROBLEM_SLIDES = 8;
