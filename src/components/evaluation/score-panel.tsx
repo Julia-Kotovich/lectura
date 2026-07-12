@@ -36,6 +36,8 @@ interface ImproveProgress {
   currentSlideTitle?: string;
   beforeScore?: number;
   afterScore?: number;
+  rawAfterScore?: number;
+  keptBest?: boolean;
   improvedCount?: number;
   skippedReason?: string;
   error?: string;
@@ -147,6 +149,12 @@ export function ScorePanel({
             <span className="font-semibold">{progress.beforeScore}</span>
             {" → "}
             <span className="font-semibold">{progress.afterScore}</span>
+            {progress.keptBest && progress.rawAfterScore != null && (
+              <p className="mt-1 text-amber-800 dark:text-amber-200">
+                Score regressed to {progress.rawAfterScore}; kept the previous deck at{" "}
+                {progress.afterScore}.
+              </p>
+            )}
           </div>
         )}
 

@@ -30,5 +30,11 @@ Return JSON for a single slide:
   "blocks": [{ "id": string, "type": string, "content": string | object }],
   "speakerNotes": string,
   "metadata": {}
-}`;
+}
+
+Size limits (STRICT — oversized responses get truncated and break JSON parsing):
+- At most 4 blocks total; at most 1 activity block
+- speakerNotes: max ~150 words (plain prose, no headings or timelines)
+- Each activity explanation: max ~80 words
+- Keep the whole JSON response under 4000 characters`;
 }

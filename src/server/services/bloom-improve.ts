@@ -3,6 +3,7 @@ import {
   BLOOM_MAX_IMPROVE_ROUNDS,
   BLOOM_TARGET_SCORE,
   selectProblemSlides,
+  shouldRevertBloomImprove,
 } from "@/lib/bloom/problem-slides";
 import { bloomAnalysisSchema } from "@/lib/schemas/evaluation";
 import { lectureOutlineSchema } from "@/lib/schemas/outline";
@@ -13,7 +14,7 @@ import {
 } from "../ai/prompts/bloom-improvement";
 import { regenerateSingleSlide } from "../ai/pipelines/single-slide";
 import { canAccessLecture } from "./access";
-import { saveDeckSnapshot } from "./lecture-ext";
+import { saveDeckSnapshot, restoreDeckVersion } from "./lecture-ext";
 import { syncLectureFiles } from "../storage/lecture-files";
 
 export type BloomImproveProgress = {
@@ -26,6 +27,8 @@ export type BloomImproveProgress = {
   skippedReason?: string;
   beforeScore?: number;
   afterScore?: number;
+  rawAfterScore?: number;
+  keptBest?: boolean;
   improvedCount?: number;
   reevaluated?: boolean;
   error?: string;
@@ -264,7 +267,7 @@ export async function improveAndReevaluateFromBloom(
       improvedSlideIds: [],
     });
 
-    await saveDeckSnapshot(lectureId, userId);
+    const snapshotVersion = await saveDeckSnapshot(lectureId, userId);
 
     const outlineVersion = await db.outlineVersion.findFirst({
       where: { lectureId, isActive: true },
@@ -339,6 +342,8 @@ export async function improveAndReevaluateFromBloom(
     });
 
     let afterScore = beforeScore;
+    let rawAfterScore: number | undefined;
+    let keptBest = false;
     if (reevaluate) {
       await writeProgress(job.id, {
         status: "running",
@@ -352,7 +357,15 @@ export async function improveAndReevaluateFromBloom(
       });
       const { evaluateLectureDeck } = await import("./lecture");
       const nextEval = await evaluateLectureDeck(lectureId, userId);
+      rawAfterScore = nextEval.overall;
       afterScore = nextEval.overall;
+
+      if (shouldRevertBloomImprove(beforeScore, afterScore, true)) {
+        await restoreDeckVersion(lectureId, userId, snapshotVersion.id);
+        await db.slideEvaluation.delete({ where: { id: nextEval.id } });
+        keptBest = true;
+        afterScore = beforeScore;
+      }
     }
 
     const progress: BloomImproveProgress = {
@@ -363,6 +376,8 @@ export async function improveAndReevaluateFromBloom(
       improvedSlideIds,
       beforeScore,
       afterScore,
+      rawAfterScore: keptBest ? rawAfterScore : undefined,
+      keptBest,
       improvedCount: improvedSlideIds.length,
       reevaluated: reevaluate,
       jobId: job.id,

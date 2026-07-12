@@ -13,7 +13,7 @@ When changing **Bloom evaluation**, **improve & re-evaluate**, or **course-gener
 
 | Web app | Notebook |
 |---------|----------|
-| `src/lib/bloom/problem-slides.ts` | Step 3.5 constants + `select_problem_slides` |
+| `src/lib/bloom/problem-slides.ts` | Step 3.5 constants + `select_problem_slides` + `should_revert_bloom_improve` |
 | `src/server/services/bloom-improve.ts` | Step 3.5 `improve_and_reevaluate_from_bloom` |
 | `src/server/ai/prompts/bloom-improvement.ts` | Step 3.5 `build_bloom_improvement_instructions` |
 | `src/server/ai/prompts/single-slide.ts` | Step 3.5 `regenerate_single_slide` |

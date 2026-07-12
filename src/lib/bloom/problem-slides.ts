@@ -110,3 +110,15 @@ export function selectProblemSlides(
 
   return { slides: selected.map((s) => s.slide), reasons };
 }
+
+/**
+ * After re-evaluation, revert to the pre-round deck when the score regresses.
+ * SYNC: course-generation-algorithm.ipynb — run_bloom_improve_loop keep-best branch
+ */
+export function shouldRevertBloomImprove(
+  beforeScore: number,
+  afterScore: number,
+  reevaluated: boolean,
+): boolean {
+  return reevaluated && afterScore < beforeScore;
+}
