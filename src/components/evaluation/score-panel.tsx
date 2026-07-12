@@ -6,8 +6,10 @@ import {
   BLOOM_LEVELS,
   bloomAnalysisSchema,
   type BloomLevel,
+  type BloomDistribution,
 } from "@/lib/schemas/evaluation";
 import { BLOOM_MAX_IMPROVE_ROUNDS, BLOOM_TARGET_SCORE } from "@/lib/bloom/problem-slides";
+import { BloomProgressCharts } from "@/components/evaluation/bloom-progress-charts";
 
 interface EvaluationRecord {
   id?: string;
@@ -23,6 +25,7 @@ interface HistoryItem {
   alignmentScore: number;
   dominantLevel: string | null;
   gapCount: number;
+  distribution?: BloomDistribution | null;
 }
 
 interface ImproveProgress {
@@ -95,25 +98,14 @@ export function ScorePanel({
         </div>
       </div>
 
-      {history.length > 1 && (
-        <div className="mb-4 rounded-lg border border-zinc-200 bg-zinc-50 p-3 dark:border-zinc-800 dark:bg-zinc-900">
-          <p className="mb-2 text-xs font-medium uppercase tracking-wide text-zinc-500">
-            Score history
-          </p>
-          <div className="flex flex-wrap items-center gap-2 text-sm">
-            {[...history].reverse().map((item, i, arr) => (
-              <span key={item.id} className="inline-flex items-center gap-2">
-                <span className="font-semibold tabular-nums">{item.alignmentScore}</span>
-                {i < arr.length - 1 && <span className="text-zinc-400">→</span>}
-              </span>
-            ))}
-          </div>
-          {previous && (
-            <p className="mt-1 text-xs text-zinc-500">
-              Latest {bloom.alignmentScore} ← previous {previous.alignmentScore}
-            </p>
-          )}
-        </div>
+      {history.length > 0 && (
+        <BloomProgressCharts
+          history={history.map((item) => ({
+            id: item.id,
+            alignmentScore: item.alignmentScore,
+            distribution: item.distribution,
+          }))}
+        />
       )}
 
       {progress && (progress.status === "running" || progress.status === "skipped") && (

@@ -123,6 +123,7 @@ export async function listBloomEvaluations(lectureId: string, userId: string) {
       alignmentScore: bloom.success ? bloom.data.alignmentScore : Math.round(row.overall),
       dominantLevel: bloom.success ? bloom.data.dominantLevel : null,
       gapCount: bloom.success ? bloom.data.gaps.length : 0,
+      distribution: bloom.success ? bloom.data.distribution : null,
     };
   });
 }
