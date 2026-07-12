@@ -1,6 +1,6 @@
 ---
 description: Keep course-generation notebook in sync with Lectura web app pipeline
-globs: course-generation-algorithm.ipynb,src/lib/bloom/**,src/server/services/bloom-improve.ts,src/server/ai/prompts/**
+globs: course-generation-algorithm.ipynb,src/lib/bloom/**,src/lib/cqi/**,src/server/services/bloom-improve.ts,src/server/ai/prompts/**
 alwaysApply: false
 ---
 
@@ -18,6 +18,8 @@ When changing **Bloom evaluation**, **improve & re-evaluate**, or **course-gener
 | `src/server/ai/prompts/bloom-improvement.ts` | Step 3.5 `build_bloom_improvement_instructions` |
 | `src/server/ai/prompts/single-slide.ts` | Step 3.5 `regenerate_single_slide` |
 | `src/server/ai/prompts/evaluation.ts` | Step 3 `evaluate_deck` prompts |
+| `src/lib/cqi/v1.ts` | Step 5 CQI weights + LRS/CQI formulas + DQP rules |
+| `src/server/ai/prompts/cqi-engagement.ts` | Step 5 `evaluate_engagement_metrics` |
 
 3. Shared limits (change in both places):
    - `BLOOM_TARGET_SCORE = 85`
