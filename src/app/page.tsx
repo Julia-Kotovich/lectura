@@ -5,10 +5,25 @@ import { AppShell } from "@/components/layout/app-shell";
 import { trpc } from "@/lib/trpc/client";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { BookOpen, Plus } from "lucide-react";
+import { BookOpen, ChevronRight, Plus } from "lucide-react";
+
+function getLectureNumber(title: string) {
+  const match = title.match(/\blecture\s+(\d+)\b/i);
+
+  return match ? Number(match[1]) : Number.POSITIVE_INFINITY;
+}
 
 export default function HomePage() {
   const { data: lectures, isLoading } = trpc.lecture.list.useQuery();
+  const sortedLectures = [...(lectures ?? [])].sort((a, b) => {
+    const numberDiff = getLectureNumber(a.title) - getLectureNumber(b.title);
+
+    if (numberDiff !== 0) {
+      return numberDiff;
+    }
+
+    return a.title.localeCompare(b.title);
+  });
 
   return (
     <AppShell>
@@ -44,20 +59,32 @@ export default function HomePage() {
         </Card>
       )}
 
-      <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {lectures?.map((lecture) => (
+      <ul className="space-y-3">
+        {sortedLectures.map((lecture, index) => (
           <li key={lecture.id}>
-            <Link href={`/lectures/${lecture.id}`}>
-              <Card className="p-5 transition-shadow hover:shadow-md">
-                <h2 className="font-semibold">{lecture.title}</h2>
-                <p className="mt-1 line-clamp-2 text-sm text-zinc-500">
-                  {lecture.description ?? "No description"}
-                </p>
-                <div className="mt-4 flex items-center gap-2">
-                  <Badge>{lecture.status.replace("_", " ")}</Badge>
-                  <span className="text-xs text-zinc-400">
-                    {lecture._count.slides} slides
-                  </span>
+            <Link href={`/lectures/${lecture.id}`} className="block">
+              <Card className="group p-0 transition-colors hover:border-violet-300 hover:bg-violet-50/40 dark:hover:border-violet-800 dark:hover:bg-violet-950/20">
+                <div className="flex items-center gap-4 px-4 py-3 sm:px-5">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-zinc-100 text-sm font-semibold text-zinc-500 dark:bg-zinc-900 dark:text-zinc-400">
+                    {index + 1}
+                  </div>
+
+                  <div className="min-w-0 flex-1">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <h2 className="truncate font-semibold">{lecture.title}</h2>
+                      <Badge>{lecture.status.replace("_", " ")}</Badge>
+                    </div>
+                    <p className="mt-1 line-clamp-1 text-sm text-zinc-500">
+                      {lecture.description ?? "No description"}
+                    </p>
+                  </div>
+
+                  <div className="hidden shrink-0 items-center gap-3 text-sm text-zinc-400 sm:flex">
+                    <span>{lecture._count.slides} slides</span>
+                    <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                  </div>
+
+                  <ChevronRight className="h-4 w-4 shrink-0 text-zinc-400 transition-transform group-hover:translate-x-0.5 sm:hidden" />
                 </div>
               </Card>
             </Link>

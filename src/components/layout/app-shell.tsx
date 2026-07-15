@@ -1,6 +1,5 @@
 import Link from "next/link";
-import { GraduationCap, Plus, BookOpen, Layers } from "lucide-react";
-import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { GraduationCap, Plus, BookOpen, Layers, FileText } from "lucide-react";
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   return (
@@ -27,13 +26,19 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               Courses
             </Link>
             <Link
+              href="/"
+              className="inline-flex h-8 items-center gap-2 rounded-md px-3 text-xs font-medium hover:bg-zinc-100 dark:hover:bg-zinc-800"
+            >
+              <FileText className="h-4 w-4" />
+              Lectures
+            </Link>
+            <Link
               href="/lectures/new"
               className="inline-flex h-8 items-center gap-2 rounded-md px-3 text-xs font-medium hover:bg-zinc-100 dark:hover:bg-zinc-800"
             >
               <Plus className="h-4 w-4" />
               New
             </Link>
-            <ThemeToggle />
           </nav>
         </div>
       </header>
