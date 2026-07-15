@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { router, protectedProcedure } from "../trpc";
-import { getExportBuffer } from "../../services/lecture-ext";
+import { getExportBuffer, getPdfExportBuffer } from "../../services/lecture-ext";
 
 export const exportRouter = router({
   getPptxBase64: protectedProcedure
@@ -15,6 +15,20 @@ export const exportRouter = router({
         data: buffer.toString("base64"),
         mimeType:
           "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+      };
+    }),
+
+  getPdfBase64: protectedProcedure
+    .input(z.object({ lectureId: z.string() }))
+    .mutation(async ({ ctx, input }) => {
+      const { buffer, filename } = await getPdfExportBuffer(
+        input.lectureId,
+        ctx.user.id,
+      );
+      return {
+        filename,
+        data: buffer.toString("base64"),
+        mimeType: "application/pdf",
       };
     }),
 });

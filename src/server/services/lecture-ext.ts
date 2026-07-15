@@ -3,6 +3,7 @@ import { lectureOutlineSchema } from "@/lib/schemas/outline";
 import { slideDocumentSchema, type SlideDocument } from "@/lib/schemas/slide";
 import { canAccessLecture } from "./access";
 import { regenerateSingleSlide } from "../ai/pipelines/single-slide";
+import { exportDeckToPdf } from "../export/pdf-exporter";
 import { exportDeckToPptx } from "../export/pptx-exporter";
 import { syncLectureFiles } from "../storage/lecture-files";
 import type { ShareRole } from "@prisma/client";
@@ -177,6 +178,19 @@ export async function getExportBuffer(lectureId: string, userId: string) {
   const docs = slides.map((s) => slideDocumentSchema.parse(s.content));
   const buffer = await exportDeckToPptx(lecture.title, docs);
   return { buffer, filename: `${lecture.title.replace(/\s+/g, "_")}.pptx` };
+}
+
+export async function getPdfExportBuffer(lectureId: string, userId: string) {
+  const lecture = await canAccessLecture(userId, lectureId);
+  if (!lecture) throw new Error("Lecture not found");
+
+  const slides = await db.slide.findMany({
+    where: { lectureId },
+    orderBy: { orderIndex: "asc" },
+  });
+  const docs = slides.map((s) => slideDocumentSchema.parse(s.content));
+  const buffer = await exportDeckToPdf(lecture.title, docs);
+  return { buffer, filename: `${lecture.title.replace(/\s+/g, "_")}.pdf` };
 }
 
 export async function shareLecture(

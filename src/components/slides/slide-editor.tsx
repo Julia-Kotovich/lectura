@@ -28,6 +28,24 @@ import { cn } from "@/lib/utils";
 
 type Tab = "plan" | "slides";
 
+type ExportResult = {
+  data: string;
+  filename: string;
+  mimeType: string;
+};
+
+function downloadBase64File(result: ExportResult) {
+  const bytes = Uint8Array.from(atob(result.data), (c) => c.charCodeAt(0));
+  const blob = new Blob([bytes], { type: result.mimeType });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+
+  a.href = url;
+  a.download = result.filename;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
 export function SlideEditor({ lectureId }: { lectureId: string }) {
   const { data, isLoading, refetch } = trpc.lecture.get.useQuery({ id: lectureId });
   const {
@@ -58,9 +76,9 @@ export function SlideEditor({ lectureId }: { lectureId: string }) {
       },
     },
   );
-  const regenerateImage = trpc.ai.regenerateImage.useMutation();
   const regenerateSlide = trpc.ai.regenerateSlide.useMutation();
   const exportPptx = trpc.export.getPptxBase64.useMutation();
+  const exportPdf = trpc.export.getPdfBase64.useMutation();
   const generateSlides = trpc.slides.generateFromOutline.useMutation();
   const regenerateOutline = trpc.outline.generate.useMutation();
 
@@ -69,16 +87,6 @@ export function SlideEditor({ lectureId }: { lectureId: string }) {
     const slides = data.slides.map((s) => slideDocumentSchema.parse(s.content));
     setLocalSlides(slides);
   }, [data, setLocalSlides]);
-
-  useEffect(() => {
-    if (
-      improveProgress?.status === "completed" ||
-      improveProgress?.status === "skipped" ||
-      improveProgress?.status === "failed"
-    ) {
-      setTrackImprove(false);
-    }
-  }, [improveProgress?.status]);
 
   if (isLoading || !data) {
     return <p className="text-sm text-zinc-500">Loading lecture…</p>;
@@ -224,15 +232,6 @@ export function SlideEditor({ lectureId }: { lectureId: string }) {
 
       {tab === "slides" && (
         <div className="space-y-6">
-          {evaluation && (
-            <ScorePanel
-              evaluation={evaluation}
-              history={bloomHistory ?? []}
-              progress={improveProgress}
-              improveRounds={improveRounds}
-            />
-          )}
-
           <div className="flex flex-wrap gap-2">
             <Button
               variant="outline"
@@ -285,18 +284,23 @@ export function SlideEditor({ lectureId }: { lectureId: string }) {
               disabled={exportPptx.isPending || !slideCount}
               onClick={async () => {
                 const result = await exportPptx.mutateAsync({ lectureId });
-                const bytes = Uint8Array.from(atob(result.data), (c) => c.charCodeAt(0));
-                const blob = new Blob([bytes], { type: result.mimeType });
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement("a");
-                a.href = url;
-                a.download = result.filename;
-                a.click();
-                URL.revokeObjectURL(url);
+                downloadBase64File(result);
               }}
             >
               <Download className="h-4 w-4" />
               Export PPTX
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              disabled={exportPdf.isPending || !slideCount}
+              onClick={async () => {
+                const result = await exportPdf.mutateAsync({ lectureId });
+                downloadBase64File(result);
+              }}
+            >
+              <Download className="h-4 w-4" />
+              Export PDF
             </Button>
             <Link
               href={`/lectures/${lectureId}/present`}
@@ -399,6 +403,15 @@ export function SlideEditor({ lectureId }: { lectureId: string }) {
                 </div>
               </div>
             ) : null}
+
+          {evaluation && (
+            <ScorePanel
+              evaluation={evaluation}
+              history={bloomHistory ?? []}
+              progress={improveProgress}
+              improveRounds={improveRounds}
+            />
+          )}
         </div>
       )}
     </div>
