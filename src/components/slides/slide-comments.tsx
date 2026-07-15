@@ -28,8 +28,7 @@ export function SlideComments({
   }
 
   return (
-    <div className="space-y-3 rounded-xl border border-zinc-200 p-4 dark:border-zinc-800">
-      <h3 className="text-sm font-medium">Comments</h3>
+    <div className="space-y-3">
       <ul className="max-h-40 space-y-2 overflow-y-auto text-sm">
         {comments?.map((c) => (
           <li key={c.id} className="rounded-lg bg-zinc-50 p-2 dark:bg-zinc-900">

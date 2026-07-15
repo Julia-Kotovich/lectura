@@ -18,11 +18,10 @@ import {
 } from "@/lib/bloom/problem-slides";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Download, Presentation, RefreshCw, Sparkles } from "lucide-react";
+import { ChevronRight, Download, Presentation, RefreshCw, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { SlideBlockEditor } from "./slide-block-editor";
 import { SlideComments } from "./slide-comments";
-import { VersionPanel } from "./version-panel";
 import { SharePanel } from "@/components/lecture/share-panel";
 import { cn } from "@/lib/utils";
 
@@ -331,16 +330,21 @@ export function SlideEditor({ lectureId }: { lectureId: string }) {
                 <div className="space-y-4">
                   <SlideCanvas slide={selectedSlide} />
 
-                  <SlideBlockEditor
-                    slide={selectedSlide}
-                    onChange={updateLocalSlide}
-                    onSave={saveSlide}
-                    saving={updateSlide.isPending}
-                  />
-
-                  <div className="space-y-3 rounded-xl border border-zinc-200 p-4 dark:border-zinc-800">
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium">Speaker notes</label>
+                  <details className="group rounded-xl border border-zinc-200 dark:border-zinc-800">
+                    <summary className="flex cursor-pointer list-none flex-wrap items-center justify-between gap-3 px-4 py-3 marker:hidden">
+                      <div className="flex min-w-0 items-center gap-2">
+                        <ChevronRight className="h-4 w-4 shrink-0 text-zinc-400 transition-transform group-open:rotate-90" />
+                        <h3 className="text-sm font-semibold">Speaker notes</h3>
+                      </div>
+                      <span className="text-xs text-zinc-500">
+                        {selectedSlide.speakerNotes?.trim() ? "Notes added" : "No notes"}
+                      </span>
+                    </summary>
+                    <div className="space-y-3 border-t border-zinc-200 p-4 dark:border-zinc-800">
+                      <p className="text-sm text-zinc-500">
+                        Private presenter notes for this slide. They are saved with the slide and exported as
+                        presenter notes where supported.
+                      </p>
                       <Textarea
                         value={selectedSlide.speakerNotes ?? ""}
                         onChange={(e) =>
@@ -350,17 +354,44 @@ export function SlideEditor({ lectureId }: { lectureId: string }) {
                           })
                         }
                       />
+                      <Button
+                        size="sm"
+                        onClick={() => saveSlide(selectedSlide)}
+                        disabled={updateSlide.isPending}
+                      >
+                        {updateSlide.isPending ? "Saving…" : "Save notes"}
+                      </Button>
                     </div>
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium">AI instructions</label>
+                  </details>
+
+                  <SlideBlockEditor
+                    slide={selectedSlide}
+                    onChange={updateLocalSlide}
+                    onSave={saveSlide}
+                    saving={updateSlide.isPending}
+                  />
+
+                  <details className="group rounded-xl border border-zinc-200 dark:border-zinc-800">
+                    <summary className="flex cursor-pointer list-none flex-wrap items-center justify-between gap-3 px-4 py-3 marker:hidden">
+                      <div className="flex min-w-0 items-center gap-2">
+                        <ChevronRight className="h-4 w-4 shrink-0 text-zinc-400 transition-transform group-open:rotate-90" />
+                        <h3 className="text-sm font-semibold">Edit slide with AI</h3>
+                      </div>
+                      <span className="text-xs text-zinc-500">
+                        {aiInstructions.trim() ? "Custom prompt ready" : "Optional"}
+                      </span>
+                    </summary>
+                    <div className="space-y-3 border-t border-zinc-200 p-4 dark:border-zinc-800">
+                      <p className="text-sm text-zinc-500">
+                        Temporary instructions for regenerating only the currently selected slide with AI.
+                        They are not saved as slide content.
+                      </p>
                       <Textarea
                         placeholder="What should change on this slide?"
                         value={aiInstructions}
                         onChange={(e) => setAiInstructions(e.target.value)}
                         className="min-h-[64px] text-sm"
                       />
-                    </div>
-                    <div className="flex flex-wrap gap-2">
                       <Button
                         size="sm"
                         variant="secondary"
@@ -378,26 +409,32 @@ export function SlideEditor({ lectureId }: { lectureId: string }) {
                         <RefreshCw className="h-3 w-3" />
                         Regenerate with AI
                       </Button>
-                      <Button
-                        size="sm"
-                        onClick={() => saveSlide(selectedSlide)}
-                        disabled={updateSlide.isPending}
-                      >
-                        {updateSlide.isPending ? "Saving…" : "Save"}
-                      </Button>
                     </div>
-                  </div>
+                  </details>
 
-                  <details className="rounded-xl border border-zinc-200 dark:border-zinc-800">
-                    <summary className="cursor-pointer px-4 py-2 text-sm text-zinc-500">
-                      Comments & sharing
-                    </summary>
-                    <div className="space-y-4 border-t border-zinc-200 p-4 dark:border-zinc-800">
-                      <SlideComments lectureId={lectureId} slideId={selectedSlide.id} />
-                      <div className="grid gap-4 lg:grid-cols-2">
-                        <VersionPanel lectureId={lectureId} />
-                        <SharePanel lectureId={lectureId} />
+                  <details className="group rounded-xl border border-zinc-200 dark:border-zinc-800">
+                    <summary className="flex cursor-pointer list-none flex-wrap items-center justify-between gap-3 px-4 py-3 marker:hidden">
+                      <div className="flex min-w-0 items-center gap-2">
+                        <ChevronRight className="h-4 w-4 shrink-0 text-zinc-400 transition-transform group-open:rotate-90" />
+                        <h3 className="text-sm font-semibold">Sharing</h3>
                       </div>
+                      <span className="text-xs text-zinc-500">Invite viewer or editor</span>
+                    </summary>
+                    <div className="border-t border-zinc-200 p-4 dark:border-zinc-800">
+                      <SharePanel lectureId={lectureId} />
+                    </div>
+                  </details>
+
+                  <details className="group rounded-xl border border-zinc-200 dark:border-zinc-800">
+                    <summary className="flex cursor-pointer list-none flex-wrap items-center justify-between gap-3 px-4 py-3 marker:hidden">
+                      <div className="flex min-w-0 items-center gap-2">
+                        <ChevronRight className="h-4 w-4 shrink-0 text-zinc-400 transition-transform group-open:rotate-90" />
+                        <h3 className="text-sm font-semibold">Comments</h3>
+                      </div>
+                      <span className="text-xs text-zinc-500">Selected slide discussion</span>
+                    </summary>
+                    <div className="border-t border-zinc-200 p-4 dark:border-zinc-800">
+                      <SlideComments lectureId={lectureId} slideId={selectedSlide.id} />
                     </div>
                   </details>
                 </div>

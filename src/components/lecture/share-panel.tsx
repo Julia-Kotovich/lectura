@@ -11,8 +11,7 @@ export function SharePanel({ lectureId }: { lectureId: string }) {
   const share = trpc.share.invite.useMutation();
 
   return (
-    <div className="rounded-xl border border-zinc-200 p-4 dark:border-zinc-800">
-      <h3 className="mb-3 text-sm font-medium">Share lecture</h3>
+    <div>
       <div className="flex flex-wrap gap-2">
         <Input
           type="email"

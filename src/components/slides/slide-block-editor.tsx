@@ -5,7 +5,7 @@ import type { SlideBlock, SlideDocument, SlideLayout } from "@/lib/schemas/slide
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Trash2 } from "lucide-react";
+import { ChevronRight, Trash2 } from "lucide-react";
 
 const layouts: { value: SlideLayout; label: string }[] = [
   { value: "title", label: "Title" },
@@ -58,61 +58,73 @@ export function SlideBlockEditor({
   }
 
   return (
-    <div className="space-y-4 rounded-xl border border-zinc-200 p-4 dark:border-zinc-800">
-      <div className="flex flex-wrap items-center justify-between gap-2">
-        <h3 className="text-sm font-semibold">Edit slide content</h3>
-        <Button size="sm" onClick={() => onSave(slide)} disabled={saving}>
-          {saving ? "Saving…" : "Save slide"}
-        </Button>
-      </div>
+    <details className="group rounded-xl border border-zinc-200 dark:border-zinc-800">
+      <summary className="flex cursor-pointer list-none flex-wrap items-center justify-between gap-3 px-4 py-3 marker:hidden">
+        <div className="flex min-w-0 items-center gap-2">
+          <ChevronRight className="h-4 w-4 shrink-0 text-zinc-400 transition-transform group-open:rotate-90" />
+          <h3 className="text-sm font-semibold">Edit slide content</h3>
+        </div>
+        <span className="text-xs text-zinc-500">
+          {layouts.find((layout) => layout.value === slide.layout)?.label ?? slide.layout} layout ·{" "}
+          {slide.blocks.length} block{slide.blocks.length === 1 ? "" : "s"}
+        </span>
+      </summary>
 
-      <div className="space-y-2">
-        <label className="text-sm font-medium">Layout</label>
-        <select
-          className="flex h-10 w-full rounded-lg border border-zinc-200 bg-white px-3 text-sm dark:border-zinc-700 dark:bg-zinc-950"
-          value={slide.layout}
-          onChange={(e) => onChange({ ...slide, layout: e.target.value as SlideLayout })}
-        >
-          {layouts.map((l) => (
-            <option key={l.value} value={l.value}>
-              {l.label}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      <div className="space-y-3">
-        {slide.blocks.map((block, index) => (
-          <div
-            key={block.id}
-            className="space-y-2 rounded-lg border border-zinc-100 bg-zinc-50/50 p-3 dark:border-zinc-800 dark:bg-zinc-900/50"
-          >
-            <div className="flex items-center justify-between gap-2">
-              <span className="text-xs font-medium uppercase tracking-wide text-zinc-500">
-                {block.type}
-              </span>
-              <button
-                type="button"
-                onClick={() => removeBlock(index)}
-                className="text-zinc-400 hover:text-red-600"
-                aria-label="Remove block"
-              >
-                <Trash2 className="h-4 w-4" />
-              </button>
-            </div>
-            <BlockFields block={block} onUpdate={(b) => updateBlock(index, b)} />
-          </div>
-        ))}
-      </div>
-
-      <div className="flex flex-wrap gap-2">
-        {blockTypes.map((t) => (
-          <Button key={t.value} type="button" size="sm" variant="outline" onClick={() => addBlock(t.value)}>
-            + {t.label}
+      <div className="space-y-4 border-t border-zinc-200 p-4 dark:border-zinc-800">
+        <div className="flex justify-end">
+          <Button size="sm" onClick={() => onSave(slide)} disabled={saving}>
+            {saving ? "Saving…" : "Save slide"}
           </Button>
-        ))}
+        </div>
+
+        <div className="space-y-2">
+          <label className="text-sm font-medium">Layout</label>
+          <select
+            className="flex h-10 w-full rounded-lg border border-zinc-200 bg-white px-3 text-sm dark:border-zinc-700 dark:bg-zinc-950"
+            value={slide.layout}
+            onChange={(e) => onChange({ ...slide, layout: e.target.value as SlideLayout })}
+          >
+            {layouts.map((l) => (
+              <option key={l.value} value={l.value}>
+                {l.label}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="space-y-3">
+          {slide.blocks.map((block, index) => (
+            <div
+              key={block.id}
+              className="space-y-2 rounded-lg border border-zinc-100 bg-zinc-50/50 p-3 dark:border-zinc-800 dark:bg-zinc-900/50"
+            >
+              <div className="flex items-center justify-between gap-2">
+                <span className="text-xs font-medium uppercase tracking-wide text-zinc-500">
+                  {block.type}
+                </span>
+                <button
+                  type="button"
+                  onClick={() => removeBlock(index)}
+                  className="text-zinc-400 hover:text-red-600"
+                  aria-label="Remove block"
+                >
+                  <Trash2 className="h-4 w-4" />
+                </button>
+              </div>
+              <BlockFields block={block} onUpdate={(b) => updateBlock(index, b)} />
+            </div>
+          ))}
+        </div>
+
+        <div className="flex flex-wrap gap-2">
+          {blockTypes.map((t) => (
+            <Button key={t.value} type="button" size="sm" variant="outline" onClick={() => addBlock(t.value)}>
+              + {t.label}
+            </Button>
+          ))}
+        </div>
       </div>
-    </div>
+    </details>
   );
 }
 

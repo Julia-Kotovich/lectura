@@ -44,6 +44,19 @@ interface ImproveProgress {
   error?: string;
 }
 
+function formatEvaluationDate(createdAt?: string | Date) {
+  if (!createdAt) return null;
+
+  const date = new Date(createdAt);
+  if (Number.isNaN(date.getTime())) return null;
+
+  return new Intl.DateTimeFormat("en", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  }).format(date);
+}
+
 export function ScorePanel({
   evaluation,
   history = [],
@@ -74,6 +87,10 @@ export function ScorePanel({
     previous != null ? bloom.alignmentScore - previous.alignmentScore : null;
   const atTarget = bloom.alignmentScore >= BLOOM_TARGET_SCORE;
   const atLimit = improveRounds >= BLOOM_MAX_IMPROVE_ROUNDS;
+  const evaluationDate = formatEvaluationDate(evaluation.createdAt);
+  const title = evaluationDate
+    ? `Bloom's taxonomy evaluation from ${evaluationDate}`
+    : "Bloom's taxonomy evaluation";
 
   return (
     <Card className="p-0">
@@ -82,7 +99,7 @@ export function ScorePanel({
           <div className="flex min-w-0 items-center gap-3">
             <ChevronRight className="h-4 w-4 shrink-0 text-zinc-400 transition-transform group-open:rotate-90" />
             <div>
-              <h3 className="text-lg font-semibold">Bloom&apos;s taxonomy</h3>
+              <h3 className="text-lg font-semibold">{title}</h3>
               <p className="text-sm text-zinc-500">Cognitive level alignment for this deck</p>
             </div>
           </div>
