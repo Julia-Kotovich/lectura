@@ -1,0 +1,2865 @@
+[
+  {
+    "status": "completed",
+    "deck": {
+      "slides": [
+        {
+          "id": "slide-01",
+          "title": "Software Engineering Process and Quality Assurance",
+          "layout": "title",
+          "blocks": [
+            {
+              "id": "block-01-title",
+              "type": "heading",
+              "content": "Lecture 10: Software Engineering Process and Quality Assurance"
+            },
+            {
+              "id": "block-01-subtitle",
+              "type": "text",
+              "content": "Synthesizing Construction, Architecture, and Engineering Principles"
+            }
+          ],
+          "speakerNotes": "Welcome to our final lecture synthesizing the entire module. Today we bring together everything learned about OO principles, design patterns, contracts, and agile methods into a cohesive framework for building high-quality industrial software. This lecture focuses on the processes and practices that enable professional software development at scale.",
+          "metadata": {
+            "transition": "fade",
+            "animation": "none",
+            "tags": [
+              "introduction",
+              "overview"
+            ]
+          }
+        },
+        {
+          "id": "slide-02",
+          "title": "Software Engineering: A Systematic Discipline",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-02-bullets",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Enables construction of industrial-scale, high-quality systems",
+                  "Built on decades of proven best practices",
+                  "Key quality attributes: correctness, robustness, extendibility, reusability",
+                  "Integrates construction, architecture, and engineering principles"
+                ]
+              }
+            },
+            {
+              "id": "block-02-diagram",
+              "type": "diagram",
+              "content": {
+                "prompt": "Triangle diagram with three pillars labeled 'Construction', 'Architecture', and 'Engineering' supporting a platform labeled 'Quality Software' at the top. Use professional colors and clean lines."
+              }
+            }
+          ],
+          "speakerNotes": "Software engineering distinguishes professional development from ad-hoc programming. The three pillars—construction (OO principles), architecture (patterns and structure), and engineering (process and quality)—work together to produce reliable systems. Emphasize that quality cannot be an afterthought; it must be built into every phase.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fadeIn",
+            "tags": [
+              "fundamentals",
+              "quality"
+            ]
+          }
+        },
+        {
+          "id": "slide-03",
+          "title": "Integration Challenge: Design Your Development Workflow",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-03-scenario",
+              "type": "text",
+              "content": "**Scenario**: You're leading a 6-person team building a safety-critical medical device interface. Requirements are stable but changes require regulatory approval. Team includes 2 junior developers.\n\n**Your Task**: Design a cohesive development workflow integrating appropriate concepts from this course."
+            },
+            {
+              "id": "block-03-activity",
+              "type": "activity",
+              "content": {
+                "title": "Synthesis Exercise (8 minutes)",
+                "instructions": "In pairs, create a workflow diagram addressing: (1) Which SDLC model and why? (2) What testing strategy supports safety requirements? (3) Which branching strategy fits team composition? (4) What CI/CD stages are essential? (5) Which 3 metrics track quality? Justify each choice considering constraints.",
+                "deliverable": "Annotated workflow diagram with rationale for each decision"
+              }
+            },
+            {
+              "id": "block-03-concepts",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Draw from: SDLC models, Design by Contract for safety, testing pyramid, Git workflows, CI/CD stages, GQM metrics",
+                  "Consider: Regulatory constraints, team experience, safety criticality, change management"
+                ]
+              }
+            }
+          ],
+          "speakerNotes": "This create-level activity addresses the synthesis objective by requiring students to integrate multiple course concepts into a cohesive solution. After pair work, have 2-3 groups share their workflows. Highlight how different valid solutions emerge from justified trade-offs. Emphasize that professional development requires synthesizing principles, not applying them in isolation. Discuss how V-Model, DbC test oracles, trunk-based with feature flags, staged deployment, and defect density metrics might form one coherent approach for this scenario.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fadeIn",
+            "tags": [
+              "integration",
+              "create",
+              "synthesis",
+              "activity"
+            ]
+          }
+        },
+        {
+          "id": "slide-04",
+          "title": "Traditional SDLC Models: Analysis and Selection",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-04-models",
+              "type": "text",
+              "content": "**Waterfall**: Sequential phases (requirements → design → implementation → testing). **V-Model**: Verification/validation at each stage with testing levels mirroring development. **Spiral**: Iterative risk-driven cycles with prototyping."
+            },
+            {
+              "id": "block-04-activity",
+              "type": "activity",
+              "content": {
+                "title": "SDLC Selection Analysis (6 minutes)",
+                "instructions": "**Three Scenarios**: (A) NASA Mars rover software—10-year mission, requirements frozen 2 years before launch. (B) Startup fintech app—evolving regulations, competitive pressure, 4-month runway. (C) Medical device firmware—FDA approval required, stable requirements, safety-critical. For each: Which model fits best? What are the trade-offs? What risks does each model mitigate or introduce?",
+                "deliverable": "Justified model selection for each scenario with trade-off analysis"
+              }
+            },
+            {
+              "id": "block-04-criteria",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Analyze using: Requirements stability, change cost, regulatory constraints, risk profile, team expertise",
+                  "Consider: Documentation needs, feedback cycles, validation timing, cost of late defects"
+                ]
+              }
+            }
+          ],
+          "speakerNotes": "This analyze-level activity addresses the SDLC comparison objective by requiring students to break down applicability criteria and justify selections. After individual thinking, discuss in pairs, then share. Guide analysis: Scenario A favors V-Model (validation rigor, stable requirements), B needs agile (rapid feedback), C suits V-Model (regulatory traceability). Emphasize that model choice depends on context—no universal best practice. Highlight how different constraints drive different trade-offs, preparing for slide 5's agile models as contrast.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fadeIn",
+            "tags": [
+              "sdlc",
+              "analyze",
+              "traditional",
+              "decision-making"
+            ]
+          }
+        },
+        {
+          "id": "slide-05",
+          "title": "Agile and Iterative Models: Comparative Analysis",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-05-foundations",
+              "type": "text",
+              "content": "**Agile Manifesto**: Individuals, working software, collaboration, responding to change. **Scrum**: Sprints, roles (PO/SM/Team), ceremonies. **XP**: Pair programming, TDD, CI. **Kanban**: Visualize workflow, limit WIP."
+            },
+            {
+              "id": "block-05-activity",
+              "type": "activity",
+              "content": {
+                "title": "Agile Framework Analysis (7 minutes)",
+                "instructions": "**Scenario**: E-commerce platform with 8 developers, unpredictable feature requests, monthly releases. **Task**: (1) Compare Scrum vs Kanban—which ceremonies/practices from each would you adopt? (2) Analyze trade-offs: sprint commitment vs flow-based delivery. (3) Justify hybrid approach addressing both predictability needs and flow efficiency.",
+                "deliverable": "Framework selection with comparative trade-off analysis and justified hybrid elements"
+              }
+            },
+            {
+              "id": "block-05-criteria",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Analyze using: feedback loop frequency, work predictability, team coordination needs, waste reduction",
+                  "Consider: How do ceremonies create quality gates? When does sprint structure help/hinder?"
+                ]
+              }
+            }
+          ],
+          "speakerNotes": "This analyze-level activity bridges slides 4-5, requiring comparative analysis of agile frameworks against scenario constraints. After individual analysis, pair discussion, then share reasoning. Guide toward recognizing Scrum provides cadence for releases while Kanban optimizes flow for urgent requests—hybrid uses sprint planning/reviews with continuous Kanban board. Emphasize framework choice depends on work nature and team context. Connect XP practices (TDD, CI) to quality topics in upcoming slides, showing how agile embeds quality through rapid feedback rather than separate QA phases.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fadeIn",
+            "tags": [
+              "sdlc",
+              "agile",
+              "analyze",
+              "decision-making"
+            ]
+          }
+        },
+        {
+          "id": "slide-06",
+          "title": "Selecting the Right SDLC Model",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-06-diagram",
+              "type": "diagram",
+              "content": {
+                "prompt": "Decision matrix table with rows for Waterfall, Agile/Scrum, and Hybrid approaches, and columns for: Requirements Stability, Team Size, Risk Level, Regulatory Constraints, and Time to Market. Use checkmarks and X marks to show suitability. Professional table design."
+              }
+            },
+            {
+              "id": "block-06-bullets",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Consider: requirements stability, team experience, domain constraints",
+                  "Hybrid approaches: Combine elements (e.g., regulated agile)",
+                  "Modern trend: Adaptive, lean, DevOps-oriented"
+                ]
+              }
+            }
+          ],
+          "speakerNotes": "No one-size-fits-all solution. Medical device software might use hybrid: waterfall for regulatory documentation, agile for implementation. Startup MVP: pure agile. Enterprise migration: phased iterative. Emphasize that the choice impacts team structure, documentation, and quality practices. Ask students to consider their own project contexts.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fadeIn",
+            "tags": [
+              "sdlc",
+              "decision-making"
+            ]
+          }
+        },
+        {
+          "id": "slide-07",
+          "title": "Quality Assurance: Cost-Benefit Analysis",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "block-07-diagram",
+              "type": "diagram",
+              "content": {
+                "prompt": "Quality cost pyramid showing three investment tiers from bottom to top: 'Prevention' ($1 - design reviews, DbC, standards), 'Detection' ($100 - testing, code review), 'Correction' ($10,000 - production bugs, rework). Include cost multipliers and arrows showing exponential growth. Professional educational diagram."
+              }
+            },
+            {
+              "id": "block-07-concepts",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Verification (built right) vs. Validation (right product)",
+                  "Quality attributes: functionality, reliability, usability, efficiency, maintainability",
+                  "Prevention cost << Detection cost << Failure cost"
+                ]
+              }
+            },
+            {
+              "id": "block-07-activity",
+              "type": "activity",
+              "content": {
+                "title": "Resource Allocation Challenge",
+                "instruction": "Your team has $100K QA budget for a financial API. Three proposals: (A) $80K automated testing + $20K code review, (B) $50K prevention (training, DbC tools) + $30K testing + $20K monitoring, (C) $60K manual testing + $40K bug bounty program. Evaluate each using cost-of-quality principles. Which maximizes long-term reliability? Justify trade-offs considering defect detection timing and maintenance costs.",
+                "duration": "5 min pair discussion"
+              }
+            }
+          ],
+          "speakerNotes": "This evaluate-level activity addresses the QA objective by requiring students to assess competing investment strategies using cost-of-quality framework. Guide discussion toward prevention economics: bugs found in requirements cost $1, design $10, code $100, testing $1,000, production $10,000. Option B balances prevention and detection. Connect to DbC as prevention mechanism. Debrief should highlight that upfront investment in prevention (training, contracts, reviews) yields exponential savings by catching defects early. Challenge students to consider maintenance costs and technical debt accumulation under each scenario.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fadeIn",
+            "tags": [
+              "quality",
+              "qa",
+              "evaluate",
+              "cost-benefit"
+            ]
+          }
+        },
+        {
+          "id": "slide-08",
+          "title": "Testing Pyramid and Strategies",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "block-08-diagram",
+              "type": "diagram",
+              "content": {
+                "prompt": "Testing pyramid with three layers: wide base labeled 'Unit Tests (70%)', middle layer 'Integration Tests (20%)', narrow top 'System/E2E Tests (10%)'. Include annotations for speed (fast at bottom, slow at top) and cost (low at bottom, high at top). Professional educational diagram."
+              }
+            },
+            {
+              "id": "block-08-concepts",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Unit: Individual classes/methods (fast, isolated)",
+                  "Integration: Component interactions (databases, APIs)",
+                  "System: Complete application behavior",
+                  "TDD: Write tests first, red-green-refactor cycle"
+                ]
+              }
+            },
+            {
+              "id": "block-08-activity",
+              "type": "activity",
+              "content": {
+                "title": "Apply Testing Strategy",
+                "instruction": "You're testing an e-commerce checkout system with payment gateway integration and inventory database. Design a test strategy: (1) List 3 unit tests, 2 integration tests, 1 system test. (2) For each, specify what you're testing and why that level is appropriate. (3) Write one unit test using DbC postconditions as test oracle. Apply pyramid proportions and TDD principles.",
+                "duration": "6 min pairs"
+              }
+            }
+          ],
+          "speakerNotes": "This apply-level activity targets the QA testing objective by requiring students to design concrete test strategies for a realistic scenario. Guide students to justify pyramid distribution: unit tests for business logic (discount calculations, cart totals), integration for payment API and database interactions, system for complete checkout flow. Emphasize TDD cycle and using contracts as oracles. Debrief should highlight appropriate test level selection based on dependencies and isolation. Challenge pairs to explain why certain tests belong at specific pyramid levels and how contracts guide assertions.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fadeIn",
+            "tags": [
+              "testing",
+              "tdd",
+              "apply",
+              "pyramid"
+            ]
+          }
+        },
+        {
+          "id": "slide-09",
+          "title": "Advanced Testing and Contracts",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-09-bullets",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Equivalence partitioning & boundary value analysis",
+                  "Mutation testing: Test your tests",
+                  "Property-based testing: Generate cases from specifications",
+                  "Contracts as test oracles: Preconditions, postconditions, invariants"
+                ]
+              }
+            },
+            {
+              "id": "block-09-code",
+              "type": "code",
+              "content": {
+                "language": "java",
+                "code": "@Test\npublic void testSortedArray() {\n    int[] input = {3, 1, 4, 1, 5};\n    int[] result = sort(input);\n    \n    // Contract postcondition as test oracle\n    assertTrue(isSorted(result)); // postcondition\n    assertEquals(input.length, result.length); // size invariant\n    assertArrayElementsEqual(input, result); // permutation property\n}"
+              }
+            }
+          ],
+          "speakerNotes": "Show how contracts guide testing. Boundary value analysis: test min-1, min, min+1, max-1, max, max+1. Mutation testing introduces bugs to verify tests catch them. Property-based testing (like QuickCheck) generates hundreds of test cases from specifications. The code example shows how postconditions become assertions—contracts and tests reinforce each other.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fadeIn",
+            "tags": [
+              "testing",
+              "contracts",
+              "advanced"
+            ]
+          }
+        },
+        {
+          "id": "slide-10",
+          "title": "Version Control with Git",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-10-bullets",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Purpose: Track changes, enable collaboration, maintain history, enable rollback",
+                  "Git fundamentals: Repositories, commits, branches, merges",
+                  "Best practices: Atomic commits, meaningful messages, frequent integration"
+                ]
+              }
+            },
+            {
+              "id": "block-10-code",
+              "type": "code",
+              "content": {
+                "language": "bash",
+                "code": "# Good commit message (conventional commits)\ngit commit -m \"feat: Add user authentication with JWT\"\n\n# Atomic commit - one logical change\ngit add src/auth/\ngit commit -m \"refactor: Extract authentication logic to service\"\n\n# Feature branch workflow\ngit checkout -b feature/user-profile\ngit push -u origin feature/user-profile"
+              }
+            }
+          ],
+          "speakerNotes": "Version control is non-negotiable in professional development. Emphasize commit message conventions (conventional commits: feat, fix, refactor, docs, test). Atomic commits mean each commit is a complete, logical change that could be reverted independently. Show how this supports code review and debugging. Connect to collaboration: multiple developers working simultaneously.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fadeIn",
+            "tags": [
+              "git",
+              "version-control",
+              "collaboration"
+            ]
+          }
+        },
+        {
+          "id": "slide-11",
+          "title": "Branching Strategies: Analysis and Selection",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-11-comparison",
+              "type": "table",
+              "content": {
+                "headers": [
+                  "Strategy",
+                  "Branch Types",
+                  "Best For",
+                  "Trade-offs"
+                ],
+                "rows": [
+                  [
+                    "Git Flow",
+                    "main, develop, feature, release, hotfix",
+                    "Release-driven products",
+                    "Complex but organized; overhead for small teams"
+                  ],
+                  [
+                    "GitHub Flow",
+                    "main + feature branches",
+                    "Continuous deployment",
+                    "Simple; requires strong CI/CD; less release control"
+                  ],
+                  [
+                    "Trunk-based",
+                    "main + short-lived (<1 day)",
+                    "High-velocity teams",
+                    "Fast integration; demands discipline & testing"
+                  ]
+                ]
+              }
+            },
+            {
+              "id": "block-11-activity",
+              "type": "activity",
+              "content": {
+                "title": "Case Analysis Exercise",
+                "description": "Analyze these scenarios and justify which branching strategy fits best: (A) 15-person team, quarterly releases, regulated industry with audit requirements. (B) 4-person startup, deploy 5x daily, feature flags enabled. (C) 8-person team, monthly releases, junior developers. Consider team size, release cadence, compliance needs, and skill level. Pair-share your reasoning.",
+                "duration": "5 minutes"
+              }
+            }
+          ],
+          "speakerNotes": "This analyze-level activity addresses the configuration management objective by requiring students to break down team characteristics and match them to appropriate strategies. Guide discussion: Scenario A needs Git Flow (audit trails, release branches for compliance). Scenario B suits trunk-based (high velocity, feature flags reduce branch need). Scenario C fits GitHub Flow (balance simplicity with structure for junior devs). Emphasize trade-off reasoning: no perfect strategy, only context-appropriate choices. Connect to pull request culture as quality gate across all strategies.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fadeIn",
+            "tags": [
+              "git",
+              "branching",
+              "workflow",
+              "analyze"
+            ]
+          }
+        },
+        {
+          "id": "slide-12",
+          "title": "Configuration Management Beyond Code",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-12-bullets",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Configuration items: Source code, docs, build scripts, dependencies, infrastructure",
+                  "Dependency management: Package managers, version pinning, lock files",
+                  "Semantic versioning: MAJOR.MINOR.PATCH (breaking.feature.fix)",
+                  "Infrastructure as Code: Versioned, reviewed, reproducible environments"
+                ]
+              }
+            },
+            {
+              "id": "block-12-scenario",
+              "type": "code",
+              "content": {
+                "language": "json",
+                "code": "// Scenario: Production bug after deployment\n{\n  \"dependencies\": {\n    \"express\": \"^4.18.2\",\n    \"lodash\": \"^4.17.0\",\n    \"axios\": \"*\"\n  },\n  \"version\": \"2.1.3\"\n}\n// Problem: Builds work locally, fail in CI"
+              }
+            },
+            {
+              "id": "block-12-activity",
+              "type": "activity",
+              "content": {
+                "title": "Dependency Troubleshooting Exercise",
+                "description": "Analyze the package.json above. Identify risky dependency specifications that could cause non-reproducible builds. Apply semantic versioning principles to fix the configuration: decide exact vs. range versioning for each dependency, justify when to use lock files, and propose version update strategy. Consider: What does ^ allow? Why is * dangerous? When should you pin exact versions?",
+                "duration": "4 minutes"
+              }
+            }
+          ],
+          "speakerNotes": "This apply-level activity addresses the configuration management objective through problem-solving. Students must diagnose issues (^ allows minor/patch updates causing drift; * is wildcard chaos; no lock file means different installs get different versions) and apply versioning principles to fix them. Guide discussion: Pin critical dependencies exactly, use ^ for stable libraries, always commit lock files, update dependencies deliberately not automatically. Connect to reproducible builds and CI/CD reliability. The scenario mirrors real production incidents where dependency drift causes 'works on my machine' failures.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fadeIn",
+            "tags": [
+              "configuration",
+              "dependencies",
+              "versioning",
+              "apply"
+            ]
+          }
+        },
+        {
+          "id": "slide-13",
+          "title": "Continuous Integration Pipeline Design",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-13-diagram",
+              "type": "diagram",
+              "content": {
+                "prompt": "CI pipeline flowchart showing: Developer commits → Trigger build → Compile code → Run unit tests → Run integration tests → Static analysis → Generate reports → Notify team. Include success (green) and failure (red) paths. Use icons for each stage. Professional DevOps diagram style."
+              }
+            },
+            {
+              "id": "block-13-scenario",
+              "type": "code",
+              "content": {
+                "language": "yaml",
+                "code": "# Scenario: E-commerce startup (8 devs)\n# Requirements:\n# - 20+ commits/day to main branch\n# - Deploy 3x daily to production\n# - Test suite: 500 unit, 50 integration tests\n# - Current build time: 25 minutes\n# - Budget: Limited CI/CD resources\n# Problem: Slow feedback blocks deployments"
+              }
+            },
+            {
+              "id": "block-13-activity",
+              "type": "activity",
+              "content": {
+                "title": "Pipeline Optimization Challenge",
+                "description": "Design an optimized CI pipeline for this scenario. Decide: Which stages run in parallel? What quality gates are mandatory vs. optional? How do you achieve <10min feedback? Where do you place integration tests? What triggers deployments? Consider trade-offs: speed vs. thoroughness, cost vs. reliability. Sketch your pipeline architecture with stage ordering, parallelization strategy, and gate placement. Justify decisions using CI principles.",
+                "duration": "5 minutes"
+              }
+            }
+          ],
+          "speakerNotes": "This create-level activity addresses the CI/CD design objective through architectural problem-solving. Students must synthesize pipeline stages, parallelization, quality gates, and resource constraints into a cohesive solution. Guide discussion toward: parallel test execution, fast unit tests first, integration tests in separate stage, static analysis non-blocking initially, caching dependencies. Key insight: CI effectiveness requires balancing speed and quality—perfect coverage is useless if feedback takes hours. Connect to deployment frequency and developer productivity. Solutions should justify stage ordering and explain failure handling strategies.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fadeIn",
+            "tags": [
+              "ci",
+              "pipeline",
+              "design",
+              "create"
+            ]
+          }
+        },
+        {
+          "id": "slide-14",
+          "title": "Continuous Deployment Strategies",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "block-14-bullets",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Continuous Delivery: Always production-ready",
+                  "Continuous Deployment: Automated to production",
+                  "Blue-Green: Two environments, instant switch",
+                  "Canary: Gradual rollout (5% → 25% → 100%)",
+                  "Feature flags: Control activation independently"
+                ]
+              }
+            },
+            {
+              "id": "block-14-diagram",
+              "type": "diagram",
+              "content": {
+                "prompt": "Blue-green deployment diagram showing two identical production environments (Blue and Green), a load balancer/router switching between them, and traffic flow. Show version 1.0 on Blue (active) and version 2.0 on Green (staging), then instant switch. Professional infrastructure diagram."
+              }
+            }
+          ],
+          "speakerNotes": "Deployment strategies minimize risk. Blue-green: deploy to inactive environment, test, switch instantly, rollback if needed. Canary: deploy to small user percentage first, monitor, gradually increase. Feature flags decouple deployment from activation—deploy dark, activate when ready. This enables true continuous deployment with safety nets.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fadeIn",
+            "tags": [
+              "cd",
+              "deployment",
+              "devops"
+            ]
+          }
+        },
+        {
+          "id": "slide-15",
+          "title": "Software Metrics and Measurement",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-15-bullets",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Goal-Question-Metric (GQM) approach to selection",
+                  "Code quality: Cyclomatic complexity, coupling, cohesion, coverage",
+                  "Process metrics: Velocity, lead time, cycle time, MTTR",
+                  "Warning: Goodhart's Law—when a measure becomes a target, it ceases to be a good measure"
+                ]
+              }
+            },
+            {
+              "id": "block-15-diagram",
+              "type": "diagram",
+              "content": {
+                "prompt": "GQM pyramid diagram with three levels: Top level 'Goal' (Improve code maintainability), middle level 'Questions' (How complex is the code? How coupled are modules?), bottom level 'Metrics' (Cyclomatic complexity, Coupling metrics, Code coverage). Use pyramid shape with arrows connecting levels."
+              }
+            }
+          ],
+          "speakerNotes": "Metrics must serve goals, not become goals themselves. GQM ensures metrics align with objectives. Example: Goal (improve reliability) → Question (how many defects?) → Metric (defect density). Warning about gaming: LOC as productivity metric leads to bloated code. Cyclomatic complexity > 10 suggests refactoring needed. Use metrics for insight, not punishment.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fadeIn",
+            "tags": [
+              "metrics",
+              "measurement",
+              "gqm"
+            ]
+          }
+        },
+        {
+          "id": "slide-16",
+          "title": "Integration: Bringing It All Together",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-16-diagram",
+              "type": "diagram",
+              "content": {
+                "prompt": "Integrated development workflow diagram showing: User Story (with acceptance criteria/contracts) → TDD cycle (test-first) → Implementation (applying OO principles and design patterns) → Code review (checking contracts and quality) → CI/CD pipeline → Deployment → Metrics feedback loop back to planning. Use circular/cyclical layout. Professional workflow diagram."
+              }
+            },
+            {
+              "id": "block-16-bullets",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "User stories with acceptance criteria (high-level contracts)",
+                  "TDD: Tests as executable contracts",
+                  "OO principles and patterns in implementation",
+                  "CI/CD enforcing quality gates",
+                  "Metrics driving continuous improvement"
+                ]
+              }
+            }
+          ],
+          "speakerNotes": "This is where everything comes together. User story acceptance criteria are behavioral contracts. TDD writes tests (contracts) first. Implementation applies OO principles (encapsulation, polymorphism) and patterns (Observer, Strategy). Code review verifies contracts and design. CI/CD automates verification. Metrics provide feedback for next iteration. This is professional software engineering in practice.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fadeIn",
+            "tags": [
+              "integration",
+              "synthesis",
+              "workflow"
+            ]
+          }
+        },
+        {
+          "id": "slide-17",
+          "title": "Course Synthesis: Construction → Architecture → Engineering",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-17-diagram",
+              "type": "diagram",
+              "content": {
+                "prompt": "Course concept map showing three main clusters: 'Construction' (OO principles, inheritance, polymorphism, genericity), 'Architecture' (design patterns, modularity, large-scale structure), and 'Engineering' (agile, testing, CI/CD, metrics, process). Show connections between clusters and how they support 'Professional Software Development' at the center. Use different colors for each cluster."
+              }
+            },
+            {
+              "id": "block-17-bullets",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Construction: OO fundamentals enabling modularity and reuse",
+                  "Architecture: Patterns and structure for large-scale systems",
+                  "Engineering: Process and quality for professional delivery",
+                  "Integration: All concepts working together in practice"
+                ]
+              }
+            }
+          ],
+          "speakerNotes": "Review the course journey. Construction gave us OO tools: encapsulation, inheritance, polymorphism, genericity. Architecture showed us how to structure large systems with patterns. Engineering provided the process framework: agile, testing, CI/CD, metrics. None works in isolation—professional development requires all three. This synthesis prepares students for industry and advanced courses.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fadeIn",
+            "tags": [
+              "review",
+              "synthesis",
+              "course-summary"
+            ]
+          }
+        },
+        {
+          "id": "slide-18",
+          "title": "Professional Excellence and Next Steps",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-18-bullets",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Technical excellence: Clean code, solid design, comprehensive testing",
+                  "Process discipline: Version control, CI/CD, metrics-driven improvement",
+                  "Continuous learning: Evolving practices and technologies",
+                  "Ethical responsibility: Reliability, security, societal impact"
+                ]
+              }
+            },
+            {
+              "id": "block-18-diagram",
+              "type": "diagram",
+              "content": {
+                "prompt": "Professional software engineer competency model showing concentric circles: innermost 'Technical Skills' (coding, design, testing), middle 'Process Skills' (agile, CI/CD, collaboration), outer 'Professional Skills' (communication, ethics, continuous learning). Professional career development diagram."
+              }
+            }
+          ],
+          "speakerNotes": "Professional software engineering requires technical excellence, process discipline, and continuous learning. Balance trade-offs: time vs. quality, features vs. technical debt. Ethical considerations matter—your code impacts real people. Next steps: Advanced Software Engineering course, specializations (distributed systems, security, AI/ML engineering), professional certifications, open source contributions. Final exam preparation: integrate all concepts into comprehensive project design.",
+          "metadata": {
+            "transition": "fade",
+            "animation": "fadeIn",
+            "tags": [
+              "conclusion",
+              "professional-development",
+              "next-steps"
+            ]
+          }
+        }
+      ]
+    },
+    "evaluation": {
+      "alignmentScore": 88,
+      "dominantLevel": "analyze",
+      "distribution": {
+        "remember": 5,
+        "understand": 15,
+        "apply": 25,
+        "analyze": 35,
+        "evaluate": 12,
+        "create": 8
+      },
+      "objectiveAlignments": [
+        {
+          "objective": "Understand and compare major software development lifecycle models and their applicability",
+          "expectedLevel": "analyze",
+          "observedLevel": "analyze",
+          "status": "aligned",
+          "rationale": "Slides 4-6 require students to analyze SDLC models against scenario constraints, compare trade-offs (Waterfall vs Agile vs V-Model), and justify selections based on requirements stability, regulatory needs, and team context. Activities explicitly ask for comparative analysis and justified model selection with trade-off reasoning."
+        },
+        {
+          "objective": "Apply quality assurance principles and testing strategies to ensure software reliability",
+          "expectedLevel": "apply",
+          "observedLevel": "apply",
+          "status": "aligned",
+          "rationale": "Slide 8 activity requires students to design concrete test strategies for e-commerce checkout, specifying unit/integration/system tests and applying testing pyramid proportions. Students must use DbC postconditions as test oracles and apply TDD principles to realistic scenarios, demonstrating procedural application of testing concepts."
+        },
+        {
+          "objective": "Implement configuration management and version control practices in team environments",
+          "expectedLevel": "apply",
+          "observedLevel": "analyze",
+          "status": "partially_aligned",
+          "rationale": "Slides 10-12 emphasize analysis over implementation. Slide 11 requires analyzing branching strategies and matching them to team contexts (analyze level), while slide 12 focuses on diagnosing dependency issues and applying versioning principles (apply level). The deck leans toward comparative analysis and troubleshooting rather than hands-on implementation of Git workflows in team settings."
+        },
+        {
+          "objective": "Design and deploy continuous integration/continuous deployment (CI/CD) pipelines",
+          "expectedLevel": "create",
+          "observedLevel": "create",
+          "status": "aligned",
+          "rationale": "Slide 13 activity requires students to design optimized CI pipeline architecture, synthesizing stages, parallelization, quality gates, and resource constraints into cohesive solutions. Students must create pipeline designs with justified stage ordering, parallelization strategies, and gate placement—clear create-level cognitive demand involving synthesis and architectural design."
+        },
+        {
+          "objective": "Select and apply appropriate software metrics to measure quality and progress",
+          "expectedLevel": "apply",
+          "observedLevel": "understand",
+          "status": "partially_aligned",
+          "rationale": "Slide 15 presents GQM approach and explains metric categories (code quality, process metrics) but lacks activities requiring students to actually select and apply metrics to scenarios. Content remains at understand level (explaining GQM pyramid, classifying metrics) without procedural application exercises where students choose specific metrics for given goals and implement measurement strategies."
+        },
+        {
+          "objective": "Synthesize OO principles, design patterns, contracts, and agile methods into cohesive development practices",
+          "expectedLevel": "create",
+          "observedLevel": "create",
+          "status": "aligned",
+          "rationale": "Slide 3 integration challenge requires students to design cohesive workflows synthesizing SDLC models, DbC, testing strategies, Git workflows, CI/CD stages, and metrics for safety-critical medical device context. Slide 16 explicitly integrates all course concepts into unified workflow. Both activities demand synthesis of multiple concepts into novel, context-appropriate solutions—clear create-level work."
+        }
+      ],
+      "slideTags": [
+        {
+          "slideTitle": "Software Engineering Process and Quality Assurance",
+          "primaryLevel": "remember",
+          "evidence": "Title slide with no cognitive demand beyond course orientation"
+        },
+        {
+          "slideTitle": "Software Engineering: A Systematic Discipline",
+          "primaryLevel": "understand",
+          "evidence": "Explains three pillars framework and quality attributes; no application or analysis activities"
+        },
+        {
+          "slideTitle": "Integration Challenge: Design Your Development Workflow",
+          "primaryLevel": "create",
+          "evidence": "Students design cohesive workflow integrating SDLC, testing, branching, CI/CD, and metrics for medical device scenario with justified trade-offs—synthesis of multiple concepts into novel solution"
+        },
+        {
+          "slideTitle": "Traditional SDLC Models: Analysis and Selection",
+          "primaryLevel": "analyze",
+          "evidence": "Students analyze three scenarios (NASA rover, fintech startup, medical device) to determine which SDLC model fits best, breaking down applicability criteria and justifying selections with trade-off analysis"
+        },
+        {
+          "slideTitle": "Agile and Iterative Models: Comparative Analysis",
+          "primaryLevel": "analyze",
+          "evidence": "Comparative analysis of Scrum vs Kanban for e-commerce platform, requiring trade-off reasoning and justified hybrid approach—breaking down framework characteristics against scenario constraints"
+        },
+        {
+          "slideTitle": "Selecting the Right SDLC Model",
+          "primaryLevel": "understand",
+          "evidence": "Decision matrix and summary of considerations; no activity requiring students to analyze or apply selection criteria to new scenarios"
+        },
+        {
+          "slideTitle": "Quality Assurance: Cost-Benefit Analysis",
+          "primaryLevel": "evaluate",
+          "evidence": "Students evaluate three QA budget allocation proposals using cost-of-quality framework, assessing which maximizes long-term reliability and justifying trade-offs—making judgments based on criteria"
+        },
+        {
+          "slideTitle": "Testing Pyramid and Strategies",
+          "primaryLevel": "apply",
+          "evidence": "Students design test strategy for e-commerce checkout, specifying unit/integration/system tests with justification for pyramid level placement and writing DbC-based unit test—procedural application"
+        },
+        {
+          "slideTitle": "Advanced Testing and Contracts",
+          "primaryLevel": "understand",
+          "evidence": "Explains equivalence partitioning, mutation testing, property-based testing, and shows contract-as-oracle example; no activity requiring application"
+        },
+        {
+          "slideTitle": "Version Control with Git",
+          "primaryLevel": "understand",
+          "evidence": "Explains Git fundamentals, best practices, and shows commit message examples; no activity requiring students to apply version control practices"
+        },
+        {
+          "slideTitle": "Branching Strategies: Analysis and Selection",
+          "primaryLevel": "analyze",
+          "evidence": "Students analyze three team scenarios to determine appropriate branching strategy, breaking down team characteristics (size, release cadence, compliance) and matching to Git Flow/GitHub Flow/trunk-based with justified trade-offs"
+        },
+        {
+          "slideTitle": "Configuration Management Beyond Code",
+          "primaryLevel": "apply",
+          "evidence": "Students diagnose dependency issues in package.json scenario and apply semantic versioning principles to fix configuration, deciding exact vs range versioning—problem-solving application"
+        },
+        {
+          "slideTitle": "Continuous Integration Pipeline Design",
+          "primaryLevel": "create",
+          "evidence": "Students design optimized CI pipeline architecture for e-commerce startup, synthesizing stage ordering, parallelization, quality gates, and resource constraints into cohesive solution with justified decisions"
+        },
+        {
+          "slideTitle": "Continuous Deployment Strategies",
+          "primaryLevel": "understand",
+          "evidence": "Explains blue-green, canary, and feature flag deployment strategies with diagram; no activity requiring students to select or design deployment approach"
+        },
+        {
+          "slideTitle": "Software Metrics and Measurement",
+          "primaryLevel": "understand",
+          "evidence": "Explains GQM approach, metric categories, and Goodhart's Law; no activity requiring students to select metrics for goals or apply measurement strategies"
+        },
+        {
+          "slideTitle": "Integration: Bringing It All Together",
+          "primaryLevel": "understand",
+          "evidence": "Synthesizes course concepts into integrated workflow diagram showing connections; explanatory rather than requiring students to create integration"
+        },
+        {
+          "slideTitle": "Course Synthesis: Construction → Architecture → Engineering",
+          "primaryLevel": "understand",
+          "evidence": "Reviews course journey with concept map showing three clusters; summary and classification of course content"
+        },
+        {
+          "slideTitle": "Professional Excellence and Next Steps",
+          "primaryLevel": "understand",
+          "evidence": "Describes professional competencies and next steps; motivational conclusion without cognitive demand"
+        }
+      ],
+      "gaps": [
+        "Metrics objective (select and apply appropriate software metrics) lacks apply-level activities—slide 15 explains GQM but never requires students to choose specific metrics for scenarios or implement measurement strategies",
+        "Configuration management objective partially addressed—slides focus on analysis (branching strategy selection) and troubleshooting (dependency issues) rather than hands-on implementation of version control practices in team environments",
+        "Advanced testing concepts (slide 9: mutation testing, property-based testing) presented at understand level without application exercises—missed opportunity for students to generate property-based tests or interpret mutation testing results",
+        "Deployment strategies (slide 14) remain at understand level—no activity requiring students to select appropriate deployment strategy for scenario or design canary rollout plan",
+        "Limited evaluate-level content (12% of deck)—only one activity (slide 7 QA budget) requires assessment against criteria; could add more critique/justification activities for design decisions"
+      ],
+      "suggestions": [
+        "Add apply-level metrics activity to slide 15: provide scenario with quality goal (e.g., 'reduce production incidents') and have students use GQM to derive 3-5 specific metrics, define measurement procedures, and specify target values",
+        "Enhance slide 10-11 with hands-on Git workflow implementation: provide merge conflict scenario or pull request with issues, require students to execute Git commands to resolve and justify workflow choices for team context",
+        "Convert slide 9 advanced testing to apply level: provide code with contracts and have students generate property-based test cases or analyze mutation testing report to identify weak test coverage areas",
+        "Add deployment strategy selection activity to slide 14: provide scenario (e.g., social media platform with 10M users) and require students to design deployment plan choosing blue-green/canary/feature flags with rollback strategy and monitoring approach",
+        "Strengthen evaluate-level content: add activity where students critique existing CI/CD pipeline configuration or assess software project's quality practices against industry standards, providing justified recommendations",
+        "Slide 6 SDLC selection could move from understand to analyze: add decision-making activity where students must choose model for ambiguous scenario with conflicting constraints and defend choice against alternatives",
+        "Consider adding remember-level checkpoint quiz early in deck (after slide 2) to activate prior knowledge of OO principles, design patterns, and contracts before synthesis activities—ensures foundation for higher-level work",
+        "Slide 16 integration workflow could be elevated from understand to create: rather than showing integrated workflow, have students design their own integration workflow for novel scenario, specifying where each course concept applies"
+      ]
+    },
+    "rounds_used": 1,
+    "before_score": 42,
+    "after_score": 88,
+    "improved_slide_ids": [
+      "slide-03",
+      "slide-04",
+      "slide-05",
+      "slide-07",
+      "slide-08",
+      "slide-11",
+      "slide-12",
+      "slide-13"
+    ],
+    "failed_slide_ids": [],
+    "improved_count": 8,
+    "reevaluated": true
+  },
+  {
+    "status": "completed",
+    "deck": {
+      "slides": [
+        {
+          "id": "slide-01",
+          "title": "Software Engineering Process and Quality Assurance",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-01-heading",
+              "type": "heading",
+              "content": "Lecture 10: Software Engineering Process and Quality Assurance"
+            },
+            {
+              "id": "block-01-subtitle",
+              "type": "text",
+              "content": "Synthesizing Construction, Architecture, and Engineering Principles"
+            },
+            {
+              "id": "block-01-context",
+              "type": "callout",
+              "content": {
+                "style": "info",
+                "text": "Scenario: You're joining a team building a healthcare appointment system. The codebase has grown to 50K lines, deployment failures occur weekly, and technical debt is accumulating. Your task today: diagnose quality gaps and design solutions using this lecture's frameworks."
+              }
+            },
+            {
+              "id": "block-01-activity",
+              "type": "activity",
+              "content": {
+                "title": "Pre-Lecture Diagnostic (2 min)",
+                "instruction": "Review this project snapshot: 60% code coverage, manual deployments, no branching strategy, unclear quality goals. List 3 specific practices from our module (OO principles, patterns, contracts, testing, CI/CD, metrics) you'd implement first and briefly justify priority order.",
+                "format": "individual-reflection"
+              }
+            }
+          ],
+          "speakerNotes": "This opening shifts from passive introduction to active problem-solving, priming students to apply course concepts to realistic quality challenges. The scenario runs throughout the lecture—each section addresses one diagnostic finding. This activity activates prior knowledge (remember/understand) while requiring prioritization and justification (analyze/evaluate). Expect responses like: 1) CI/CD pipeline to reduce deployment failures, 2) Git workflow for team coordination, 3) GQM metrics to track improvement. Use their answers to bridge into systematic quality frameworks in slide 2.",
+          "metadata": {
+            "transition": "fade",
+            "animation": "fadeIn",
+            "tags": [
+              "introduction",
+              "analyze",
+              "evaluate",
+              "scenario-based"
+            ]
+          }
+        },
+        {
+          "id": "slide-02",
+          "title": "Software Engineering: A Systematic Discipline",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-02-framework",
+              "type": "text",
+              "content": "**Software Engineering** enables construction of industrial-scale, high-quality systems through systematic integration of three pillars: **Construction** (OO principles, contracts), **Architecture** (patterns, structure), and **Engineering** (process, quality assurance)."
+            },
+            {
+              "id": "block-02-activity",
+              "type": "activity",
+              "content": {
+                "title": "Quality Attribute Mapping (4 min)",
+                "instruction": "Return to the healthcare appointment system scenario. For each quality attribute (correctness, robustness, extendibility, reusability), identify: (1) Which pillar(s) primarily address it? (2) One specific practice from our module that supports it. Example: Correctness → Construction pillar → Design by Contract with test oracles.",
+                "format": "pair-work with table completion"
+              }
+            },
+            {
+              "id": "block-02-diagram",
+              "type": "diagram",
+              "content": {
+                "prompt": "Triangle diagram with three pillars labeled 'Construction (OO, DbC)', 'Architecture (Patterns)', and 'Engineering (Process, QA)' supporting a platform labeled 'Quality Software' at the top. Use professional blue and gray tones."
+              }
+            }
+          ],
+          "speakerNotes": "This activity raises cognitive demand to apply/analyze by requiring students to map abstract quality attributes to concrete practices within the three-pillar framework. After pair work, collect responses to reveal how multiple pillars contribute to each attribute (e.g., extendibility requires OO principles AND architectural patterns AND refactoring processes). This bridges the conceptual framework to actionable practices students will synthesize in slide 3's workflow design. Emphasize that professional quality emerges from systematic integration, not isolated techniques.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fadeIn",
+            "tags": [
+              "fundamentals",
+              "apply",
+              "analyze",
+              "quality"
+            ]
+          }
+        },
+        {
+          "id": "slide-03",
+          "title": "Integration Challenge: Design Your Development Workflow",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-03-scenario",
+              "type": "text",
+              "content": "**Scenario**: You're leading a 6-person team building a safety-critical medical device interface. Requirements are stable but changes require regulatory approval. Team includes 2 junior developers.\n\n**Your Task**: Design a cohesive development workflow integrating appropriate concepts from this course."
+            },
+            {
+              "id": "block-03-activity",
+              "type": "activity",
+              "content": {
+                "title": "Synthesis Exercise (8 minutes)",
+                "instructions": "In pairs, create a workflow diagram addressing: (1) Which SDLC model and why? (2) What testing strategy supports safety requirements? (3) Which branching strategy fits team composition? (4) What CI/CD stages are essential? (5) Which 3 metrics track quality? Justify each choice considering constraints.",
+                "deliverable": "Annotated workflow diagram with rationale for each decision"
+              }
+            },
+            {
+              "id": "block-03-concepts",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Draw from: SDLC models, Design by Contract for safety, testing pyramid, Git workflows, CI/CD stages, GQM metrics",
+                  "Consider: Regulatory constraints, team experience, safety criticality, change management"
+                ]
+              }
+            }
+          ],
+          "speakerNotes": "This create-level activity addresses the synthesis objective by requiring students to integrate multiple course concepts into a cohesive solution. After pair work, have 2-3 groups share their workflows. Highlight how different valid solutions emerge from justified trade-offs. Emphasize that professional development requires synthesizing principles, not applying them in isolation. Discuss how V-Model, DbC test oracles, trunk-based with feature flags, staged deployment, and defect density metrics might form one coherent approach for this scenario.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fadeIn",
+            "tags": [
+              "integration",
+              "create",
+              "synthesis",
+              "activity"
+            ]
+          }
+        },
+        {
+          "id": "slide-04",
+          "title": "Traditional SDLC Models: Analysis and Selection",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-04-models",
+              "type": "text",
+              "content": "**Waterfall**: Sequential phases (requirements → design → implementation → testing). **V-Model**: Verification/validation at each stage with testing levels mirroring development. **Spiral**: Iterative risk-driven cycles with prototyping."
+            },
+            {
+              "id": "block-04-activity",
+              "type": "activity",
+              "content": {
+                "title": "SDLC Selection Analysis (6 minutes)",
+                "instructions": "**Three Scenarios**: (A) NASA Mars rover software—10-year mission, requirements frozen 2 years before launch. (B) Startup fintech app—evolving regulations, competitive pressure, 4-month runway. (C) Medical device firmware—FDA approval required, stable requirements, safety-critical. For each: Which model fits best? What are the trade-offs? What risks does each model mitigate or introduce?",
+                "deliverable": "Justified model selection for each scenario with trade-off analysis"
+              }
+            },
+            {
+              "id": "block-04-criteria",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Analyze using: Requirements stability, change cost, regulatory constraints, risk profile, team expertise",
+                  "Consider: Documentation needs, feedback cycles, validation timing, cost of late defects"
+                ]
+              }
+            }
+          ],
+          "speakerNotes": "This analyze-level activity addresses the SDLC comparison objective by requiring students to break down applicability criteria and justify selections. After individual thinking, discuss in pairs, then share. Guide analysis: Scenario A favors V-Model (validation rigor, stable requirements), B needs agile (rapid feedback), C suits V-Model (regulatory traceability). Emphasize that model choice depends on context—no universal best practice. Highlight how different constraints drive different trade-offs, preparing for slide 5's agile models as contrast.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fadeIn",
+            "tags": [
+              "sdlc",
+              "analyze",
+              "traditional",
+              "decision-making"
+            ]
+          }
+        },
+        {
+          "id": "slide-05",
+          "title": "Agile and Iterative Models: Comparative Analysis",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-05-foundations",
+              "type": "text",
+              "content": "**Agile Manifesto**: Individuals, working software, collaboration, responding to change. **Scrum**: Sprints, roles (PO/SM/Team), ceremonies. **XP**: Pair programming, TDD, CI. **Kanban**: Visualize workflow, limit WIP."
+            },
+            {
+              "id": "block-05-activity",
+              "type": "activity",
+              "content": {
+                "title": "Agile Framework Analysis (7 minutes)",
+                "instructions": "**Scenario**: E-commerce platform with 8 developers, unpredictable feature requests, monthly releases. **Task**: (1) Compare Scrum vs Kanban—which ceremonies/practices from each would you adopt? (2) Analyze trade-offs: sprint commitment vs flow-based delivery. (3) Justify hybrid approach addressing both predictability needs and flow efficiency.",
+                "deliverable": "Framework selection with comparative trade-off analysis and justified hybrid elements"
+              }
+            },
+            {
+              "id": "block-05-criteria",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Analyze using: feedback loop frequency, work predictability, team coordination needs, waste reduction",
+                  "Consider: How do ceremonies create quality gates? When does sprint structure help/hinder?"
+                ]
+              }
+            }
+          ],
+          "speakerNotes": "This analyze-level activity bridges slides 4-5, requiring comparative analysis of agile frameworks against scenario constraints. After individual analysis, pair discussion, then share reasoning. Guide toward recognizing Scrum provides cadence for releases while Kanban optimizes flow for urgent requests—hybrid uses sprint planning/reviews with continuous Kanban board. Emphasize framework choice depends on work nature and team context. Connect XP practices (TDD, CI) to quality topics in upcoming slides, showing how agile embeds quality through rapid feedback rather than separate QA phases.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fadeIn",
+            "tags": [
+              "sdlc",
+              "agile",
+              "analyze",
+              "decision-making"
+            ]
+          }
+        },
+        {
+          "id": "slide-06",
+          "title": "Selecting the Right SDLC Model",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-06-criteria",
+              "type": "text",
+              "content": "**Selection Factors**: Requirements stability, regulatory constraints, team experience, risk tolerance, time-to-market pressure, customer involvement availability, budget flexibility"
+            },
+            {
+              "id": "block-06-activity",
+              "type": "activity",
+              "content": {
+                "title": "SDLC Decision Challenge (8 minutes)",
+                "instructions": "**Scenario**: Healthcare appointment system—moderate regulatory requirements (HIPAA), 6-person team (2 junior), requirements 70% known, 4-month deadline, stakeholders available biweekly. **Task**: (1) Select SDLC model (Waterfall/Agile/Hybrid) and justify against each selection factor. (2) Identify 3 highest risks of your choice and mitigation strategies. (3) Specify which artifacts/ceremonies your model requires and why they address constraints.",
+                "deliverable": "Model selection with risk analysis and justified process adaptations"
+              }
+            },
+            {
+              "id": "block-06-guidance",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Consider trade-offs: documentation needs vs iteration speed, compliance gates vs feedback loops",
+                  "Hybrid example: Agile sprints with waterfall-style regulatory documentation checkpoints"
+                ]
+              }
+            }
+          ],
+          "speakerNotes": "This analyze-level activity requires students to evaluate competing SDLC models against ambiguous constraints with no single correct answer. After individual work, facilitate pairs comparing selections. Guide toward hybrid approach: agile iterations for feature development with waterfall gates for HIPAA documentation and validation. Debrief should surface that junior developers need more structure (favoring Scrum ceremonies), regulatory needs demand traceability (waterfall artifacts), but partial requirements and stakeholder availability enable iteration. Connect to next slide's QA discussion by noting how model choice affects when/how quality is verified.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fadeIn",
+            "tags": [
+              "sdlc",
+              "analyze",
+              "decision-making",
+              "risk-analysis"
+            ]
+          }
+        },
+        {
+          "id": "slide-07",
+          "title": "Quality Assurance: Cost-Benefit Analysis",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "block-07-diagram",
+              "type": "diagram",
+              "content": {
+                "prompt": "Quality cost pyramid showing three investment tiers from bottom to top: 'Prevention' ($1 - design reviews, DbC, standards), 'Detection' ($100 - testing, code review), 'Correction' ($10,000 - production bugs, rework). Include cost multipliers and arrows showing exponential growth. Professional educational diagram."
+              }
+            },
+            {
+              "id": "block-07-concepts",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Verification (built right) vs. Validation (right product)",
+                  "Quality attributes: functionality, reliability, usability, efficiency, maintainability",
+                  "Prevention cost << Detection cost << Failure cost"
+                ]
+              }
+            },
+            {
+              "id": "block-07-activity",
+              "type": "activity",
+              "content": {
+                "title": "Resource Allocation Challenge",
+                "instruction": "Your team has $100K QA budget for a financial API. Three proposals: (A) $80K automated testing + $20K code review, (B) $50K prevention (training, DbC tools) + $30K testing + $20K monitoring, (C) $60K manual testing + $40K bug bounty program. Evaluate each using cost-of-quality principles. Which maximizes long-term reliability? Justify trade-offs considering defect detection timing and maintenance costs.",
+                "duration": "5 min pair discussion"
+              }
+            }
+          ],
+          "speakerNotes": "This evaluate-level activity addresses the QA objective by requiring students to assess competing investment strategies using cost-of-quality framework. Guide discussion toward prevention economics: bugs found in requirements cost $1, design $10, code $100, testing $1,000, production $10,000. Option B balances prevention and detection. Connect to DbC as prevention mechanism. Debrief should highlight that upfront investment in prevention (training, contracts, reviews) yields exponential savings by catching defects early. Challenge students to consider maintenance costs and technical debt accumulation under each scenario.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fadeIn",
+            "tags": [
+              "quality",
+              "qa",
+              "evaluate",
+              "cost-benefit"
+            ]
+          }
+        },
+        {
+          "id": "slide-08",
+          "title": "Testing Pyramid and Strategies",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "block-08-diagram",
+              "type": "diagram",
+              "content": {
+                "prompt": "Testing pyramid with three layers: wide base labeled 'Unit Tests (70%)', middle layer 'Integration Tests (20%)', narrow top 'System/E2E Tests (10%)'. Include annotations for speed (fast at bottom, slow at top) and cost (low at bottom, high at top). Professional educational diagram."
+              }
+            },
+            {
+              "id": "block-08-concepts",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Unit: Individual classes/methods (fast, isolated)",
+                  "Integration: Component interactions (databases, APIs)",
+                  "System: Complete application behavior",
+                  "TDD: Write tests first, red-green-refactor cycle"
+                ]
+              }
+            },
+            {
+              "id": "block-08-activity",
+              "type": "activity",
+              "content": {
+                "title": "Apply Testing Strategy",
+                "instruction": "You're testing an e-commerce checkout system with payment gateway integration and inventory database. Design a test strategy: (1) List 3 unit tests, 2 integration tests, 1 system test. (2) For each, specify what you're testing and why that level is appropriate. (3) Write one unit test using DbC postconditions as test oracle. Apply pyramid proportions and TDD principles.",
+                "duration": "6 min pairs"
+              }
+            }
+          ],
+          "speakerNotes": "This apply-level activity targets the QA testing objective by requiring students to design concrete test strategies for a realistic scenario. Guide students to justify pyramid distribution: unit tests for business logic (discount calculations, cart totals), integration for payment API and database interactions, system for complete checkout flow. Emphasize TDD cycle and using contracts as oracles. Debrief should highlight appropriate test level selection based on dependencies and isolation. Challenge pairs to explain why certain tests belong at specific pyramid levels and how contracts guide assertions.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fadeIn",
+            "tags": [
+              "testing",
+              "tdd",
+              "apply",
+              "pyramid"
+            ]
+          }
+        },
+        {
+          "id": "slide-09",
+          "title": "Advanced Testing and Contracts",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "block-09-concepts",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Equivalence partitioning: Group inputs into valid/invalid classes",
+                  "Boundary value analysis: Test min-1, min, min+1, max-1, max, max+1",
+                  "Mutation testing: Inject bugs to verify tests catch them",
+                  "Property-based testing: Generate cases from specifications",
+                  "Contracts as oracles: Postconditions → assertions"
+                ]
+              }
+            },
+            {
+              "id": "block-09-code",
+              "type": "code",
+              "content": {
+                "language": "java",
+                "code": "class BankAccount {\n  // requires: amount > 0\n  // ensures: balance = old balance + amount\n  void deposit(double amount) {...}\n}\n\n// Mutation: change + to - in deposit\n// Does your test catch it?"
+              }
+            },
+            {
+              "id": "block-09-activity",
+              "type": "activity",
+              "content": {
+                "title": "Generate Property-Based Tests",
+                "instruction": "Given a search(String[] array, String key) method with contract: requires array sorted alphabetically, ensures returns index where key found or -1. (1) Identify 3 properties to test (e.g., 'if found, array[result] == key'). (2) Design 5 boundary test cases using partitioning. (3) Review mutation report showing 2/5 mutants survived—which properties would catch them? Write one additional test.",
+                "duration": "7 min pairs"
+              }
+            }
+          ],
+          "speakerNotes": "This apply-level activity addresses the advanced testing gap by requiring students to generate property-based tests from contracts and analyze mutation testing results. Guide students to derive testable properties from postconditions: result validity, array unchanged, correct index. Boundary cases include empty array, single element, key at start/end, duplicate keys, key not present. For survived mutants (e.g., off-by-one errors, wrong comparison operators), students must identify which contract properties expose them. Debrief should connect contracts to test oracles and show how property-based testing generates comprehensive suites. Challenge pairs to explain why certain properties catch specific mutation types.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fadeIn",
+            "tags": [
+              "testing",
+              "contracts",
+              "apply",
+              "mutation-testing"
+            ]
+          }
+        },
+        {
+          "id": "slide-10",
+          "title": "Version Control with Git: Team Implementation",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "block-10-concepts",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Distributed collaboration: Clone, pull, push, fetch",
+                  "Commit atomicity: One logical change, revertable independently",
+                  "Conventional commits: feat, fix, refactor, docs, test, chore",
+                  "Pull requests: Code review gate before merge",
+                  "Conflict resolution: Manual merge when concurrent edits overlap"
+                ]
+              }
+            },
+            {
+              "id": "block-10-scenario",
+              "type": "code",
+              "content": {
+                "language": "bash",
+                "code": "# Scenario: Two developers edited User.java\n# Alice added login(), Bob refactored constructor\n# After git pull, conflict in User.java lines 15-23\n\n<<<<<<< HEAD\npublic User(String name) {\n  this.name = name;\n  this.createdAt = new Date();\n}\n=======\npublic User(String name, Role role) {\n  this.name = name;\n  this.role = role;\n}\n>>>>>>> feature/role-support"
+              }
+            },
+            {
+              "id": "block-10-activity",
+              "type": "activity",
+              "content": {
+                "title": "Resolve Conflict & Implement Workflow",
+                "instruction": "Given the merge conflict above: (1) Write the resolved code preserving both changes. (2) Write the Git commands to complete the merge with a conventional commit message. (3) Justify whether this should have been avoided—propose one workflow practice (branch naming, integration frequency, or communication protocol) to prevent future conflicts in this team.",
+                "duration": "6 min pairs"
+              }
+            }
+          ],
+          "speakerNotes": "This apply-level activity addresses the configuration management objective by requiring hands-on Git workflow implementation. Students must resolve a realistic merge conflict (combining constructor changes), execute proper Git commands (git add, git commit with conventional message like 'merge: Integrate role support with timestamp initialization'), and propose preventive workflow practices (e.g., frequent integration, feature branch naming conventions, or pre-merge communication). Debrief should emphasize that conflicts are normal but workflow discipline reduces them. Connect resolution strategy to atomic commits—each developer's change was logical independently. Challenge pairs to explain how pull request reviews could catch integration issues earlier.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fadeIn",
+            "tags": [
+              "git",
+              "version-control",
+              "apply",
+              "workflow"
+            ]
+          }
+        },
+        {
+          "id": "slide-11",
+          "title": "Branching Strategies: Analysis and Selection",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-11-comparison",
+              "type": "table",
+              "content": {
+                "headers": [
+                  "Strategy",
+                  "Branch Types",
+                  "Best For",
+                  "Trade-offs"
+                ],
+                "rows": [
+                  [
+                    "Git Flow",
+                    "main, develop, feature, release, hotfix",
+                    "Release-driven products",
+                    "Complex but organized; overhead for small teams"
+                  ],
+                  [
+                    "GitHub Flow",
+                    "main + feature branches",
+                    "Continuous deployment",
+                    "Simple; requires strong CI/CD; less release control"
+                  ],
+                  [
+                    "Trunk-based",
+                    "main + short-lived (<1 day)",
+                    "High-velocity teams",
+                    "Fast integration; demands discipline & testing"
+                  ]
+                ]
+              }
+            },
+            {
+              "id": "block-11-activity",
+              "type": "activity",
+              "content": {
+                "title": "Case Analysis Exercise",
+                "description": "Analyze these scenarios and justify which branching strategy fits best: (A) 15-person team, quarterly releases, regulated industry with audit requirements. (B) 4-person startup, deploy 5x daily, feature flags enabled. (C) 8-person team, monthly releases, junior developers. Consider team size, release cadence, compliance needs, and skill level. Pair-share your reasoning.",
+                "duration": "5 minutes"
+              }
+            }
+          ],
+          "speakerNotes": "This analyze-level activity addresses the configuration management objective by requiring students to break down team characteristics and match them to appropriate strategies. Guide discussion: Scenario A needs Git Flow (audit trails, release branches for compliance). Scenario B suits trunk-based (high velocity, feature flags reduce branch need). Scenario C fits GitHub Flow (balance simplicity with structure for junior devs). Emphasize trade-off reasoning: no perfect strategy, only context-appropriate choices. Connect to pull request culture as quality gate across all strategies.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fadeIn",
+            "tags": [
+              "git",
+              "branching",
+              "workflow",
+              "analyze"
+            ]
+          }
+        },
+        {
+          "id": "slide-12",
+          "title": "Configuration Management Beyond Code",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-12-bullets",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Configuration items: Source code, docs, build scripts, dependencies, infrastructure",
+                  "Dependency management: Package managers, version pinning, lock files",
+                  "Semantic versioning: MAJOR.MINOR.PATCH (breaking.feature.fix)",
+                  "Infrastructure as Code: Versioned, reviewed, reproducible environments"
+                ]
+              }
+            },
+            {
+              "id": "block-12-scenario",
+              "type": "code",
+              "content": {
+                "language": "json",
+                "code": "// Scenario: Production bug after deployment\n{\n  \"dependencies\": {\n    \"express\": \"^4.18.2\",\n    \"lodash\": \"^4.17.0\",\n    \"axios\": \"*\"\n  },\n  \"version\": \"2.1.3\"\n}\n// Problem: Builds work locally, fail in CI"
+              }
+            },
+            {
+              "id": "block-12-activity",
+              "type": "activity",
+              "content": {
+                "title": "Dependency Troubleshooting Exercise",
+                "description": "Analyze the package.json above. Identify risky dependency specifications that could cause non-reproducible builds. Apply semantic versioning principles to fix the configuration: decide exact vs. range versioning for each dependency, justify when to use lock files, and propose version update strategy. Consider: What does ^ allow? Why is * dangerous? When should you pin exact versions?",
+                "duration": "4 minutes"
+              }
+            }
+          ],
+          "speakerNotes": "This apply-level activity addresses the configuration management objective through problem-solving. Students must diagnose issues (^ allows minor/patch updates causing drift; * is wildcard chaos; no lock file means different installs get different versions) and apply versioning principles to fix them. Guide discussion: Pin critical dependencies exactly, use ^ for stable libraries, always commit lock files, update dependencies deliberately not automatically. Connect to reproducible builds and CI/CD reliability. The scenario mirrors real production incidents where dependency drift causes 'works on my machine' failures.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fadeIn",
+            "tags": [
+              "configuration",
+              "dependencies",
+              "versioning",
+              "apply"
+            ]
+          }
+        },
+        {
+          "id": "slide-13",
+          "title": "Continuous Integration Pipeline Design",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-13-diagram",
+              "type": "diagram",
+              "content": {
+                "prompt": "CI pipeline flowchart showing: Developer commits → Trigger build → Compile code → Run unit tests → Run integration tests → Static analysis → Generate reports → Notify team. Include success (green) and failure (red) paths. Use icons for each stage. Professional DevOps diagram style."
+              }
+            },
+            {
+              "id": "block-13-scenario",
+              "type": "code",
+              "content": {
+                "language": "yaml",
+                "code": "# Scenario: E-commerce startup (8 devs)\n# Requirements:\n# - 20+ commits/day to main branch\n# - Deploy 3x daily to production\n# - Test suite: 500 unit, 50 integration tests\n# - Current build time: 25 minutes\n# - Budget: Limited CI/CD resources\n# Problem: Slow feedback blocks deployments"
+              }
+            },
+            {
+              "id": "block-13-activity",
+              "type": "activity",
+              "content": {
+                "title": "Pipeline Optimization Challenge",
+                "description": "Design an optimized CI pipeline for this scenario. Decide: Which stages run in parallel? What quality gates are mandatory vs. optional? How do you achieve <10min feedback? Where do you place integration tests? What triggers deployments? Consider trade-offs: speed vs. thoroughness, cost vs. reliability. Sketch your pipeline architecture with stage ordering, parallelization strategy, and gate placement. Justify decisions using CI principles.",
+                "duration": "5 minutes"
+              }
+            }
+          ],
+          "speakerNotes": "This create-level activity addresses the CI/CD design objective through architectural problem-solving. Students must synthesize pipeline stages, parallelization, quality gates, and resource constraints into a cohesive solution. Guide discussion toward: parallel test execution, fast unit tests first, integration tests in separate stage, static analysis non-blocking initially, caching dependencies. Key insight: CI effectiveness requires balancing speed and quality—perfect coverage is useless if feedback takes hours. Connect to deployment frequency and developer productivity. Solutions should justify stage ordering and explain failure handling strategies.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fadeIn",
+            "tags": [
+              "ci",
+              "pipeline",
+              "design",
+              "create"
+            ]
+          }
+        },
+        {
+          "id": "slide-14",
+          "title": "Continuous Deployment Strategies",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-14-bullets",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Blue-Green: Two environments, instant switch, instant rollback",
+                  "Canary: Gradual rollout (5% → 25% → 100%), monitor metrics",
+                  "Feature flags: Deploy dark, activate when ready, A/B testing",
+                  "Strategy selection depends on: user base size, risk tolerance, monitoring capability"
+                ]
+              }
+            },
+            {
+              "id": "block-14-scenario",
+              "type": "code",
+              "content": {
+                "language": "text",
+                "code": "Scenario: Banking mobile app (5M active users)\n- New payment feature with ML fraud detection\n- Regulatory compliance required\n- Zero tolerance for payment failures\n- Monitoring: transaction success rate, latency\n- Rollback must be <2 minutes if issues detected\n- Current deployment: manual, off-peak hours"
+              }
+            },
+            {
+              "id": "block-14-activity",
+              "type": "activity",
+              "content": {
+                "title": "Deployment Strategy Design",
+                "description": "Design a deployment plan for this feature. Choose: blue-green, canary, feature flags, or hybrid approach. Specify: rollout percentages and timing, monitoring metrics and thresholds for proceed/rollback decisions, rollback mechanism, how to handle regulatory compliance verification. Justify your strategy choice against alternatives considering risk, user impact, and operational constraints.",
+                "duration": "5 minutes"
+              }
+            }
+          ],
+          "speakerNotes": "This apply-level activity requires students to select and design an appropriate deployment strategy for a constrained scenario. Guide discussion toward hybrid approach: feature flag to control activation, canary rollout (1% internal → 5% → 25% → 100%) with automated rollback on transaction failure rate >0.1%, blue-green for instant rollback capability. Key insight: high-risk domains need layered safety—no single strategy suffices. Students must justify monitoring thresholds and explain compliance verification timing. Connect to configuration management objective by discussing feature flag management and version control of deployment configurations.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fadeIn",
+            "tags": [
+              "cd",
+              "deployment",
+              "apply",
+              "design"
+            ]
+          }
+        },
+        {
+          "id": "slide-15",
+          "title": "Software Metrics and Measurement",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-15-bullets",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Goal-Question-Metric (GQM): Align metrics with objectives",
+                  "Code quality: Cyclomatic complexity, coupling, cohesion, coverage",
+                  "Process metrics: Velocity, lead time, cycle time, MTTR",
+                  "Warning: Goodhart's Law—when a measure becomes a target, it ceases to be a good measure"
+                ]
+              }
+            },
+            {
+              "id": "block-15-scenario",
+              "type": "code",
+              "content": {
+                "language": "text",
+                "code": "Scenario: E-commerce platform experiencing issues\n- Goal: Reduce production incidents by 40% in 6 months\n- Current: 8 incidents/month, avg resolution time 3 hours\n- Team: 12 developers, 2-week sprints, CI/CD pipeline\n- Codebase: 200K LOC, microservices architecture\n- Recent incidents: null pointer exceptions, timeout errors, integration failures"
+              }
+            },
+            {
+              "id": "block-15-activity",
+              "type": "activity",
+              "content": {
+                "title": "Apply GQM to Derive Metrics",
+                "description": "Use GQM to design a measurement strategy: (1) Break the goal into 3-4 specific questions about code quality, testing, or process. (2) For each question, select 2-3 concrete metrics with measurement procedures. (3) Specify target values and thresholds for each metric. (4) Identify one metric that could be gamed (Goodhart's Law) and explain the risk.",
+                "duration": "6 minutes"
+              }
+            }
+          ],
+          "speakerNotes": "This apply-level activity directly addresses the metrics objective. Students must operationalize GQM by deriving questions (How robust is error handling? How comprehensive is testing?) and selecting specific metrics (exception handling coverage, integration test count, defect escape rate). Guide toward process metrics too (MTTR, deployment frequency). Target values force practical thinking: cyclomatic complexity <10, test coverage >80%, MTTR <1 hour. Goodhart discussion prevents naive metric worship—e.g., coverage target leads to meaningless tests. Connect to CI/CD by discussing automated metric collection in pipelines.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fadeIn",
+            "tags": [
+              "metrics",
+              "measurement",
+              "gqm",
+              "apply"
+            ]
+          }
+        },
+        {
+          "id": "slide-16",
+          "title": "Integration: Design Your Development Workflow",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-16-scenario",
+              "type": "code",
+              "content": {
+                "language": "text",
+                "code": "Scenario: Healthcare appointment system\n- Team: 8 developers (mixed experience), 1-week sprints\n- Requirements: HIPAA compliance, 99.9% uptime, frequent updates\n- Constraints: No downtime deployments, audit trail required\n- Tech: Microservices, shared databases, external payment API\n- Challenge: Balance velocity with regulatory compliance"
+              }
+            },
+            {
+              "id": "block-16-activity",
+              "type": "activity",
+              "content": {
+                "title": "Design Integrated Workflow with Metrics",
+                "description": "Design a complete development workflow for this team: (1) Specify branching strategy and version control practices with justification. (2) Define TDD and CI/CD pipeline stages with quality gates (what gets checked, when deployment blocks). (3) Select 4-5 metrics to track quality and compliance (use GQM for one metric). (4) Identify where contracts/assertions enforce compliance requirements.",
+                "duration": "8 minutes"
+              }
+            }
+          ],
+          "speakerNotes": "This create-level activity addresses configuration management and metrics objectives by requiring students to design an integrated workflow. Students must implement version control practices (branching for compliance context), apply metrics (selecting and operationalizing GQM), and synthesize all course concepts. The healthcare scenario forces trade-offs between velocity and compliance. Guide students to specify concrete practices: trunk-based vs GitFlow for audit requirements, where contracts enforce HIPAA rules, which metrics track compliance (audit log coverage, deployment success rate), and how CI/CD gates prevent violations. Deliverable is a justified workflow design, not just concept identification.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fadeIn",
+            "tags": [
+              "integration",
+              "create",
+              "workflow",
+              "metrics",
+              "configuration-management"
+            ]
+          }
+        },
+        {
+          "id": "slide-17",
+          "title": "Course Synthesis: Construction → Architecture → Engineering",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-17-diagram",
+              "type": "diagram",
+              "content": {
+                "prompt": "Course concept map showing three main clusters: 'Construction' (OO principles, inheritance, polymorphism, genericity), 'Architecture' (design patterns, modularity, large-scale structure), and 'Engineering' (agile, testing, CI/CD, metrics, process). Show connections between clusters and how they support 'Professional Software Development' at the center. Use different colors for each cluster."
+              }
+            },
+            {
+              "id": "block-17-bullets",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Construction: OO fundamentals enabling modularity and reuse",
+                  "Architecture: Patterns and structure for large-scale systems",
+                  "Engineering: Process and quality for professional delivery",
+                  "Integration: All concepts working together in practice"
+                ]
+              }
+            }
+          ],
+          "speakerNotes": "Review the course journey. Construction gave us OO tools: encapsulation, inheritance, polymorphism, genericity. Architecture showed us how to structure large systems with patterns. Engineering provided the process framework: agile, testing, CI/CD, metrics. None works in isolation—professional development requires all three. This synthesis prepares students for industry and advanced courses.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fadeIn",
+            "tags": [
+              "review",
+              "synthesis",
+              "course-summary"
+            ]
+          }
+        },
+        {
+          "id": "slide-18",
+          "title": "Professional Excellence and Next Steps",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-18-bullets",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Technical excellence: Clean code, solid design, comprehensive testing",
+                  "Process discipline: Version control, CI/CD, metrics-driven improvement",
+                  "Continuous learning: Evolving practices and technologies",
+                  "Ethical responsibility: Reliability, security, societal impact"
+                ]
+              }
+            },
+            {
+              "id": "block-18-diagram",
+              "type": "diagram",
+              "content": {
+                "prompt": "Professional software engineer competency model showing concentric circles: innermost 'Technical Skills' (coding, design, testing), middle 'Process Skills' (agile, CI/CD, collaboration), outer 'Professional Skills' (communication, ethics, continuous learning). Professional career development diagram."
+              }
+            }
+          ],
+          "speakerNotes": "Professional software engineering requires technical excellence, process discipline, and continuous learning. Balance trade-offs: time vs. quality, features vs. technical debt. Ethical considerations matter—your code impacts real people. Next steps: Advanced Software Engineering course, specializations (distributed systems, security, AI/ML engineering), professional certifications, open source contributions. Final exam preparation: integrate all concepts into comprehensive project design.",
+          "metadata": {
+            "transition": "fade",
+            "animation": "fadeIn",
+            "tags": [
+              "conclusion",
+              "professional-development",
+              "next-steps"
+            ]
+          }
+        }
+      ]
+    },
+    "evaluation": {
+      "alignmentScore": 88,
+      "dominantLevel": "apply",
+      "distribution": {
+        "remember": 5,
+        "understand": 10,
+        "apply": 40,
+        "analyze": 30,
+        "evaluate": 10,
+        "create": 5
+      },
+      "objectiveAlignments": [
+        {
+          "objective": "Understand and compare major software development lifecycle models and their applicability",
+          "expectedLevel": "analyze",
+          "observedLevel": "analyze",
+          "status": "aligned",
+          "rationale": "Slides 4-6 require students to analyze SDLC models against scenario constraints, compare trade-offs, and justify selections based on requirements stability, regulatory needs, and team characteristics. Activities explicitly demand breaking down applicability criteria and evaluating competing models."
+        },
+        {
+          "objective": "Apply quality assurance principles and testing strategies to ensure software reliability",
+          "expectedLevel": "apply",
+          "observedLevel": "apply",
+          "status": "aligned",
+          "rationale": "Slides 7-9 require students to apply testing pyramid principles, design concrete test strategies for specific scenarios, generate property-based tests from contracts, and implement TDD practices. Activities involve executing testing procedures on realistic problems."
+        },
+        {
+          "objective": "Implement configuration management and version control practices in team environments",
+          "expectedLevel": "apply",
+          "observedLevel": "apply",
+          "status": "aligned",
+          "rationale": "Slides 10-12 require hands-on implementation: resolving merge conflicts with Git commands, applying branching strategies to team scenarios, and fixing dependency configurations. Activities demand procedural execution of version control workflows."
+        },
+        {
+          "objective": "Design and deploy continuous integration/continuous deployment (CI/CD) pipelines",
+          "expectedLevel": "create",
+          "observedLevel": "apply",
+          "status": "partially_aligned",
+          "rationale": "Slides 13-14 require pipeline design and deployment strategy selection, which involves create-level synthesis. However, activities focus more on optimizing existing pipeline architectures and selecting from established deployment patterns rather than designing novel CI/CD solutions from scratch. The cognitive demand reaches apply/analyze more than full create-level synthesis."
+        },
+        {
+          "objective": "Select and apply appropriate software metrics to measure quality and progress",
+          "expectedLevel": "apply",
+          "observedLevel": "apply",
+          "status": "aligned",
+          "rationale": "Slides 15-16 require students to apply GQM methodology, derive metrics from goals, specify measurement procedures, and operationalize metrics for specific scenarios. Activities demand procedural application of metrics frameworks to concrete problems."
+        },
+        {
+          "objective": "Synthesize OO principles, design patterns, contracts, and agile methods into cohesive development practices",
+          "expectedLevel": "create",
+          "observedLevel": "apply",
+          "status": "partially_aligned",
+          "rationale": "Slides 1-3 and 16 address synthesis through workflow design activities requiring integration of multiple course concepts. However, most activities provide structured frameworks (three-pillar model, workflow templates) that guide synthesis rather than demanding fully original integration. Students select and combine from established practices more than creating novel cohesive approaches. The cognitive demand reaches high apply/low create."
+        }
+      ],
+      "slideTags": [
+        {
+          "slideTitle": "Software Engineering Process and Quality Assurance",
+          "primaryLevel": "analyze",
+          "evidence": "Pre-lecture diagnostic requires analyzing project snapshot, prioritizing practices, and justifying decisions based on quality gaps—breaking down problems and evaluating solutions."
+        },
+        {
+          "slideTitle": "Software Engineering: A Systematic Discipline",
+          "primaryLevel": "apply",
+          "evidence": "Quality attribute mapping activity requires applying three-pillar framework to specific quality attributes and identifying concrete practices that support each attribute."
+        },
+        {
+          "slideTitle": "Integration Challenge: Design Your Development Workflow",
+          "primaryLevel": "create",
+          "evidence": "Synthesis exercise requires designing cohesive workflow integrating SDLC, testing, branching, CI/CD, and metrics—creating novel solution from multiple components with justified trade-offs."
+        },
+        {
+          "slideTitle": "Traditional SDLC Models: Analysis and Selection",
+          "primaryLevel": "analyze",
+          "evidence": "SDLC selection analysis requires breaking down applicability criteria, comparing models against scenario constraints, and analyzing trade-offs and risks for each model choice."
+        },
+        {
+          "slideTitle": "Agile and Iterative Models: Comparative Analysis",
+          "primaryLevel": "analyze",
+          "evidence": "Framework analysis requires comparing Scrum vs Kanban, analyzing trade-offs between sprint commitment and flow-based delivery, and justifying hybrid approach."
+        },
+        {
+          "slideTitle": "Selecting the Right SDLC Model",
+          "primaryLevel": "analyze",
+          "evidence": "SDLC decision challenge requires evaluating competing models against ambiguous constraints, identifying risks, and analyzing how model choice addresses specific factors."
+        },
+        {
+          "slideTitle": "Quality Assurance: Cost-Benefit Analysis",
+          "primaryLevel": "evaluate",
+          "evidence": "Resource allocation challenge requires evaluating competing QA investment strategies using cost-of-quality framework and assessing which maximizes long-term reliability."
+        },
+        {
+          "slideTitle": "Testing Pyramid and Strategies",
+          "primaryLevel": "apply",
+          "evidence": "Testing strategy activity requires applying pyramid principles to design concrete test suite with appropriate distribution and using DbC postconditions as test oracles."
+        },
+        {
+          "slideTitle": "Advanced Testing and Contracts",
+          "primaryLevel": "apply",
+          "evidence": "Property-based testing activity requires applying contract specifications to generate testable properties, designing boundary cases, and analyzing mutation testing results."
+        },
+        {
+          "slideTitle": "Version Control with Git: Team Implementation",
+          "primaryLevel": "apply",
+          "evidence": "Conflict resolution activity requires applying Git workflow procedures: resolving merge conflicts, executing proper commands, and implementing preventive workflow practices."
+        },
+        {
+          "slideTitle": "Branching Strategies: Analysis and Selection",
+          "primaryLevel": "analyze",
+          "evidence": "Case analysis requires breaking down team characteristics, comparing branching strategies, and analyzing trade-offs to match strategies to scenario constraints."
+        },
+        {
+          "slideTitle": "Configuration Management Beyond Code",
+          "primaryLevel": "apply",
+          "evidence": "Dependency troubleshooting requires applying semantic versioning principles to diagnose configuration issues and implement fixes for reproducible builds."
+        },
+        {
+          "slideTitle": "Continuous Integration Pipeline Design",
+          "primaryLevel": "create",
+          "evidence": "Pipeline optimization challenge requires designing pipeline architecture with stage ordering, parallelization strategy, and quality gate placement—synthesizing CI principles into cohesive solution."
+        },
+        {
+          "slideTitle": "Continuous Deployment Strategies",
+          "primaryLevel": "apply",
+          "evidence": "Deployment strategy design requires selecting appropriate deployment approach and applying it to constrained scenario with monitoring thresholds and rollback mechanisms."
+        },
+        {
+          "slideTitle": "Software Metrics and Measurement",
+          "primaryLevel": "apply",
+          "evidence": "GQM application requires operationalizing measurement strategy: deriving questions from goals, selecting metrics with procedures, and specifying target values."
+        },
+        {
+          "slideTitle": "Integration: Design Your Development Workflow",
+          "primaryLevel": "create",
+          "evidence": "Integrated workflow design requires synthesizing branching strategy, CI/CD pipeline, metrics, and compliance requirements into complete development workflow with justified practices."
+        },
+        {
+          "slideTitle": "Course Synthesis: Construction → Architecture → Engineering",
+          "primaryLevel": "understand",
+          "evidence": "Concept map review summarizes course journey and explains how construction, architecture, and engineering integrate—understanding relationships between course components."
+        },
+        {
+          "slideTitle": "Professional Excellence and Next Steps",
+          "primaryLevel": "understand",
+          "evidence": "Professional competency model explains technical, process, and professional skills required for software engineering—understanding career development framework."
+        }
+      ],
+      "gaps": [
+        "The 'Design and deploy CI/CD pipelines' objective expects create-level synthesis, but slide 13's pipeline optimization activity provides too much scaffolding (existing pipeline structure, specific constraints) to reach full create-level demand. Students optimize rather than design from scratch.",
+        "The synthesis objective expects create-level integration of OO principles, patterns, contracts, and agile methods, but most activities provide structured frameworks that guide combination rather than demanding original synthesis. Only slides 3 and 16 approach true create-level, representing ~10% of deck.",
+        "Slides 17-18 operate at understand level (summarizing course concepts and explaining professional competencies) when a capstone create-level activity would better align with synthesis objective and provide summative assessment opportunity.",
+        "The deck lacks evaluate-level activities for quality assessment beyond slide 7's cost-benefit analysis. Given the quality assurance focus, more activities requiring students to critique existing designs, assess testing adequacy, or judge metric appropriateness would strengthen evaluation skills.",
+        "No activities require students to remember or understand foundational definitions before applying them. While MSc students may have prerequisites, brief knowledge checks (e.g., 'Define cyclomatic complexity before applying it') would ensure conceptual grounding for application tasks."
+      ],
+      "suggestions": [
+        "Elevate slide 13 to full create-level by removing pipeline scaffolding: provide only requirements and constraints, requiring students to design complete CI/CD architecture from scratch including tool selection, stage definition, and integration strategy.",
+        "Replace slide 17-18's passive review with capstone synthesis activity: provide comprehensive project scenario requiring students to design complete development approach integrating OO design, architectural patterns, contracts, testing strategy, CI/CD pipeline, branching workflow, and metrics—demonstrating full course synthesis.",
+        "Add evaluate-level activity to slide 8 or 9: provide existing test suite with coverage report and mutation testing results, requiring students to critique test quality, assess adequacy against requirements, and justify improvements using testing principles.",
+        "Strengthen slide 11's analyze-level demand by adding risk analysis dimension: for each branching strategy, require students to identify failure modes (e.g., merge conflicts, integration delays, deployment errors) and analyze how strategy characteristics mitigate or exacerbate each risk.",
+        "Add brief knowledge activation to slides introducing new frameworks (GQM, testing pyramid, deployment strategies): 2-minute individual recall activity defining key terms before application exercises, ensuring conceptual foundation supports procedural application.",
+        "Increase evaluate-level representation by adding quality assessment activities: slide 7 could include critiquing a QA plan, slide 15 could require judging metric validity, slide 14 could involve assessing deployment strategy appropriateness for multiple scenarios with justification.",
+        "For slide 16's integration activity, add explicit synthesis scaffolding: require students to first map which course concepts address each workflow requirement, then justify integration decisions showing how concepts work together, making synthesis process visible.",
+        "Strengthen create-level representation by adding design constraints that prevent template application: for workflow design activities, introduce conflicting requirements (e.g., 'regulatory compliance requires documentation but team velocity demands minimal overhead') forcing novel solutions rather than standard pattern application."
+      ]
+    },
+    "rounds_used": 2,
+    "before_score": 88,
+    "after_score": 88,
+    "improved_slide_ids": [
+      "slide-09",
+      "slide-10",
+      "slide-14",
+      "slide-15",
+      "slide-01",
+      "slide-02",
+      "slide-06",
+      "slide-16"
+    ],
+    "failed_slide_ids": [],
+    "improved_count": 8,
+    "reevaluated": true
+  },
+  {
+    "status": "completed",
+    "deck": {
+      "slides": [
+        {
+          "id": "slide-01",
+          "title": "Software Engineering Process and Quality Assurance",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-01-heading",
+              "type": "heading",
+              "content": "Lecture 10: Software Engineering Process and Quality Assurance"
+            },
+            {
+              "id": "block-01-subtitle",
+              "type": "text",
+              "content": "Synthesizing Construction, Architecture, and Engineering Principles"
+            },
+            {
+              "id": "block-01-context",
+              "type": "callout",
+              "content": {
+                "style": "info",
+                "text": "Scenario: You're technical lead for a healthcare appointment system (50K lines). Recent audit reveals: 60% code coverage, weekly deployment failures, no branching strategy, unclear quality goals, mounting technical debt. Board demands improvement plan by end of quarter."
+              }
+            },
+            {
+              "id": "block-01-activity",
+              "type": "activity",
+              "content": {
+                "title": "Quality Architecture Design (3 min)",
+                "instruction": "Design a complete quality improvement strategy integrating at least 4 course concepts (OO principles, patterns, DbC, testing, CI/CD, metrics, workflows). For each: specify how it addresses audit findings, how it integrates with other practices, and what success criteria you'd establish. Justify why this combination creates cohesive quality assurance rather than isolated fixes.",
+                "format": "individual synthesis with integration justification"
+              }
+            }
+          ],
+          "speakerNotes": "This create-level activity requires students to synthesize multiple course concepts into cohesive strategy, directly addressing the synthesis objective. Unlike later structured activities, no framework is provided—students must design integration architecture from scratch. Expect solutions combining CI/CD pipelines with testing pyramids, DbC with metrics, branching workflows with deployment strategies. The integration justification requirement forces explicit synthesis reasoning. Collect 2-3 responses showing different integration approaches, highlighting how professional quality emerges from systematic combination rather than isolated techniques. This primes the three-pillar framework in slide 2 as organizing structure for their intuitive designs.",
+          "metadata": {
+            "transition": "fade",
+            "animation": "fadeIn",
+            "tags": [
+              "introduction",
+              "create",
+              "synthesis",
+              "scenario-based"
+            ]
+          }
+        },
+        {
+          "id": "slide-02",
+          "title": "Software Engineering: A Systematic Discipline",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-02-framework",
+              "type": "text",
+              "content": "**Software Engineering** enables construction of industrial-scale, high-quality systems through systematic integration of three pillars: **Construction** (OO principles, contracts), **Architecture** (patterns, structure), and **Engineering** (process, quality assurance)."
+            },
+            {
+              "id": "block-02-activity",
+              "type": "activity",
+              "content": {
+                "title": "Quality Attribute Mapping (4 min)",
+                "instruction": "Return to the healthcare appointment system scenario. For each quality attribute (correctness, robustness, extendibility, reusability), identify: (1) Which pillar(s) primarily address it? (2) One specific practice from our module that supports it. Example: Correctness → Construction pillar → Design by Contract with test oracles.",
+                "format": "pair-work with table completion"
+              }
+            },
+            {
+              "id": "block-02-diagram",
+              "type": "diagram",
+              "content": {
+                "prompt": "Triangle diagram with three pillars labeled 'Construction (OO, DbC)', 'Architecture (Patterns)', and 'Engineering (Process, QA)' supporting a platform labeled 'Quality Software' at the top. Use professional blue and gray tones."
+              }
+            }
+          ],
+          "speakerNotes": "This activity raises cognitive demand to apply/analyze by requiring students to map abstract quality attributes to concrete practices within the three-pillar framework. After pair work, collect responses to reveal how multiple pillars contribute to each attribute (e.g., extendibility requires OO principles AND architectural patterns AND refactoring processes). This bridges the conceptual framework to actionable practices students will synthesize in slide 3's workflow design. Emphasize that professional quality emerges from systematic integration, not isolated techniques.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fadeIn",
+            "tags": [
+              "fundamentals",
+              "apply",
+              "analyze",
+              "quality"
+            ]
+          }
+        },
+        {
+          "id": "slide-03",
+          "title": "Integration Challenge: Design Your Development Workflow",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-03-scenario",
+              "type": "text",
+              "content": "**Scenario**: You're leading a 6-person team building a safety-critical medical device interface. Requirements are stable but changes require regulatory approval. Team includes 2 junior developers.\n\n**Your Task**: Design a cohesive development workflow integrating appropriate concepts from this course."
+            },
+            {
+              "id": "block-03-activity",
+              "type": "activity",
+              "content": {
+                "title": "Synthesis Exercise (8 minutes)",
+                "instructions": "In pairs, create a workflow diagram addressing: (1) Which SDLC model and why? (2) What testing strategy supports safety requirements? (3) Which branching strategy fits team composition? (4) What CI/CD stages are essential? (5) Which 3 metrics track quality? Justify each choice considering constraints.",
+                "deliverable": "Annotated workflow diagram with rationale for each decision"
+              }
+            },
+            {
+              "id": "block-03-concepts",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Draw from: SDLC models, Design by Contract for safety, testing pyramid, Git workflows, CI/CD stages, GQM metrics",
+                  "Consider: Regulatory constraints, team experience, safety criticality, change management"
+                ]
+              }
+            }
+          ],
+          "speakerNotes": "This create-level activity addresses the synthesis objective by requiring students to integrate multiple course concepts into a cohesive solution. After pair work, have 2-3 groups share their workflows. Highlight how different valid solutions emerge from justified trade-offs. Emphasize that professional development requires synthesizing principles, not applying them in isolation. Discuss how V-Model, DbC test oracles, trunk-based with feature flags, staged deployment, and defect density metrics might form one coherent approach for this scenario.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fadeIn",
+            "tags": [
+              "integration",
+              "create",
+              "synthesis",
+              "activity"
+            ]
+          }
+        },
+        {
+          "id": "slide-04",
+          "title": "Traditional SDLC Models: Evaluation and Risk Analysis",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-04-models",
+              "type": "text",
+              "content": "**Waterfall**: Sequential phases (requirements → design → implementation → testing). **V-Model**: Verification/validation at each stage with testing levels mirroring development. **Spiral**: Iterative risk-driven cycles with prototyping."
+            },
+            {
+              "id": "block-04-activity",
+              "type": "activity",
+              "content": {
+                "title": "SDLC Evaluation with Risk Analysis (7 minutes)",
+                "instructions": "**Scenarios**: (A) NASA Mars rover—10-year mission, frozen requirements. (B) Fintech startup—evolving regulations, 4-month runway. (C) Medical device—FDA approval, safety-critical. **Task**: For each, (1) evaluate which model best mitigates dominant risks, (2) identify failure modes each model introduces (e.g., late integration defects, requirement drift), (3) critique the model's assumptions against scenario realities, (4) justify selection with risk-benefit trade-off analysis.",
+                "deliverable": "Model evaluation matrix with risk analysis and justified recommendations"
+              }
+            },
+            {
+              "id": "block-04-criteria",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Evaluate using: risk mitigation effectiveness, assumption validity, failure mode severity, cost-benefit ratio",
+                  "Critique: When do model assumptions break? What risks does each model overlook? How do constraints invalidate standard practices?"
+                ]
+              }
+            }
+          ],
+          "speakerNotes": "This evaluate-level activity requires students to critique model appropriateness and judge risk trade-offs rather than just selecting models. After individual analysis, pair discussion focusing on conflicting criteria (e.g., V-Model's validation rigor vs. Spiral's flexibility for scenario C). Guide toward recognizing model choice involves evaluating competing values: A needs V-Model's traceability despite rigidity, B needs iteration despite documentation gaps, C might need hybrid V-Model with risk-driven prototyping. Emphasize evaluation requires questioning model assumptions and assessing failure modes, preparing for agile alternatives in slide 5.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fadeIn",
+            "tags": [
+              "sdlc",
+              "evaluate",
+              "traditional",
+              "risk-analysis"
+            ]
+          }
+        },
+        {
+          "id": "slide-05",
+          "title": "Agile and Iterative Models: Comparative Analysis",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-05-foundations",
+              "type": "text",
+              "content": "**Agile Manifesto**: Individuals, working software, collaboration, responding to change. **Scrum**: Sprints, roles (PO/SM/Team), ceremonies. **XP**: Pair programming, TDD, CI. **Kanban**: Visualize workflow, limit WIP."
+            },
+            {
+              "id": "block-05-activity",
+              "type": "activity",
+              "content": {
+                "title": "Agile Framework Analysis (7 minutes)",
+                "instructions": "**Scenario**: E-commerce platform with 8 developers, unpredictable feature requests, monthly releases. **Task**: (1) Compare Scrum vs Kanban—which ceremonies/practices from each would you adopt? (2) Analyze trade-offs: sprint commitment vs flow-based delivery. (3) Justify hybrid approach addressing both predictability needs and flow efficiency.",
+                "deliverable": "Framework selection with comparative trade-off analysis and justified hybrid elements"
+              }
+            },
+            {
+              "id": "block-05-criteria",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Analyze using: feedback loop frequency, work predictability, team coordination needs, waste reduction",
+                  "Consider: How do ceremonies create quality gates? When does sprint structure help/hinder?"
+                ]
+              }
+            }
+          ],
+          "speakerNotes": "This analyze-level activity bridges slides 4-5, requiring comparative analysis of agile frameworks against scenario constraints. After individual analysis, pair discussion, then share reasoning. Guide toward recognizing Scrum provides cadence for releases while Kanban optimizes flow for urgent requests—hybrid uses sprint planning/reviews with continuous Kanban board. Emphasize framework choice depends on work nature and team context. Connect XP practices (TDD, CI) to quality topics in upcoming slides, showing how agile embeds quality through rapid feedback rather than separate QA phases.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fadeIn",
+            "tags": [
+              "sdlc",
+              "agile",
+              "analyze",
+              "decision-making"
+            ]
+          }
+        },
+        {
+          "id": "slide-06",
+          "title": "Selecting the Right SDLC Model",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-06-criteria",
+              "type": "text",
+              "content": "**Selection Factors**: Requirements stability, regulatory constraints, team experience, risk tolerance, time-to-market pressure, customer involvement availability, budget flexibility, quality assurance needs"
+            },
+            {
+              "id": "block-06-activity",
+              "type": "activity",
+              "content": {
+                "title": "SDLC Risk-Driven Design Challenge (8 minutes)",
+                "instructions": "**Scenario**: Healthcare appointment system—moderate regulatory requirements (HIPAA), 6-person team (2 junior), requirements 70% known, 4-month deadline, stakeholders available biweekly. **Task**: (1) Design custom SDLC approach integrating elements from multiple models (not selecting single framework). (2) For each model element you incorporate, identify specific failure mode it prevents (e.g., integration delays, compliance gaps, knowledge silos). (3) Analyze trade-offs where your design choices create new risks and specify mitigation strategies.",
+                "deliverable": "Custom SDLC design with failure mode analysis and risk mitigation justification"
+              }
+            },
+            {
+              "id": "block-06-guidance",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Create hybrid by analyzing how each practice addresses specific risks—don't just combine frameworks",
+                  "Example failure modes: junior developers blocked (knowledge risk), HIPAA audit failure (compliance risk), late integration defects (technical risk)"
+                ]
+              }
+            }
+          ],
+          "speakerNotes": "This evaluate-level activity requires risk-driven SDLC design rather than framework selection. Students must evaluate how specific practices mitigate failure modes, moving beyond template application to justified synthesis. After individual work, pairs compare risk analyses. Guide toward recognizing that junior developers need pairing/reviews (knowledge transfer), HIPAA demands traceability gates (compliance), partial requirements enable iteration (feedback). Debrief should surface that effective process design starts with risk identification, then selects practices addressing highest-impact failures. Connect to slide 7's prevention economics: process choices determine when defects are caught. This bridges agile frameworks (slide 5) with quality assurance principles.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fadeIn",
+            "tags": [
+              "sdlc",
+              "evaluate",
+              "risk-analysis",
+              "synthesis"
+            ]
+          }
+        },
+        {
+          "id": "slide-07",
+          "title": "Quality Assurance: Cost-Benefit Analysis",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "block-07-diagram",
+              "type": "diagram",
+              "content": {
+                "prompt": "Quality cost pyramid showing three investment tiers from bottom to top: 'Prevention' ($1 - design reviews, DbC, standards), 'Detection' ($100 - testing, code review), 'Correction' ($10,000 - production bugs, rework). Include cost multipliers and arrows showing exponential growth. Professional educational diagram."
+              }
+            },
+            {
+              "id": "block-07-concepts",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Verification (built right) vs. Validation (right product)",
+                  "Quality attributes: functionality, reliability, usability, efficiency, maintainability",
+                  "Prevention cost << Detection cost << Failure cost"
+                ]
+              }
+            },
+            {
+              "id": "block-07-activity",
+              "type": "activity",
+              "content": {
+                "title": "QA Strategy Critique & Redesign (7 minutes)",
+                "instruction": "**Given**: Financial API QA plan—$60K manual regression testing, $25K production monitoring, $15K incident response. Current metrics: 40% code coverage, 12 production defects/month, 8-hour mean time to repair. **Tasks**: (1) Critique this strategy using cost-of-quality framework—identify where investment misaligns with defect economics. (2) Assess quality adequacy against financial system reliability requirements. (3) Redesign budget allocation to maximize defect prevention, justify each investment using exponential cost principle and predict impact on defect rates.",
+                "duration": "7 min pairs"
+              }
+            }
+          ],
+          "speakerNotes": "This evaluate-level activity requires critiquing existing QA strategy then creating improved allocation. Students must judge inadequacy (detection-heavy with minimal prevention), assess against domain requirements (financial systems need higher reliability), and synthesize redesign integrating prevention mechanisms. Guide toward recognizing over-investment in late-stage detection. Debrief should surface prevention investments like DbC tools, design reviews, and TDD training that shift defect discovery left. Connect to testing pyramid (slide 8) and CI/CD quality gates (slide 13). Challenge students to quantify expected defect reduction from prevention investments using exponential cost model.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fadeIn",
+            "tags": [
+              "quality",
+              "qa",
+              "evaluate",
+              "cost-benefit",
+              "critique"
+            ]
+          }
+        },
+        {
+          "id": "slide-08",
+          "title": "Testing Pyramid and Strategies",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "block-08-diagram",
+              "type": "diagram",
+              "content": {
+                "prompt": "Testing pyramid with three layers: wide base labeled 'Unit Tests (70%)', middle layer 'Integration Tests (20%)', narrow top 'System/E2E Tests (10%)'. Include annotations for speed (fast at bottom, slow at top) and cost (low at bottom, high at top). Professional educational diagram."
+              }
+            },
+            {
+              "id": "block-08-concepts",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Unit: Individual classes/methods (fast, isolated)",
+                  "Integration: Component interactions (databases, APIs)",
+                  "System: Complete application behavior",
+                  "TDD: Write tests first, red-green-refactor cycle"
+                ]
+              }
+            },
+            {
+              "id": "block-08-activity",
+              "type": "activity",
+              "content": {
+                "title": "Evaluate & Redesign Test Suite (7 minutes)",
+                "instruction": "**Given**: E-commerce checkout test suite—85 system tests (checkout flows), 12 integration tests (payment API), 8 unit tests (discount logic). Coverage: 78% overall, 45% unit-level. Mutation score: 62%. Production defects: 15/month in business logic. **Tasks**: (1) Critique this distribution against pyramid principles and defect location. (2) Assess adequacy for financial transaction reliability requirements. (3) Redesign suite specifying test counts per level, which mutations your new tests catch, and predicted defect reduction with justification.",
+                "duration": "7 min pairs"
+              }
+            }
+          ],
+          "speakerNotes": "This evaluate-level activity requires critiquing inverted pyramid (top-heavy with slow, expensive system tests) and judging inadequacy against reliability requirements. Students must analyze defect location (business logic) versus test distribution, assess mutation score implications, then synthesize redesigned strategy. Guide toward recognizing mismatch between defect source and test investment. Debrief should surface how proper pyramid distribution catches logic defects faster and cheaper through unit tests with contract-based oracles. Connect to cost-benefit analysis from slide 7 and mutation testing from slide 9. Challenge pairs to quantify expected improvements from rebalanced investment.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fadeIn",
+            "tags": [
+              "testing",
+              "tdd",
+              "evaluate",
+              "pyramid",
+              "critique"
+            ]
+          }
+        },
+        {
+          "id": "slide-09",
+          "title": "Advanced Testing and Contracts",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "block-09-concepts",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Equivalence partitioning: Group inputs into valid/invalid classes",
+                  "Boundary value analysis: Test min-1, min, min+1, max-1, max, max+1",
+                  "Mutation testing: Inject bugs to verify tests catch them (mutation score = killed/total)",
+                  "Property-based testing: Generate cases from contract specifications",
+                  "Contracts as oracles: Postconditions → test assertions"
+                ]
+              }
+            },
+            {
+              "id": "block-09-code",
+              "type": "code",
+              "content": {
+                "language": "java",
+                "code": "class PriorityQueue {\n  // requires: priority in [1..10]\n  // ensures: size = old size + 1\n  // ensures: peek() returns highest priority item\n  void enqueue(Task t, int priority) {...}\n}\n\n// Mutation report: 12 mutants, 7 killed\n// Coverage: 85% line, 60% branch"
+              }
+            },
+            {
+              "id": "block-09-activity",
+              "type": "activity",
+              "content": {
+                "title": "Evaluate Test Suite Quality & Redesign Strategy (8 min)",
+                "instruction": "**Given**: PriorityQueue test suite with 85% line coverage, 60% branch coverage, mutation score 58% (7/12 killed). Existing tests: 3 valid enqueue cases, 1 boundary (priority=10), 1 exception test (priority=0). **Tasks**: (1) Critique suite quality—what do coverage vs mutation scores reveal about test effectiveness? (2) Assess adequacy for mission-critical scheduling system requirements. (3) Identify which contract properties are untested. (4) Design 4 additional tests specifying properties each validates and which surviving mutants each kills. Justify your strategy.",
+                "duration": "8 min pairs"
+              }
+            }
+          ],
+          "speakerNotes": "This evaluate-level activity addresses the quality assessment gap by requiring students to critique test suite effectiveness using multiple quality indicators. Students must judge the gap between high coverage and low mutation score, revealing inadequate assertions. They assess adequacy against reliability requirements, identify missing contract properties (priority ordering, size invariant, boundary completeness), then create targeted tests with explicit property-to-mutant mappings. Debrief should emphasize that coverage measures execution not correctness—mutation testing exposes weak oracles. Connect to slide 8's pyramid principles and cost-benefit analysis. Challenge pairs to explain how contract-derived properties systematically improve mutation scores compared to ad-hoc test design.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fadeIn",
+            "tags": [
+              "testing",
+              "contracts",
+              "evaluate",
+              "mutation-testing",
+              "quality-assessment"
+            ]
+          }
+        },
+        {
+          "id": "slide-10",
+          "title": "Version Control with Git: Team Implementation",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "block-10-concepts",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Distributed collaboration: Clone, pull, push, fetch",
+                  "Commit atomicity: One logical change, revertable independently",
+                  "Conventional commits: feat, fix, refactor, docs, test, chore",
+                  "Pull requests: Code review gate before merge",
+                  "Conflict resolution: Manual merge when concurrent edits overlap"
+                ]
+              }
+            },
+            {
+              "id": "block-10-scenario",
+              "type": "code",
+              "content": {
+                "language": "bash",
+                "code": "# Scenario: Two developers edited User.java\n# Alice added login(), Bob refactored constructor\n# After git pull, conflict in User.java lines 15-23\n\n<<<<<<< HEAD\npublic User(String name) {\n  this.name = name;\n  this.createdAt = new Date();\n}\n=======\npublic User(String name, Role role) {\n  this.name = name;\n  this.role = role;\n}\n>>>>>>> feature/role-support"
+              }
+            },
+            {
+              "id": "block-10-activity",
+              "type": "activity",
+              "content": {
+                "title": "Resolve Conflict & Implement Workflow",
+                "instruction": "Given the merge conflict above: (1) Write the resolved code preserving both changes. (2) Write the Git commands to complete the merge with a conventional commit message. (3) Justify whether this should have been avoided—propose one workflow practice (branch naming, integration frequency, or communication protocol) to prevent future conflicts in this team.",
+                "duration": "6 min pairs"
+              }
+            }
+          ],
+          "speakerNotes": "This apply-level activity addresses the configuration management objective by requiring hands-on Git workflow implementation. Students must resolve a realistic merge conflict (combining constructor changes), execute proper Git commands (git add, git commit with conventional message like 'merge: Integrate role support with timestamp initialization'), and propose preventive workflow practices (e.g., frequent integration, feature branch naming conventions, or pre-merge communication). Debrief should emphasize that conflicts are normal but workflow discipline reduces them. Connect resolution strategy to atomic commits—each developer's change was logical independently. Challenge pairs to explain how pull request reviews could catch integration issues earlier.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fadeIn",
+            "tags": [
+              "git",
+              "version-control",
+              "apply",
+              "workflow"
+            ]
+          }
+        },
+        {
+          "id": "slide-11",
+          "title": "Branching Strategies: Risk Analysis and Selection",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-11-comparison",
+              "type": "table",
+              "content": {
+                "headers": [
+                  "Strategy",
+                  "Branch Types",
+                  "Best For",
+                  "Failure Modes"
+                ],
+                "rows": [
+                  [
+                    "Git Flow",
+                    "main, develop, feature, release, hotfix",
+                    "Release-driven products",
+                    "Merge conflicts from long-lived branches; integration delays"
+                  ],
+                  [
+                    "GitHub Flow",
+                    "main + feature branches",
+                    "Continuous deployment",
+                    "Production breaks if CI/CD weak; limited rollback control"
+                  ],
+                  [
+                    "Trunk-based",
+                    "main + short-lived (<1 day)",
+                    "High-velocity teams",
+                    "Requires strong testing discipline; risky with juniors"
+                  ]
+                ]
+              }
+            },
+            {
+              "id": "block-11-activity",
+              "type": "activity",
+              "content": {
+                "title": "Multi-Dimensional Strategy Evaluation",
+                "description": "Analyze these scenarios: (A) 15-person team, quarterly releases, regulated industry, 40% junior developers. (B) 4-person startup, deploy 5x daily, feature flags enabled, no compliance needs. For EACH scenario: (1) Rank all three strategies by suitability (1st/2nd/3rd). (2) Identify the top two failure modes most likely given team constraints. (3) Propose one mitigation practice for your recommended strategy's primary risk. Justify rankings using team size, skill mix, release cadence, and compliance requirements.",
+                "duration": "6 min pairs"
+              }
+            }
+          ],
+          "speakerNotes": "This evaluate-level activity strengthens analyze demand by requiring risk assessment across multiple dimensions. Students must judge strategy appropriateness by evaluating how team characteristics amplify or mitigate each failure mode. Expected reasoning: Scenario A needs Git Flow despite merge conflict risk (compliance demands release branches; mitigation: frequent integration from feature to develop). Scenario B suits trunk-based (velocity matches cadence; mitigation: automated testing gates). The ranking requirement forces comparative evaluation beyond simple matching. Debrief should emphasize that strategy selection involves judging acceptable risks given context, not finding perfect solutions. Connect failure mode analysis to configuration management objective by showing how workflow choices create or prevent integration problems.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fadeIn",
+            "tags": [
+              "git",
+              "branching",
+              "workflow",
+              "evaluate",
+              "risk-analysis"
+            ]
+          }
+        },
+        {
+          "id": "slide-12",
+          "title": "Configuration Management Beyond Code",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-12-bullets",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Configuration items: Source code, docs, build scripts, dependencies, infrastructure",
+                  "Dependency management: Package managers, version pinning, lock files",
+                  "Semantic versioning: MAJOR.MINOR.PATCH (breaking.feature.fix)",
+                  "Infrastructure as Code: Versioned, reviewed, reproducible environments"
+                ]
+              }
+            },
+            {
+              "id": "block-12-scenario",
+              "type": "code",
+              "content": {
+                "language": "json",
+                "code": "// Scenario: Production bug after deployment\n{\n  \"dependencies\": {\n    \"express\": \"^4.18.2\",\n    \"lodash\": \"^4.17.0\",\n    \"axios\": \"*\"\n  },\n  \"version\": \"2.1.3\"\n}\n// Problem: Builds work locally, fail in CI"
+              }
+            },
+            {
+              "id": "block-12-activity",
+              "type": "activity",
+              "content": {
+                "title": "Dependency Troubleshooting Exercise",
+                "description": "Analyze the package.json above. Identify risky dependency specifications that could cause non-reproducible builds. Apply semantic versioning principles to fix the configuration: decide exact vs. range versioning for each dependency, justify when to use lock files, and propose version update strategy. Consider: What does ^ allow? Why is * dangerous? When should you pin exact versions?",
+                "duration": "4 minutes"
+              }
+            }
+          ],
+          "speakerNotes": "This apply-level activity addresses the configuration management objective through problem-solving. Students must diagnose issues (^ allows minor/patch updates causing drift; * is wildcard chaos; no lock file means different installs get different versions) and apply versioning principles to fix them. Guide discussion: Pin critical dependencies exactly, use ^ for stable libraries, always commit lock files, update dependencies deliberately not automatically. Connect to reproducible builds and CI/CD reliability. The scenario mirrors real production incidents where dependency drift causes 'works on my machine' failures.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fadeIn",
+            "tags": [
+              "configuration",
+              "dependencies",
+              "versioning",
+              "apply"
+            ]
+          }
+        },
+        {
+          "id": "slide-13",
+          "title": "Continuous Integration Pipeline Design",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-13-diagram",
+              "type": "diagram",
+              "content": {
+                "prompt": "CI pipeline flowchart showing: Developer commits → Trigger build → Compile code → Run unit tests → Run integration tests → Static analysis → Generate reports → Notify team. Include success (green) and failure (red) paths. Use icons for each stage. Professional DevOps diagram style."
+              }
+            },
+            {
+              "id": "block-13-scenario",
+              "type": "code",
+              "content": {
+                "language": "yaml",
+                "code": "# Scenario: E-commerce startup (8 devs)\n# Requirements:\n# - 20+ commits/day to main branch\n# - Deploy 3x daily to production\n# - Test suite: 500 unit, 50 integration tests\n# - Current build time: 25 minutes\n# - Budget: Limited CI/CD resources\n# Problem: Slow feedback blocks deployments"
+              }
+            },
+            {
+              "id": "block-13-activity",
+              "type": "activity",
+              "content": {
+                "title": "Pipeline Optimization Challenge",
+                "description": "Design an optimized CI pipeline for this scenario. Decide: Which stages run in parallel? What quality gates are mandatory vs. optional? How do you achieve <10min feedback? Where do you place integration tests? What triggers deployments? Consider trade-offs: speed vs. thoroughness, cost vs. reliability. Sketch your pipeline architecture with stage ordering, parallelization strategy, and gate placement. Justify decisions using CI principles.",
+                "duration": "5 minutes"
+              }
+            }
+          ],
+          "speakerNotes": "This create-level activity addresses the CI/CD design objective through architectural problem-solving. Students must synthesize pipeline stages, parallelization, quality gates, and resource constraints into a cohesive solution. Guide discussion toward: parallel test execution, fast unit tests first, integration tests in separate stage, static analysis non-blocking initially, caching dependencies. Key insight: CI effectiveness requires balancing speed and quality—perfect coverage is useless if feedback takes hours. Connect to deployment frequency and developer productivity. Solutions should justify stage ordering and explain failure handling strategies.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fadeIn",
+            "tags": [
+              "ci",
+              "pipeline",
+              "design",
+              "create"
+            ]
+          }
+        },
+        {
+          "id": "slide-14",
+          "title": "Continuous Deployment Strategies",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-14-bullets",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Blue-Green: Two environments, instant switch, instant rollback",
+                  "Canary: Gradual rollout (5% → 25% → 100%), monitor metrics",
+                  "Feature flags: Deploy dark, activate when ready, A/B testing",
+                  "Strategy selection depends on: user base size, risk tolerance, monitoring capability"
+                ]
+              }
+            },
+            {
+              "id": "block-14-scenarios",
+              "type": "code",
+              "content": {
+                "language": "text",
+                "code": "Scenario A: Banking app (5M users), new ML fraud detection\n  Zero tolerance for payment failures, <2min rollback\nScenario B: Social media (50M users), redesigned feed algorithm\n  Engagement metrics critical, gradual user migration\nScenario C: Healthcare SaaS (200 hospitals), HIPAA-compliant audit logs\n  Regulatory validation required, 24/7 uptime mandate"
+              }
+            },
+            {
+              "id": "block-14-activity",
+              "type": "activity",
+              "content": {
+                "title": "Multi-Scenario Strategy Evaluation",
+                "description": "For each scenario: (1) Evaluate all three strategies (blue-green, canary, feature flags) against scenario constraints. (2) Rank strategies by suitability with specific justification addressing risk, compliance, and operational factors. (3) Identify critical failure mode for your top choice and design mitigation. (4) Critique: explain why your lowest-ranked strategy would fail in this context.",
+                "duration": "6 minutes"
+              }
+            }
+          ],
+          "speakerNotes": "This evaluate-level activity addresses CI/CD deployment objective through comparative assessment across multiple contexts. Students must judge strategy appropriateness using criteria (risk tolerance, compliance, user impact, rollback speed) rather than simply applying one approach. Guide discussion toward nuanced evaluation: Scenario A needs feature flags + canary hybrid with automated rollback; Scenario B favors canary with engagement metrics; Scenario C requires blue-green for compliance validation gates. Key insight: deployment strategy selection requires evaluating trade-offs and failure modes, not template application. Critique component forces students to articulate why alternatives fail, deepening understanding of strategy limitations and context dependencies.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fadeIn",
+            "tags": [
+              "cd",
+              "deployment",
+              "evaluate",
+              "design"
+            ]
+          }
+        },
+        {
+          "id": "slide-15",
+          "title": "Software Metrics and Measurement",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-15-bullets",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Goal-Question-Metric (GQM): Align metrics with objectives",
+                  "Code quality: Cyclomatic complexity, coupling, cohesion, coverage",
+                  "Process metrics: Velocity, lead time, cycle time, MTTR",
+                  "Warning: Goodhart's Law—when a measure becomes a target, it ceases to be a good measure"
+                ]
+              }
+            },
+            {
+              "id": "block-15-scenario",
+              "type": "code",
+              "content": {
+                "language": "text",
+                "code": "Scenario: E-commerce platform experiencing issues\n- Goal: Reduce production incidents by 40% in 6 months\n- Current: 8 incidents/month, avg resolution time 3 hours\n- Team: 12 developers, 2-week sprints, CI/CD pipeline\n- Codebase: 200K LOC, microservices architecture\n- Recent incidents: null pointer exceptions, timeout errors, integration failures"
+              }
+            },
+            {
+              "id": "block-15-activity",
+              "type": "activity",
+              "content": {
+                "title": "Apply GQM to Derive Metrics",
+                "description": "Use GQM to design a measurement strategy: (1) Break the goal into 3-4 specific questions about code quality, testing, or process. (2) For each question, select 2-3 concrete metrics with measurement procedures. (3) Specify target values and thresholds for each metric. (4) Identify one metric that could be gamed (Goodhart's Law) and explain the risk.",
+                "duration": "6 minutes"
+              }
+            }
+          ],
+          "speakerNotes": "This apply-level activity directly addresses the metrics objective. Students must operationalize GQM by deriving questions (How robust is error handling? How comprehensive is testing?) and selecting specific metrics (exception handling coverage, integration test count, defect escape rate). Guide toward process metrics too (MTTR, deployment frequency). Target values force practical thinking: cyclomatic complexity <10, test coverage >80%, MTTR <1 hour. Goodhart discussion prevents naive metric worship—e.g., coverage target leads to meaningless tests. Connect to CI/CD by discussing automated metric collection in pipelines.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fadeIn",
+            "tags": [
+              "metrics",
+              "measurement",
+              "gqm",
+              "apply"
+            ]
+          }
+        },
+        {
+          "id": "slide-16",
+          "title": "Integration: Design Your Development Workflow",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-16-scenario",
+              "type": "code",
+              "content": {
+                "language": "text",
+                "code": "Scenario: Healthcare appointment system\n- Team: 8 developers (mixed experience), 1-week sprints\n- Requirements: HIPAA compliance, 99.9% uptime, frequent updates\n- Constraints: No downtime deployments, audit trail required\n- Tech: Microservices, shared databases, external payment API\n- Challenge: Balance velocity with regulatory compliance"
+              }
+            },
+            {
+              "id": "block-16-activity",
+              "type": "activity",
+              "content": {
+                "title": "Design Integrated Workflow with Metrics",
+                "description": "Design a complete development workflow for this team: (1) Specify branching strategy and version control practices with justification. (2) Define TDD and CI/CD pipeline stages with quality gates (what gets checked, when deployment blocks). (3) Select 4-5 metrics to track quality and compliance (use GQM for one metric). (4) Identify where contracts/assertions enforce compliance requirements.",
+                "duration": "8 minutes"
+              }
+            }
+          ],
+          "speakerNotes": "This create-level activity addresses configuration management and metrics objectives by requiring students to design an integrated workflow. Students must implement version control practices (branching for compliance context), apply metrics (selecting and operationalizing GQM), and synthesize all course concepts. The healthcare scenario forces trade-offs between velocity and compliance. Guide students to specify concrete practices: trunk-based vs GitFlow for audit requirements, where contracts enforce HIPAA rules, which metrics track compliance (audit log coverage, deployment success rate), and how CI/CD gates prevent violations. Deliverable is a justified workflow design, not just concept identification.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fadeIn",
+            "tags": [
+              "integration",
+              "create",
+              "workflow",
+              "metrics",
+              "configuration-management"
+            ]
+          }
+        },
+        {
+          "id": "slide-17",
+          "title": "Course Synthesis: Construction → Architecture → Engineering",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-17-diagram",
+              "type": "diagram",
+              "content": {
+                "prompt": "Course concept map showing three main clusters: 'Construction' (OO principles, inheritance, polymorphism, genericity), 'Architecture' (design patterns, modularity, large-scale structure), and 'Engineering' (agile, testing, CI/CD, metrics, process). Show connections between clusters and how they support 'Professional Software Development' at the center. Use different colors for each cluster."
+              }
+            },
+            {
+              "id": "block-17-bullets",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Construction: OO fundamentals enabling modularity and reuse",
+                  "Architecture: Patterns and structure for large-scale systems",
+                  "Engineering: Process and quality for professional delivery",
+                  "Integration: All concepts working together in practice"
+                ]
+              }
+            }
+          ],
+          "speakerNotes": "Review the course journey. Construction gave us OO tools: encapsulation, inheritance, polymorphism, genericity. Architecture showed us how to structure large systems with patterns. Engineering provided the process framework: agile, testing, CI/CD, metrics. None works in isolation—professional development requires all three. This synthesis prepares students for industry and advanced courses.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fadeIn",
+            "tags": [
+              "review",
+              "synthesis",
+              "course-summary"
+            ]
+          }
+        },
+        {
+          "id": "slide-18",
+          "title": "Professional Excellence and Next Steps",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-18-bullets",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Technical excellence: Clean code, solid design, comprehensive testing",
+                  "Process discipline: Version control, CI/CD, metrics-driven improvement",
+                  "Continuous learning: Evolving practices and technologies",
+                  "Ethical responsibility: Reliability, security, societal impact"
+                ]
+              }
+            },
+            {
+              "id": "block-18-diagram",
+              "type": "diagram",
+              "content": {
+                "prompt": "Professional software engineer competency model showing concentric circles: innermost 'Technical Skills' (coding, design, testing), middle 'Process Skills' (agile, CI/CD, collaboration), outer 'Professional Skills' (communication, ethics, continuous learning). Professional career development diagram."
+              }
+            }
+          ],
+          "speakerNotes": "Professional software engineering requires technical excellence, process discipline, and continuous learning. Balance trade-offs: time vs. quality, features vs. technical debt. Ethical considerations matter—your code impacts real people. Next steps: Advanced Software Engineering course, specializations (distributed systems, security, AI/ML engineering), professional certifications, open source contributions. Final exam preparation: integrate all concepts into comprehensive project design.",
+          "metadata": {
+            "transition": "fade",
+            "animation": "fadeIn",
+            "tags": [
+              "conclusion",
+              "professional-development",
+              "next-steps"
+            ]
+          }
+        }
+      ]
+    },
+    "evaluation": {
+      "alignmentScore": 88,
+      "dominantLevel": "evaluate",
+      "distribution": {
+        "remember": 5,
+        "understand": 10,
+        "apply": 20,
+        "analyze": 20,
+        "evaluate": 30,
+        "create": 15
+      },
+      "objectiveAlignments": [
+        {
+          "objective": "Understand and compare major software development lifecycle models and their applicability",
+          "expectedLevel": "analyze",
+          "observedLevel": "evaluate",
+          "status": "aligned",
+          "rationale": "Slides 4-6 exceed expectations by requiring risk-driven evaluation and critique of SDLC models rather than just comparison. Slide 4 demands failure mode analysis and assumption critique. Slide 6 requires custom SDLC design with risk mitigation justification, demonstrating evaluate-level engagement with model selection."
+        },
+        {
+          "objective": "Apply quality assurance principles and testing strategies to ensure software reliability",
+          "expectedLevel": "apply",
+          "observedLevel": "evaluate",
+          "status": "aligned",
+          "rationale": "Slides 7-9 systematically address this objective at higher cognitive levels. Slide 7 requires critiquing and redesigning QA budget allocation using cost-benefit analysis. Slide 8 demands evaluation of inverted test pyramid and redesign with defect prediction. Slide 9 requires assessing test suite quality using mutation scores and designing targeted improvements. Activities move beyond application to quality assessment and strategic redesign."
+        },
+        {
+          "objective": "Implement configuration management and version control practices in team environments",
+          "expectedLevel": "apply",
+          "observedLevel": "apply",
+          "status": "aligned",
+          "rationale": "Slides 10-12 directly address implementation through hands-on activities. Slide 10 requires resolving merge conflicts and writing Git commands with workflow justification. Slide 11 evaluates branching strategies with risk analysis. Slide 12 applies semantic versioning to fix dependency issues. Slide 16 synthesizes configuration practices into complete workflow design. Strong alignment with implementation focus."
+        },
+        {
+          "objective": "Design and deploy continuous integration/continuous deployment (CI/CD) pipelines",
+          "expectedLevel": "create",
+          "observedLevel": "create",
+          "status": "aligned",
+          "rationale": "Slides 13-14 directly target pipeline design at create level. Slide 13 requires designing optimized CI pipeline architecture with parallelization strategy, quality gates, and resource trade-offs. Slide 14 demands multi-scenario evaluation of deployment strategies with failure mode mitigation. Both activities require synthesizing stages, gates, and constraints into cohesive architectures rather than applying templates."
+        },
+        {
+          "objective": "Select and apply appropriate software metrics to measure quality and progress",
+          "expectedLevel": "apply",
+          "observedLevel": "apply",
+          "status": "aligned",
+          "rationale": "Slides 15-16 address metrics through GQM application. Slide 15 requires operationalizing GQM by deriving questions, selecting concrete metrics with measurement procedures, and specifying targets. Includes Goodhart's Law critique to prevent naive application. Slide 16 integrates metrics into complete workflow design. Strong alignment with selection and application of measurement strategies."
+        },
+        {
+          "objective": "Synthesize OO principles, design patterns, contracts, and agile methods into cohesive development practices",
+          "expectedLevel": "create",
+          "observedLevel": "create",
+          "status": "aligned",
+          "rationale": "Slides 1, 3, 6, and 16 systematically build synthesis capability. Slide 1 opens with create-level quality architecture design requiring integration of 4+ course concepts without scaffolding. Slide 3 demands workflow design integrating SDLC, testing, branching, CI/CD, and metrics. Slide 6 requires custom SDLC synthesis addressing specific failure modes. Slide 16 culminates with complete workflow design integrating all course concepts for healthcare compliance scenario. Strong synthesis thread throughout deck."
+        }
+      ],
+      "slideTags": [
+        {
+          "slideTitle": "Software Engineering Process and Quality Assurance",
+          "primaryLevel": "create",
+          "evidence": "Opening activity requires designing complete quality improvement strategy integrating 4+ course concepts without framework scaffolding. Students must justify integration architecture and explain how combination creates cohesive quality assurance. No structured guidance provided—pure synthesis from scratch."
+        },
+        {
+          "slideTitle": "Software Engineering: A Systematic Discipline",
+          "primaryLevel": "analyze",
+          "evidence": "Activity requires mapping quality attributes to three-pillar framework, identifying which practices support each attribute. Moves beyond understanding framework to analyzing how multiple pillars contribute to each quality dimension. Bridges conceptual model to actionable practices."
+        },
+        {
+          "slideTitle": "Integration Challenge: Design Your Development Workflow",
+          "primaryLevel": "create",
+          "evidence": "Requires designing cohesive workflow integrating SDLC model, testing strategy, branching strategy, CI/CD stages, and metrics for safety-critical medical device scenario. Students must justify each choice considering regulatory constraints, team composition, and safety requirements. Pure synthesis activity."
+        },
+        {
+          "slideTitle": "Traditional SDLC Models: Evaluation and Risk Analysis",
+          "primaryLevel": "evaluate",
+          "evidence": "Demands evaluation of three SDLC models across three scenarios using risk mitigation effectiveness, assumption validity, failure mode severity, and cost-benefit criteria. Requires critiquing when model assumptions break and assessing which risks each model overlooks. Explicit evaluate-level engagement."
+        },
+        {
+          "slideTitle": "Agile and Iterative Models: Comparative Analysis",
+          "primaryLevel": "analyze",
+          "evidence": "Requires comparative analysis of Scrum vs Kanban frameworks, analyzing trade-offs between sprint commitment and flow-based delivery. Students must justify hybrid approach addressing both predictability and flow efficiency. Systematic comparison with trade-off analysis."
+        },
+        {
+          "slideTitle": "Selecting the Right SDLC Model",
+          "primaryLevel": "evaluate",
+          "evidence": "Requires designing custom SDLC by evaluating how specific practices address failure modes. Students must analyze trade-offs where design choices create new risks and specify mitigation strategies. Risk-driven design requiring evaluation of practice effectiveness against specific failure scenarios."
+        },
+        {
+          "slideTitle": "Quality Assurance: Cost-Benefit Analysis",
+          "primaryLevel": "evaluate",
+          "evidence": "Requires critiquing existing QA budget allocation using cost-of-quality framework, assessing adequacy against reliability requirements, and redesigning investment strategy. Students must judge misalignment between investment and defect economics, then synthesize improved allocation with predicted impact justification."
+        },
+        {
+          "slideTitle": "Testing Pyramid and Strategies",
+          "primaryLevel": "evaluate",
+          "evidence": "Demands critique of inverted test pyramid distribution, assessment of adequacy for reliability requirements, and redesign specifying test counts per level with mutation coverage and defect reduction predictions. Requires judging test suite quality against multiple criteria and synthesizing improved strategy."
+        },
+        {
+          "slideTitle": "Advanced Testing and Contracts",
+          "primaryLevel": "evaluate",
+          "evidence": "Requires critiquing test suite quality using coverage vs mutation score gap, assessing adequacy for mission-critical requirements, identifying untested contract properties, and designing targeted tests with explicit property-to-mutant mappings. Multi-dimensional quality assessment with strategic improvement design."
+        },
+        {
+          "slideTitle": "Version Control with Git: Team Implementation",
+          "primaryLevel": "apply",
+          "evidence": "Requires resolving realistic merge conflict by writing integrated code, executing proper Git commands with conventional commit message, and proposing workflow practice to prevent future conflicts. Hands-on implementation of version control practices in team context."
+        },
+        {
+          "slideTitle": "Branching Strategies: Risk Analysis and Selection",
+          "primaryLevel": "evaluate",
+          "evidence": "Requires ranking three branching strategies across two scenarios, identifying top failure modes given team constraints, and proposing mitigation for primary risks. Students must judge strategy appropriateness by evaluating how team characteristics amplify or mitigate failure modes across multiple dimensions."
+        },
+        {
+          "slideTitle": "Configuration Management Beyond Code",
+          "primaryLevel": "apply",
+          "evidence": "Requires diagnosing risky dependency specifications causing non-reproducible builds and applying semantic versioning principles to fix configuration. Students must decide exact vs range versioning, justify lock file usage, and propose update strategy. Problem-solving through principle application."
+        },
+        {
+          "slideTitle": "Continuous Integration Pipeline Design",
+          "primaryLevel": "create",
+          "evidence": "Requires designing optimized CI pipeline architecture specifying stage parallelization, quality gate placement, and resource trade-offs to achieve <10min feedback. Students must synthesize pipeline stages, testing strategy, and constraints into cohesive solution with justified stage ordering and failure handling."
+        },
+        {
+          "slideTitle": "Continuous Deployment Strategies",
+          "primaryLevel": "evaluate",
+          "evidence": "Requires evaluating three deployment strategies across three scenarios against risk, compliance, and operational criteria. Students must rank strategies with specific justification, identify critical failure modes, design mitigation, and critique why lowest-ranked strategy would fail. Multi-scenario comparative assessment."
+        },
+        {
+          "slideTitle": "Software Metrics and Measurement",
+          "primaryLevel": "apply",
+          "evidence": "Requires operationalizing GQM by deriving questions, selecting concrete metrics with measurement procedures, specifying target values, and identifying gaming risks. Students must apply GQM framework to production incident reduction goal with practical metric selection and threshold specification."
+        },
+        {
+          "slideTitle": "Integration: Design Your Development Workflow",
+          "primaryLevel": "create",
+          "evidence": "Requires designing complete development workflow integrating branching strategy, TDD/CI/CD pipeline with quality gates, GQM-derived metrics, and contract enforcement for HIPAA compliance. Students must synthesize all course concepts into justified workflow addressing healthcare regulatory constraints and velocity requirements."
+        },
+        {
+          "slideTitle": "Course Synthesis: Construction → Architecture → Engineering",
+          "primaryLevel": "understand",
+          "evidence": "Reviews course journey through three-pillar framework showing how construction, architecture, and engineering concepts integrate. Primarily explanatory content connecting course modules without demanding higher-order cognitive work from students."
+        },
+        {
+          "slideTitle": "Professional Excellence and Next Steps",
+          "primaryLevel": "understand",
+          "evidence": "Presents professional competency model and next steps for continued learning. Primarily informational content about career development without cognitive demand beyond comprehension of professional development pathways."
+        }
+      ],
+      "gaps": [
+        "Limited explicit remember/understand content for foundational concepts. Students encountering SDLC models, testing strategies, or Git workflows for first time may struggle with immediate evaluate-level demands without conceptual scaffolding.",
+        "Slide 2's three-pillar framework introduced at understand level but immediately leveraged for analyze-level mapping. Consider brief remember-level review of OO principles, patterns, and DbC from prior lectures before demanding integration.",
+        "Mutation testing (slide 9) introduced as new concept within evaluate-level activity. Students unfamiliar with mutation scores may struggle to critique test suite quality without prior understand-level explanation of what mutation testing measures.",
+        "No explicit scaffolding between slides 1 and 3's create-level synthesis activities. Students may benefit from intermediate apply-level practice integrating 2-3 concepts before full workflow design.",
+        "Slides 17-18 drop to understand level after sustained evaluate/create demands. Consider capstone create-level activity synthesizing entire course rather than passive review."
+      ],
+      "suggestions": [
+        "Add 2-minute conceptual primer before slide 4's SDLC evaluation activity. Briefly review Waterfall/V-Model/Spiral characteristics at remember level before demanding risk analysis, especially for students without prior software engineering coursework.",
+        "Strengthen slide 9 by adding brief understand-level explanation of mutation testing mechanics before critique activity. Show example mutant and how tests kill it, then transition to quality assessment exercise.",
+        "Consider reordering slides 1-3 to scaffold synthesis progression: Move slide 2's framework introduction before slide 1's opening activity, allowing students to leverage three-pillar structure in their initial quality architecture design.",
+        "Replace slide 17's passive review with active synthesis: Provide complex scenario requiring students to trace how construction principles enable architectural patterns which are validated through engineering processes. Demand explicit connection-making rather than concept listing.",
+        "Add metacognitive reflection prompts throughout evaluate/create activities: 'What criteria are you using to judge this trade-off?' or 'How does this design decision constrain future choices?' Make evaluation reasoning explicit.",
+        "Strengthen slide 18 by adding create-level capstone: 'Design your personal learning roadmap integrating technical, process, and professional skills for your target role (e.g., backend engineer, DevOps specialist). Justify skill sequencing and identify knowledge dependencies.' Maintains high cognitive demand through conclusion.",
+        "Consider adding brief apply-level Git command practice before slide 11's branching strategy evaluation. Students may struggle evaluating workflow risks without hands-on experience with merge conflicts and branch management.",
+        "Slide 6's custom SDLC design could benefit from worked example showing how one practice addresses specific failure mode. Provide 1-2 minute demonstration of risk-driven design reasoning before pairs attempt full synthesis.",
+        "Add explicit connection between slides 7-9's quality assessment activities and slide 15's metrics. Show how mutation scores, coverage gaps, and defect rates become GQM metrics for quality goals. Strengthen vertical integration across quality assurance sequence.",
+        "Consider adding analyze-level activity comparing student-generated solutions after create-level exercises. Have pairs exchange workflow designs (slides 3, 13, 16) and critique each other's integration logic, making synthesis reasoning explicit through peer evaluation."
+      ]
+    },
+    "rounds_used": 3,
+    "before_score": 88,
+    "after_score": 88,
+    "improved_slide_ids": [
+      "slide-04",
+      "slide-06",
+      "slide-07",
+      "slide-08",
+      "slide-09",
+      "slide-11",
+      "slide-14",
+      "slide-01"
+    ],
+    "failed_slide_ids": [],
+    "improved_count": 8,
+    "reevaluated": true
+  }
+]

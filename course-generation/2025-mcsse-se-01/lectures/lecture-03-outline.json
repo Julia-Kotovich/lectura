@@ -1,0 +1,479 @@
+{
+  "title": "Lecture 3: Genericity and Information Hiding",
+  "summary": "This lecture explores generic programming techniques for creating reusable components and information hiding principles for managing complexity and ensuring proper encapsulation in large systems. Students will learn how to design flexible, maintainable software through type parameters, constrained genericity, access control, and interface-implementation separation.",
+  "learningObjectives": [
+    "Understand and apply generic programming concepts to create reusable software components",
+    "Design and implement generic classes with appropriate type parameters and constraints",
+    "Apply information hiding principles to manage complexity in large-scale systems",
+    "Implement proper access control and visibility mechanisms for encapsulation",
+    "Distinguish between interface and implementation, designing clean separation boundaries",
+    "Build reusable library components following best practices in object-oriented design"
+  ],
+  "targetSlideCount": 18,
+  "estimatedStudyMinutes": 120,
+  "sections": [
+    {
+      "title": "Introduction to Genericity and Reusability",
+      "learningGoals": [
+        "Understand the motivation for generic programming",
+        "Recognize code duplication problems that genericity solves",
+        "Appreciate the role of genericity in building reusable components"
+      ],
+      "subsections": [
+        {
+          "title": "The Problem: Code Duplication Without Genericity",
+          "keyPoints": [
+            "Traditional approach requires separate implementations for each type (IntStack, StringStack, PersonStack)",
+            "Code duplication leads to maintenance nightmares and increased error potential",
+            "Type-specific implementations violate the DRY (Don't Repeat Yourself) principle",
+            "Need for a unified approach to handle multiple types with same logic"
+          ],
+          "examples": [
+            "Stack implementations for different types showing identical logic",
+            "List classes duplicated across Integer, String, and custom object types",
+            "Sorting algorithms rewritten for each data type"
+          ],
+          "suggestedDiagram": "Side-by-side comparison of IntStack and StringStack classes showing duplicated code structure"
+        },
+        {
+          "title": "The Solution: Generic Programming",
+          "keyPoints": [
+            "Genericity allows writing code that works with multiple types",
+            "Type parameters serve as placeholders for actual types",
+            "Single implementation can be instantiated for different types",
+            "Enhances code reusability, maintainability, and type safety"
+          ],
+          "examples": [
+            "Generic Stack<G> replacing multiple type-specific stack implementations",
+            "Generic List<T> used with different element types",
+            "Generic sorting method working with any comparable type"
+          ],
+          "suggestedDiagram": "Conceptual diagram showing generic class Stack<G> with multiple instantiations (Stack<Integer>, Stack<String>, Stack<Person>)"
+        }
+      ],
+      "exercises": [
+        "Identify code duplication in a set of type-specific collection classes",
+        "Sketch a generic version of a simple container class"
+      ]
+    },
+    {
+      "title": "Generic Classes and Type Parameters",
+      "learningGoals": [
+        "Master the syntax and semantics of generic class declarations",
+        "Understand type parameter naming conventions and best practices",
+        "Learn how to instantiate generic classes with concrete types"
+      ],
+      "subsections": [
+        {
+          "title": "Declaring Generic Classes",
+          "keyPoints": [
+            "Syntax: class ClassName<TypeParameter> with type parameters in angle brackets",
+            "Type parameters are formal placeholders used throughout the class definition",
+            "Convention: single uppercase letters (T, E, K, V, G) or descriptive names",
+            "Type parameters can be used for fields, method parameters, and return types"
+          ],
+          "examples": [
+            "class Stack<G> with push(item: G) and pop: G methods",
+            "class Pair<K, V> representing key-value pairs with multiple type parameters",
+            "class Box<T> with methods to store and retrieve items of type T"
+          ],
+          "suggestedDiagram": "Anatomy of a generic class declaration showing type parameter placement and usage in method signatures"
+        },
+        {
+          "title": "Type Instantiation and Usage",
+          "keyPoints": [
+            "Creating instances by providing actual type arguments: new Stack<Integer>",
+            "Type inference in modern languages can reduce verbosity",
+            "Type parameters ensure compile-time type safety",
+            "Different instantiations create logically distinct types"
+          ],
+          "examples": [
+            "stack_of_integers: Stack<Integer> := create {Stack<Integer>}.make",
+            "names: List<String> := create {List<String>}.make",
+            "Type inference example: var numbers = new ArrayList<Integer>() vs new ArrayList<>()"
+          ],
+          "suggestedDiagram": "Flow diagram showing generic class definition → type instantiation → concrete object creation"
+        }
+      ],
+      "exercises": [
+        "Implement a generic Pair<F, S> class with first and second elements",
+        "Create multiple instantiations of a generic Queue class with different types"
+      ]
+    },
+    {
+      "title": "Constrained Genericity",
+      "learningGoals": [
+        "Understand the need for type constraints in generic programming",
+        "Apply bounded type parameters to ensure required capabilities",
+        "Design generic algorithms with appropriate type constraints"
+      ],
+      "subsections": [
+        {
+          "title": "The Need for Constraints",
+          "keyPoints": [
+            "Unconstrained type parameters limit what operations can be performed",
+            "Cannot assume any operations beyond those available on Object/ANY",
+            "Constraints specify required interfaces or base classes for type arguments",
+            "Enable generic code to call specific methods on type parameter instances"
+          ],
+          "examples": [
+            "Cannot compare elements in generic sort without Comparable constraint",
+            "Cannot perform arithmetic on generic type T without numeric constraint",
+            "Need for constraint when implementing generic max/min functions"
+          ],
+          "suggestedDiagram": "Comparison showing unconstrained generic class with limited operations vs constrained generic with expanded capabilities"
+        },
+        {
+          "title": "Implementing Type Constraints",
+          "keyPoints": [
+            "Syntax varies by language: <T extends Comparable> in Java, {G -> COMPARABLE} in Eiffel",
+            "Constraints can specify interfaces, base classes, or multiple bounds",
+            "Type arguments must satisfy all specified constraints",
+            "Constraints enable calling methods defined in the constraint type"
+          ],
+          "examples": [
+            "class SortedList<G -> COMPARABLE> ensuring elements can be compared",
+            "class NumericProcessor<T extends Number> for numeric operations",
+            "class Repository<E extends Entity & Serializable> with multiple constraints"
+          ],
+          "suggestedDiagram": "UML-style diagram showing generic class with constraint relationship to interface/base class"
+        },
+        {
+          "title": "Designing with Constraints",
+          "keyPoints": [
+            "Choose minimal necessary constraints for maximum reusability",
+            "Overly restrictive constraints limit applicability of generic code",
+            "Design interfaces specifically for use as generic constraints",
+            "Balance between flexibility and required functionality"
+          ],
+          "examples": [
+            "Comparable interface designed for sorting algorithms",
+            "Hashable interface for hash-based collections",
+            "Cloneable interface for generic copy operations"
+          ],
+          "suggestedDiagram": "Decision tree for selecting appropriate type constraints based on required operations"
+        }
+      ],
+      "exercises": [
+        "Implement a generic findMax method with appropriate constraints",
+        "Design a generic binary search tree with constrained type parameter",
+        "Refactor unconstrained generic code to add necessary constraints"
+      ]
+    },
+    {
+      "title": "Information Hiding Principles",
+      "learningGoals": [
+        "Understand the fundamental principles of information hiding",
+        "Recognize the benefits of hiding implementation details",
+        "Apply information hiding to manage complexity in large systems"
+      ],
+      "subsections": [
+        {
+          "title": "Foundations of Information Hiding",
+          "keyPoints": [
+            "Information hiding: concealing design decisions that are likely to change",
+            "Parnas's principle: modules should hide design decisions from each other",
+            "Reduces coupling between system components",
+            "Enables independent evolution of module implementations"
+          ],
+          "examples": [
+            "Database implementation hidden behind repository interface",
+            "Data structure choice (array vs linked list) hidden from clients",
+            "Encryption algorithm details hidden in security module"
+          ],
+          "suggestedDiagram": "Layered architecture showing public interfaces hiding private implementation details"
+        },
+        {
+          "title": "Benefits and Trade-offs",
+          "keyPoints": [
+            "Reduces complexity by limiting what clients need to understand",
+            "Enables implementation changes without affecting clients",
+            "Supports parallel development by different teams",
+            "May introduce performance overhead through abstraction layers"
+          ],
+          "examples": [
+            "Changing from ArrayList to LinkedList without client code changes",
+            "Upgrading database system while maintaining same API",
+            "Optimizing internal algorithms without breaking existing code"
+          ],
+          "suggestedDiagram": "Before/after comparison showing implementation change with stable interface"
+        }
+      ],
+      "exercises": [
+        "Identify information that should be hidden in a given class design",
+        "Analyze a code example for information hiding violations"
+      ]
+    },
+    {
+      "title": "Access Control and Visibility",
+      "learningGoals": [
+        "Master access control mechanisms (private, protected, public)",
+        "Apply appropriate visibility levels to class members",
+        "Design class interfaces with proper encapsulation"
+      ],
+      "subsections": [
+        {
+          "title": "Access Control Levels",
+          "keyPoints": [
+            "Private: accessible only within the class itself",
+            "Protected: accessible within class and subclasses (use cautiously)",
+            "Public: accessible from anywhere (forms the class interface)",
+            "Package/internal: accessible within same package/assembly (language-dependent)"
+          ],
+          "examples": [
+            "Private fields with public getter/setter methods",
+            "Protected helper methods for subclass extension",
+            "Public API methods forming the contract with clients"
+          ],
+          "suggestedDiagram": "Concentric circles showing visibility scopes from private (innermost) to public (outermost)"
+        },
+        {
+          "title": "Designing Class Interfaces",
+          "keyPoints": [
+            "Default to private, expose only what's necessary",
+            "Public interface should be minimal and stable",
+            "Implementation details should always be private",
+            "Use properties/accessors instead of direct field access"
+          ],
+          "examples": [
+            "BankAccount class with private balance field and public deposit/withdraw methods",
+            "Collection class hiding internal array with public add/remove/size methods",
+            "Configuration class with private validation logic"
+          ],
+          "suggestedDiagram": "Class diagram showing clear separation between public interface (above line) and private implementation (below line)"
+        }
+      ],
+      "exercises": [
+        "Review a class and assign appropriate access levels to all members",
+        "Refactor a class with public fields to use proper encapsulation"
+      ]
+    },
+    {
+      "title": "Interface vs. Implementation Separation",
+      "learningGoals": [
+        "Understand the distinction between interface and implementation",
+        "Design clean interfaces independent of implementation",
+        "Apply the Dependency Inversion Principle"
+      ],
+      "subsections": [
+        {
+          "title": "Interface as Contract",
+          "keyPoints": [
+            "Interface defines what a component does, not how it does it",
+            "Specifies method signatures, preconditions, postconditions, invariants",
+            "Forms a contract between provider and client",
+            "Should be stable while implementation can evolve"
+          ],
+          "examples": [
+            "List interface with add, remove, get operations independent of array/linked implementation",
+            "PaymentProcessor interface hiding specific payment gateway details",
+            "Logger interface abstracting over file/database/network logging"
+          ],
+          "suggestedDiagram": "Interface-implementation relationship showing multiple implementations of same interface"
+        },
+        {
+          "title": "Programming to Interfaces",
+          "keyPoints": [
+            "Depend on abstractions (interfaces) not concrete implementations",
+            "Enables substitutability and flexibility",
+            "Facilitates testing through mock implementations",
+            "Supports plugin architectures and extensibility"
+          ],
+          "examples": [
+            "Declaring variables as List<T> rather than ArrayList<T>",
+            "Dependency injection using interface types",
+            "Strategy pattern with interchangeable algorithm implementations"
+          ],
+          "suggestedDiagram": "Dependency diagram showing client depending on interface, with multiple concrete implementations"
+        },
+        {
+          "title": "Design by Contract in Interfaces",
+          "keyPoints": [
+            "Preconditions: what must be true before method execution",
+            "Postconditions: what must be true after method execution",
+            "Class invariants: properties that always hold",
+            "Contracts are part of the interface, not implementation"
+          ],
+          "examples": [
+            "Stack.pop requires not is_empty (precondition)",
+            "BankAccount.withdraw ensures balance updated correctly (postcondition)",
+            "Queue invariant: count >= 0"
+          ],
+          "suggestedDiagram": "Method signature with annotated preconditions, postconditions, and class invariants"
+        }
+      ],
+      "exercises": [
+        "Design an interface for a cache system with multiple possible implementations",
+        "Write contracts (preconditions/postconditions) for a queue interface",
+        "Refactor code to depend on interfaces rather than concrete classes"
+      ]
+    },
+    {
+      "title": "Building Reusable Library Components",
+      "learningGoals": [
+        "Apply genericity and information hiding to create reusable libraries",
+        "Design components with broad applicability",
+        "Follow best practices for library design"
+      ],
+      "subsections": [
+        {
+          "title": "Principles of Reusable Design",
+          "keyPoints": [
+            "Generality: solve broader problem class, not just specific case",
+            "Simplicity: minimal interface with maximum functionality",
+            "Consistency: follow established patterns and conventions",
+            "Completeness: provide all necessary operations for the abstraction"
+          ],
+          "examples": [
+            "Generic collection library (List, Set, Map) usable across domains",
+            "Utility library with broadly applicable algorithms (sort, search, filter)",
+            "Logging framework adaptable to different output targets"
+          ],
+          "suggestedDiagram": "Reusability pyramid showing layers from specific solutions to general libraries"
+        },
+        {
+          "title": "Library Design Best Practices",
+          "keyPoints": [
+            "Minimize dependencies on external libraries",
+            "Provide clear, comprehensive documentation",
+            "Design for extension through inheritance or composition",
+            "Version interfaces carefully to maintain backward compatibility"
+          ],
+          "examples": [
+            "Java Collections Framework as exemplar of reusable library design",
+            "Apache Commons libraries providing general-purpose utilities",
+            "Standard Template Library (STL) in C++ with generic algorithms"
+          ],
+          "suggestedDiagram": "Component diagram showing well-designed library with minimal external dependencies"
+        },
+        {
+          "title": "Combining Genericity and Information Hiding",
+          "keyPoints": [
+            "Use genericity for type flexibility while hiding implementation",
+            "Generic interfaces with multiple concrete implementations",
+            "Type parameters enable reuse across different data types",
+            "Information hiding allows implementation optimization without API changes"
+          ],
+          "examples": [
+            "Generic HashMap<K,V> hiding hash table implementation details",
+            "Generic repository pattern with interface and multiple storage backends",
+            "Generic event system with type-safe event handlers"
+          ],
+          "suggestedDiagram": "Architecture diagram showing generic interface layer above multiple hidden implementations"
+        }
+      ],
+      "exercises": [
+        "Design a generic, reusable caching library with proper information hiding",
+        "Implement a generic priority queue with hidden heap implementation",
+        "Create a generic observer pattern implementation for event handling"
+      ]
+    },
+    {
+      "title": "Practical Applications and Case Studies",
+      "learningGoals": [
+        "Analyze real-world applications of genericity and information hiding",
+        "Evaluate design decisions in existing libraries",
+        "Apply learned principles to solve practical problems"
+      ],
+      "subsections": [
+        {
+          "title": "Case Study: Collection Frameworks",
+          "keyPoints": [
+            "Generic type parameters for element types (List<E>, Map<K,V>)",
+            "Interface hierarchy hiding implementation diversity",
+            "Constrained genericity for comparable/hashable elements",
+            "Information hiding in internal data structure choices"
+          ],
+          "examples": [
+            "Java Collections Framework architecture",
+            "Eiffel EiffelBase library structure",
+            "C# generic collections in System.Collections.Generic"
+          ],
+          "suggestedDiagram": "UML class diagram of collection framework showing interfaces and implementations"
+        },
+        {
+          "title": "Design Patterns with Genericity",
+          "keyPoints": [
+            "Factory pattern with generic product types",
+            "Repository pattern with generic entity types",
+            "Observer pattern with generic event types",
+            "Strategy pattern with generic context types"
+          ],
+          "examples": [
+            "Generic Factory<T> creating instances of type T",
+            "Repository<TEntity> for data access abstraction",
+            "Observable<T> for type-safe event notifications"
+          ],
+          "suggestedDiagram": "Pattern structure diagram showing generic type parameters in pattern participants"
+        }
+      ],
+      "exercises": [
+        "Analyze the design of a standard library (Java Collections, .NET generics, etc.)",
+        "Implement a design pattern using generics and information hiding",
+        "Critique a library design for proper use of genericity and encapsulation"
+      ]
+    },
+    {
+      "title": "Summary and Integration",
+      "learningGoals": [
+        "Synthesize concepts of genericity and information hiding",
+        "Connect to broader software engineering principles",
+        "Prepare for applying concepts in software construction projects"
+      ],
+      "subsections": [
+        {
+          "title": "Key Takeaways",
+          "keyPoints": [
+            "Genericity enables type-safe code reuse across different types",
+            "Constrained genericity balances flexibility with required functionality",
+            "Information hiding manages complexity by concealing implementation details",
+            "Interface-implementation separation enables evolution and substitutability",
+            "Combining these principles creates robust, reusable library components"
+          ],
+          "examples": [
+            "Well-designed generic library component exemplifying all principles",
+            "Comparison of poor vs. excellent application of these concepts"
+          ],
+          "suggestedDiagram": "Concept map showing relationships between genericity, information hiding, encapsulation, and reusability"
+        },
+        {
+          "title": "Connection to Software Quality Attributes",
+          "keyPoints": [
+            "Reusability: genericity enables use across contexts",
+            "Maintainability: information hiding localizes changes",
+            "Extensibility: interface separation supports extension",
+            "Correctness: type safety and contracts ensure reliability"
+          ],
+          "examples": [
+            "How these principles support the quality goals from module ILOs",
+            "Trade-offs between different quality attributes"
+          ],
+          "suggestedDiagram": "Quality attribute tree showing how genericity and information hiding contribute to overall software quality"
+        }
+      ],
+      "exercises": [
+        "Design a complete reusable component applying all lecture principles",
+        "Prepare for tutorial exercises on generic programming and encapsulation"
+      ]
+    }
+  ],
+  "suggestedResources": [
+    "Meyer, B. (2009). Touch of Class: Learning to Program Well Using Objects and Contracts - Chapters on genericity and information hiding",
+    "Gamma, E. et al. (1994). Design Patterns - for pattern applications with generics",
+    "Bloch, J. (2018). Effective Java (3rd Edition) - Items on generics and encapsulation",
+    "Liskov, B. & Guttag, J. (2000). Program Development in Java: Abstraction, Specification, and Object-Oriented Design",
+    "Eiffel Software documentation on generic programming and Design by Contract",
+    "Java Generics and Collections by Naftalin & Wadler for in-depth generic programming",
+    "Object-Oriented Software Construction (2nd Edition) by Bertrand Meyer - foundational text"
+  ],
+  "assessmentIdeas": [
+    "Design and implement a generic collection class with appropriate constraints and information hiding",
+    "Refactor existing non-generic code to use genericity while maintaining proper encapsulation",
+    "Analyze a code sample for violations of information hiding and propose improvements",
+    "Create a reusable library component demonstrating interface-implementation separation",
+    "Write contracts (preconditions, postconditions, invariants) for a generic interface",
+    "Compare multiple implementations of the same generic interface, evaluating design quality",
+    "Design a generic version of a classic design pattern (Factory, Observer, Strategy)",
+    "Portfolio exercise: Build a small generic library with documentation explaining design decisions"
+  ]
+}

@@ -1,0 +1,410 @@
+{
+  "title": "Lecture 9: Agile Development Methods and Practices",
+  "summary": "This lecture provides a comprehensive overview of agile software development methodologies, exploring the Agile Manifesto, Scrum framework, Extreme Programming practices, and iterative development approaches. Students will understand how agile techniques integrate with software engineering principles and learn to apply basic agile development techniques in real-world contexts.",
+  "learningObjectives": [
+    "Understand the core values and principles of the Agile Manifesto and their impact on modern software development",
+    "Apply the Scrum framework including roles, artifacts, and ceremonies to organize software projects",
+    "Implement Extreme Programming (XP) practices to improve code quality and team collaboration",
+    "Design and execute iterative and incremental development cycles",
+    "Create effective user stories and conduct sprint planning sessions",
+    "Compare and contrast agile versus traditional development approaches and select appropriate methodologies for different contexts"
+  ],
+  "targetSlideCount": 18,
+  "estimatedStudyMinutes": 120,
+  "sections": [
+    {
+      "title": "Introduction to Agile Software Development",
+      "learningGoals": [
+        "Understand the historical context that led to agile methodologies",
+        "Recognize the limitations of traditional waterfall approaches",
+        "Appreciate the paradigm shift agile represents in software engineering"
+      ],
+      "subsections": [
+        {
+          "title": "The Evolution from Traditional to Agile",
+          "keyPoints": [
+            "Traditional waterfall model: sequential phases with limited flexibility",
+            "Challenges in traditional approaches: late feedback, rigid requirements, long delivery cycles",
+            "The software crisis of the 1990s and need for adaptive methodologies",
+            "Emergence of lightweight methodologies in the late 1990s"
+          ],
+          "examples": [
+            "Case study: Failed waterfall project due to changing requirements",
+            "Comparison timeline: 18-month waterfall vs. 2-week agile iterations"
+          ],
+          "suggestedDiagram": "Timeline showing evolution from waterfall (1970s) through iterative models to agile (2001-present)"
+        },
+        {
+          "title": "The Agile Manifesto: Values and Principles",
+          "keyPoints": [
+            "Four core values: Individuals over processes, working software over documentation, customer collaboration over contracts, responding to change over following plans",
+            "Twelve principles underlying agile development",
+            "Emphasis on continuous delivery, sustainable development, and technical excellence",
+            "The balance: valuing items on the right while valuing items on the left more"
+          ],
+          "examples": [
+            "Real-world interpretation: How 'working software over documentation' doesn't mean no documentation",
+            "Customer collaboration example: Daily standup with product owner vs. quarterly review meetings"
+          ],
+          "suggestedDiagram": "Visual representation of the four Agile Manifesto values with concrete examples for each"
+        }
+      ],
+      "exercises": [
+        "Group discussion: Identify a software project scenario and determine which agile values would be most critical",
+        "Reflection: Map traditional software engineering practices from earlier lectures to agile principles"
+      ]
+    },
+    {
+      "title": "The Scrum Framework",
+      "learningGoals": [
+        "Master the three roles, three artifacts, and five ceremonies of Scrum",
+        "Understand how Scrum implements agile principles in practice",
+        "Apply Scrum framework to organize a software development project"
+      ],
+      "subsections": [
+        {
+          "title": "Scrum Roles and Responsibilities",
+          "keyPoints": [
+            "Product Owner: Maximizes product value, manages product backlog, represents stakeholders",
+            "Scrum Master: Facilitates process, removes impediments, coaches team on Scrum practices",
+            "Development Team: Self-organizing, cross-functional, 3-9 members, collectively responsible",
+            "Role boundaries and collaboration patterns",
+            "Common anti-patterns: Product Owner as project manager, Scrum Master as team lead"
+          ],
+          "examples": [
+            "Product Owner prioritizing features based on business value and technical dependencies",
+            "Scrum Master facilitating conflict resolution without dictating solutions",
+            "Development team self-organizing to tackle a complex technical challenge"
+          ],
+          "suggestedDiagram": "Scrum team structure showing three roles and their interactions with arrows indicating communication flows"
+        },
+        {
+          "title": "Scrum Artifacts",
+          "keyPoints": [
+            "Product Backlog: Ordered list of everything needed in the product, single source of requirements",
+            "Sprint Backlog: Selected product backlog items plus plan for delivering increment",
+            "Increment: Sum of all completed backlog items, must be in usable condition",
+            "Definition of Done: Shared understanding of what 'complete' means",
+            "Transparency through artifacts: everyone sees the same information"
+          ],
+          "examples": [
+            "Sample product backlog with user stories ordered by priority and estimated",
+            "Sprint backlog showing tasks broken down from user stories with daily updates",
+            "Definition of Done checklist: code reviewed, tests passing, documentation updated, deployed to staging"
+          ],
+          "suggestedDiagram": "Flow diagram showing how items move from Product Backlog to Sprint Backlog to Increment"
+        },
+        {
+          "title": "Scrum Ceremonies and Events",
+          "keyPoints": [
+            "Sprint: Time-boxed iteration (1-4 weeks), consistent duration, creates rhythm",
+            "Sprint Planning: Team selects work and creates sprint goal (max 8 hours for 1-month sprint)",
+            "Daily Scrum: 15-minute synchronization, three questions format, identify impediments",
+            "Sprint Review: Inspect increment, adapt product backlog, stakeholder collaboration (max 4 hours)",
+            "Sprint Retrospective: Team inspects itself, creates improvement plan (max 3 hours)",
+            "Time-boxing principle: all events have maximum durations"
+          ],
+          "examples": [
+            "Sprint Planning agenda: Part 1 (What can be done?) and Part 2 (How will it be done?)",
+            "Daily Scrum in practice: What I did yesterday, what I'll do today, any blockers",
+            "Retrospective techniques: Start-Stop-Continue, Sailboat, 4Ls (Liked, Learned, Lacked, Longed for)"
+          ],
+          "suggestedDiagram": "Sprint cycle diagram showing all ceremonies positioned within a 2-week sprint timeline"
+        }
+      ],
+      "exercises": [
+        "Role-play exercise: Conduct a 10-minute sprint planning session for a simple project",
+        "Create a sample product backlog with 10 user stories for a mobile app, ordered by priority",
+        "Design a Definition of Done appropriate for a web application project"
+      ]
+    },
+    {
+      "title": "Extreme Programming (XP) Practices",
+      "learningGoals": [
+        "Understand XP values and their relationship to code quality",
+        "Apply core XP practices to improve software construction",
+        "Integrate XP techniques with object-oriented programming principles"
+      ],
+      "subsections": [
+        {
+          "title": "XP Values and Core Practices",
+          "keyPoints": [
+            "Five values: Communication, Simplicity, Feedback, Courage, Respect",
+            "Pair Programming: Two programmers, one keyboard, continuous code review",
+            "Test-Driven Development (TDD): Write test first, then code to pass test, then refactor",
+            "Continuous Integration: Integrate code multiple times daily, automated builds",
+            "Collective Code Ownership: Anyone can modify any code, shared responsibility",
+            "Simple Design: Do the simplest thing that could possibly work, YAGNI principle"
+          ],
+          "examples": [
+            "TDD cycle: Red (failing test) → Green (passing code) → Refactor (improve design)",
+            "Pair programming roles: Driver (typing) and Navigator (reviewing, thinking ahead)",
+            "Simple design example: Avoiding premature optimization and over-engineering"
+          ],
+          "suggestedDiagram": "TDD cycle diagram showing the red-green-refactor loop with code examples at each stage"
+        },
+        {
+          "title": "Additional XP Practices and Integration",
+          "keyPoints": [
+            "Refactoring: Continuous improvement of code structure without changing behavior",
+            "Coding Standards: Team agrees on conventions for consistency",
+            "Sustainable Pace: 40-hour weeks, no overtime as standard practice",
+            "Small Releases: Frequent delivery of working software to production",
+            "On-site Customer: Customer representative available for questions",
+            "Integration with Design by Contract: XP testing complements DbC assertions"
+          ],
+          "examples": [
+            "Refactoring catalog: Extract Method, Rename Variable, Introduce Parameter Object",
+            "Coding standards document: Naming conventions, formatting rules, comment guidelines",
+            "Small release strategy: Deploy to production every two weeks vs. quarterly"
+          ],
+          "suggestedDiagram": "Mind map showing how XP practices reinforce each other (e.g., TDD enables refactoring, CI requires collective ownership)"
+        }
+      ],
+      "exercises": [
+        "Practice TDD: Write tests first for a simple function (e.g., string validator), then implement",
+        "Pair programming simulation: Two students solve a coding problem together, switching roles every 5 minutes",
+        "Refactoring exercise: Identify code smells in provided code and apply appropriate refactorings"
+      ]
+    },
+    {
+      "title": "Iterative and Incremental Development",
+      "learningGoals": [
+        "Distinguish between iterative and incremental approaches",
+        "Plan effective iteration cycles",
+        "Manage technical debt and architecture evolution across iterations"
+      ],
+      "subsections": [
+        {
+          "title": "Iteration Planning and Execution",
+          "keyPoints": [
+            "Iterative: Refining and improving through repeated cycles",
+            "Incremental: Building piece by piece, adding functionality",
+            "Combining both: Each iteration adds features and refines existing ones",
+            "Iteration length: Typically 1-4 weeks, consistent duration preferred",
+            "Velocity: Measure of work completed per iteration, used for planning",
+            "Burndown charts: Visual tracking of remaining work"
+          ],
+          "examples": [
+            "Incremental example: Building e-commerce site—iteration 1: product catalog, iteration 2: shopping cart, iteration 3: checkout",
+            "Iterative example: Refining user interface based on feedback each iteration",
+            "Velocity calculation: Team completes 25 story points in iteration 1, 28 in iteration 2, average velocity = 26.5"
+          ],
+          "suggestedDiagram": "Comparison chart showing waterfall (sequential phases) vs. iterative-incremental (overlapping cycles with growing functionality)"
+        },
+        {
+          "title": "Managing Evolution and Technical Debt",
+          "keyPoints": [
+            "Technical debt: Shortcuts taken for speed that require future rework",
+            "Architectural runway: Preparing infrastructure for upcoming features",
+            "Refactoring as debt repayment: Allocating time each iteration",
+            "Balancing new features with quality improvements",
+            "Emergent architecture: Design evolves based on actual needs, not predicted needs",
+            "Spike solutions: Time-boxed research to reduce uncertainty"
+          ],
+          "examples": [
+            "Technical debt example: Hard-coding configuration for quick demo, must refactor to configuration file later",
+            "Spike: 2-day investigation into database scalability options before committing to architecture",
+            "Refactoring budget: Reserve 20% of each sprint for technical debt reduction"
+          ],
+          "suggestedDiagram": "Graph showing feature delivery vs. technical debt over iterations, illustrating sustainable vs. unsustainable pace"
+        }
+      ],
+      "exercises": [
+        "Planning exercise: Given a project description, divide it into 4 iterations with clear increments",
+        "Calculate velocity and forecast completion: Given past iteration data, predict when 100 story points will be complete",
+        "Identify technical debt in a code sample and propose a refactoring schedule"
+      ]
+    },
+    {
+      "title": "User Stories and Sprint Planning",
+      "learningGoals": [
+        "Write effective user stories following INVEST criteria",
+        "Estimate user stories using relative sizing techniques",
+        "Conduct productive sprint planning sessions"
+      ],
+      "subsections": [
+        {
+          "title": "Writing and Estimating User Stories",
+          "keyPoints": [
+            "User story format: As a [role], I want [feature], so that [benefit]",
+            "INVEST criteria: Independent, Negotiable, Valuable, Estimable, Small, Testable",
+            "Acceptance criteria: Specific conditions that must be met for story to be complete",
+            "Story points vs. hours: Relative sizing vs. absolute time estimates",
+            "Planning poker: Team-based estimation technique using Fibonacci sequence",
+            "Epic stories: Large stories that must be broken down into smaller ones"
+          ],
+          "examples": [
+            "Good user story: 'As a customer, I want to filter products by price range, so that I can find items within my budget'",
+            "Acceptance criteria: 'Given a product list, when I set min price to $10 and max to $50, then only products in that range are displayed'",
+            "Planning poker session: Team estimates story, reveals cards simultaneously, discusses outliers, re-estimates"
+          ],
+          "suggestedDiagram": "User story card template showing story format, acceptance criteria, story points, and notes sections"
+        },
+        {
+          "title": "Sprint Planning Process",
+          "keyPoints": [
+            "Input: Prioritized product backlog, team velocity, team capacity",
+            "Output: Sprint goal, sprint backlog, commitment",
+            "Part 1 - What: Product Owner presents top priorities, team asks questions, team selects stories",
+            "Part 2 - How: Team breaks stories into tasks, identifies dependencies, creates plan",
+            "Capacity planning: Account for holidays, training, support work",
+            "Sprint goal: Cohesive objective that provides focus beyond individual stories"
+          ],
+          "examples": [
+            "Sprint goal example: 'Enable users to manage their account settings'",
+            "Capacity calculation: 5 team members × 8 hours/day × 10 days = 400 hours - 50 hours (meetings, support) = 350 available hours",
+            "Task breakdown: User story 'User login' → Tasks: Design login UI (4h), Implement authentication (8h), Write tests (4h), Update documentation (2h)"
+          ],
+          "suggestedDiagram": "Sprint planning flow chart showing inputs, two-part process, and outputs with decision points"
+        }
+      ],
+      "exercises": [
+        "Write 5 user stories for a library management system following INVEST criteria",
+        "Conduct planning poker: Estimate provided user stories as a team",
+        "Sprint planning simulation: Given a product backlog and team velocity, select stories for next sprint and create sprint goal"
+      ]
+    },
+    {
+      "title": "Agile vs. Traditional Development Approaches",
+      "learningGoals": [
+        "Compare agile and traditional methodologies across multiple dimensions",
+        "Select appropriate methodology based on project context",
+        "Understand hybrid approaches and when to use them"
+      ],
+      "subsections": [
+        {
+          "title": "Comparative Analysis",
+          "keyPoints": [
+            "Requirements: Agile (emergent, evolving) vs. Traditional (defined upfront, frozen)",
+            "Planning: Agile (adaptive, rolling wave) vs. Traditional (comprehensive, upfront)",
+            "Control: Agile (empirical, inspect-adapt) vs. Traditional (defined process, variance control)",
+            "Customer involvement: Agile (continuous collaboration) vs. Traditional (milestone reviews)",
+            "Risk management: Agile (early, frequent delivery) vs. Traditional (risk analysis phase)",
+            "Team structure: Agile (self-organizing, cross-functional) vs. Traditional (specialized roles, hierarchy)",
+            "Documentation: Agile (just enough, working software) vs. Traditional (comprehensive, contractual)"
+          ],
+          "examples": [
+            "Requirements evolution: Agile project pivots based on user feedback after iteration 3; waterfall project requires formal change request",
+            "Risk mitigation: Agile delivers core feature in iteration 1 to validate assumptions; waterfall completes all design before coding",
+            "Team dynamics: Agile team decides how to implement feature; traditional team follows detailed design specification"
+          ],
+          "suggestedDiagram": "Comparison table with dimensions (requirements, planning, control, etc.) showing agile vs. traditional characteristics"
+        },
+        {
+          "title": "Selecting and Adapting Methodologies",
+          "keyPoints": [
+            "Project suitability factors: Requirements stability, team size, criticality, organizational culture",
+            "Agile works well: Innovative products, changing requirements, small-medium teams, low criticality",
+            "Traditional works well: Stable requirements, large teams, safety-critical systems, regulatory compliance",
+            "Hybrid approaches: Combining elements (e.g., agile development with waterfall project management)",
+            "Scaling agile: SAFe, LeSS, Scrum of Scrums for large organizations",
+            "Tailoring: Adapting methodology to organizational context, not following dogmatically"
+          ],
+          "examples": [
+            "Hybrid example: Medical device software using waterfall for regulatory documentation but agile for development iterations",
+            "Unsuitable for pure agile: Air traffic control system with strict certification requirements",
+            "Scaling example: 10 Scrum teams working on same product using Scrum of Scrums for coordination",
+            "Tailoring example: Startup uses Scrum but skips Sprint Review because Product Owner is on team"
+          ],
+          "suggestedDiagram": "Decision tree for selecting methodology based on project characteristics (requirements clarity, team size, criticality)"
+        }
+      ],
+      "exercises": [
+        "Case analysis: Given 3 project scenarios, recommend agile, traditional, or hybrid approach with justification",
+        "Debate: Divide class into teams arguing for agile vs. traditional for a specific project type",
+        "Reflection: How do agile practices (ILO 6) integrate with object-oriented techniques (ILO 1-2) and Design by Contract (ILO 3) from earlier lectures?"
+      ]
+    },
+    {
+      "title": "Integration with Software Engineering Principles",
+      "learningGoals": [
+        "Connect agile practices to fundamental software engineering concepts",
+        "Apply agile techniques within object-oriented development",
+        "Understand how agile supports quality attributes"
+      ],
+      "subsections": [
+        {
+          "title": "Agile and Software Quality",
+          "keyPoints": [
+            "Quality built-in: TDD, continuous integration, pair programming prevent defects",
+            "Correctness: Automated tests verify behavior, acceptance criteria define correctness",
+            "Robustness: Frequent integration catches errors early, small increments limit blast radius",
+            "Extendibility: Refactoring maintains clean code, simple design enables change",
+            "Reusability: Collective ownership spreads knowledge, coding standards promote consistency",
+            "Connection to Design by Contract: Unit tests can verify preconditions, postconditions, invariants"
+          ],
+          "examples": [
+            "TDD supporting correctness: Tests document expected behavior and catch regressions",
+            "Refactoring for extendibility: Extract common code into reusable components each iteration",
+            "DbC integration: Eiffel assertions complement XP tests—assertions for internal correctness, tests for external behavior"
+          ],
+          "suggestedDiagram": "Mapping diagram showing how agile practices (TDD, refactoring, CI, etc.) support quality attributes (correctness, robustness, extendibility, reusability)"
+        },
+        {
+          "title": "Agile in Object-Oriented Development",
+          "keyPoints": [
+            "Iterative design: Classes and inheritance hierarchies emerge through refactoring",
+            "Design patterns in agile: Apply patterns when needed (YAGNI), refactor to patterns",
+            "Test-driven class design: Tests drive interface design, promote loose coupling",
+            "Continuous refactoring: Maintain SOLID principles throughout iterations",
+            "Agile architecture: Evolutionary design vs. big upfront design",
+            "Balance: Enough design to start, refactor as understanding grows"
+          ],
+          "examples": [
+            "Refactoring to Observer pattern: Start with simple notification, refactor to Observer when multiple listeners needed",
+            "TDD driving interface: Writing tests first leads to more testable, decoupled class designs",
+            "Evolutionary architecture: Start with simple layered architecture, introduce patterns as complexity warrants"
+          ],
+          "suggestedDiagram": "Iteration timeline showing how class design evolves: Iteration 1 (simple classes) → Iteration 2 (extract interfaces) → Iteration 3 (apply patterns) → Iteration 4 (refine hierarchy)"
+        },
+        {
+          "title": "Practical Application and Summary",
+          "keyPoints": [
+            "Agile as a mindset, not just practices: Embrace change, value individuals, focus on working software",
+            "Continuous improvement: Retrospectives drive process evolution",
+            "Metrics that matter: Velocity, burndown, cycle time, defect rates",
+            "Common pitfalls: Agile without discipline, skipping practices, cargo cult agile",
+            "Success factors: Team commitment, organizational support, customer collaboration",
+            "Future trends: DevOps, continuous delivery, agile at scale"
+          ],
+          "examples": [
+            "Retrospective improvement: Team identifies slow builds as impediment, invests in CI infrastructure",
+            "Pitfall example: Team does daily standups and sprints but skips TDD and refactoring—results in technical debt",
+            "Success story: Team reduces time-to-market from 6 months to 2 weeks through agile adoption"
+          ],
+          "suggestedDiagram": "Summary infographic showing agile ecosystem: Manifesto at center, surrounded by methodologies (Scrum, XP), practices, and benefits"
+        }
+      ],
+      "exercises": [
+        "Integration exercise: Design a 4-iteration plan for developing a class library using OO principles and agile practices",
+        "Reflection paper: How do agile techniques (ILO 6) complement other course topics (OO programming, design patterns, DbC)?",
+        "Case study analysis: Evaluate a real-world agile transformation story, identify success factors and challenges"
+      ]
+    }
+  ],
+  "suggestedResources": [
+    "Beck, K. (2000). Extreme Programming Explained: Embrace Change. Addison-Wesley.",
+    "Schwaber, K. & Sutherland, J. (2020). The Scrum Guide. Scrum.org.",
+    "Martin, R.C. (2008). Clean Code: A Handbook of Agile Software Craftsmanship. Prentice Hall.",
+    "Cohn, M. (2004). User Stories Applied: For Agile Software Development. Addison-Wesley.",
+    "Shore, J. & Warden, S. (2007). The Art of Agile Development. O'Reilly.",
+    "Manifesto for Agile Software Development. https://agilemanifesto.org",
+    "Martin Fowler's articles on agile and refactoring. https://martinfowler.com",
+    "Ghezzi, C., Jazayeri, M. and Mandrioli, D. (2003). Fundamentals of Software Engineering, Chapters on iterative development and agile methods",
+    "Meyer, B. (2009). Touch of Class, Chapters on software process and quality",
+    "Video resources: Scrum.org training videos, Uncle Bob Martin talks on agile craftsmanship"
+  ],
+  "assessmentIdeas": [
+    "Portfolio component: Maintain a sprint backlog and burndown chart for a semester project, documenting sprint planning and retrospectives",
+    "Practical exam question: Given a project scenario, write user stories, estimate them, and plan a sprint",
+    "Written exam question: Compare and contrast Scrum and XP, explaining when each is most appropriate",
+    "Group assignment: Conduct a 2-week sprint developing a small application, with daily standups, sprint review, and retrospective",
+    "Individual assignment: Write a reflective essay on how agile practices support software quality attributes (correctness, robustness, extendibility, reusability)",
+    "Case study analysis: Evaluate a failed agile adoption, identify root causes, and propose corrective actions",
+    "Practical exercise: Perform TDD to implement a feature, submitting tests and code with explanation of red-green-refactor cycles",
+    "Exam question: Design a Definition of Done for a specific project type and justify each criterion",
+    "Portfolio component: Create a product backlog for a proposed application with 20+ user stories following INVEST criteria",
+    "Written question: Explain how agile techniques integrate with Design by Contract and object-oriented programming principles covered earlier in the course"
+  ]
+}

@@ -1,0 +1,162 @@
+{
+  "alignmentScore": 92,
+  "dominantLevel": "apply",
+  "distribution": {
+    "remember": 5,
+    "understand": 10,
+    "apply": 40,
+    "analyze": 20,
+    "evaluate": 10,
+    "create": 15
+  },
+  "objectiveAlignments": [
+    {
+      "objective": "Understand and apply generic programming concepts to create reusable software components",
+      "expectedLevel": "apply",
+      "observedLevel": "apply",
+      "status": "aligned",
+      "rationale": "Slides 4-6 require students to design generic classes from scratch (PAIR container, event scheduling system), moving beyond understanding syntax to applying genericity principles in novel contexts. Activities demand creating complete architectures with justified design decisions."
+    },
+    {
+      "objective": "Design and implement generic classes with appropriate type parameters and constraints",
+      "expectedLevel": "create",
+      "observedLevel": "create",
+      "status": "aligned",
+      "rationale": "Slides 5, 7, 9, and 16 explicitly require designing generic classes from requirements. Slide 5 asks students to design event scheduling architecture with type parameters and constraints. Slide 7 requires determining minimal necessary constraints. Slide 16 synthesizes both principles in cache system design. These are create-level tasks requiring original architectural decisions."
+    },
+    {
+      "objective": "Apply information hiding principles to manage complexity in large-scale systems",
+      "expectedLevel": "apply",
+      "observedLevel": "apply",
+      "status": "aligned",
+      "rationale": "Slides 10-11 present realistic scenarios (STUDENT_REGISTRY, EMPLOYEE_DATABASE) requiring students to apply information hiding to solve evolution problems. Students must redesign classes to hide implementation details and enable changes like switching data structures or adding audit logging without breaking clients."
+    },
+    {
+      "objective": "Implement proper access control and visibility mechanisms for encapsulation",
+      "expectedLevel": "apply",
+      "observedLevel": "apply",
+      "status": "aligned",
+      "rationale": "Slides 12-13 require applying access control decisions to realistic classes (STUDENT_REGISTRY, EMAIL_QUEUE, BANK_ACCOUNT). Students must decide public vs private for each feature and justify decisions based on client needs, future flexibility, and preventing misuse. These are application tasks with justification requirements."
+    },
+    {
+      "objective": "Distinguish between interface and implementation, designing clean separation boundaries",
+      "expectedLevel": "analyze",
+      "observedLevel": "analyze",
+      "status": "aligned",
+      "rationale": "Slide 14 requires analyzing three CACHE interface designs to identify leaky abstractions and rank separation quality. Slide 15 requires identifying concrete dependencies and refactoring to interface types. Both tasks require breaking down designs to distinguish interface from implementation concerns and assessing separation quality."
+    },
+    {
+      "objective": "Build reusable library components following best practices in object-oriented design",
+      "expectedLevel": "create",
+      "observedLevel": "create",
+      "status": "aligned",
+      "rationale": "Slide 16's cache system design synthesizes all principles, requiring students to create a complete generic component with interface-implementation separation, appropriate constraints, and hidden implementation details. This directly addresses building reusable components. Slide 5's event scheduling design also requires creating library-quality architectures from requirements."
+    }
+  ],
+  "slideTags": [
+    {
+      "slideTitle": "Lecture 3: Genericity and Information Hiding",
+      "primaryLevel": "create",
+      "evidence": "Design Preview Challenge asks students to sketch notification system architecture with encapsulation boundaries before instruction—priming create-level thinking about component design."
+    },
+    {
+      "slideTitle": "Learning Objectives & Pre-Assessment",
+      "primaryLevel": "apply",
+      "evidence": "Quick Design Challenge requires sketching generic Cache<K,V> interface with type constraints and visibility decisions—diagnostic baseline at apply level."
+    },
+    {
+      "slideTitle": "The Problem: Code Duplication",
+      "primaryLevel": "understand",
+      "evidence": "Presents problem context explaining why duplication occurs and its consequences—building understanding of motivation for genericity."
+    },
+    {
+      "slideTitle": "The Solution: Generic Programming",
+      "primaryLevel": "create",
+      "evidence": "Design & Critique Challenge requires designing generic PAIR container from scratch, then evaluating trade-offs (one vs two type parameters) and proposing improvements—create and evaluate levels."
+    },
+    {
+      "slideTitle": "Declaring Generic Classes",
+      "primaryLevel": "create",
+      "evidence": "Design from Requirements activity requires synthesizing complete generic architecture for event scheduling from requirements, choosing type parameters, constraints, and method signatures with justification."
+    },
+    {
+      "slideTitle": "Type Instantiation",
+      "primaryLevel": "understand",
+      "evidence": "Explains instantiation syntax and type safety with code examples—primarily understanding how instantiation works, no higher-order task."
+    },
+    {
+      "slideTitle": "Constraint Design Challenge",
+      "primaryLevel": "apply",
+      "evidence": "Students must determine minimal constraints for PRIORITY_QUEUE, HASH_TABLE, and SORTED_LIST by analyzing required operations—applying constraint design principles to novel scenarios."
+    },
+    {
+      "slideTitle": "Implementing Type Constraints",
+      "primaryLevel": "analyze",
+      "evidence": "Activity requires analyzing what breaks without constraints, evaluating weaker alternatives (ANY vs COMPARABLE), and determining minimal interface requirements—analyzing constraint necessity and dependencies."
+    },
+    {
+      "slideTitle": "Designing with Constraints",
+      "primaryLevel": "evaluate",
+      "evidence": "Students evaluate two PRIORITY_QUEUE design approaches, comparing use cases, reusability, and trade-offs, then propose improved third approach—evaluating design alternatives and justifying choices."
+    },
+    {
+      "slideTitle": "Information Hiding: Design Challenge",
+      "primaryLevel": "apply",
+      "evidence": "Students redesign STUDENT_REGISTRY to hide storage implementation, determining visibility and designing public methods to enable switching data structures—applying information hiding to solve evolution problem."
+    },
+    {
+      "slideTitle": "Applying Information Hiding: Design Analysis",
+      "primaryLevel": "apply",
+      "evidence": "Redesign EMPLOYEE_DATABASE to enable audit logging by hiding implementation and exposing controlled methods—applying information hiding with analysis of trade-offs between flexibility and convenience."
+    },
+    {
+      "slideTitle": "Access Control Levels: Design Decisions",
+      "primaryLevel": "apply",
+      "evidence": "Students decide public/private/protected for each STUDENT_REGISTRY feature with justification based on client needs, flexibility, and preventing misuse—applying access control principles."
+    },
+    {
+      "slideTitle": "Designing Class Interfaces",
+      "primaryLevel": "apply",
+      "evidence": "Design EMAIL_QUEUE public interface by deciding visibility for each feature with one-sentence justifications, then identifying problems from exposing internal array—applying interface design principles."
+    },
+    {
+      "slideTitle": "Interface as Contract",
+      "primaryLevel": "analyze",
+      "evidence": "Analyze three CACHE interface designs to identify leaky abstractions, rank separation quality, and justify ranking with specific problems—analyzing interface-implementation separation quality."
+    },
+    {
+      "slideTitle": "Programming to Interfaces",
+      "primaryLevel": "apply",
+      "evidence": "Refactor ReportGenerator to use interface dependencies by introducing Database interface and dependency injection—applying programming-to-interfaces principle to enable flexibility and testing."
+    },
+    {
+      "slideTitle": "Combining Genericity and Information Hiding",
+      "primaryLevel": "create",
+      "evidence": "Design complete CACHE<K,V> system with interface, two implementations (LRU_CACHE, TTL_CACHE), type constraints, and hidden implementation details—synthesizing both principles in original design."
+    },
+    {
+      "slideTitle": "Case Study: Collection Frameworks",
+      "primaryLevel": "understand",
+      "evidence": "Presents real-world example of collection framework architecture showing how principles apply professionally—understanding application in existing systems, no active design task."
+    },
+    {
+      "slideTitle": "Key Takeaways",
+      "primaryLevel": "understand",
+      "evidence": "Synthesizes main concepts and their relationships—understanding how principles connect, no higher-order cognitive demand."
+    }
+  ],
+  "gaps": [
+    "Slide 6 (Type Instantiation) remains at understand level with only code examples and explanation. Consider adding brief activity requiring students to predict compile-time errors for mismatched type instantiations or to explain why certain instantiations fail—moving to apply level.",
+    "Slide 17 (Case Study) is passive observation of existing framework. Consider adding analysis task: given a new collection type requirement (e.g., PriorityQueue, ConcurrentMap), students determine where it fits in hierarchy, what interfaces it should implement, and what constraints are needed.",
+    "No explicit activity bridges from individual principles (genericity, information hiding) to integrated application before slide 16's synthesis. Consider adding intermediate task in slides 10-15 range requiring students to apply both principles simultaneously in smaller scope.",
+    "Limited metacognitive reflection opportunities. Consider adding brief reflection prompts asking students to identify which principle (genericity vs information hiding) addresses specific design problems, strengthening their ability to select appropriate tools."
+  ],
+  "suggestions": [
+    "Slide 6: Add 3-minute activity: 'Given STACK<G> class, predict which instantiations compile and which fail: STACK<INTEGER>, STACK<STACK<STRING>>, STACK<VOID>. Explain reasoning.' This moves from passive understanding to active application of instantiation rules.",
+    "Slide 17: Transform case study into analysis task: 'You need to add PRIORITY_QUEUE<E> to this framework. Determine: (1) Which interface(s) should it extend? (2) What constraint on E is required? (3) Should it be interface or concrete class? Justify decisions.' This elevates from understand to analyze/apply.",
+    "Slide 8-9 transition: Add bridging activity: 'Design SORTED_SET<G> that combines generic type parameter with hidden implementation. Specify constraint on G, decide what to expose vs hide, and explain how information hiding enables switching from tree to hash-based implementation.' This integrates both principles earlier.",
+    "Slide 18: Add final reflection: 'Return to your initial notification system sketch from slide 1. Identify three specific improvements you would make now using today's principles. For each, name the principle applied and the benefit gained.' This creates metacognitive closure linking learning to initial design intuitions.",
+    "Consider adding one evaluate-level task comparing complete designs: 'Two students designed generic REPOSITORY<T> differently. Design A uses constraints, Design B uses runtime type checking. Evaluate which better satisfies reusability, type safety, and maintainability. Justify your assessment.' This would strengthen evaluation skills currently at 10% of deck.",
+    "Slide 4's PAIR design activity is excellent but could be strengthened: after individual design, require students to peer-review another student's design using specific criteria (appropriate constraints, minimal interface, hidden implementation). This adds evaluate-level peer assessment to the create task."
+  ]
+}

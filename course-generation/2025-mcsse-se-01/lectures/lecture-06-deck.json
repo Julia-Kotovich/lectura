@@ -1,0 +1,771 @@
+{
+  "slides": [
+    {
+      "id": "slide-01",
+      "title": "Lecture 6: Fundamental Design Patterns II: Behavioral Patterns",
+      "layout": "title",
+      "blocks": [
+        {
+          "id": "title-block",
+          "type": "heading",
+          "content": "Lecture 6: Fundamental Design Patterns II: Behavioral Patterns"
+        },
+        {
+          "id": "subtitle-block",
+          "type": "text",
+          "content": "Managing Object Interactions and Responsibilities"
+        }
+      ],
+      "speakerNotes": "Welcome to Lecture 6 on Behavioral Design Patterns. Today we'll explore five key patterns that manage how objects communicate and distribute responsibilities. These patterns are essential for building flexible, maintainable software systems. We'll cover Observer, Strategy, Command, Visitor, and Template Method patterns with practical examples and implementation guidance.",
+      "metadata": {
+        "transition": "fade",
+        "animation": "none",
+        "tags": [
+          "introduction",
+          "title"
+        ]
+      }
+    },
+    {
+      "id": "slide-02",
+      "title": "What Are Behavioral Patterns?",
+      "layout": "content",
+      "blocks": [
+        {
+          "id": "definition-block",
+          "type": "bullets",
+          "content": {
+            "items": [
+              "Focus on algorithms and responsibility assignment between objects",
+              "Characterize complex control flow and object collaboration",
+              "Shift from 'what objects are' to 'how objects communicate'",
+              "Enable flexible, maintainable interaction architectures"
+            ]
+          }
+        },
+        {
+          "id": "pattern-selection-activity",
+          "type": "activity",
+          "content": {
+            "title": "Pattern Category Analysis",
+            "description": "Scenario: You're designing a document editor. Evaluate which pattern category addresses each requirement: (1) Multiple undo/redo operations, (2) Notify UI when document changes, (3) Different file format export strategies. Justify your category selection (Creational/Structural/Behavioral) and explain why the other categories are insufficient.",
+            "duration": "3 minutes"
+          }
+        },
+        {
+          "id": "comparison-diagram",
+          "type": "diagram",
+          "content": {
+            "prompt": "Create a three-column comparison table showing Creational (focus: object creation), Structural (focus: object composition), and Behavioral (focus: object communication) patterns. For each, show key concern, example patterns, and a simple icon representing the focus area. Highlight Behavioral with emphasis on bidirectional arrows representing communication."
+          }
+        }
+      ],
+      "speakerNotes": "This slide moves beyond understanding definitions to evaluating pattern categories. The activity requires students to analyze requirements and justify pattern category selection—critical for the 'evaluate trade-offs and select appropriate patterns' objective. Students must defend why behavioral patterns specifically address communication concerns versus creation or composition. This evaluate-level task builds the decision-making skills needed for later pattern selection exercises. Discuss how requirement 1 needs Command (behavioral), requirement 2 needs Observer (behavioral), and requirement 3 needs Strategy (behavioral), reinforcing that interaction problems demand behavioral solutions.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fade-in",
+        "tags": [
+          "concepts",
+          "introduction",
+          "taxonomy",
+          "evaluate"
+        ]
+      }
+    },
+    {
+      "id": "slide-03",
+      "title": "Five Key Behavioral Patterns",
+      "layout": "content",
+      "blocks": [
+        {
+          "id": "patterns-overview",
+          "type": "bullets",
+          "content": {
+            "items": [
+              "Observer: One-to-many dependency for event notification",
+              "Strategy: Encapsulating interchangeable algorithms",
+              "Command: Encapsulating requests as objects",
+              "Visitor: Adding operations without modifying structures",
+              "Template Method: Defining algorithm skeleton with customizable steps"
+            ]
+          }
+        },
+        {
+          "id": "pattern-selection-exercise",
+          "type": "activity",
+          "content": {
+            "title": "Pattern Selection Challenge",
+            "description": "You're designing a text editor. Match each requirement to the appropriate pattern and justify your choice: (A) Support undo/redo for editing operations, (B) Update word count, spell-check panel, and preview when document changes, (C) Switch between different text formatting algorithms (Markdown, HTML, Plain). For each, explain why your selected pattern is superior to the alternatives and what trade-offs you accept.",
+            "duration": "4 minutes"
+          }
+        },
+        {
+          "id": "mindmap-diagram",
+          "type": "diagram",
+          "content": {
+            "prompt": "Create a mind map with 'Behavioral Patterns' at center, branching to five nodes: Observer (labeled 'Events'), Strategy (labeled 'Algorithms'), Command (labeled 'Actions'), Visitor (labeled 'Operations'), and Template Method (labeled 'Skeleton'). Use different colors for each pattern and show their primary concern as sub-branches."
+          }
+        }
+      ],
+      "speakerNotes": "This activity targets evaluate-level thinking by requiring students to justify pattern selection and assess trade-offs. Correct answers: (A) Command enables undo/redo through encapsulation, (B) Observer decouples document from UI panels, (C) Strategy allows runtime algorithm switching. Students must defend choices by comparing patterns—why Command over Strategy for undo? Why Observer over polling? This evaluation practice directly addresses the 'select appropriate patterns' objective and prepares students for deeper pattern application in subsequent slides.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fade-in",
+        "tags": [
+          "overview",
+          "roadmap",
+          "evaluate",
+          "pattern-selection"
+        ]
+      }
+    },
+    {
+      "id": "slide-04",
+      "title": "Observer Pattern: Design & Apply",
+      "layout": "content",
+      "blocks": [
+        {
+          "id": "observer-intent",
+          "type": "text",
+          "content": "Intent: Define one-to-many dependency so when one object changes state, all dependents are notified automatically. Foundation of event-driven architectures and loose coupling."
+        },
+        {
+          "id": "observer-application-exercise",
+          "type": "activity",
+          "content": {
+            "title": "Apply Observer Pattern",
+            "description": "Design an Observer-based solution for a smart home system: when a motion sensor detects movement, multiple devices respond (lights turn on, camera starts recording, alarm system logs event). Sketch the class structure showing Subject/Observer roles, then identify: which component is the Subject? What are the Observers? How does adding a new responding device (e.g., thermostat) demonstrate loose coupling?",
+            "duration": "5 minutes"
+          }
+        },
+        {
+          "id": "observer-diagram",
+          "type": "diagram",
+          "content": {
+            "prompt": "Create a UML class diagram showing Subject interface with attach(), detach(), notifyObservers() methods connected to Observer interface with update() method. Show one ConcreteSubject and three ConcreteObserver implementations with 1-to-many relationship arrows and notification flow direction."
+          }
+        }
+      ],
+      "speakerNotes": "This activity targets apply-level cognition by requiring students to map Observer pattern concepts to a concrete scenario. Students must identify roles, design structure, and explain how the pattern achieves loose coupling. Correct solution: MotionSensor is Subject, devices (Light, Camera, AlarmLog) are Observers. Adding ThermostatObserver requires no changes to MotionSensor, demonstrating extensibility. This bridges understanding from slide 3's pattern selection to implementing Observer in slide 5, directly addressing the 'apply Observer to event handling' objective through guided practice.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fade-in",
+        "tags": [
+          "observer",
+          "apply",
+          "design-exercise"
+        ]
+      }
+    },
+    {
+      "id": "slide-05",
+      "title": "Observer Pattern: Implementation Challenge",
+      "layout": "content",
+      "blocks": [
+        {
+          "id": "implementation-starter",
+          "type": "code",
+          "content": {
+            "language": "java",
+            "code": "// Complete this Observer implementation\nclass StockTicker implements Subject {\n    private List<Observer> observers = new ArrayList<>();\n    private String symbol;\n    private double price;\n    \n    public void setPrice(String symbol, double price) {\n        // TODO: Update state and notify observers\n    }\n    \n    // TODO: Implement attach(), detach(), notifyObservers()\n}\n\n// TODO: Create DisplayObserver and AlertObserver\n// DisplayObserver: prints \"[symbol]: $[price]\"\n// AlertObserver: prints alert if price > threshold"
+          }
+        },
+        {
+          "id": "implementation-exercise",
+          "type": "activity",
+          "content": {
+            "title": "Implement & Evaluate",
+            "description": "Complete the StockTicker implementation using Observer pattern. Create two concrete observers: DisplayObserver and AlertObserver. Then evaluate: Which notification model (push vs pull) is better for this scenario? Justify your choice considering performance and flexibility trade-offs. Test by simulating price updates to multiple observers.",
+            "duration": "6 minutes"
+          }
+        },
+        {
+          "id": "evaluation-prompt",
+          "type": "text",
+          "content": "After implementing: Could you use Strategy pattern instead? Why is Observer the better choice here? Consider the one-to-many relationship and dynamic subscription requirements."
+        }
+      ],
+      "speakerNotes": "This exercise targets apply and evaluate levels. Students must implement the pattern (apply), then justify design decisions about push/pull models (evaluate). The comparison question requires evaluating Observer vs Strategy for this scenario. Solution uses pull model for flexibility, allowing observers to query specific data. The one-to-many dependency and need for runtime subscription make Observer superior to Strategy here. This directly addresses the 'apply Observer to event handling' objective through hands-on implementation and the 'evaluate trade-offs between patterns' objective through comparative analysis.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fade-in",
+        "tags": [
+          "observer",
+          "apply",
+          "evaluate",
+          "implementation"
+        ]
+      }
+    },
+    {
+      "id": "slide-06",
+      "title": "Observer Pattern: Evaluate Trade-offs",
+      "layout": "content",
+      "blocks": [
+        {
+          "id": "tradeoff-context",
+          "type": "text",
+          "content": "Observer provides loose coupling and dynamic subscriptions, but introduces risks: cascading updates, memory leaks from undetached observers, performance degradation with many observers, and unpredictable notification ordering."
+        },
+        {
+          "id": "evaluation-scenarios",
+          "type": "activity",
+          "content": {
+            "title": "Evaluate: Diagnose Observer Problems",
+            "instructions": "Analyze these scenarios and propose solutions: (1) A GUI application crashes after closing windows—observers still registered. How do you prevent memory leaks? (2) Stock price updates trigger 500 observers, causing 2-second lag. Evaluate: batching updates, async notifications, or limiting observers? (3) Observer A's update triggers Observer B, which triggers C—cascading chain. How do you detect and prevent this? Justify your solutions considering maintainability and performance trade-offs.",
+            "duration": "5 minutes"
+          }
+        },
+        {
+          "id": "evaluation-prompt",
+          "type": "text",
+          "content": "For each scenario: What's the root cause? Which solution best balances complexity vs. benefit? When would you avoid Observer entirely and choose an alternative pattern?"
+        }
+      ],
+      "speakerNotes": "This evaluate-level exercise requires students to diagnose Observer pattern problems and assess solutions. Scenario 1 targets weak references or explicit lifecycle management. Scenario 2 needs trade-off evaluation between batching (complexity) vs async (threading concerns) vs limiting (functionality loss). Scenario 3 requires dependency detection strategies. Push students to justify choices—no single right answer, but solutions must address specific constraints. This directly supports evaluating pattern trade-offs in realistic contexts, moving beyond memorizing pros/cons to applying judgment.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fade-in",
+        "tags": [
+          "observer",
+          "evaluate",
+          "trade-offs",
+          "problem-solving"
+        ]
+      }
+    },
+    {
+      "id": "slide-07",
+      "title": "Strategy Pattern: Apply Algorithm Selection",
+      "layout": "content",
+      "blocks": [
+        {
+          "id": "strategy-intent",
+          "type": "text",
+          "content": "Intent: Define a family of algorithms, encapsulate each one, and make them interchangeable. Replaces conditional logic with composition and polymorphism."
+        },
+        {
+          "id": "strategy-diagram",
+          "type": "diagram",
+          "content": {
+            "prompt": "UML class diagram showing Context class with strategy reference to Strategy interface. Three ConcreteStrategy implementations (QuickSort, MergeSort, BubbleSort) with execute() method. Show delegation arrow from Context to Strategy."
+          }
+        },
+        {
+          "id": "apply-exercise",
+          "type": "activity",
+          "content": {
+            "title": "Apply: Design a Compression Strategy",
+            "instructions": "You're building a file backup system that must support ZIP, GZIP, and RAR compression. Design the Strategy pattern solution: (1) Define the Strategy interface with appropriate method(s), (2) Sketch how BackupManager would use the strategy, (3) Explain how you'd add LZ4 compression without modifying existing code. Consider: What parameters does compress() need? How does the client select strategies?",
+            "timeEstimate": "4 minutes",
+            "deliverable": "Interface definition and usage explanation"
+          }
+        }
+      ],
+      "speakerNotes": "This exercise moves from understanding Strategy to applying it. Students must design the interface contract, consider what data compression methods need, and demonstrate the Open-Closed Principle by adding new algorithms. Watch for students hardcoding algorithm selection in the client—push them toward dependency injection or factory approaches. The key insight is that BackupManager shouldn't know about concrete compression classes, only the interface. After individual work, compare solutions focusing on interface design choices and how easily new strategies integrate.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fade-in",
+        "tags": [
+          "strategy",
+          "apply",
+          "exercise"
+        ]
+      }
+    },
+    {
+      "id": "slide-08",
+      "title": "Strategy Pattern: Before and After",
+      "layout": "code",
+      "blocks": [
+        {
+          "id": "strategy-refactoring",
+          "type": "code",
+          "content": {
+            "language": "java",
+            "code": "// BEFORE: Conditional logic\nclass PaymentProcessor {\n    void processPayment(String type, double amount) {\n        if (type.equals(\"CREDIT\")) {\n            // Credit card logic\n        } else if (type.equals(\"PAYPAL\")) {\n            // PayPal logic\n        } else if (type.equals(\"BITCOIN\")) {\n            // Bitcoin logic\n        }\n    }\n}\n\n// AFTER: Strategy pattern\ninterface PaymentStrategy {\n    void pay(double amount);\n}\n\nclass PaymentProcessor {\n    private PaymentStrategy strategy;\n    \n    void setStrategy(PaymentStrategy strategy) {\n        this.strategy = strategy;\n    }\n    \n    void processPayment(double amount) {\n        strategy.pay(amount);  // Clean delegation\n    }\n}"
+          }
+        }
+      ],
+      "speakerNotes": "This before-and-after comparison shows Strategy's power. The before version has growing conditional complexity - every new payment method requires modifying this class. The after version uses composition and polymorphism. Adding a new payment method just means creating a new strategy class - no modification to existing code. This follows the Open-Closed Principle: open for extension, closed for modification.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fade-in",
+        "tags": [
+          "strategy",
+          "code",
+          "refactoring"
+        ]
+      }
+    },
+    {
+      "id": "slide-09",
+      "title": "Strategy vs Template Method: Pattern Selection",
+      "layout": "content",
+      "blocks": [
+        {
+          "id": "quick-comparison",
+          "type": "table",
+          "content": {
+            "headers": [
+              "Aspect",
+              "Strategy",
+              "Template Method"
+            ],
+            "rows": [
+              [
+                "Mechanism",
+                "Composition",
+                "Inheritance"
+              ],
+              [
+                "Flexibility",
+                "Runtime switching",
+                "Compile-time binding"
+              ],
+              [
+                "Variation scope",
+                "Entire algorithm",
+                "Specific steps"
+              ],
+              [
+                "Use when",
+                "Independent algorithms",
+                "Shared structure"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "selection-exercise",
+          "type": "activity",
+          "content": {
+            "type": "evaluation",
+            "title": "Evaluate: Which Pattern Fits?",
+            "description": "Scenario: You're building a data export system. Users need CSV, JSON, and XML formats. All formats follow: validate data → transform structure → write output → log completion. However, clients may need custom formats added via plugins at runtime. Evaluate: Should you use Strategy or Template Method? Justify your choice by analyzing: (1) which variation points exist, (2) runtime vs compile-time requirements, (3) extensibility needs, (4) trade-offs of your decision. Defend why the alternative pattern would be problematic here.",
+            "duration": "6 minutes"
+          }
+        }
+      ],
+      "speakerNotes": "This exercise elevates comparison to evaluation level. Students must analyze the scenario's constraints, assess which pattern better addresses runtime extensibility and plugin requirements, and justify their selection with trade-offs. Strategy is superior here due to runtime flexibility and composition-based extensibility, but students should articulate why Template Method's inheritance would limit plugin architecture. Discussion should cover how choosing the wrong pattern creates maintenance burden. Look for reasoning about Open-Closed Principle and composition over inheritance.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fade-in",
+        "tags": [
+          "strategy",
+          "template-method",
+          "evaluate",
+          "pattern-selection"
+        ]
+      }
+    },
+    {
+      "id": "slide-10",
+      "title": "Command Pattern: Design Exercise",
+      "layout": "content",
+      "blocks": [
+        {
+          "id": "command-intent",
+          "type": "text",
+          "content": "Intent: Encapsulate a request as an object, enabling parameterization, queuing, and undo operations"
+        },
+        {
+          "id": "command-structure",
+          "type": "diagram",
+          "content": {
+            "prompt": "Create a compact UML class diagram showing Command interface with execute() method, ConcreteCommand with Receiver reference, Invoker storing commands, and Receiver with action(). Show flow: Client→Command→Invoker→execute()→Receiver.action()."
+          }
+        },
+        {
+          "id": "design-exercise",
+          "type": "activity",
+          "content": {
+            "type": "problem-solving",
+            "title": "Apply: Design a Smart Home Controller",
+            "description": "Design a Command-based system for a smart home: control lights (on/off/dim), thermostat (set temp), and door locks (lock/unlock). Requirements: (1) Support macro commands (e.g., 'Good Night' = lights off + lock doors + lower temp), (2) Enable undo for all operations, (3) Log all commands for security audit. Sketch your class structure showing concrete commands, receivers, and how you'll implement macros and undo. Justify why Command pattern fits better than direct method calls.",
+            "duration": "8 minutes"
+          }
+        }
+      ],
+      "speakerNotes": "This exercise moves students from understanding Command to applying it. They must design concrete commands for different devices, implement composite commands for macros, and handle undo with varying complexity (lights toggle easily, but temperature needs previous state). The logging requirement reinforces how command objects enable request history. Common mistakes: forgetting receiver references, not considering undo state storage. After individual work, compare solutions focusing on macro implementation strategies and undo approaches for stateful operations.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fade-in",
+        "tags": [
+          "command",
+          "apply",
+          "design-exercise"
+        ]
+      }
+    },
+    {
+      "id": "slide-11",
+      "title": "Command Pattern: Undo/Redo Implementation",
+      "layout": "split",
+      "blocks": [
+        {
+          "id": "command-undo-code",
+          "type": "code",
+          "content": {
+            "language": "java",
+            "code": "interface Command {\n    void execute();\n    void undo();\n}\n\nclass MoveCommand implements Command {\n    private Shape shape;\n    private int deltaX, deltaY;\n    \n    public void execute() {\n        shape.move(deltaX, deltaY);\n    }\n    \n    public void undo() {\n        shape.move(-deltaX, -deltaY);\n    }\n}\n\nclass CommandManager {\n    private Stack<Command> history = new Stack<>();\n    \n    public void executeCommand(Command cmd) {\n        cmd.execute();\n        history.push(cmd);\n    }\n    \n    public void undo() {\n        if (!history.isEmpty())\n            history.pop().undo();\n    }\n}"
+          }
+        },
+        {
+          "id": "undo-analysis",
+          "type": "activity",
+          "content": {
+            "type": "analysis",
+            "title": "Analyze: Undo Implementation Trade-offs",
+            "description": "Examine this MoveCommand implementation. (1) Identify what types of operations can use this reversible approach versus which require state snapshots (Memento). (2) Diagnose the problem: what happens if user undoes, performs new command, then tries to redo? (3) Propose how to extend CommandManager to support redo functionality. Sketch the enhanced design.",
+            "duration": "5 minutes"
+          }
+        }
+      ],
+      "speakerNotes": "This code shows reversible undo—MoveCommand inverts its operation. Students must analyze limitations: works for symmetric operations but not destructive ones like delete (needs Memento for state capture). Critical insight: current design loses redo capability when new commands execute after undo. They should identify need for second stack or position pointer in history. This analysis prepares them for the design exercise on slide 12 where they'll apply these insights to complex scenarios. Discuss solutions emphasizing when to choose reversible commands versus state snapshots based on operation characteristics.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fade-in",
+        "tags": [
+          "command",
+          "analyze",
+          "undo-redo"
+        ]
+      }
+    },
+    {
+      "id": "slide-12",
+      "title": "Command Pattern: Design Challenge",
+      "layout": "content",
+      "blocks": [
+        {
+          "id": "design-scenario",
+          "type": "text",
+          "content": "Scenario: Design a document editor supporting undo/redo, macro recording, and collaborative editing with command synchronization across network."
+        },
+        {
+          "id": "design-activity",
+          "type": "activity",
+          "content": {
+            "title": "Pattern Application Exercise",
+            "description": "Design a command architecture addressing: (1) How will you structure commands for undo/redo? (2) How will macro commands compose atomic commands? (3) How will you serialize commands for network transmission? (4) Should you use event sourcing or state snapshots? Sketch class diagram showing command hierarchy, manager, and queue components. Justify your design decisions based on pattern trade-offs.",
+            "duration": "8 minutes",
+            "deliverable": "Class diagram with written justification of architectural choices"
+          }
+        },
+        {
+          "id": "evaluation-criteria",
+          "type": "bullets",
+          "content": {
+            "items": [
+              "Does design support all three requirements?",
+              "Are command composition and serialization addressed?",
+              "Is the undo/redo mechanism efficient and correct?",
+              "Are trade-offs (memory vs. complexity) justified?"
+            ]
+          }
+        }
+      ],
+      "speakerNotes": "This exercise moves from understanding Command pattern to applying and evaluating it. Students must synthesize multiple advanced applications—undo, macros, distributed commands—into one design. They'll evaluate trade-offs: event sourcing provides audit trail but uses more storage; memento snapshots are faster but lose granularity. The justification requirement targets evaluate level: students must defend their choices against constraints. Walk through one solution after group work, highlighting how different valid designs reflect different trade-off priorities.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fade-in",
+        "tags": [
+          "command",
+          "apply",
+          "evaluate",
+          "design-exercise"
+        ]
+      }
+    },
+    {
+      "id": "slide-13",
+      "title": "Visitor Pattern: Apply Double Dispatch",
+      "layout": "content",
+      "blocks": [
+        {
+          "id": "visitor-intent",
+          "type": "text",
+          "content": "Intent: Represent operations on object structures without modifying element classes. Uses double dispatch: operation depends on both visitor type AND element type."
+        },
+        {
+          "id": "visitor-application",
+          "type": "activity",
+          "content": {
+            "title": "Pattern Application Challenge",
+            "description": "You're building a file system analyzer. Elements: File, Directory, Symlink (stable hierarchy). Operations needed: size calculation, permission audit, virus scanning (frequently added). Implement: (1) Element interface with accept() method, (2) Visitor interface for one operation, (3) One concrete element showing double dispatch. Then justify: Why is Visitor better than adding methods to each element class?",
+            "duration": "6 minutes",
+            "deliverable": "Code sketch with written justification"
+          }
+        },
+        {
+          "id": "evaluation-prompts",
+          "type": "bullets",
+          "content": {
+            "items": [
+              "Does accept() correctly implement double dispatch?",
+              "Can new operations be added without modifying elements?",
+              "What happens when you need to add a new element type?",
+              "When would Visitor be the wrong choice?"
+            ]
+          }
+        }
+      ],
+      "speakerNotes": "This exercise moves students from understanding Visitor to applying it. The file system scenario mirrors the expression tree example but requires independent implementation. Students must recognize the stable-hierarchy requirement and implement double dispatch themselves. The justification question targets evaluate level: defending pattern choice against alternatives. After individual work, discuss trade-off: Visitor excels when operations change frequently but element types are stable. If adding new element types often, Visitor becomes maintenance burden. This prepares them for the code example on slide 14.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fade-in",
+        "tags": [
+          "visitor",
+          "apply",
+          "evaluate",
+          "double-dispatch"
+        ]
+      }
+    },
+    {
+      "id": "slide-14",
+      "title": "Visitor Pattern: Analyze & Extend",
+      "layout": "content",
+      "blocks": [
+        {
+          "id": "base-code",
+          "type": "code",
+          "content": {
+            "language": "java",
+            "code": "interface Expression { void accept(Visitor v); }\n\nclass Number implements Expression {\n    int value;\n    public void accept(Visitor v) { v.visit(this); }\n}\n\nclass Addition implements Expression {\n    Expression left, right;\n    public void accept(Visitor v) { v.visit(this); }\n}\n\ninterface Visitor {\n    void visit(Number n);\n    void visit(Addition a);\n}\n\nclass EvaluatorVisitor implements Visitor {\n    private Stack<Integer> stack = new Stack<>();\n    public void visit(Number n) { stack.push(n.value); }\n    public void visit(Addition a) {\n        a.left.accept(this); a.right.accept(this);\n        stack.push(stack.pop() + stack.pop());\n    }\n}"
+          }
+        },
+        {
+          "id": "analysis-task",
+          "type": "activity",
+          "content": {
+            "title": "Pattern Analysis & Extension",
+            "description": "Analyze this expression tree implementation: (1) Trace double dispatch for 'new Addition(new Number(5), new Number(3)).accept(evaluator)' showing method calls. (2) Add Multiplication element—what classes must change? (3) Add PrintVisitor operation—what classes must change? (4) Evaluate: Which extension (new element vs new operation) violated Open-Closed Principle? Why does this matter for pattern selection?",
+            "duration": "5 minutes",
+            "deliverable": "Trace diagram, change analysis, OCP evaluation"
+          }
+        }
+      ],
+      "speakerNotes": "This analyze-level exercise makes students trace double dispatch execution to understand the mechanism, then evaluate Visitor's asymmetric extensibility. Adding Multiplication breaks all visitors—violates OCP for operations. Adding PrintVisitor only adds one class—maintains OCP for elements. This asymmetry is Visitor's defining characteristic and critical for pattern selection. Students must recognize that Visitor optimizes for operation extension at the cost of element extension difficulty. This analysis prepares them to evaluate when Visitor is appropriate on slide 15.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fade-in",
+        "tags": [
+          "visitor",
+          "analyze",
+          "evaluate",
+          "double-dispatch",
+          "open-closed-principle"
+        ]
+      }
+    },
+    {
+      "id": "slide-15",
+      "title": "Visitor Pattern: Evaluate Applicability",
+      "layout": "content",
+      "blocks": [
+        {
+          "id": "selection-criteria",
+          "type": "text",
+          "content": "**When Visitor Fits:** Stable element hierarchy + frequently changing operations + operations need element internals + related operations grouped. **When Visitor Fails:** Frequently changing element types + simple operations + strong encapsulation required + language has pattern matching."
+        },
+        {
+          "id": "scenario-evaluation",
+          "type": "activity",
+          "content": {
+            "title": "Pattern Selection Exercise",
+            "description": "Evaluate whether Visitor is appropriate for these scenarios, justifying each decision: (1) Compiler AST with 15 node types (stable) needing optimization passes (added quarterly). (2) E-commerce product catalog with new product types added monthly, needing price calculation and display. (3) Medical records system with 8 document types needing HIPAA audit, encryption, and export operations. (4) Game entity system in Rust with pattern matching, needing collision and rendering logic. For each: Select Visitor or alternative, defend choice using stability/operation frequency trade-offs, identify OCP implications.",
+            "duration": "6 minutes",
+            "deliverable": "Decision matrix with justifications"
+          }
+        }
+      ],
+      "speakerNotes": "This evaluate-level exercise requires students to apply Visitor selection criteria to realistic scenarios with conflicting constraints. Scenario 1 fits perfectly—stable AST, changing operations. Scenario 2 violates stability assumption—new product types break all visitors. Scenario 3 is borderline—requires weighing operation frequency against encapsulation costs. Scenario 4 highlights language features making Visitor unnecessary. Students must defend decisions by analyzing trade-offs, not just matching checklists. This prepares critical thinking for pattern selection in practice and addresses the evaluate-level gap for Visitor applicability.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fade-in",
+        "tags": [
+          "visitor",
+          "evaluate",
+          "pattern-selection",
+          "trade-offs"
+        ]
+      }
+    },
+    {
+      "id": "slide-16",
+      "title": "Template Method Pattern",
+      "layout": "content",
+      "blocks": [
+        {
+          "id": "template-intent",
+          "type": "text",
+          "content": "**Intent:** Define algorithm skeleton in base class, deferring specific steps to subclasses. **Structure:** Template method (final) calls primitive operations (abstract—must implement) and hooks (concrete—optional override). **Hollywood Principle:** Framework calls your code, not vice versa."
+        },
+        {
+          "id": "template-code",
+          "type": "code",
+          "content": {
+            "language": "java",
+            "code": "abstract class DataProcessor {\n    public final void process() {  // Template\n        readData();\n        if (isValid()) { parseData(); transformData(); saveData(); }\n    }\n    protected abstract void readData();    // Primitive\n    protected abstract void parseData();\n    protected abstract void saveData();\n    protected void transformData() { }     // Hook\n    protected boolean isValid() { return true; }\n}"
+          }
+        },
+        {
+          "id": "template-exercise",
+          "type": "activity",
+          "content": {
+            "title": "Implement Template Method",
+            "description": "Design a ReportGenerator using Template Method with steps: gatherData(), formatHeader(), formatBody(), formatFooter(), output(). Identify which should be primitive operations vs hooks. Implement two subclasses: PDFReport (all steps) and QuickTextReport (skip header/footer). Show how template method enforces workflow while allowing customization.",
+            "duration": "5 minutes",
+            "deliverable": "Code skeleton with justification for primitive/hook decisions"
+          }
+        }
+      ],
+      "speakerNotes": "This apply-level exercise addresses the gap in Template Method coverage. Students must make design decisions—which steps are mandatory primitives versus optional hooks—then implement concrete subclasses demonstrating different customization needs. The QuickTextReport scenario shows hook utility. This parallels servlet lifecycle and test frameworks mentioned conceptually. Students practice the Hollywood Principle by designing framework control flow. Connects to OCP: adding new report types without changing base algorithm.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fade-in",
+        "tags": [
+          "template-method",
+          "apply",
+          "implementation",
+          "design-decisions"
+        ]
+      }
+    },
+    {
+      "id": "slide-17",
+      "title": "Combining Behavioral Patterns",
+      "layout": "content",
+      "blocks": [
+        {
+          "id": "combination-rationale",
+          "type": "text",
+          "content": "**Pattern Synergies:** Real systems combine patterns to solve multifaceted problems. **Observer + Command:** Notifications for undoable actions. **Strategy + Template Method:** Pluggable algorithms within fixed workflow. **Visitor + Composite:** Operations on tree structures. **MVC Architecture:** Observer (model-view sync), Strategy (controller algorithms), Command (user actions)."
+        },
+        {
+          "id": "mvc-diagram",
+          "type": "diagram",
+          "content": {
+            "prompt": "Create MVC architecture diagram showing Model connected to multiple Views via Observer pattern (notification arrows), Controller using Strategy pattern (algorithm selection), and user interactions as Command objects. Label pattern boundaries and interaction flows clearly."
+          }
+        },
+        {
+          "id": "combination-exercise",
+          "type": "activity",
+          "content": {
+            "title": "Design Multi-Pattern System",
+            "description": "Design a text editor supporting: undo/redo, auto-save notifications, pluggable export formats (PDF/HTML/Markdown). Select 2-3 behavioral patterns, draw architecture showing how they interact, and justify each pattern choice. Identify which pattern handles each requirement and explain why alternatives were rejected.",
+            "duration": "6 minutes",
+            "deliverable": "Architecture diagram with pattern justifications"
+          }
+        }
+      ],
+      "speakerNotes": "This apply-level exercise requires students to synthesize multiple patterns into a coherent architecture. They must map requirements to appropriate patterns (Command for undo, Observer for notifications, Strategy for export), show interactions, and defend choices—hitting the objective's apply level. The justification component adds evaluate-level thinking. Students practice the critical skill of selecting complementary patterns rather than forcing unnecessary complexity. Emphasize that each pattern must solve a specific problem; avoid pattern abuse.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fade-in",
+        "tags": [
+          "patterns",
+          "combination",
+          "apply",
+          "design",
+          "architecture"
+        ]
+      }
+    },
+    {
+      "id": "slide-18",
+      "title": "Pattern Selection and Best Practices",
+      "layout": "content",
+      "blocks": [
+        {
+          "id": "selection-principles",
+          "type": "text",
+          "content": "**Selection Criteria:** Choose patterns when complexity justifies abstraction. **Key Questions:** Does the problem recur? Will requirements change? Does the pattern reduce coupling? **Anti-Patterns:** Pattern abuse, premature optimization, over-engineering. **YAGNI Principle:** Implement patterns when needed, not speculatively. **Documentation:** Record pattern choice rationale—the 'why' matters as much as 'how'."
+        },
+        {
+          "id": "decision-framework",
+          "type": "bullets",
+          "content": {
+            "items": [
+              "Runtime algorithm flexibility → Strategy",
+              "Event notifications, loose coupling → Observer",
+              "Undoable actions, queuing → Command",
+              "Operations on stable structures → Visitor",
+              "Algorithm skeleton with variation → Template Method"
+            ]
+          }
+        },
+        {
+          "id": "pattern-evaluation-exercise",
+          "type": "activity",
+          "content": {
+            "title": "Evaluate Pattern Selection Scenarios",
+            "description": "Analyze three design scenarios: (1) Logging system with file/database/cloud outputs, (2) UI framework needing theme change notifications, (3) Report generator with PDF/Excel formats and audit trail. For each: select the most appropriate behavioral pattern, justify your choice using SOLID principles, identify which pattern to avoid and why, assess trade-offs (complexity vs. flexibility). Defend decisions considering team expertise and maintenance costs.",
+            "duration": "7 minutes",
+            "deliverable": "Pattern selections with justified trade-off analysis"
+          }
+        }
+      ],
+      "speakerNotes": "This evaluate-level exercise requires students to assess multiple scenarios, defend pattern selections using principles, and analyze trade-offs—directly addressing the pattern combination objective at apply/evaluate levels. Students must consider not just correctness but also context: team skills, maintenance burden, and whether simpler solutions suffice. The anti-pattern identification component develops critical thinking about when NOT to use patterns. Emphasize that rejecting a pattern with sound reasoning is as valuable as selecting one. This bridges to the summary by reinforcing thoughtful, justified pattern application.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fade-in",
+        "tags": [
+          "evaluate",
+          "best-practices",
+          "decision-making",
+          "trade-offs"
+        ]
+      }
+    },
+    {
+      "id": "slide-19",
+      "title": "Summary: Behavioral Patterns",
+      "layout": "content",
+      "blocks": [
+        {
+          "id": "summary-table",
+          "type": "bullets",
+          "content": {
+            "items": [
+              "Observer: Event-driven communication, loose coupling",
+              "Strategy: Algorithm encapsulation, runtime flexibility",
+              "Command: Action objects, undo/redo, queuing",
+              "Visitor: Operations on structures, double dispatch",
+              "Template Method: Algorithm skeleton, inheritance-based"
+            ]
+          }
+        },
+        {
+          "id": "key-takeaways",
+          "type": "text",
+          "content": "Common themes: Encapsulation, flexibility, separation of concerns, Open-Closed Principle"
+        },
+        {
+          "id": "next-steps",
+          "type": "bullets",
+          "content": {
+            "items": [
+              "Practice: Identify patterns in existing codebases",
+              "Apply: Use appropriate patterns in your projects",
+              "Reflect: Evaluate trade-offs and document decisions"
+            ]
+          }
+        }
+      ],
+      "speakerNotes": "Let's recap our five behavioral patterns. Each addresses specific interaction challenges: Observer for events, Strategy for algorithms, Command for actions, Visitor for operations, Template Method for algorithm customization. They all promote encapsulation and flexibility while following SOLID principles. Your next step is practice - analyze open-source projects to see these patterns in action, apply them thoughtfully in your own work, and always evaluate whether the added complexity is justified. Patterns are tools, not mandates. Use them wisely.",
+      "metadata": {
+        "transition": "fade",
+        "animation": "fade-in",
+        "tags": [
+          "summary",
+          "conclusion",
+          "recap"
+        ]
+      }
+    }
+  ]
+}

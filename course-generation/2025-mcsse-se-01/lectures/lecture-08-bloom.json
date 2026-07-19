@@ -1,0 +1,165 @@
+{
+  "alignmentScore": 88,
+  "dominantLevel": "apply",
+  "distribution": {
+    "remember": 5,
+    "understand": 15,
+    "apply": 40,
+    "analyze": 20,
+    "evaluate": 15,
+    "create": 5
+  },
+  "objectiveAlignments": [
+    {
+      "objective": "Understand the requirements engineering process and its role in software development lifecycle",
+      "expectedLevel": "understand",
+      "observedLevel": "create",
+      "status": "aligned",
+      "rationale": "Slide 3 activity requires students to design an integrated RE approach covering all process stages, synthesizing elicitation, analysis, specification, validation, and management into a coherent plan. This exceeds the understand-level objective by requiring students to create a complete RE strategy, demonstrating deep understanding through synthesis."
+    },
+    {
+      "objective": "Apply various requirements elicitation techniques to gather stakeholder needs effectively",
+      "expectedLevel": "apply",
+      "observedLevel": "apply",
+      "status": "aligned",
+      "rationale": "Slides 4-6 provide multiple apply-level activities: slide 4 requires evaluating elicitation strategies for specific contexts, slide 5 has students design interview questions for a library system, and slide 6 requires selecting appropriate techniques (observation vs. prototyping) for different scenarios. Students actively use elicitation techniques rather than just identifying them."
+    },
+    {
+      "objective": "Distinguish between functional and non-functional requirements and categorize them appropriately",
+      "expectedLevel": "analyze",
+      "observedLevel": "evaluate",
+      "status": "aligned",
+      "rationale": "Slides 7-9 exceed the analyze-level objective. Slide 7 requires students to critique requirements and identify quality problems, slide 8 has students evaluate competing NFR specification approaches and assess architectural impacts, and slide 9 requires classifying requirements with overlapping categories while assessing negotiability and elicitation needs. This moves beyond simple categorization to evaluation of quality and trade-offs."
+    },
+    {
+      "objective": "Document requirements using industry-standard techniques including use cases and scenarios",
+      "expectedLevel": "apply",
+      "observedLevel": "apply",
+      "status": "aligned",
+      "rationale": "Slides 10-14 provide extensive apply-level practice: slide 10 requires organizing content into IEEE 830 SRS structure, slide 13 has students write complete use case descriptions from scratch, and slide 14 requires creating user stories with acceptance criteria. Students actively produce documentation artifacts using standard templates and formats."
+    },
+    {
+      "objective": "Validate requirements for completeness, consistency, and feasibility",
+      "expectedLevel": "evaluate",
+      "observedLevel": "evaluate",
+      "status": "aligned",
+      "rationale": "Slide 15 activity requires students to systematically apply validation criteria (completeness, consistency, feasibility, testability, clarity) to six requirements, identify specific quality defects, and propose corrections. This is authentic evaluate-level work where students judge requirement quality against established criteria and justify their assessments."
+    },
+    {
+      "objective": "Manage requirements changes throughout the software development process",
+      "expectedLevel": "apply",
+      "observedLevel": "apply",
+      "status": "aligned",
+      "rationale": "Slides 16-17 address requirements management through apply-level activities: slide 16 requires performing impact analysis for a change request using traceability matrices, and slide 17 has students apply prioritization frameworks (MoSCoW, Value-Effort matrix) to make MVP decisions. Students actively use management techniques to solve realistic scenarios."
+    }
+  ],
+  "slideTags": [
+    {
+      "slideTitle": "Requirements Engineering Fundamentals",
+      "primaryLevel": "analyze",
+      "evidence": "Opening activity requires diagnosing which RE stage failed and identifying violated requirement qualities, then synthesizing a corrected requirement—analyzing failure patterns and creating solutions."
+    },
+    {
+      "slideTitle": "What is Requirements Engineering?",
+      "primaryLevel": "evaluate",
+      "evidence": "Activity requires evaluating five requirement statements against multiple quality criteria (testability, specificity, problem-focus), classifying valid ones, and rewriting invalid ones—judging quality and synthesizing improvements."
+    },
+    {
+      "slideTitle": "The Requirements Engineering Process",
+      "primaryLevel": "create",
+      "evidence": "Activity requires designing a complete RE approach integrating all process stages: selecting elicitation techniques with justification, identifying conflicts, drafting requirements, designing validation strategy, and proposing traceability—synthesizing a coherent plan."
+    },
+    {
+      "slideTitle": "Requirements Elicitation Techniques",
+      "primaryLevel": "evaluate",
+      "evidence": "Activity requires comparing two elicitation strategies for a 311 system, analyzing trade-offs in coverage/cost/engagement/risk, and justifying which better addresses context—evaluating competing approaches against multiple criteria."
+    },
+    {
+      "slideTitle": "Interviews and Workshops",
+      "primaryLevel": "apply",
+      "evidence": "Activity requires designing interview questions (structured and open-ended) for a library system stakeholder, applying question design principles to elicit requirements effectively."
+    },
+    {
+      "slideTitle": "Observation and Prototyping",
+      "primaryLevel": "apply",
+      "evidence": "Activity requires selecting appropriate elicitation technique (observation or prototyping) for two scenarios and justifying choices based on context factors—applying technique selection criteria."
+    },
+    {
+      "slideTitle": "Functional Requirements",
+      "primaryLevel": "evaluate",
+      "evidence": "Activity requires identifying quality problems in three requirements, classifying severity, and rewriting to fix issues—evaluating requirement quality and synthesizing improvements."
+    },
+    {
+      "slideTitle": "Non-Functional Requirements",
+      "primaryLevel": "evaluate",
+      "evidence": "Activity requires evaluating three NFR specification approaches, assessing completeness/testability, identifying architectural impacts, and recommending best approach—judging quality against multiple criteria."
+    },
+    {
+      "slideTitle": "Constraints and Domain Requirements",
+      "primaryLevel": "evaluate",
+      "evidence": "Activity requires classifying five requirements (noting overlaps), assessing negotiability and architectural impact, and recommending elicitation techniques—evaluating requirement characteristics and trade-offs."
+    },
+    {
+      "slideTitle": "Requirements Specification Documents",
+      "primaryLevel": "apply",
+      "evidence": "Activity requires organizing items into correct IEEE 830 SRS sections and identifying quality violations—applying standard structure and quality criteria."
+    },
+    {
+      "slideTitle": "Writing Quality Requirements",
+      "primaryLevel": "evaluate",
+      "evidence": "Activity requires evaluating three requirement versions, identifying conflicting quality characteristics, and recommending best version with risk assessment—judging trade-offs between competing valid approaches."
+    },
+    {
+      "slideTitle": "Use Case Fundamentals",
+      "primaryLevel": "apply",
+      "evidence": "Activity requires identifying actors and use cases for a smart home system before seeing examples—applying use case modeling concepts to construct a model from scratch."
+    },
+    {
+      "slideTitle": "Use Case Descriptions",
+      "primaryLevel": "apply",
+      "evidence": "Activity requires writing a complete use case description including actors, preconditions, postconditions, main flow, and alternative flows—applying template structure to create documentation."
+    },
+    {
+      "slideTitle": "User Stories in Agile",
+      "primaryLevel": "apply",
+      "evidence": "Activity requires writing three user stories with acceptance criteria following role-feature-benefit format and INVEST criteria—applying agile documentation techniques."
+    },
+    {
+      "slideTitle": "Requirements Validation",
+      "primaryLevel": "evaluate",
+      "evidence": "Activity requires reviewing six requirements using validation checklist, identifying specific quality defects, and proposing corrections—evaluating requirement quality systematically."
+    },
+    {
+      "slideTitle": "Requirements Traceability and Management",
+      "primaryLevel": "apply",
+      "evidence": "Activity requires performing impact analysis for a change request using traceability matrix, identifying affected artifacts, and making approval recommendation—applying change management techniques."
+    },
+    {
+      "slideTitle": "Requirements Prioritization",
+      "primaryLevel": "apply",
+      "evidence": "Activity requires categorizing ten requirements using MoSCoW, plotting on Value-Effort matrix, and selecting top 3 MVP requirements with justification—applying prioritization frameworks."
+    },
+    {
+      "slideTitle": "Best Practices and Common Pitfalls",
+      "primaryLevel": "understand",
+      "evidence": "Content summarizes best practices and common pitfalls with mitigations—explaining lessons learned without requiring application or evaluation."
+    },
+    {
+      "slideTitle": "Summary and Next Steps",
+      "primaryLevel": "remember",
+      "evidence": "Content reviews key takeaways and previews next steps—recalling main concepts covered in the lecture."
+    }
+  ],
+  "gaps": [
+    "Limited create-level opportunities: Only slide 3 requires students to design/synthesize a complete solution from scratch. For MSc-level work, consider adding 1-2 more activities requiring students to create comprehensive artifacts (e.g., complete SRS section, requirements management plan).",
+    "Slide 18 (Best Practices) remains at understand level without application. Consider adding a brief case study where students must identify which pitfall occurred and propose the appropriate mitigation strategy.",
+    "No explicit activity connecting requirements to downstream SDLC phases. Consider adding an analyze-level activity where students trace how a requirement change impacts design, implementation, and testing artifacts."
+  ],
+  "suggestions": [
+    "Strengthen create-level engagement: Add a capstone activity (possibly replacing or enhancing slide 18) where students synthesize a mini-SRS for a novel system scenario, integrating elicitation strategy, functional/non-functional requirements, use cases, validation plan, and traceability approach. This would provide authentic create-level assessment.",
+    "Enhance slide 18 cognitive demand: Replace passive best practices summary with an analyze/evaluate activity. Present 2-3 project failure scenarios and have students diagnose which pitfall occurred, evaluate severity, and recommend specific RE practices that would have prevented the failure.",
+    "Add metacognitive reflection: Include a brief activity where students evaluate their own RE approach from slide 3 after learning all techniques, identifying what they would change and why. This creates-level self-assessment reinforces learning.",
+    "Consider adding requirements-to-architecture bridge: Since next lecture covers architecture, add an analyze-level activity where students examine how specific NFRs (performance, security, scalability) constrain architectural choices, preparing them for design decisions.",
+    "Balance activity duration: Several activities (slides 11, 13, 15, 16, 17) require 7-8 minutes. Consider whether this allows sufficient depth or if some should be extended to 10 minutes for more thorough work, or shortened to 5 minutes with paired discussion to maintain engagement."
+  ]
+}

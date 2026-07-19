@@ -1,0 +1,149 @@
+{
+  "source": "generated",
+  "targetLectureCount": 10,
+  "lectures": [
+    {
+      "number": 1,
+      "title": "Introduction to Software Engineering and Object-Oriented Fundamentals",
+      "durationMinutes": 90,
+      "summary": "Introduction to modern software engineering principles, the role of object technology in building high-quality systems, and foundational concepts of object-oriented programming including classes, objects, and encapsulation.",
+      "topics": [
+        "Overview of software engineering challenges and industrial software systems",
+        "Quality attributes: correctness, robustness, extendibility, reusability",
+        "Object-oriented programming fundamentals",
+        "Classes, objects, and encapsulation",
+        "Introduction to Eiffel notation",
+        "Course structure and learning objectives"
+      ]
+    },
+    {
+      "number": 2,
+      "title": "Inheritance, Polymorphism and Dynamic Binding",
+      "durationMinutes": 90,
+      "summary": "Deep dive into advanced object-oriented mechanisms including single and multiple inheritance, polymorphism, dynamic binding, and their role in creating flexible and reusable software architectures.",
+      "topics": [
+        "Single inheritance: concepts and applications",
+        "Multiple inheritance: benefits and challenges",
+        "Polymorphism and substitutability",
+        "Dynamic binding and late binding",
+        "Method redefinition and overriding",
+        "Practical examples in Eiffel"
+      ]
+    },
+    {
+      "number": 3,
+      "title": "Genericity and Information Hiding",
+      "durationMinutes": 90,
+      "summary": "Exploration of generic programming techniques for creating reusable components and information hiding principles for managing complexity and ensuring proper encapsulation in large systems.",
+      "topics": [
+        "Generic classes and constrained genericity",
+        "Type parameters and instantiation",
+        "Information hiding principles",
+        "Access control and visibility",
+        "Interface vs. implementation separation",
+        "Building reusable library components"
+      ]
+    },
+    {
+      "number": 4,
+      "title": "Design by Contract: Assertions and Program Correctness",
+      "durationMinutes": 90,
+      "summary": "Introduction to Design by Contract methodology using preconditions, postconditions, and class invariants to specify software behavior and guarantee program reliability through formal contracts.",
+      "topics": [
+        "Design by Contract principles",
+        "Preconditions and postconditions",
+        "Class invariants",
+        "Assertion monitoring and debugging",
+        "Contract inheritance and behavioral subtyping",
+        "Reliability through contracts"
+      ]
+    },
+    {
+      "number": 5,
+      "title": "Fundamental Design Patterns I: Creational and Structural Patterns",
+      "durationMinutes": 90,
+      "summary": "Study of essential design patterns for object creation and structural composition, including Singleton, Factory, Adapter, and Composite patterns with practical applications.",
+      "topics": [
+        "Introduction to design patterns",
+        "Creational patterns: Singleton, Factory Method, Abstract Factory",
+        "Structural patterns: Adapter, Composite, Decorator",
+        "Pattern selection and application criteria",
+        "Implementation strategies",
+        "Real-world pattern examples"
+      ]
+    },
+    {
+      "number": 6,
+      "title": "Fundamental Design Patterns II: Behavioral Patterns",
+      "durationMinutes": 90,
+      "summary": "Examination of behavioral design patterns focusing on Observer, Visitor, Strategy, and Command patterns for managing object interactions and responsibilities in complex systems.",
+      "topics": [
+        "Observer pattern: event handling and notifications",
+        "Visitor pattern: operations on object structures",
+        "Strategy pattern: algorithm encapsulation",
+        "Command pattern: action encapsulation",
+        "Template Method pattern",
+        "Pattern combinations and trade-offs"
+      ]
+    },
+    {
+      "number": 7,
+      "title": "Software Architecture: Structuring Large-Scale Programs",
+      "durationMinutes": 90,
+      "summary": "Techniques for organizing and structuring large software systems, including architectural styles, component organization, module dependencies, and managing system complexity.",
+      "topics": [
+        "Architectural thinking and large-scale design",
+        "Layered architectures",
+        "Component-based design",
+        "Module dependencies and coupling",
+        "Package organization strategies",
+        "Managing complexity in large systems"
+      ]
+    },
+    {
+      "number": 8,
+      "title": "Requirements Engineering Fundamentals",
+      "durationMinutes": 90,
+      "summary": "Introduction to requirements engineering processes, techniques for eliciting, analyzing, and documenting software requirements, including functional and non-functional requirements.",
+      "topics": [
+        "Requirements engineering process",
+        "Requirements elicitation techniques",
+        "Functional vs. non-functional requirements",
+        "Requirements documentation and specification",
+        "Use cases and scenarios",
+        "Requirements validation and management"
+      ]
+    },
+    {
+      "number": 9,
+      "title": "Agile Development Methods and Practices",
+      "durationMinutes": 90,
+      "summary": "Overview of agile software development methodologies, including Scrum, XP practices, iterative development, and how agile techniques integrate with software engineering principles.",
+      "topics": [
+        "Agile manifesto and principles",
+        "Scrum framework: roles, artifacts, ceremonies",
+        "Extreme Programming (XP) practices",
+        "Iterative and incremental development",
+        "User stories and sprint planning",
+        "Agile vs. traditional development approaches"
+      ]
+    },
+    {
+      "number": 10,
+      "title": "Software Engineering Process and Quality Assurance",
+      "durationMinutes": 90,
+      "summary": "Comprehensive overview of software engineering processes, quality assurance practices, testing strategies, and integration of construction, architecture, and engineering principles in professional software development.",
+      "topics": [
+        "Software development lifecycle models",
+        "Quality assurance and testing overview",
+        "Configuration management and version control",
+        "Continuous integration and deployment",
+        "Software metrics and measurement",
+        "Integration of OO principles, patterns, contracts, and agile methods",
+        "Course review and synthesis"
+      ]
+    }
+  ],
+  "moduleCode": "2025-MCSSE-SE-01",
+  "moduleName": "Software Construction, Architecture and Engineering"
+}

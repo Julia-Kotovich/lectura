@@ -1,0 +1,800 @@
+{
+  "slides": [
+    {
+      "id": "slide-01",
+      "title": "Fundamental Design Patterns I: Creational and Structural Patterns",
+      "layout": "title",
+      "blocks": [
+        {
+          "id": "title-block",
+          "type": "heading",
+          "content": "Lecture 5: Fundamental Design Patterns I"
+        },
+        {
+          "id": "subtitle-block",
+          "type": "text",
+          "content": "Creational and Structural Patterns"
+        },
+        {
+          "id": "preview-challenge",
+          "type": "activity",
+          "content": {
+            "title": "Design Challenge Preview",
+            "duration": "2 minutes",
+            "instructions": "Scenario: You're building a document editor that needs multiple file format exporters (PDF, HTML, XML) and must add features like spell-check and auto-save to documents dynamically. Sketch one approach to organize this code. What design problems do you anticipate?",
+            "format": "Individual brainstorm (1 min), then share one challenge with neighbor (1 min). We'll revisit solutions using today's patterns."
+          }
+        }
+      ],
+      "speakerNotes": "Open with an authentic design challenge requiring both object creation (exporters) and composition (dynamic features). Students apply prior OO knowledge to sketch solutions, surfacing problems patterns will solve: proliferating classes, inflexible instantiation, tight coupling. This primes analyze-level thinking about design forces. Collect 2-3 anticipated challenges via volunteers. Emphasize we'll return to this scenario after learning patterns, creating a throughline for evaluating pattern selection and combination. This transforms a passive title slide into active problem framing.",
+      "metadata": {
+        "transition": "fade",
+        "animation": "none",
+        "tags": [
+          "introduction",
+          "title",
+          "apply",
+          "analyze"
+        ]
+      }
+    },
+    {
+      "id": "slide-02",
+      "title": "What Are Design Patterns?",
+      "layout": "content",
+      "blocks": [
+        {
+          "id": "definition",
+          "type": "text",
+          "content": "Reusable solutions to commonly occurring problems in software design—templates capturing expert knowledge, not finished code. Patterns provide shared vocabulary and leverage OO principles (encapsulation, polymorphism, composition)."
+        },
+        {
+          "id": "pattern-recognition",
+          "type": "activity",
+          "content": {
+            "title": "Recognize Patterns in Real Code",
+            "duration": "3 minutes",
+            "instructions": "Examine these Java framework examples: (1) Collections.unmodifiableList(list) wraps a list to prevent modification. (2) Calendar.getInstance() returns platform-specific calendar implementations. Identify which design pattern each uses. Cite structural evidence (wrapping behavior? factory method?) and analyze why the framework designers chose this pattern for each scenario.",
+            "format": "Individual analysis (1.5 min), pair comparison (1 min), poll with reasoning (0.5 min)"
+          }
+        },
+        {
+          "id": "design-synthesis",
+          "type": "activity",
+          "content": {
+            "title": "Create Pattern Combination",
+            "duration": "4 minutes",
+            "instructions": "Design a notification system where messages can be sent via Email, SMS, or Push, and you need to add encryption and logging dynamically to any combination. Propose which 2-3 patterns to combine, sketch how they collaborate (class relationships), and justify why this design handles future notification types and feature additions better than inheritance hierarchies.",
+            "format": "Individual design sketch (2 min), share with neighbor and critique each other's approach (2 min)"
+          }
+        }
+      ],
+      "speakerNotes": "Strengthen pattern recognition (objective 6) and create-level synthesis before formal pattern introduction. First activity engages analyze-level pattern identification in real frameworks (unmodifiableList is Decorator, getInstance is Factory Method), building recognition skills across authentic code. Second activity elevates to create level: students synthesize multiple patterns into novel architecture, requiring them to generate solutions rather than evaluate pre-defined options. This addresses the deck's 2% create-level gap. Collect diverse designs to show multiple valid pattern combinations (e.g., Factory + Decorator, Strategy + Decorator), emphasizing context-dependent selection—priming evaluation skills for later comparative activities.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fadeIn",
+        "tags": [
+          "introduction",
+          "concepts",
+          "analyze",
+          "create"
+        ]
+      }
+    },
+    {
+      "id": "slide-03",
+      "title": "Pattern Categories: Analyzing Design Intent",
+      "layout": "split",
+      "blocks": [
+        {
+          "id": "categories-diagram",
+          "type": "diagram",
+          "content": {
+            "prompt": "Hierarchical diagram with three colored boxes: 'Creational Patterns' (blue) showing Singleton, Factory Method, Abstract Factory with 'Controls object creation'; 'Structural Patterns' (green) showing Adapter, Composite, Decorator with 'Organizes object composition'; 'Behavioral Patterns' (gray) with 'Next Lecture' label. Include design intent labels under each category."
+          }
+        },
+        {
+          "id": "framework-pattern-recognition",
+          "type": "activity",
+          "content": {
+            "title": "Framework Pattern Recognition & Synthesis",
+            "duration": "5 minutes",
+            "instructions": "Part 1 (2 min): Examine real framework code: (a) Spring's BeanFactory.getBean() returns configured objects; (b) Java's Arrays.asList() wraps arrays as lists; (c) File system hierarchies treating files and folders uniformly. Identify the pattern category for each, citing structural evidence. Part 2 (3 min): Design a plugin system where plugins are loaded dynamically and can have logging/security added at runtime. Propose 2+ pattern categories to combine and sketch how they collaborate.",
+            "format": "Individual analysis (2 min), pair synthesis and critique (3 min)"
+          }
+        }
+      ],
+      "speakerNotes": "Gang of Four organized 23 patterns by design intent: creational (object creation), structural (composition), behavioral (interaction). This activity elevates cognitive demand: Part 1 strengthens pattern recognition (objective 6) through real framework analysis—BeanFactory is creational (Abstract Factory), asList is structural (Adapter), file systems use structural (Composite). Part 2 engages create-level synthesis, addressing the deck's 2% create gap: students must generate novel multi-pattern architectures rather than selecting from given options. Collect diverse plugin designs showing Factory+Decorator, Abstract Factory+Composite combinations, emphasizing context-dependent pattern selection.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fadeIn",
+        "tags": [
+          "introduction",
+          "taxonomy",
+          "analyze",
+          "create"
+        ]
+      }
+    },
+    {
+      "id": "slide-04",
+      "title": "Singleton Pattern: Ensuring One Instance",
+      "layout": "split",
+      "blocks": [
+        {
+          "id": "singleton-structure",
+          "type": "diagram",
+          "content": {
+            "prompt": "UML class diagram showing Singleton class with private static instance variable, private constructor marked '-Singleton()', public static getInstance() method returning Singleton type. Show self-reference arrow from getInstance to instance. Add note box: 'Controls instantiation through static method and private constructor.'"
+          }
+        },
+        {
+          "id": "implementation-activity",
+          "type": "activity",
+          "content": {
+            "title": "Apply & Analyze Singleton",
+            "duration": "4 min",
+            "instructions": "Implement a ThreadPoolManager Singleton with: (1) private constructor initializing 10 worker threads, (2) getInstance() method, (3) getAvailableThread() method. Then analyze: Why is Singleton appropriate here? What problems arise if multiple ThreadPoolManager instances existed? How would you test this class?",
+            "format": "Individual coding (2 min), pair analysis (2 min)"
+          }
+        },
+        {
+          "id": "key-characteristics",
+          "type": "bullets",
+          "content": {
+            "items": [
+              "Intent: Exactly one instance, global access point",
+              "Mechanism: Private constructor + static accessor",
+              "Use when: Coordinating shared resources (configs, pools, caches)",
+              "Trade-off: Testability vs. controlled instantiation"
+            ]
+          }
+        }
+      ],
+      "speakerNotes": "This activity elevates from understand to apply/analyze. Students implement Singleton mechanism (apply objective 3), then analyze appropriateness for resource coordination—multiple thread pools would cause resource conflicts and inconsistent state. During pair discussions, listen for testing challenges: global state prevents mocking, hard to reset between tests. Probe: 'How does dependency injection address these issues?' Collect 2-3 implementations showing eager vs. lazy initialization strategies. Transition to slide 5's thread-safe implementation examining the volatile double-check pattern.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fadeIn",
+        "tags": [
+          "creational",
+          "singleton",
+          "apply",
+          "analyze"
+        ]
+      }
+    },
+    {
+      "id": "slide-05",
+      "title": "Singleton Implementation: Analyze & Redesign",
+      "layout": "split",
+      "blocks": [
+        {
+          "id": "singleton-code",
+          "type": "code",
+          "content": {
+            "language": "java",
+            "code": "public class ConfigManager {\n    private static volatile ConfigManager instance;\n    private Properties config;\n    \n    private ConfigManager() {\n        config = loadConfiguration();\n    }\n    \n    public static ConfigManager getInstance() {\n        if (instance == null) {\n            synchronized (ConfigManager.class) {\n                if (instance == null) {\n                    instance = new ConfigManager();\n                }\n            }\n        }\n        return instance;\n    }\n}"
+          }
+        },
+        {
+          "id": "redesign-activity",
+          "type": "activity",
+          "content": {
+            "title": "Analyze Flaws, Create Alternative",
+            "duration": "5 min",
+            "instructions": "Part 1 (2 min): Analyze why volatile is essential and identify two specific testing problems this creates. Part 2 (3 min): Redesign ConfigManager using dependency injection instead of Singleton. Your design must support: easy unit testing with mock configs, multiple configurations in integration tests. Compare your solution's trade-offs (testability, complexity, global access) against the Singleton approach. When is each justified?",
+            "format": "Individual analysis (2 min), pair redesign & comparison (3 min)"
+          }
+        },
+        {
+          "id": "evaluation-criteria",
+          "type": "bullets",
+          "content": {
+            "items": [
+              "Analyze: volatile prevents partial construction visibility across threads",
+              "Create: DI alternative enables constructor injection of configs",
+              "Evaluate: Singleton = simple global access; DI = testable but needs container",
+              "Context matters: Desktop app config vs. microservice shared state"
+            ]
+          }
+        }
+      ],
+      "speakerNotes": "This activity elevates from analyze to create by requiring students to design an alternative implementation, not just critique the existing one. During Part 1, confirm understanding of volatile and testing issues (can't mock, global state persists). Part 2 pushes create-level: students must synthesize DI pattern knowledge to produce testable design. Listen for trade-off justifications—DI wins for testing but adds framework dependency; Singleton appropriate for truly global, stable resources. Collect 2-3 DI implementations showing constructor vs. setter injection. Emphasize recognizing when NOT to use patterns is critical design skill. Transition to Factory Method's controlled instantiation approach.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fadeIn",
+        "tags": [
+          "creational",
+          "singleton",
+          "analyze",
+          "evaluate",
+          "create",
+          "code"
+        ]
+      }
+    },
+    {
+      "id": "slide-06",
+      "title": "Factory Method: Create & Evaluate Solutions",
+      "layout": "split",
+      "blocks": [
+        {
+          "id": "design-activity",
+          "type": "activity",
+          "content": {
+            "title": "Design, Implement & Justify Pattern Choice",
+            "duration": "6 min",
+            "instructions": "Notification system needs Email, SMS, Push alerts based on user preference. (1) Design your own solution using any pattern approach—sketch class structure (2 min). (2) Implement factory method for one notification type in pseudocode (2 min). (3) Compare your design against Factory Method and Simple Factory alternatives: Which best supports adding Slack next month? Which simplifies testing? Justify your final selection with specific trade-offs addressing extensibility, complexity, and team context.",
+            "format": "Individual design/implementation, then trio comparison and justified selection"
+          }
+        },
+        {
+          "id": "factory-comparison",
+          "type": "diagram",
+          "content": {
+            "prompt": "UML comparing Factory Method pattern (Creator hierarchy with EmailNotifier, SMSNotifier subclasses) versus Simple Factory (single NotificationFactory with switch). Highlight modification points when adding new notification types."
+          }
+        },
+        {
+          "id": "evaluation-framework",
+          "type": "bullets",
+          "content": {
+            "items": [
+              "Create: Design solution before seeing alternatives—tests synthesis ability",
+              "Analyze: Does your approach violate Open/Closed when extending?",
+              "Evaluate: Compare complexity vs. extensibility across all three designs",
+              "Justify: Optimal choice depends on change frequency and team constraints"
+            ]
+          }
+        }
+      ],
+      "speakerNotes": "This redesign elevates from evaluate-only to create-then-evaluate, addressing the deck's 2% create-level gap. Students first synthesize their own solution before comparing against standard patterns, revealing whether they can generate viable alternatives independently. During trio discussions, push beyond 'Factory Method is better' to context-dependent justification—Simple Factory may suffice for stable requirements; custom approaches might optimize for specific constraints. Challenge defenses with scenarios: What if notification types change weekly? What if team is unfamiliar with inheritance hierarchies? Collect 2-3 student designs showing novel approaches, demonstrating multiple valid solutions exist. This strengthens objective 4's evaluate competency while engaging create-level synthesis missing from current deck.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fadeIn",
+        "tags": [
+          "creational",
+          "factory-method",
+          "create",
+          "evaluate",
+          "pattern-selection"
+        ]
+      }
+    },
+    {
+      "id": "slide-07",
+      "title": "Factory Method: Create, Apply & Evaluate",
+      "layout": "split",
+      "blocks": [
+        {
+          "id": "create-evaluate-activity",
+          "type": "activity",
+          "content": {
+            "title": "Design Novel Solution, Then Compare Patterns",
+            "duration": "7 min",
+            "instructions": "Payment system needs Credit Card support added to existing Cash payments. (1) CREATE your own extensible design without using named patterns—sketch class structure showing how to add payment types (2 min). (2) APPLY Factory Method to implement CreditCardPayment creation (2 min). (3) EVALUATE all three approaches: your design, Factory Method, and static factory with switch. Which best supports adding PayPal next month while keeping ProcessPayment logic unchanged? Justify selection for: (a) 10 payment types expected, (b) only 3 types ever needed.",
+            "format": "Individual creation/implementation, then trio comparison with context-dependent justification"
+          }
+        },
+        {
+          "id": "factory-starter",
+          "type": "code",
+          "content": {
+            "language": "java",
+            "code": "abstract class PaymentProcessor {\n    abstract Payment create();\n    void process(Order o) {\n        create().execute(o);\n    }\n}\n// Extend for CreditCardProcessor"
+          }
+        },
+        {
+          "id": "evaluation-criteria",
+          "type": "bullets",
+          "content": {
+            "items": [
+              "CREATE: Generate solution before seeing patterns—reveals synthesis ability",
+              "ANALYZE: Does your design violate Open/Closed when extending?",
+              "EVALUATE: Compare modification points, testing isolation across all three",
+              "JUSTIFY: Optimal choice depends on change frequency, not pattern popularity"
+            ]
+          }
+        }
+      ],
+      "speakerNotes": "This slide addresses the 2% create-level gap by requiring students to synthesize their own extensible design before applying Factory Method, revealing whether they can independently generate viable alternatives. During trio discussions, push beyond pattern preference to context-dependent justification—static factory may suffice for stable requirements; novel designs might optimize for specific constraints. Challenge: 'What if payment types change weekly vs. annually?' Collect 2-3 student designs showing diverse approaches. This engages create-level synthesis while maintaining evaluate-level pattern comparison, strengthening objectives 4 and 6 through comparative analysis of student-generated vs. canonical solutions.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fadeIn",
+        "tags": [
+          "creational",
+          "factory-method",
+          "create",
+          "apply",
+          "evaluate",
+          "pattern-selection"
+        ]
+      }
+    },
+    {
+      "id": "slide-08",
+      "title": "Abstract Factory: Creating Product Families",
+      "layout": "split",
+      "blocks": [
+        {
+          "id": "abstract-factory-implementation",
+          "type": "activity",
+          "content": {
+            "title": "Implement Product Families",
+            "duration": "6 minutes",
+            "instructions": "Build DocumentFactory creating Parser and ImageExtractor families for PDF and Word formats. (1) IMPLEMENT: Code AbstractFactory interface with createParser() and createExtractor() methods, then PDFFactory and WordFactory concrete implementations (3 min). (2) EXTEND: Add RTFFactory supporting RTF format (2 min). (3) ANALYZE: What code changed when adding RTF? Compare to adding a new product type (FontRenderer) across all factories.",
+            "deliverable": "Working factory code showing family extension vs. product extension trade-offs"
+          }
+        },
+        {
+          "id": "factory-structure",
+          "type": "code",
+          "content": {
+            "language": "java",
+            "code": "interface DocumentFactory {\n    Parser createParser();\n    ImageExtractor createExtractor();\n}\n// Implement: PDFFactory, WordFactory\n// Products: PDFParser, WordParser,\n//           PDFExtractor, WordExtractor"
+          }
+        },
+        {
+          "id": "analysis-prompts",
+          "type": "bullets",
+          "content": {
+            "items": [
+              "ANALYZE: Which is easier—adding RTF family or adding FontRenderer product? Why?",
+              "EVALUATE: When does family consistency justify Abstract Factory's product-extension cost?",
+              "Products must work together (PDF parser + PDF extractor, not mixed)"
+            ]
+          }
+        }
+      ],
+      "speakerNotes": "This activity provides apply-level implementation practice for Abstract Factory, balancing hands-on coding across all creational patterns per gap analysis. Students implement the factory interface and two concrete families, then extend with RTF to experience easy family addition. The analysis phase reveals Abstract Factory's core trade-off: simple family extension but difficult product-type addition (adding FontRenderer requires changing all factories). During debrief, contrast with Factory Method's opposite trade-off. Collect examples showing students recognized when family consistency requirements justify this design choice, strengthening pattern selection skills.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fadeIn",
+        "tags": [
+          "creational",
+          "abstract-factory",
+          "apply",
+          "analyze"
+        ]
+      }
+    },
+    {
+      "id": "slide-09",
+      "title": "Abstract Factory vs Factory Method: Pattern Selection",
+      "layout": "split",
+      "blocks": [
+        {
+          "id": "comparison-table",
+          "type": "table",
+          "content": {
+            "headers": [
+              "Dimension",
+              "Factory Method",
+              "Abstract Factory"
+            ],
+            "rows": [
+              [
+                "Mechanism",
+                "Inheritance (subclasses)",
+                "Composition (objects)"
+              ],
+              [
+                "Creates",
+                "Single product type",
+                "Product families"
+              ],
+              [
+                "Adding products",
+                "Easy: new subclass",
+                "Hard: all factories change"
+              ],
+              [
+                "Adding families",
+                "N/A",
+                "Easy: new factory class"
+              ],
+              [
+                "Use when",
+                "One product hierarchy",
+                "Related products must work together"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "implementation-selection",
+          "type": "activity",
+          "content": {
+            "title": "Implement & Justify Pattern Choice",
+            "duration": "7 minutes",
+            "instructions": "Document editor needs PDF and Word support. Each format requires Parser and ImageExtractor working together. (1) IMPLEMENT: Code AbstractFactory with createParser() and createExtractor(), plus PDFFactory and WordFactory (4 min). (2) EXTEND: Add RTF format support (1 min). (3) CREATE: Propose alternative using Factory Method for parsers and extractors separately. (4) EVALUATE: Compare both designs—which better handles adding formats vs. adding new product types like FontRenderer? Justify final choice.",
+            "deliverable": "Working code for both approaches with justified selection based on extensibility trade-offs"
+          }
+        }
+      ],
+      "speakerNotes": "This activity balances apply-level implementation with create-level design synthesis and evaluate-level justification. Students implement Abstract Factory experiencing easy family extension (RTF), then design an alternative using separate Factory Methods. The comparison reveals Abstract Factory's strength (family consistency) versus its weakness (hard to add product types). During debrief, emphasize when family cohesion requirements justify Abstract Factory's constraints. This addresses the gap in Abstract Factory hands-on practice while engaging create-level by requiring students to generate and compare alternative designs rather than selecting from pre-defined options.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fadeIn",
+        "tags": [
+          "creational",
+          "comparison",
+          "apply",
+          "create",
+          "evaluate"
+        ]
+      }
+    },
+    {
+      "id": "slide-10",
+      "title": "Adapter Pattern: Interface Conversion",
+      "layout": "split",
+      "blocks": [
+        {
+          "id": "adapter-intent",
+          "type": "bullets",
+          "content": {
+            "items": [
+              "Intent: Convert incompatible interfaces",
+              "Wraps existing class with new interface",
+              "Two variants: Class and Object Adapter",
+              "Enables reuse without modification"
+            ]
+          }
+        },
+        {
+          "id": "adapter-diagram",
+          "type": "diagram",
+          "content": {
+            "prompt": "UML diagram showing Client using Target interface, Adapter implementing Target and containing Adaptee reference, and Adaptee class with incompatible interface. Show delegation arrow from Adapter to Adaptee with 'adaptee.specificRequest()' label."
+          }
+        }
+      ],
+      "speakerNotes": "Adapter makes incompatible interfaces work together—like a power adapter converting US plug to European socket. The Adapter implements the interface the client expects (Target) and wraps the existing class (Adaptee). Object Adapter uses composition (shown here)—more flexible, can adapt multiple adaptees. Class Adapter uses multiple inheritance—more efficient but less flexible. Real example: Java's InputStreamReader adapts byte streams to character streams. Use when you can't modify existing code but need it to work with new interface.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fadeIn",
+        "tags": [
+          "structural",
+          "adapter"
+        ]
+      }
+    },
+    {
+      "id": "slide-11",
+      "title": "Adapter Pattern: Evaluate & Create Solutions",
+      "layout": "split",
+      "blocks": [
+        {
+          "id": "scenario-problem",
+          "type": "text",
+          "content": {
+            "text": "**Design Challenge**: Your system uses `Logger` interface with `log(String msg)`. A third-party library provides `AdvancedLogger` with `writeLog(String msg, LogLevel level, Timestamp time)`. You need structured logging but can't modify either interface.\n\n**Competing Solutions**: (1) Adapter with hardcoded defaults, (2) Adapter parsing message for level hints, (3) Wrapper adding setLevel() method, (4) Abandon Logger interface entirely.\n\n**Your Task**: Evaluate which solution best fits if clients need occasional level control but mostly default INFO logging."
+          }
+        },
+        {
+          "id": "evaluation-activity",
+          "type": "activity",
+          "content": {
+            "activityType": "think-pair-share",
+            "duration": "4 minutes",
+            "instructions": "1. Individually: Rank the 4 solutions by appropriateness. Justify using OO principles (encapsulation, LSP) and pattern intent (1.5 min). 2. Pair: Compare rankings—what criteria drove your decisions? Identify where solutions violate Adapter pattern vs. becoming different patterns (1.5 min). 3. Create: Propose hybrid solution combining strengths of top 2 approaches (1 min)."
+          }
+        }
+      ],
+      "speakerNotes": "This evaluate-level activity requires students to compare competing solutions against pattern intent and OO principles, not just implement one approach. Key insight: solution 3 violates Adapter pattern (changes Target interface), solution 4 abandons the constraint. During pair work, surface that parsing (solution 2) breaks encapsulation while defaults (solution 1) lose flexibility. The create phase scaffolds synthesis: best hybrid often adds optional configuration to adapter constructor while maintaining Logger interface. Debrief connects to objective 4—pattern selection requires evaluating trade-offs across multiple candidate solutions, not just analyzing one pattern's limitations. Emphasize when to adapt vs. when constraint itself is wrong.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fadeIn",
+        "tags": [
+          "structural",
+          "adapter",
+          "evaluate",
+          "create"
+        ]
+      }
+    },
+    {
+      "id": "slide-12",
+      "title": "Composite Pattern: Part-Whole Hierarchies",
+      "layout": "split",
+      "blocks": [
+        {
+          "id": "composite-intent",
+          "type": "bullets",
+          "content": {
+            "items": [
+              "Intent: Compose objects into tree structures",
+              "Treat individual and composite objects uniformly",
+              "Recursive composition",
+              "Component, Leaf, Composite roles"
+            ]
+          }
+        },
+        {
+          "id": "composite-diagram",
+          "type": "diagram",
+          "content": {
+            "prompt": "UML diagram showing Component interface with operation(), Leaf implementing Component, and Composite implementing Component with children list and add/remove methods. Show tree structure with Composite containing both Leaf and other Composite objects."
+          }
+        }
+      ],
+      "speakerNotes": "Composite represents part-whole hierarchies as trees. Classic example: file system with files (leaves) and directories (composites containing files and other directories). The key insight: clients treat leaves and composites uniformly through Component interface. Composite stores children and delegates operations to them recursively. This enables building complex structures from simple parts. The pattern embodies recursion—composites can contain other composites. GUI frameworks use this extensively: panels contain buttons, labels, and other panels.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fadeIn",
+        "tags": [
+          "structural",
+          "composite"
+        ]
+      }
+    },
+    {
+      "id": "slide-13",
+      "title": "Composite Pattern: Implementation Challenge",
+      "layout": "split",
+      "blocks": [
+        {
+          "id": "composite-code-partial",
+          "type": "code",
+          "content": {
+            "language": "java",
+            "code": "interface Graphic {\n    void draw();\n    // TODO: Should add/remove be here?\n}\n\nclass Circle implements Graphic {\n    public void draw() { /* draw circle */ }\n}\n\nclass CompositeGraphic implements Graphic {\n    private List<Graphic> children = new ArrayList<>();\n    \n    void add(Graphic g) { children.add(g); }\n    \n    public void draw() {\n        // TODO: Implement recursive delegation\n    }\n}"
+          }
+        },
+        {
+          "id": "implementation-activity",
+          "type": "activity",
+          "content": {
+            "title": "Apply & Analyze (3 min)",
+            "instructions": "1. Complete the draw() method using recursive delegation\n2. Decide: Should add/remove methods be in Graphic interface or only CompositeGraphic?\n3. Justify your choice: What are the trade-offs?\n\nConsider: What happens if client calls add() on a Circle?",
+            "deliverable": "Code completion + design decision with rationale"
+          }
+        }
+      ],
+      "speakerNotes": "This active learning exercise elevates engagement to apply and analyze levels. Students first apply the pattern by implementing recursive delegation, then analyze the transparency vs. safety trade-off. Poll students on their interface decision. Transparency (add/remove in Graphic) treats all objects uniformly but allows unsafe operations on leaves. Safety (add/remove only in Composite) prevents errors but requires type checking. Discuss how different contexts favor different approaches: GUI frameworks often choose transparency, while type-safe systems prefer safety. Connect to real design decisions they'll face.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fadeIn",
+        "tags": [
+          "structural",
+          "composite",
+          "code",
+          "apply",
+          "analyze"
+        ]
+      }
+    },
+    {
+      "id": "slide-14",
+      "title": "Decorator Pattern: Dynamic Responsibilities",
+      "layout": "split",
+      "blocks": [
+        {
+          "id": "decorator-intent",
+          "type": "bullets",
+          "content": {
+            "items": [
+              "Intent: Add responsibilities dynamically",
+              "Flexible alternative to subclassing",
+              "Decorator wraps component",
+              "Multiple decorators can be stacked"
+            ]
+          }
+        },
+        {
+          "id": "decorator-diagram",
+          "type": "diagram",
+          "content": {
+            "prompt": "UML diagram showing Component interface, ConcreteComponent implementing it, Decorator implementing Component and containing Component reference, ConcreteDecoratorA and ConcreteDecoratorB extending Decorator. Show wrapping relationship with nested boxes visualization."
+          }
+        }
+      ],
+      "speakerNotes": "Decorator adds behavior to objects dynamically without subclassing. Decorator implements same interface as component it wraps and contains reference to component. It forwards requests to wrapped component, adding behavior before/after. Multiple decorators can be chained. Classic example: Java I/O streams—BufferedInputStream wraps FileInputStream, which might wrap another stream. Coffee shop analogy: plain coffee decorated with milk, sugar, whipped cream. Each decorator adds cost and functionality.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fadeIn",
+        "tags": [
+          "structural",
+          "decorator"
+        ]
+      }
+    },
+    {
+      "id": "slide-15",
+      "title": "Decorator Implementation: Design Challenge",
+      "layout": "split",
+      "blocks": [
+        {
+          "id": "decorator-code",
+          "type": "code",
+          "content": {
+            "language": "java",
+            "code": "interface DataSource {\n    void writeData(String data);\n    String readData();\n}\n\nclass FileDataSource implements DataSource {\n    public void writeData(String data) { /* file */ }\n    public String readData() { /* file */ }\n}\n\n// TODO: Implement CompressionDecorator\n// Requirements:\n// - Compress data before writing\n// - Decompress data after reading\n// - Allow stacking with other decorators"
+          }
+        },
+        {
+          "id": "design-activity",
+          "type": "activity",
+          "content": {
+            "title": "Apply: Complete the Decorator",
+            "duration": "3 minutes",
+            "instructions": "Implement CompressionDecorator following the pattern structure. Then answer: How would you stack EncryptionDecorator and CompressionDecorator? Which order (compress-then-encrypt or encrypt-then-compress) and why? Consider data size and security implications.",
+            "deliverable": "Sketch class structure; justify decorator ordering with rationale"
+          }
+        },
+        {
+          "id": "evaluation-prompt",
+          "type": "bullets",
+          "content": {
+            "items": [
+              "When would Decorator be better than subclassing?",
+              "What problems arise with too many decorators?",
+              "How does order affect behavior and performance?"
+            ]
+          }
+        }
+      ],
+      "speakerNotes": "Students implement CompressionDecorator applying pattern structure from slide 14, then evaluate decorator ordering trade-offs. Compression-then-encryption reduces encrypted data size but encryption-then-compression may leak information through compression ratios. Discuss when Decorator beats inheritance (runtime flexibility, avoiding class explosion) versus drawbacks (debugging complexity, many small objects, identity issues). Poll students on ordering choice before revealing that security typically trumps efficiency. This bridges apply (implementation) and evaluate (justify ordering) levels, directly supporting objectives requiring pattern application and selection based on trade-offs.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fadeIn",
+        "tags": [
+          "structural",
+          "decorator",
+          "code",
+          "apply",
+          "evaluate"
+        ]
+      }
+    },
+    {
+      "id": "slide-16",
+      "title": "Pattern Selection: Apply the Criteria",
+      "layout": "split",
+      "blocks": [
+        {
+          "id": "scenario",
+          "type": "scenario",
+          "content": {
+            "title": "Design Challenge",
+            "description": "You need to add logging to 15+ classes in a legacy system. Logs must include timestamps, user context, and be filterable by severity. Requirements may change (add encryption, remote logging).",
+            "question": "Which approach and why?",
+            "options": [
+              "A. Inheritance: Create LoggableBase class",
+              "B. Decorator: Wrap objects with LoggingDecorator",
+              "C. Proxy: Create logging proxies for each class"
+            ]
+          }
+        },
+        {
+          "id": "selection-activity",
+          "type": "activity",
+          "content": {
+            "title": "Evaluate: Justify Your Pattern Choice",
+            "duration": "4 minutes",
+            "instructions": "Select approach A, B, or C. Apply selection criteria: runtime flexibility needs, coupling impact, extensibility for new features (encryption, remote logging), and maintenance complexity. Justify your choice against the alternatives, identifying which criteria matter most for this scenario.",
+            "deliverable": "Written justification citing at least 3 criteria; explain why rejected alternatives fail"
+          }
+        },
+        {
+          "id": "criteria-reference",
+          "type": "bullets",
+          "content": {
+            "items": [
+              "Runtime flexibility: Can behavior change without recompilation?",
+              "Extensibility: How easily can new features stack?",
+              "Coupling: Does solution force dependencies on existing classes?",
+              "Complexity vs. benefit: Is added abstraction justified?"
+            ]
+          }
+        }
+      ],
+      "speakerNotes": "Students evaluate three competing solutions using explicit criteria. Inheritance creates tight coupling, limits runtime changes, and doesn't support stacking features. Proxy requires creating 15+ proxy classes, high maintenance cost. Decorator offers runtime composition, supports stacking (logging + encryption), minimal coupling, but adds object overhead. Poll class on choices before discussion. Reveal that Decorator best fits extensibility and runtime flexibility needs despite complexity. Emphasize trade-off thinking: no perfect answer, but justified selection based on prioritized criteria. This directly targets objective 4 (evaluate and select) at evaluate level, moving beyond conceptual criteria to applied decision-making.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fadeIn",
+        "tags": [
+          "evaluate",
+          "selection",
+          "application"
+        ]
+      }
+    },
+    {
+      "id": "slide-17",
+      "title": "Pattern Recognition in Real Systems",
+      "layout": "split",
+      "blocks": [
+        {
+          "id": "code-analysis",
+          "type": "code",
+          "content": {
+            "language": "java",
+            "code": "public class WebApp {\n  private static WebApp instance;\n  private LoggerFactory logFactory;\n  \n  private WebApp() {\n    logFactory = new FileLoggerFactory();\n  }\n  \n  public static WebApp getInstance() {\n    if (instance == null) {\n      instance = new WebApp();\n    }\n    return instance;\n  }\n  \n  public Logger createLogger(String name) {\n    Logger base = logFactory.create(name);\n    return new TimestampDecorator(\n      new FilterDecorator(base));\n  }\n}"
+          }
+        },
+        {
+          "id": "recognition-activity",
+          "type": "activity",
+          "content": {
+            "title": "Identify Patterns and Analyze Collaboration",
+            "duration": "5 minutes",
+            "instructions": "Examine the code. Identify at least 3 patterns used. For each: name the pattern, cite specific evidence (lines/methods), and explain how patterns collaborate. Then evaluate: which pattern could be eliminated if requirements simplified to single logger type? Justify your answer.",
+            "deliverable": "List of patterns with evidence; analysis of how they work together; justified evaluation of which is least essential"
+          }
+        },
+        {
+          "id": "real-world-context",
+          "type": "bullets",
+          "content": {
+            "items": [
+              "Patterns: Singleton (WebApp instance), Abstract/Factory Method (LoggerFactory), Decorator (wrapping loggers)",
+              "Collaboration: Singleton manages factory; factory creates objects for Decorator chain",
+              "Recognition skill: Identify patterns in unfamiliar codebases to understand architecture faster"
+            ]
+          }
+        }
+      ],
+      "speakerNotes": "Students analyze real code to identify patterns and their interactions—moving from understanding examples to analyzing unfamiliar implementations. Code shows Singleton (getInstance), Factory Method (createLogger/logFactory), Decorator (TimestampDecorator wrapping FilterDecorator). Patterns collaborate: Singleton provides single factory instance, factory creates base logger, decorators add behavior dynamically. Evaluation question targets objective 4: which pattern is least essential? Factory could be eliminated if only one logger type exists, but Singleton and Decorator provide distinct value. Poll students, discuss justifications. This develops pattern recognition in real systems and evaluates appropriateness based on requirements—key professional skills.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fadeIn",
+        "tags": [
+          "analyze",
+          "evaluate",
+          "recognition"
+        ]
+      }
+    },
+    {
+      "id": "slide-18",
+      "title": "Summary and Next Steps",
+      "layout": "content",
+      "blocks": [
+        {
+          "id": "summary-heading",
+          "type": "heading",
+          "content": "Today's Patterns"
+        },
+        {
+          "id": "patterns-summary",
+          "type": "bullets",
+          "content": {
+            "items": [
+              "Creational: Singleton, Factory Method, Abstract Factory",
+              "Structural: Adapter, Composite, Decorator",
+              "Patterns embody OO principles: encapsulation, inheritance, polymorphism",
+              "Selection depends on specific forces and trade-offs"
+            ]
+          }
+        },
+        {
+          "id": "next-lecture",
+          "type": "text",
+          "content": "Next Lecture: Behavioral Patterns (Observer, Strategy, Visitor, Template Method)"
+        },
+        {
+          "id": "action-items",
+          "type": "bullets",
+          "content": {
+            "items": [
+              "Complete tutorial: implement each pattern",
+              "Portfolio: design system using 3+ patterns with justification",
+              "Read ahead: Observer and Strategy patterns"
+            ]
+          }
+        }
+      ],
+      "speakerNotes": "Recap: We covered 6 fundamental patterns today. Creational patterns control object creation—Singleton for single instances, Factory Method for subclass-based creation, Abstract Factory for product families. Structural patterns organize composition—Adapter for interface conversion, Composite for tree structures, Decorator for dynamic behavior addition. These patterns embody core OO principles and provide vocabulary for design discussions. Next lecture covers behavioral patterns focusing on object interaction and responsibility distribution. Action items: implement each pattern in tutorial exercises, start portfolio assignment using multiple patterns with written justification, read about Observer and Strategy to prepare. Emphasize connection to ILO 4: applying fundamental design patterns to build high-quality, extendible systems.",
+      "metadata": {
+        "transition": "fade",
+        "animation": "fadeIn",
+        "tags": [
+          "summary",
+          "conclusion"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,808 @@
+{
+  "slides": [
+    {
+      "id": "slide-01",
+      "title": "Lecture 9: Agile Development Methods and Practices",
+      "layout": "title",
+      "blocks": [
+        {
+          "id": "title-block",
+          "type": "heading",
+          "content": "Lecture 9: Agile Development Methods and Practices"
+        },
+        {
+          "id": "subtitle-block",
+          "type": "text",
+          "content": "From Waterfall to Iterative Excellence"
+        },
+        {
+          "id": "opening-challenge",
+          "type": "activity",
+          "content": {
+            "title": "Your Agile Hypothesis",
+            "description": "Consider a project you've worked on (class, personal, work). What was the biggest challenge: changing requirements, unclear goals, technical risks, or tight deadlines? Write down: (1) Which agile practice might have helped most—daily standups, iterative releases, TDD, or user stories? (2) Why that specific practice addresses your challenge. No wrong answers—we'll revisit your hypothesis at lecture end to evaluate if you'd change your choice.",
+            "activityType": "individual reflection",
+            "duration": "2 min"
+          }
+        }
+      ],
+      "speakerNotes": "This opening primes students to evaluate agile practices against real problems rather than passively receiving definitions. By committing to a hypothesis early, they'll actively test it against concepts throughout the lecture. The revisit promise creates cognitive tension supporting deeper engagement with methodology selection and evaluation objectives. Their written hypotheses become artifacts for analyzing how their understanding evolved, supporting the deck's apply-evaluate focus while addressing the create-level gap through personal synthesis.",
+      "metadata": {
+        "transition": "fade",
+        "animation": "none",
+        "tags": [
+          "introduction",
+          "evaluate",
+          "metacognition"
+        ]
+      }
+    },
+    {
+      "id": "slide-02",
+      "title": "Your Agile Journey: From Concepts to Practice",
+      "layout": "content",
+      "blocks": [
+        {
+          "id": "objectives-framework",
+          "type": "bullets",
+          "content": {
+            "items": [
+              "Apply Scrum framework to organize real project scenarios",
+              "Implement XP practices through hands-on TDD exercises",
+              "Create user stories meeting INVEST criteria with peer review",
+              "Design iteration cycles for projects with specific constraints",
+              "Evaluate and justify methodology selection for case studies"
+            ]
+          }
+        },
+        {
+          "id": "skill-design-challenge",
+          "type": "activity",
+          "content": {
+            "title": "Design Your Learning Path",
+            "description": "Scenario: Your team has 8 weeks to build a mobile app prototype using agile. Draft a learning plan: Which 3 objectives will you master first and why? For each, identify one concrete deliverable you'll create today (e.g., 'Create user stories' → write 5 stories for login feature). Sketch your iteration timeline showing when you'll apply each skill. Compare plans with neighbor—did you sequence differently?",
+            "activityType": "individual design + pair comparison",
+            "duration": "4 min"
+          }
+        }
+      ],
+      "speakerNotes": "This activity elevates the slide from understand to create-level by requiring students to design their own learning strategy rather than passively rating abilities. Students must synthesize objectives into a coherent plan, prioritize based on dependencies, and create concrete deliverables—mirroring how they'll design iteration cycles later (slide 14). The neighbor comparison introduces peer evaluation of different sequencing choices. This primes students for the deck's apply-dominant approach while addressing the create-level gap. Their plans become reference points during hands-on activities, supporting metacognitive monitoring of actual vs. planned skill development.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fade-in",
+        "tags": [
+          "objectives",
+          "create",
+          "metacognition"
+        ]
+      }
+    },
+    {
+      "id": "slide-03",
+      "title": "The Software Crisis: Why Agile Emerged",
+      "layout": "content",
+      "blocks": [
+        {
+          "id": "crisis-context",
+          "type": "bullets",
+          "content": {
+            "items": [
+              "1990s reality: 70% of projects failed, over budget, or late",
+              "Waterfall assumption: Requirements stable, predictable delivery",
+              "Market reality: Customer needs changed during 18+ month cycles",
+              "Consequence: Delivered software obsolete before release"
+            ]
+          }
+        },
+        {
+          "id": "methodology-diagnosis",
+          "type": "activity",
+          "content": {
+            "title": "Analyze the Mismatch",
+            "description": "Given scenario: E-commerce startup plans 24-month waterfall project. Month 18: competitor launches mobile-first checkout. Your analysis: (1) Why does waterfall fail here? (2) Which agile principle addresses this? (3) How would 2-week iterations change the outcome? Write your diagnosis, then compare with neighbor.",
+            "activityType": "pair analysis",
+            "duration": "3 min"
+          }
+        }
+      ],
+      "speakerNotes": "Present the crisis as a methodology-context mismatch, not waterfall failure. After students analyze the scenario, reveal that agile emerged from practitioners facing exactly this problem. Key insight: methodology selection depends on requirement stability and feedback urgency. Connect their diagnosis to upcoming Agile Manifesto values—'responding to change over following a plan' directly addresses this scenario. This analysis primes students for the evaluation objective requiring methodology selection for different contexts. Transition to timeline showing how practitioners experimented with solutions.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fade-in",
+        "tags": [
+          "history",
+          "context",
+          "analyze"
+        ]
+      }
+    },
+    {
+      "id": "slide-04",
+      "title": "Evolution Timeline: Waterfall to Agile",
+      "layout": "content",
+      "blocks": [
+        {
+          "id": "timeline-diagram",
+          "type": "diagram",
+          "content": {
+            "prompt": "Create a horizontal timeline showing software development methodology evolution: 1970s (Waterfall - sequential phases with downward arrows), 1980s (Iterative models - circular arrows), 1990s (Lightweight methods - Scrum, XP icons), 2001 (Agile Manifesto - document icon with 4 values), 2010s-Present (Scaled Agile, DevOps - network diagram). Use distinct colors for each era and include small representative icons."
+          }
+        },
+        {
+          "id": "methodology-selection",
+          "type": "activity",
+          "content": {
+            "title": "Evaluate Methodology Fit",
+            "description": "Three scenarios: (A) Banking system migration, strict regulatory compliance, fixed requirements. (B) Mobile app startup, evolving market, weekly user feedback. (C) NASA spacecraft software, safety-critical, 5-year timeline. For each: Select methodology from timeline (waterfall, iterative, or agile). Justify with 2 specific reasons based on project characteristics. Identify 1 risk if wrong methodology chosen. Write answers, then discuss.",
+            "activityType": "individual evaluation",
+            "duration": "4 min"
+          }
+        }
+      ],
+      "speakerNotes": "Present timeline first, then launch evaluation activity. This directly addresses the 'select appropriate methodologies for different contexts' objective at evaluate level. After students work individually, facilitate brief discussion revealing: A likely suits waterfall (stable requirements, compliance documentation), B needs agile (uncertainty, rapid feedback), C may blend approaches (safety needs rigor, long timeline allows iteration). Emphasize no single right answer—justification quality matters. Connect choices to upcoming Manifesto values: their reasoning should reflect understanding that methodology matches project uncertainty and change frequency. Transition by noting the 2001 Manifesto codified principles they just applied intuitively.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fade-in",
+        "tags": [
+          "history",
+          "evaluate",
+          "application"
+        ]
+      }
+    },
+    {
+      "id": "slide-05",
+      "title": "The Agile Manifesto: Four Core Values",
+      "layout": "content",
+      "blocks": [
+        {
+          "id": "manifesto-values",
+          "type": "bullets",
+          "content": {
+            "items": [
+              "Individuals and interactions > Processes and tools",
+              "Working software > Comprehensive documentation",
+              "Customer collaboration > Contract negotiation",
+              "Responding to change > Following a plan"
+            ]
+          }
+        },
+        {
+          "id": "manifesto-note",
+          "type": "text",
+          "content": "While there is value in the items on the right, we value the items on the left more."
+        },
+        {
+          "id": "values-evaluation",
+          "type": "activity",
+          "content": {
+            "title": "Evaluate and Design Methodology Approach",
+            "description": "Scenario: E-commerce startup, 3-month MVP deadline, evolving requirements. Team A: 3-week requirements phase, fixed-price contract, monthly status reports, change control board. Team B: 1-week sprints, on-site customer, daily standups, flexible scope. (1) Evaluate each approach against all four values—which values does each honor or violate? (2) Design a hybrid approach: select elements from both teams, justify which values you prioritize and why certain traditional practices might still be needed.",
+            "activityType": "individual-then-pairs",
+            "duration": "5 min"
+          }
+        }
+      ],
+      "speakerNotes": "Present values, then launch evaluation activity targeting evaluate and create levels. Students must evaluate two approaches against all four values, then create hybrid methodology justifying prioritization decisions. Expected reasoning: Team B aligns with agile values; Team A follows traditional approach but may offer risk mitigation through contracts. Hybrid might include sprints with lightweight contracts, daily standups with minimal documentation for compliance. Debrief emphasizes no single right answer—justification quality and value alignment matter. This directly supports methodology selection objective at evaluate level and prepares for next slide's concrete practice scenarios.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fade-in",
+        "tags": [
+          "agile-manifesto",
+          "evaluate",
+          "create",
+          "methodology-selection"
+        ]
+      }
+    },
+    {
+      "id": "slide-06",
+      "title": "Agile Values in Practice",
+      "layout": "content",
+      "blocks": [
+        {
+          "id": "values-scenarios",
+          "type": "bullets",
+          "content": {
+            "items": [
+              "Individuals & Interactions: Daily standup vs. status reports",
+              "Working Software: Demo vs. design document",
+              "Customer Collaboration: Product Owner on team vs. quarterly reviews",
+              "Responding to Change: Adapt backlog vs. change request forms"
+            ]
+          }
+        },
+        {
+          "id": "values-application",
+          "type": "activity",
+          "content": {
+            "title": "Evaluate and Design Hybrid Methodology",
+            "description": "Scenario: Healthcare startup, 4-month MVP, evolving requirements, regulatory compliance needed. Team A: 3-week requirements phase, fixed contract, monthly reports, change control. Team B: 1-week sprints, on-site customer, daily standups, flexible scope. (1) Evaluate each against all four values—which does each honor or violate? (2) Design hybrid methodology: select elements from both, justify which values you prioritize for this context and which traditional practices you retain for compliance.",
+            "activityType": "individual-then-pairs",
+            "duration": "5 min"
+          }
+        }
+      ],
+      "speakerNotes": "Activity targets evaluate and create levels, supporting methodology selection objective. Students evaluate two approaches against values, then create hybrid solution balancing agility with regulatory needs. Expected reasoning: Team B aligns with agile values; Team A offers compliance documentation. Hybrid might include 2-week sprints with lightweight compliance artifacts, daily standups with audit trails, customer collaboration within regulatory constraints. Debrief emphasizes justification quality and context-appropriate value prioritization. No single right answer—trade-off analysis matters. Connects to Scrum framework next, showing how specific practices operationalize these values.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fade-in",
+        "tags": [
+          "agile-manifesto",
+          "evaluate",
+          "create",
+          "methodology-selection"
+        ]
+      }
+    },
+    {
+      "id": "slide-07",
+      "title": "Scrum Framework Overview",
+      "layout": "content",
+      "blocks": [
+        {
+          "id": "scrum-components",
+          "type": "bullets",
+          "content": {
+            "items": [
+              "3 Roles: Product Owner, Scrum Master, Development Team",
+              "3 Artifacts: Product Backlog, Sprint Backlog, Increment",
+              "5 Events: Sprint, Sprint Planning, Daily Scrum, Sprint Review, Sprint Retrospective",
+              "Foundation: Transparency, Inspection, Adaptation"
+            ]
+          }
+        },
+        {
+          "id": "scrum-design-activity",
+          "type": "activity",
+          "content": {
+            "title": "Design Complete Scrum Implementation",
+            "description": "Scenario: Campus food delivery mobile app. 5 developers, 1 designer, 4-month MVP timeline, evolving student feedback. Design your Scrum approach: (1) Create role structure—who fills each role and why might you need external stakeholders? (2) Design your sprint cadence and justify the length based on project constraints. (3) Create 6-8 prioritized backlog items reflecting MVP scope. (4) Plan first sprint goal and analyze how transparency/inspection/adaptation will manage requirement evolution. Present one coherent implementation strategy.",
+            "activityType": "small-group",
+            "duration": "6 min"
+          }
+        }
+      ],
+      "speakerNotes": "Activity elevated to create-level by removing scaffolding and requiring coherent strategy design rather than filling blanks. Students must synthesize role assignments, sprint structure, backlog prioritization, and pillar application into unified implementation plan. Expected decisions: external PO representing students, SM from team, 2-week sprints balancing feedback cycles with development rhythm, backlog prioritizing core ordering/payment flows. Debrief focuses on justification quality and internal consistency—does sprint length align with feedback needs? Does role structure enable transparency? Connects to next slide's detailed role exploration, showing how design decisions impact team dynamics.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fade-in",
+        "tags": [
+          "scrum",
+          "framework",
+          "create",
+          "design"
+        ]
+      }
+    },
+    {
+      "id": "slide-08",
+      "title": "Scrum Roles and Interactions",
+      "layout": "content",
+      "blocks": [
+        {
+          "id": "roles-overview",
+          "type": "bullets",
+          "content": {
+            "items": [
+              "Product Owner: Maximizes value, manages/prioritizes backlog, defines acceptance criteria",
+              "Scrum Master: Removes impediments, coaches team, facilitates events, shields from disruption",
+              "Development Team: Self-organizing, cross-functional, commits to sprint goals, delivers increment",
+              "Collaboration: PO clarifies requirements ↔ Team asks questions; SM coaches ↔ Team provides feedback"
+            ]
+          }
+        },
+        {
+          "id": "role-design-activity",
+          "type": "activity",
+          "content": {
+            "title": "Design Role Structure for Complex Context",
+            "description": "Scenario: 20-person product development (3 interdependent features, shared codebase, regulatory compliance needs, distributed across 2 time zones). Design your role structure: How many teams? How many Product Owners and why? Will Scrum Masters serve multiple teams or dedicate to one? How will you handle cross-team dependencies and architectural decisions? Justify each choice using Scrum principles (self-organization, transparency, encapsulation of responsibilities). Present coherent organizational design.",
+            "activityType": "small-group",
+            "duration": "5 min"
+          }
+        }
+      ],
+      "speakerNotes": "Activity elevated to create-level by requiring organizational design rather than analyzing violations. Students must synthesize role structure for scaled Scrum context, making architectural decisions about team composition, PO allocation, and coordination mechanisms. Expected decisions: 2-3 teams with dedicated SMs, single PO or PO + domain proxies, architecture guild for technical alignment. Debrief focuses on tradeoff analysis—does structure enable autonomy while maintaining coherence? How do role boundaries scale? Connects to next slide's artifacts discussion, showing how role design impacts backlog management and transparency across teams.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fade-in",
+        "tags": [
+          "scrum",
+          "roles",
+          "create",
+          "design"
+        ]
+      }
+    },
+    {
+      "id": "slide-09",
+      "title": "Scrum Artifacts: Transparency Through Visibility",
+      "layout": "content",
+      "blocks": [
+        {
+          "id": "artifacts-list",
+          "type": "bullets",
+          "content": {
+            "items": [
+              "Product Backlog: Ordered list of all desired work",
+              "Sprint Backlog: Selected items + plan for current sprint",
+              "Increment: Potentially shippable product at sprint end",
+              "Definition of Done: Shared quality standard",
+              "All artifacts visible to entire team and stakeholders"
+            ]
+          }
+        }
+      ],
+      "speakerNotes": "Explain the flow: Product Backlog → Sprint Backlog → Increment. Emphasize 'potentially shippable'—the increment must meet the Definition of Done, even if not actually released. Give DoD example: 'Code reviewed, tests pass, documentation updated, deployed to staging.' Relate to earlier lectures: DoD can include DbC assertions verified, coding standards met, design patterns properly applied.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fade-in",
+        "tags": [
+          "scrum",
+          "artifacts",
+          "transparency"
+        ]
+      }
+    },
+    {
+      "id": "slide-10",
+      "title": "Sprint Cycle: Design Your Sprint Strategy",
+      "layout": "split",
+      "blocks": [
+        {
+          "id": "sprint-cycle-diagram",
+          "type": "diagram",
+          "content": {
+            "prompt": "Create a circular diagram showing a 2-week sprint cycle. Clockwise from top: 'Sprint Planning' (4h) → 'Daily Scrum' (15 min, small circles around arc) → 'Development Work' (largest arc) → 'Sprint Review' (2h) → 'Sprint Retrospective' (1.5h) → back to Sprint Planning. Center shows 'Sprint Goal' and 'Increment'. Use clock icons for time-boxing."
+          }
+        },
+        {
+          "id": "sprint-design-activity",
+          "type": "activity",
+          "content": {
+            "title": "Create: Design Sprint Structure",
+            "instructions": "Your 6-person team builds a healthcare compliance app (HIPAA regulations require audit trails, security reviews). Historical velocity: 18-22 pts/sprint. Product Backlog has 12 stories (3-13 pts each) with dependencies. Design your first 3 sprints: select stories for each, sequence them considering dependencies and compliance needs, write sprint goals, and specify when regulatory reviews occur. Justify your iteration strategy.",
+            "deliverable": "3-sprint plan with story assignments, goals, review points, and strategic justification explaining dependency management and compliance integration"
+          }
+        }
+      ],
+      "speakerNotes": "Walk through sprint cycle diagram emphasizing time-boxing and event purposes. Launch design activity requiring students to create multi-sprint strategy rather than just select stories for one sprint. This elevates to create-level by demanding synthesis of dependencies, regulatory constraints, and iteration planning. Students must design their own sequencing logic and justify trade-offs. Debrief solutions: How did compliance reviews affect sprint boundaries? Did anyone front-load risky stories vs. building foundational features first? Connect to objective of designing iterative cycles with real-world constraints.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fade-in",
+        "tags": [
+          "scrum",
+          "events",
+          "sprint",
+          "create",
+          "activity",
+          "iteration-design"
+        ]
+      }
+    },
+    {
+      "id": "slide-11",
+      "title": "Extreme Programming: Implement Core Practices",
+      "layout": "split",
+      "blocks": [
+        {
+          "id": "xp-values-practices",
+          "type": "bullets",
+          "content": {
+            "items": [
+              "5 Values: Communication, Simplicity, Feedback, Courage, Respect",
+              "Pair Programming: Two developers, one keyboard—driver codes, navigator reviews",
+              "Test-Driven Development: Red (failing test) → Green (minimal code) → Refactor",
+              "Continuous Integration: Merge code multiple times daily, automated tests verify",
+              "Collective Code Ownership: Any team member can improve any code"
+            ]
+          }
+        },
+        {
+          "id": "pair-tdd-exercise",
+          "type": "activity",
+          "content": {
+            "title": "Apply: Pair Programming + TDD",
+            "instructions": "Pair with a neighbor. Person A writes a failing test for a function that validates passwords (min 8 chars, 1 uppercase, 1 digit). Person B writes minimal code to pass. Switch roles: Person B writes test for edge case (empty string), Person A implements. Discuss: How did pairing catch errors? Did TDD clarify requirements?",
+            "deliverable": "Test code + implementation + 2 observations about pairing/TDD benefits"
+          }
+        }
+      ],
+      "speakerNotes": "Introduce XP as engineering complement to Scrum's project management. Walk through values and practices briefly. Then launch hands-on exercise: students experience pair programming and TDD simultaneously. Monitor pairs—common issues: driver ignoring navigator, writing implementation before test. Debrief: How did real-time code review improve quality? Did writing tests first clarify expected behavior? Connect to earlier OO principles: TDD supports correctness, pairing spreads knowledge (reduces key-person risk). This applies XP practices directly, elevating from understand to apply level and addressing the implementation objective gap.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fade-in",
+        "tags": [
+          "xp",
+          "practices",
+          "apply",
+          "activity",
+          "tdd",
+          "pairing"
+        ]
+      }
+    },
+    {
+      "id": "slide-12",
+      "title": "Test-Driven Development: Analyze Design Impact",
+      "layout": "split",
+      "blocks": [
+        {
+          "id": "tdd-cycle-visual",
+          "type": "diagram",
+          "content": {
+            "prompt": "Create a circular flow diagram showing TDD Red-Green-Refactor cycle. Three nodes with arrows: (1) 'RED' (red X icon) - 'Write failing test first', (2) 'GREEN' (green checkmark) - 'Minimal code to pass', (3) 'REFACTOR' (blue wrench) - 'Improve design, tests still pass'. Clockwise arrows between nodes. Add small code icons at each stage showing test → function → improved function."
+          }
+        },
+        {
+          "id": "tdd-analysis-activity",
+          "type": "activity",
+          "content": {
+            "title": "Analyze: TDD's Design Influence",
+            "instructions": "Implement email validator two ways. FIRST: Write implementation directly (no tests), supporting formats: user@domain.com, user+tag@domain.co.uk. SECOND: Use TDD—write 4 tests (valid basic, valid with tag, invalid missing @, invalid no domain), then implement. Compare: Which version has better modularity? Which handles edge cases? Analyze how writing tests first changed your design decisions. Evaluate: When would TDD overhead NOT be justified?",
+            "deliverable": "Both implementations + 3-sentence analysis of design differences + 1 scenario where TDD overhead isn't worth it"
+          }
+        }
+      ],
+      "speakerNotes": "Students experience TDD's design impact by comparing test-first vs. code-first approaches for same problem. This elevates from apply to analyze—they must examine how TDD shaped their design choices, coupling, and edge case handling. Monitor for superficial comparisons; push students to identify structural differences. Debrief common findings: TDD version often more modular, testable functions. Discussion on when TDD overhead isn't justified (throwaway prototypes, simple scripts) addresses evaluate-level thinking. Connects to create-level iteration design objective by showing how TDD practice influences development cycle structure and quality gates.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fade-in",
+        "tags": [
+          "xp",
+          "tdd",
+          "analyze",
+          "evaluate",
+          "activity",
+          "design-impact"
+        ]
+      }
+    },
+    {
+      "id": "slide-13",
+      "title": "XP Practices: Reinforcing Quality",
+      "layout": "image",
+      "blocks": [
+        {
+          "id": "xp-practices-map",
+          "type": "diagram",
+          "content": {
+            "prompt": "Create a mind map with 'XP Practices' at center, branches radiating outward showing practice relationships: (1) 'TDD' connects to 'Refactoring' and 'Simple Design', (2) 'Continuous Integration' connects to 'Collective Ownership' and 'Coding Standards', (3) 'Pair Programming' connects to 'TDD' and 'Collective Ownership', (4) 'Small Releases' connects to 'CI' and 'Customer Feedback'. Use arrows to show how practices support each other. Include small icons for each practice."
+          }
+        }
+      ],
+      "speakerNotes": "Show how XP practices reinforce each other—this is a system, not isolated techniques. For example: TDD enables confident refactoring, refactoring maintains simple design, CI requires collective ownership, pair programming spreads knowledge enabling collective ownership. Emphasize sustainable pace: 40-hour weeks, no heroics. Relate to course themes: these practices support extendibility, reusability, correctness from earlier lectures.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fade-in",
+        "tags": [
+          "xp",
+          "practices",
+          "visual",
+          "integration"
+        ]
+      }
+    },
+    {
+      "id": "slide-14",
+      "title": "Iterative vs. Incremental Development",
+      "layout": "split",
+      "blocks": [
+        {
+          "id": "iterative-incremental-diagram",
+          "type": "diagram",
+          "content": {
+            "prompt": "Create a comparison diagram with two sections. Top: 'Waterfall' showing sequential boxes (Requirements → Design → Implementation → Testing → Deployment) with no overlap. Bottom: 'Iterative-Incremental' showing 4 overlapping cycles, each containing mini-phases (Plan → Design → Code → Test). Show growing functionality with each iteration: Iteration 1 (small feature set), Iteration 2 (medium), Iteration 3 (larger), Iteration 4 (complete). Use stacked blocks to show incremental growth and circular arrows to show iterative refinement."
+          }
+        },
+        {
+          "id": "iteration-design-activity",
+          "type": "activity",
+          "content": {
+            "title": "Design Your Iteration Plan",
+            "duration": "8 minutes",
+            "instructions": "You're building a healthcare patient portal. Constraints: 4-month timeline, regulatory review required every 6 weeks, team velocity 20 pts/sprint, monthly stakeholder demos. Design your development plan: (1) Specify iteration length (1-4 weeks) and total number of iterations, (2) Map which features to build in each iteration (login, appointments, records, prescriptions), (3) Identify feedback points and regulatory checkpoints, (4) Justify your iteration length choice with 2 specific reasons.",
+            "deliverable": "Iteration timeline diagram with rationale"
+          }
+        }
+      ],
+      "speakerNotes": "First clarify concepts: Iterative = refining through cycles, Incremental = building piece by piece. Agile combines both. Then transition to activity: students design custom iteration strategy, not just apply template. This requires synthesizing constraints (regulatory reviews, demos, velocity) into coherent plan. Circulate to check: Are iterations too long (risk)? Too short (overhead)? Do regulatory reviews align with iteration boundaries? Debrief: Compare 2-week vs 3-week choices, discuss tradeoffs between feedback frequency and feature completeness per iteration.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fade-in",
+        "tags": [
+          "iterative",
+          "incremental",
+          "create",
+          "design-activity"
+        ]
+      }
+    },
+    {
+      "id": "slide-15",
+      "title": "Managing Technical Debt",
+      "layout": "split",
+      "blocks": [
+        {
+          "id": "tech-debt-concept",
+          "type": "bullets",
+          "content": {
+            "items": [
+              "Technical Debt: Shortcuts taken for speed, require future rework",
+              "Causes: Tight deadlines, changing requirements, learning",
+              "Impact: Slower velocity, increased bugs, harder to change",
+              "Management: Track debt, allocate refactoring time (20% per sprint)",
+              "Spike Solutions: Time-boxed research to reduce uncertainty"
+            ]
+          }
+        },
+        {
+          "id": "debt-analysis-activity",
+          "type": "activity",
+          "content": {
+            "title": "Identify and Prioritize Technical Debt",
+            "duration": "7 minutes",
+            "instructions": "Review this code snippet: a user authentication module with hard-coded credentials, no input validation, duplicated logic across 3 methods, and missing error handling. Tasks: (1) Identify 4 specific technical debt items, (2) Estimate 'interest cost' for each (low/medium/high impact on velocity), (3) Prioritize which 2 to address first in next sprint with justification, (4) Propose a 2-day spike to investigate OAuth integration—what questions should it answer?",
+            "deliverable": "Debt inventory with prioritization rationale"
+          }
+        }
+      ],
+      "speakerNotes": "Use financial metaphor: debt is like a loan—useful short-term but accrues interest. Activity targets analyze-level: students must identify debt in realistic code, not just define the concept. Circulate to check: Are they distinguishing between high-interest debt (security issues, duplicated logic) vs. low-interest (minor style inconsistencies)? Do spike questions address uncertainty (OAuth providers, token storage, migration path)? Debrief: Compare prioritization choices. Emphasize strategic debt is acceptable if tracked and repaid. Connect to XP practice of sustainable pace and refactoring.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fade-in",
+        "tags": [
+          "technical-debt",
+          "analyze",
+          "quality",
+          "refactoring"
+        ]
+      }
+    },
+    {
+      "id": "slide-16",
+      "title": "User Stories: INVEST Criteria",
+      "layout": "split",
+      "blocks": [
+        {
+          "id": "invest-list",
+          "type": "bullets",
+          "content": {
+            "items": [
+              "Independent: Can be developed in any order",
+              "Negotiable: Details emerge through conversation",
+              "Valuable: Provides clear benefit to user/stakeholder",
+              "Estimable: Team can estimate size/effort",
+              "Small: Fits within one iteration",
+              "Testable: Clear acceptance criteria"
+            ]
+          }
+        },
+        {
+          "id": "story-creation-activity",
+          "type": "activity",
+          "content": {
+            "title": "Write and Critique User Stories",
+            "duration": "8 minutes",
+            "instructions": "Create 3 user stories with acceptance criteria for a library management system feature: book reservation. Use role-feature-benefit format. Include 2 acceptance criteria per story. Then peer-review a partner's stories: check each against all 6 INVEST criteria, identify 2 violations or weaknesses, suggest specific improvements. Be ready to justify your INVEST assessment.",
+            "deliverable": "3 original stories + peer review feedback"
+          }
+        }
+      ],
+      "speakerNotes": "Brief INVEST overview using bullets, then transition to creation activity. This targets the create-level objective for writing user stories. Circulate to check: Are stories in proper format (As a [role], I want [feature], so that [benefit])? Are acceptance criteria testable and specific? During peer review, listen for INVEST reasoning—students should cite specific criteria violations like 'Not Small—spans multiple sprints' or 'Not Testable—vague criteria.' Debrief by sharing strong examples and common pitfalls. Emphasize acceptance criteria define 'done' and connect to testing practices covered in XP slides.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fade-in",
+        "tags": [
+          "user-stories",
+          "invest",
+          "create",
+          "peer-review"
+        ]
+      }
+    },
+    {
+      "id": "slide-17",
+      "title": "Sprint Planning Process",
+      "layout": "split",
+      "blocks": [
+        {
+          "id": "sprint-planning-flow",
+          "type": "diagram",
+          "content": {
+            "prompt": "Two-column flow chart. Left 'Part 1: What?': Product Backlog → PO presents priorities → Team asks questions → Team selects stories (based on velocity/capacity) → Sprint Goal. Right 'Part 2: How?': Selected stories → Break into tasks → Identify dependencies → Estimate hours → Sprint Backlog (stories + tasks). Use arrows and icons."
+          }
+        },
+        {
+          "id": "planning-activity",
+          "type": "activity",
+          "content": {
+            "title": "Conduct Sprint Planning",
+            "duration": "10 minutes",
+            "instructions": "Team of 4. Given: Product backlog with 8 user stories (3-8 pts each), team velocity 18 pts, capacity 120 hours this sprint. Part 1: Select stories to commit (justify using velocity). Create one cohesive sprint goal. Part 2: Pick your top story, break into 4-6 technical tasks with hour estimates. Identify one dependency. Present: sprint goal, committed stories, task breakdown.",
+            "deliverable": "Sprint goal + committed stories + task breakdown for one story"
+          }
+        }
+      ],
+      "speakerNotes": "Brief diagram walkthrough: Part 1 determines what (PO presents, team commits based on capacity), Part 2 determines how (task breakdown, dependencies). Then launch activity simulating real planning. Circulate to check: Are teams respecting velocity limits? Is sprint goal cohesive (not just list of stories)? Are tasks technical and granular (3-8 hours each)? Debrief common issues: over-committing, vague goals like 'finish stories,' missing dependencies. Emphasize team self-organizes and commits—PO doesn't assign. Connect to slide 10's backlog prioritization and slide 16's story quality.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fade-in",
+        "tags": [
+          "sprint-planning",
+          "scrum",
+          "apply",
+          "simulation"
+        ]
+      }
+    },
+    {
+      "id": "slide-18",
+      "title": "Agile vs. Traditional: Choosing the Right Approach",
+      "layout": "content",
+      "blocks": [
+        {
+          "id": "comparison-table",
+          "type": "bullets",
+          "content": {
+            "items": [
+              "Requirements: Agile (emergent) vs. Traditional (defined upfront)",
+              "Planning: Agile (adaptive) vs. Traditional (comprehensive)",
+              "Control: Agile (empirical) vs. Traditional (defined process)",
+              "Risk: Agile (early delivery) vs. Traditional (upfront analysis)",
+              "Best for Agile: Innovation, changing needs, small teams",
+              "Best for Traditional: Stable requirements, safety-critical, compliance"
+            ]
+          }
+        }
+      ],
+      "speakerNotes": "Present balanced comparison—neither approach is universally superior. Agile excels with uncertainty and change; traditional works for predictable, well-understood domains. Give examples: Agile for startup mobile app (changing market), Traditional for medical device (regulatory requirements). Mention hybrid approaches: agile development with waterfall documentation for compliance. Emphasize: tailor methodology to context, don't follow dogmatically. Ask students to consider their semester projects.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fade-in",
+        "tags": [
+          "comparison",
+          "methodology",
+          "selection"
+        ]
+      }
+    },
+    {
+      "id": "slide-19",
+      "title": "Agile Supporting Software Quality",
+      "layout": "content",
+      "blocks": [
+        {
+          "id": "quality-mapping",
+          "type": "bullets",
+          "content": {
+            "items": [
+              "Correctness: TDD verifies behavior, DbC verifies contracts",
+              "Robustness: CI catches integration issues, small increments limit risk",
+              "Extendibility: Refactoring prevents decay, SOLID principles guide structure",
+              "Reusability: Collective ownership spreads knowledge, patterns emerge"
+            ]
+          }
+        },
+        {
+          "id": "analysis-activity",
+          "type": "activity",
+          "content": {
+            "title": "Quality Practice Analysis",
+            "instructions": "Analyze this scenario: A team's code has 40% test coverage, no CI pipeline, and duplicated validation logic across 5 classes. (1) Identify which quality attributes are at risk. (2) Select 3 agile practices to address the issues. (3) For each practice, explain how it improves a specific quality attribute and estimate adoption effort (low/medium/high). (4) Prioritize the practices—which should be introduced first and why?",
+            "duration": "8 minutes",
+            "format": "Small groups, then share priorities"
+          }
+        }
+      ],
+      "speakerNotes": "This activity elevates understanding to analysis and evaluation. Students must diagnose quality problems (low coverage risks correctness, no CI risks robustness, duplication harms extendibility), then evaluate which practices address them. Prioritization requires justifying trade-offs between impact and effort. Sample solution: (1) TDD for correctness (medium effort), (2) CI for robustness (high effort), (3) Refactoring for extendibility (low effort). Prioritize refactoring first (quick win), then TDD (builds discipline), finally CI (infrastructure investment). Debrief: How do practices reinforce each other? This synthesizes agile practices with quality attributes from earlier lectures.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fade-in",
+        "tags": [
+          "quality",
+          "analyze",
+          "evaluate",
+          "synthesis"
+        ]
+      }
+    },
+    {
+      "id": "slide-20",
+      "title": "Agile in Object-Oriented Development",
+      "layout": "content",
+      "blocks": [
+        {
+          "id": "oo-agile-synergy",
+          "type": "bullets",
+          "content": {
+            "items": [
+              "Evolutionary Design: Classes emerge through refactoring, not upfront",
+              "TDD drives interface design: Tests first → loose coupling (DIP)",
+              "Refactor to Patterns: Apply when needed (YAGNI), not speculatively",
+              "Continuous refactoring maintains SOLID principles over time"
+            ]
+          }
+        },
+        {
+          "id": "design-evolution-activity",
+          "type": "activity",
+          "content": {
+            "title": "Design Evolution Exercise",
+            "instructions": "Scenario: You're building a notification system. Initially, only email notifications are needed. (1) Design a simple class structure (just class names and key methods). (2) New requirement: Add SMS notifications. Refactor your design—what changes? Which SOLID principle guides you? (3) Third requirement: Log all notifications. Apply a design pattern. Which pattern and why? (4) Reflect: How did TDD (testing each notification type separately) influence your coupling decisions?",
+            "duration": "7 minutes",
+            "format": "Individual sketch, then pair discussion"
+          }
+        }
+      ],
+      "speakerNotes": "This activity elevates the slide from understanding integration to applying evolutionary design. Students start simple (single EmailNotifier class), then refactor when requirements change (extract INotifier interface for SMS, applying Open-Closed Principle). The logging requirement prompts Decorator or Observer pattern. Debrief focuses on how TDD encourages designing for testability (dependency injection, interfaces), which naturally leads to SOLID compliance. Emphasize: agile doesn't mean no design—it means design emerges from real needs, validated by tests. This synthesizes OO principles with agile practices, addressing the implementation objective by having students actually design and refactor.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fade-in",
+        "tags": [
+          "oo",
+          "agile",
+          "apply",
+          "design",
+          "refactoring"
+        ]
+      }
+    },
+    {
+      "id": "slide-21",
+      "title": "Summary: Agile Ecosystem",
+      "layout": "image",
+      "blocks": [
+        {
+          "id": "agile-ecosystem",
+          "type": "diagram",
+          "content": {
+            "prompt": "Create a comprehensive infographic showing the agile ecosystem. Center: 'Agile Manifesto' (4 values). Inner ring: 'Methodologies' (Scrum, XP, Kanban icons). Middle ring: 'Practices' (TDD, CI, Pair Programming, Refactoring, User Stories icons). Outer ring: 'Benefits' (Faster delivery, Higher quality, Better collaboration, Adaptability). Use concentric circles with connecting lines showing relationships. Include small representative icons and use a cohesive color scheme."
+          }
+        }
+      ],
+      "speakerNotes": "Synthesize the lecture: Agile Manifesto provides values, methodologies (Scrum, XP) provide frameworks, practices (TDD, CI, refactoring) implement the frameworks, benefits (speed, quality, collaboration) result. Emphasize agile as a mindset, not just practices. Success requires: team commitment, organizational support, customer collaboration, continuous improvement through retrospectives. Preview next steps: students should apply these techniques in their projects. Mention future trends: DevOps, continuous delivery, agile at scale.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fade-in",
+        "tags": [
+          "summary",
+          "synthesis",
+          "visual"
+        ]
+      }
+    },
+    {
+      "id": "slide-22",
+      "title": "Key Takeaways and Next Steps",
+      "layout": "content",
+      "blocks": [
+        {
+          "id": "takeaways",
+          "type": "bullets",
+          "content": {
+            "items": [
+              "Agile is a mindset: Embrace change, value individuals, focus on working software",
+              "Scrum provides project framework; XP provides engineering practices",
+              "Quality built-in: TDD, CI, refactoring prevent defects",
+              "Iterative + Incremental: Deliver value early, refine continuously",
+              "Choose methodology based on context: requirements stability, team size, criticality",
+              "Apply in your projects: User stories, sprint planning, TDD, retrospectives"
+            ]
+          }
+        }
+      ],
+      "speakerNotes": "Conclude with actionable takeaways. Emphasize that students should apply these techniques in semester projects: write user stories, conduct sprint planning, practice TDD, hold retrospectives. Remind them that agile integrates with earlier course topics: supports OO development, complements DbC, enhances quality attributes. Encourage experimentation—agile is about continuous improvement. Assign exercises: write user stories for their projects, practice TDD, plan a sprint. Preview assessments: portfolio components, practical exams, case study analysis.",
+      "metadata": {
+        "transition": "fade",
+        "animation": "fade-in",
+        "tags": [
+          "conclusion",
+          "takeaways",
+          "action-items"
+        ]
+      }
+    }
+  ]
+}

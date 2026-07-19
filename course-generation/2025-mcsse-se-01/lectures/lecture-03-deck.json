@@ -1,0 +1,726 @@
+{
+  "slides": [
+    {
+      "id": "slide-01",
+      "title": "Lecture 3: Genericity and Information Hiding",
+      "layout": "title",
+      "blocks": [
+        {
+          "id": "block-01-title",
+          "type": "heading",
+          "content": "Genericity and Information Hiding"
+        },
+        {
+          "id": "block-01-subtitle",
+          "type": "text",
+          "content": "Building Reusable, Maintainable Software Components"
+        },
+        {
+          "id": "block-01-preview",
+          "type": "activity",
+          "content": {
+            "title": "Design Preview Challenge",
+            "description": "Before we begin: Imagine you're tasked with building a reusable notification system that handles messages of different types (email, SMS, push) with type-safe delivery guarantees. Sketch what classes/interfaces you'd need. What should clients see vs. what should be hidden? What would make this truly reusable across projects?",
+            "duration": "2 minutes",
+            "format": "Individual reflection, brief pair discussion",
+            "purpose": "Primes create-level thinking about component design, reusability constraints, and encapsulation boundaries before instruction"
+          }
+        }
+      ],
+      "speakerNotes": "Welcome to Lecture 3. Before diving into principles, let's activate your design thinking. Take two minutes to sketch a reusable notification system architecture—what abstractions would you create, what would you expose versus hide, how would you ensure type safety across message types? Don't aim for perfection; this primes you to recognize how genericity and information hiding solve real design challenges. Briefly compare ideas with a neighbor, noting different approaches. We'll return to this system throughout the lecture as our running example.",
+      "metadata": {
+        "transition": "fade",
+        "animation": "fadeIn",
+        "tags": [
+          "introduction",
+          "title",
+          "create",
+          "priming-activity"
+        ]
+      }
+    },
+    {
+      "id": "slide-02",
+      "title": "Learning Objectives & Pre-Assessment",
+      "layout": "content",
+      "blocks": [
+        {
+          "id": "block-02-objectives",
+          "type": "bullets",
+          "content": {
+            "items": [
+              "Apply generic programming to create reusable components",
+              "Design generic classes with type parameters and constraints",
+              "Apply information hiding to manage system complexity",
+              "Implement proper access control for encapsulation",
+              "Separate interface from implementation effectively"
+            ]
+          }
+        },
+        {
+          "id": "block-02-diagnostic",
+          "type": "activity",
+          "content": {
+            "title": "Quick Design Challenge",
+            "description": "Sketch a generic Cache<K, V> class interface. What type constraints would K need? What methods should be public vs private? Why?",
+            "duration": "3 minutes",
+            "format": "Think-pair-share",
+            "purpose": "Diagnostic baseline: reveals current design intuitions about genericity and encapsulation before instruction"
+          }
+        }
+      ],
+      "speakerNotes": "These objectives target apply and create levels. Before diving in, let's baseline your current design instincts with a quick challenge. Sketch a generic cache interface: what constraints on keys, what visibility for internal storage? Don't worry about correctness—this reveals where you are now. We'll revisit this design at lecture end to see how your thinking evolves. Pair up and compare your initial designs briefly.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fadeIn",
+        "tags": [
+          "objectives",
+          "apply",
+          "create",
+          "diagnostic-activity"
+        ]
+      }
+    },
+    {
+      "id": "slide-03",
+      "title": "The Problem: Code Duplication",
+      "layout": "split",
+      "blocks": [
+        {
+          "id": "block-03-problem",
+          "type": "bullets",
+          "content": {
+            "items": [
+              "Separate class for each type (IntStack, StringStack, PersonStack)",
+              "Identical logic duplicated across implementations",
+              "Maintenance nightmare: fix bugs in multiple places",
+              "Violates DRY (Don't Repeat Yourself) principle"
+            ]
+          }
+        },
+        {
+          "id": "block-03-diagram",
+          "type": "diagram",
+          "content": {
+            "prompt": "Side-by-side comparison showing two classes: IntStack with push(int), pop():int methods and StringStack with push(String), pop():String methods. Highlight the identical structure with arrows showing duplication. Use contrasting colors to emphasize the only difference is the type."
+          }
+        }
+      ],
+      "speakerNotes": "Imagine implementing a stack for integers, then realizing you need one for strings, then for custom objects. Without generics, you'd copy-paste the entire implementation, changing only the type. This leads to maintenance nightmares—fix a bug once, you have to fix it everywhere.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fadeIn",
+        "tags": [
+          "problem",
+          "motivation"
+        ]
+      }
+    },
+    {
+      "id": "slide-04",
+      "title": "The Solution: Generic Programming",
+      "layout": "split",
+      "blocks": [
+        {
+          "id": "block-04-concept",
+          "type": "bullets",
+          "content": {
+            "items": [
+              "Write code once, works with multiple types",
+              "Type parameters as placeholders",
+              "Single implementation, many instantiations",
+              "Enhances reusability, maintainability, type safety"
+            ]
+          }
+        },
+        {
+          "id": "block-04-diagram",
+          "type": "diagram",
+          "content": {
+            "prompt": "Conceptual diagram showing a single generic Stack<G> class at the center with three arrows pointing to instantiated versions: Stack<Integer>, Stack<String>, and Stack<Person>. Use a template/blueprint metaphor with the generic version as a master template."
+          }
+        },
+        {
+          "id": "block-04-activity",
+          "type": "activity",
+          "content": {
+            "title": "Design & Critique Challenge",
+            "instructions": "Design a generic PAIR container from scratch. Choose type parameters (one or two?) and declare key methods. Then critique your design: What usage scenarios does it support well? Where does it fall short? If you chose PAIR<G>, when would clients need PAIR<G,H> instead? If you chose two parameters, does that over-complicate simple cases? Propose one improvement addressing a weakness you identified.",
+            "duration": "5 minutes",
+            "format": "individual-then-share"
+          }
+        }
+      ],
+      "speakerNotes": "Genericity eliminates duplication through parameterized types. Before seeing syntax, design your own generic class and evaluate trade-offs. This isn't just about applying a pattern—you must create a design, then critically assess its strengths and limitations. The one-versus-two parameter decision has real consequences: flexibility versus simplicity, expressiveness versus cognitive load. After designing, step back and critique your own work. What use cases break your design? This metacognitive evaluation mirrors real-world architectural decision-making where you must justify choices and identify improvement opportunities.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fadeIn",
+        "tags": [
+          "solution",
+          "genericity",
+          "create",
+          "evaluate"
+        ]
+      }
+    },
+    {
+      "id": "slide-05",
+      "title": "Declaring Generic Classes",
+      "layout": "split",
+      "blocks": [
+        {
+          "id": "block-05-syntax",
+          "type": "bullets",
+          "content": {
+            "items": [
+              "Syntax: class ClassName[TypeParameter]",
+              "Type parameters in square brackets",
+              "Use throughout: fields, parameters, return types",
+              "Convention: G, T, E or descriptive names"
+            ]
+          }
+        },
+        {
+          "id": "block-05-code",
+          "type": "code",
+          "content": {
+            "language": "eiffel",
+            "code": "class STACK[G]\nfeature\n  items: ARRAY[G]\n  \n  push (item: G)\n  do\n    -- implementation\n  end\n  \n  pop: G\n  do\n    -- implementation\n  end\nend"
+          }
+        },
+        {
+          "id": "block-05-activity",
+          "type": "activity",
+          "content": {
+            "title": "Design from Requirements",
+            "instructions": "You're building a library for event scheduling. Requirements: store events of any type, retrieve by priority, support filtering by criteria. Design a complete generic class architecture from scratch: choose class names, declare all type parameters with constraints if needed, sketch key method signatures, and decide what fields are required. Justify: Why did you choose your type parameter structure? What constraints (if any) did you add and why? How does your design support the filtering requirement?",
+            "duration": "6 minutes",
+            "format": "individual-then-pair"
+          }
+        }
+      ],
+      "speakerNotes": "This create-level task requires synthesizing a complete generic architecture from requirements rather than filling in a template. Students must make foundational decisions: single generic parameter or multiple? What constraints enable priority and filtering? Should filtering be a method parameter or a separate type? These choices have cascading implications. During pair discussion, compare different valid architectures and identify trade-offs. This mirrors real design work where requirements don't dictate a single solution—you must create, justify, and defend architectural choices.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fadeIn",
+        "tags": [
+          "syntax",
+          "create",
+          "design-from-requirements"
+        ]
+      }
+    },
+    {
+      "id": "slide-06",
+      "title": "Type Instantiation",
+      "layout": "split",
+      "blocks": [
+        {
+          "id": "block-06-concepts",
+          "type": "bullets",
+          "content": {
+            "items": [
+              "Provide actual type arguments when creating instances",
+              "Type inference reduces verbosity",
+              "Compile-time type safety guaranteed",
+              "Each instantiation is a distinct type"
+            ]
+          }
+        },
+        {
+          "id": "block-06-code",
+          "type": "code",
+          "content": {
+            "language": "eiffel",
+            "code": "-- Explicit type instantiation\nint_stack: STACK[INTEGER]\ncreate int_stack.make\n\nstring_stack: STACK[STRING]\ncreate string_stack.make\n\n-- These are distinct types\nint_stack.push(42)        -- OK\nstring_stack.push(\"hello\") -- OK\nint_stack.push(\"error\")   -- Compile error!"
+          }
+        }
+      ],
+      "speakerNotes": "When creating instances, we specify the actual type. STACK[INTEGER] and STACK[STRING] are distinct types—the compiler won't let you mix them up. This is type safety in action: errors caught at compile time, not runtime.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fadeIn",
+        "tags": [
+          "instantiation",
+          "code"
+        ]
+      }
+    },
+    {
+      "id": "slide-07",
+      "title": "Constraint Design Challenge",
+      "layout": "content",
+      "blocks": [
+        {
+          "id": "block-07-scenario",
+          "type": "bullets",
+          "content": {
+            "items": [
+              "Generic classes need constraints to enable operations",
+              "Too restrictive → limits reusability",
+              "Too permissive → can't implement required behavior",
+              "Design challenge: find minimal necessary constraints"
+            ]
+          }
+        },
+        {
+          "id": "block-07-activity",
+          "type": "activity",
+          "content": {
+            "title": "Design Exercise: Determine Minimal Constraints",
+            "description": "For each generic class below, determine the minimal type constraint needed. Justify why your constraint is both necessary and sufficient.",
+            "tasks": [
+              "PRIORITY_QUEUE[G] — needs to order elements by priority",
+              "HASH_TABLE[K, V] — needs to compute hash codes for keys",
+              "SORTED_LIST[G] — needs to maintain sorted order and find duplicates"
+            ],
+            "timeEstimate": "5 minutes"
+          }
+        },
+        {
+          "id": "block-07-example",
+          "type": "code",
+          "content": {
+            "language": "eiffel",
+            "code": "class SORTED_LIST[G]  -- What constraint?\n  insert (item: G)\n  do\n    if item > current_item then  -- Needs what?\n      -- requires comparison\n    end\n  end\n  \n  has_duplicate (item: G): BOOLEAN\n  do\n    -- requires equality check\n  end\nend"
+          }
+        }
+      ],
+      "speakerNotes": "This activity moves students from understanding why constraints exist to applying design judgment. They must analyze what operations each class requires, then determine the minimal interface needed—avoiding over-constraining while ensuring necessary capabilities. The SORTED_LIST example requires both comparison and equality, pushing students to think about multiple operation requirements. Discuss trade-offs: COMPARABLE vs HASHABLE vs custom interfaces. This applies constraint design to novel scenarios, building toward the create-level objective of designing generic classes.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fadeIn",
+        "tags": [
+          "constraints",
+          "apply",
+          "design-activity"
+        ]
+      }
+    },
+    {
+      "id": "slide-08",
+      "title": "Implementing Type Constraints",
+      "layout": "content",
+      "blocks": [
+        {
+          "id": "block-08-syntax",
+          "type": "bullets",
+          "content": {
+            "items": [
+              "Syntax: class NAME[G -> CONSTRAINT]",
+              "Type arguments must satisfy constraints",
+              "Enables calling methods from constraint type",
+              "Compiler enforces constraint satisfaction"
+            ]
+          }
+        },
+        {
+          "id": "block-08-code",
+          "type": "code",
+          "content": {
+            "language": "eiffel",
+            "code": "class SORTED_LIST[G -> COMPARABLE]\n  insert (item: G)\n  do\n    if item > current_item then  -- Valid!\n      -- comparison enabled by constraint\n    end\n  end\n  \n  find_max: G\n  do\n    -- Can safely compare elements\n  end\nend"
+          }
+        },
+        {
+          "id": "block-08-activity",
+          "type": "activity",
+          "content": {
+            "title": "Analyze: Constraint Necessity",
+            "description": "For the SORTED_LIST above, evaluate what breaks if we remove the constraint. Then analyze: could we use a weaker constraint like ANY? What operations would fail? What's the minimal interface G needs to support both insert and find_max? Justify your reasoning.",
+            "timeEstimate": "3 minutes"
+          }
+        }
+      ],
+      "speakerNotes": "This activity pushes students to analyze constraint necessity rather than just accepting syntax. By asking what breaks without constraints, they must trace through operations and identify dependencies. The question about weaker constraints (ANY vs COMPARABLE) requires analyzing trade-offs between flexibility and functionality. This moves from understanding syntax to analyzing why constraints exist and evaluating minimal requirements—supporting the objective of designing appropriate constraints.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fadeIn",
+        "tags": [
+          "constraints",
+          "analyze",
+          "code"
+        ]
+      }
+    },
+    {
+      "id": "slide-09",
+      "title": "Designing with Constraints",
+      "layout": "split",
+      "blocks": [
+        {
+          "id": "block-09-principles",
+          "type": "bullets",
+          "content": {
+            "items": [
+              "Choose minimal necessary constraints",
+              "Overly restrictive = limited reusability",
+              "Design interfaces for use as constraints",
+              "Balance flexibility vs. functionality"
+            ]
+          }
+        },
+        {
+          "id": "block-09-scenario",
+          "type": "text",
+          "content": "**Scenario:** Design a generic PRIORITY_QUEUE[G] that orders elements by priority. Two approaches proposed:\n\n**A:** Constraint G -> COMPARABLE (elements self-compare)\n**B:** Add separate PRIORITY_FUNCTION parameter, no constraint on G"
+        },
+        {
+          "id": "block-09-activity",
+          "type": "activity",
+          "content": {
+            "title": "Evaluate: Constraint Trade-offs",
+            "explanation": "Compare approaches A and B. For each: (1) What use cases does it support well? (2) What use cases does it prevent? (3) Which is more reusable and why? Then propose a third approach that combines strengths of both. Justify which approach you'd choose for a general-purpose library.",
+            "timeEstimate": "4 minutes"
+          }
+        }
+      ],
+      "speakerNotes": "This evaluation task requires students to analyze trade-offs between constraint designs rather than just applying rules. Approach A is simpler but forces G to be comparable. Approach B is more flexible but more complex. Strong answers recognize that approach B enables priority queues over non-comparable types (like tasks prioritized by external rules). The best solution might combine both: allow optional priority function with COMPARABLE as fallback. This develops judgment in constraint design—a key skill for creating reusable components.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fadeIn",
+        "tags": [
+          "evaluate",
+          "constraints",
+          "design"
+        ]
+      }
+    },
+    {
+      "id": "slide-10",
+      "title": "Information Hiding: Design Challenge",
+      "layout": "split",
+      "blocks": [
+        {
+          "id": "block-10-definition",
+          "type": "quote",
+          "content": "\"Modules should hide design decisions that are likely to change from other modules.\" —David Parnas"
+        },
+        {
+          "id": "block-10-scenario",
+          "type": "bullets",
+          "content": {
+            "items": [
+              "Scenario: STUDENT_REGISTRY class manages enrollment",
+              "Current: public array 'students', public 'count' field",
+              "Clients directly access: registry.students[i], registry.count",
+              "Problem: Need to switch from array to hash table"
+            ]
+          }
+        },
+        {
+          "id": "block-10-activity",
+          "type": "activity",
+          "content": {
+            "title": "Apply Information Hiding",
+            "explanation": "Redesign STUDENT_REGISTRY to hide the storage implementation. Determine: (1) Which members should be private vs public? (2) What public methods should replace direct access? (3) How does your design allow switching from array to hash table without breaking client code? Justify each visibility decision.",
+            "timeEstimate": "4 minutes"
+          }
+        }
+      ],
+      "speakerNotes": "This activity requires applying information hiding to solve a realistic problem. Students must analyze what should be hidden, design a proper interface, and justify their decisions. The scenario mirrors real evolution challenges. After individual work, discuss solutions: make storage and count private, provide methods like enroll(), find(), remove(). This demonstrates how hiding implementation details enables changing data structures without affecting clients—the core value of information hiding.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fadeIn",
+        "tags": [
+          "information-hiding",
+          "apply",
+          "design"
+        ]
+      }
+    },
+    {
+      "id": "slide-11",
+      "title": "Applying Information Hiding: Design Analysis",
+      "layout": "split",
+      "blocks": [
+        {
+          "id": "block-11-scenario",
+          "type": "bullets",
+          "content": {
+            "items": [
+              "Given: EMPLOYEE_DATABASE class with public fields 'employees: ARRAY[EMPLOYEE]' and 'size: INTEGER'",
+              "Clients use: db.employees[i].salary := 50000",
+              "New requirement: Add audit logging for all salary changes",
+              "Challenge: Current design makes this impossible without changing all client code"
+            ]
+          }
+        },
+        {
+          "id": "block-11-activity",
+          "type": "activity",
+          "content": {
+            "title": "Redesign for Information Hiding",
+            "explanation": "Redesign EMPLOYEE_DATABASE applying information hiding. (1) Identify what to hide and what to expose. (2) Design public methods to replace direct access. (3) Explain how your design enables audit logging without breaking clients. (4) Analyze trade-offs: what flexibility does hiding provide vs. what convenience does direct access lose?",
+            "timeEstimate": "5 minutes"
+          }
+        }
+      ],
+      "speakerNotes": "This shifts from passive explanation to active application and analysis. Students must apply information hiding principles to solve a realistic problem, then analyze trade-offs. After individual work, discuss solutions: hide employees array and size, expose update_salary(), get_employee() methods. The key insight: hiding implementation creates an interception point for cross-cutting concerns like logging. Discuss the trade-off: clients lose direct access convenience but gain flexibility for system evolution. This demonstrates why information hiding is worth the initial design effort.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fadeIn",
+        "tags": [
+          "information-hiding",
+          "apply",
+          "analyze"
+        ]
+      }
+    },
+    {
+      "id": "slide-12",
+      "title": "Access Control Levels: Design Decisions",
+      "layout": "split",
+      "blocks": [
+        {
+          "id": "block-12-scenario",
+          "type": "code",
+          "content": {
+            "language": "eiffel",
+            "code": "class STUDENT_REGISTRY\n  students: ARRAY[STUDENT]\n  enrollment_count: INTEGER\n  max_capacity: INTEGER\n  \n  enroll(s: STUDENT)\n  drop(s: STUDENT)\n  find_by_id(id: STRING): STUDENT\n  validate_enrollment(s: STUDENT): BOOLEAN\n  update_statistics\n  get_enrollment_count: INTEGER\nend"
+          }
+        },
+        {
+          "id": "block-12-activity",
+          "type": "activity",
+          "content": {
+            "title": "Apply Access Control",
+            "explanation": "For each feature in STUDENT_REGISTRY, decide: private, protected, or public? Justify each choice considering: (1) what clients need vs implementation details, (2) future flexibility for changes, (3) preventing misuse. Then identify one consequence of making 'students' public vs private.",
+            "timeEstimate": "4 minutes"
+          }
+        }
+      ],
+      "speakerNotes": "Students must apply access control principles to make design decisions, not just recall definitions. Expected: students array and update_statistics private (implementation details), validate_enrollment private or protected (helper), public interface minimal (enroll, drop, find_by_id, get_enrollment_count). Key insight: exposing 'students' directly allows clients to bypass enroll/drop logic, breaking invariants. After individual work, compare decisions and discuss trade-offs. This bridges to slide 13's BANK_ACCOUNT example showing proper separation.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fadeIn",
+        "tags": [
+          "access-control",
+          "apply",
+          "design-decisions"
+        ]
+      }
+    },
+    {
+      "id": "slide-13",
+      "title": "Designing Class Interfaces",
+      "layout": "split",
+      "blocks": [
+        {
+          "id": "block-13-example",
+          "type": "code",
+          "content": {
+            "language": "eiffel",
+            "code": "class BANK_ACCOUNT\nfeature -- Access\n  balance: DECIMAL\n  deposit (amount: DECIMAL)\n  withdraw (amount: DECIMAL)\n\nfeature {NONE} -- Implementation\n  transaction_log: LINKED_LIST[TRANSACTION]\n  validate_amount (amount: DECIMAL): BOOLEAN\n  update_audit_trail\nend\n\n-- What if balance were feature {NONE}?\n-- What if transaction_log were public?\n-- What if validate_amount were public?"
+          }
+        },
+        {
+          "id": "block-13-activity",
+          "type": "activity",
+          "content": {
+            "title": "Design Interface & Justify Decisions",
+            "explanation": "Design the public interface for class EMAIL_QUEUE with features: messages (array), add_message, send_next, retry_failed, last_error, validate_recipient, log_activity, message_count. For each feature, decide public or private and write one-sentence justification. Then: identify two problems that occur if 'messages' is public instead of private.",
+            "timeEstimate": "5 minutes"
+          }
+        }
+      ],
+      "speakerNotes": "Students must apply interface design principles to make and justify access control decisions. Expected reasoning: messages private (prevent bypassing queue logic), add_message/send_next/message_count public (core operations), validate_recipient/log_activity/retry_failed private (implementation details). Key insight: exposing messages allows clients to manipulate queue directly, breaking ordering guarantees and bypassing validation. After individual work, compare decisions in pairs. This builds on slide 12's activity and prepares for slide 14's contract discussion.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fadeIn",
+        "tags": [
+          "interface-design",
+          "apply",
+          "design-decisions"
+        ]
+      }
+    },
+    {
+      "id": "slide-14",
+      "title": "Interface as Contract",
+      "layout": "split",
+      "blocks": [
+        {
+          "id": "block-14-concepts",
+          "type": "bullets",
+          "content": {
+            "items": [
+              "Interface defines WHAT, not HOW",
+              "Specifies signatures, preconditions, postconditions",
+              "Forms contract between provider and client",
+              "Stable interface, evolving implementation"
+            ]
+          }
+        },
+        {
+          "id": "block-14-activity",
+          "type": "activity",
+          "content": {
+            "title": "Analyze Interface Separation Quality",
+            "explanation": "Three designs for interface CACHE<K,V> are provided. Design A: get(key), put(key,value), size(). Design B: get(key), put(key,value), getInternalArray(), rehash(), size(). Design C: get(key), put(key,value), clear(), contains(key). Analyze each: (1) Identify which exposes implementation details (leaky abstraction). (2) Rank designs from best to worst separation. (3) Justify ranking with specific problems in weaker designs. (4) Propose one improvement to Design C.",
+            "timeEstimate": "6 minutes"
+          }
+        }
+      ],
+      "speakerNotes": "Students analyze interface designs to distinguish good separation from leaky abstractions. Design B clearly violates separation by exposing getInternalArray() and rehash(). Expected ranking: C > A > B. Key insight: B locks clients into array-based implementation and breaks encapsulation. Design C is strongest but could add remove(key) for completeness. This analyze-level task directly addresses the objective 'distinguish between interface and implementation' and prepares students for slide 15's programming-to-interfaces principle. Discuss findings in pairs before class debrief.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fadeIn",
+        "tags": [
+          "interface",
+          "contract",
+          "analyze",
+          "separation-quality"
+        ]
+      }
+    },
+    {
+      "id": "slide-15",
+      "title": "Programming to Interfaces",
+      "layout": "split",
+      "blocks": [
+        {
+          "id": "block-15-principles",
+          "type": "bullets",
+          "content": {
+            "items": [
+              "Depend on abstractions, not concrete classes",
+              "Enables substitutability and flexibility",
+              "Facilitates testing with mock implementations",
+              "Supports plugin architectures"
+            ]
+          }
+        },
+        {
+          "id": "block-15-activity",
+          "type": "activity",
+          "content": {
+            "title": "Refactor to Interface Dependencies",
+            "explanation": "Given code: class ReportGenerator { private MySQLDatabase db = new MySQLDatabase(); void generate() { db.connect(); List<Record> data = db.query(\"SELECT...\"); /*process*/ } }. Tasks: (1) Identify all concrete dependencies that limit flexibility. (2) Refactor to use interface types, introducing a Database interface. (3) Explain how your refactoring enables: testing with mock databases, switching to PostgreSQL, supporting multiple database backends simultaneously. (4) Identify injection points for dependency injection.",
+            "timeEstimate": "7 minutes"
+          }
+        }
+      ],
+      "speakerNotes": "Students apply programming-to-interfaces by refactoring concrete dependencies. Expected solution introduces Database interface, changes field type to Database, uses constructor injection. This apply-level task directly addresses 'distinguish between interface and implementation' by requiring students to identify separation boundaries and demonstrate flexibility gains. Key insight: concrete class in field declaration locks implementation; interface enables runtime substitution. Discuss testing and plugin scenarios. Prepares for slide 16's synthesis of genericity and information hiding.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fadeIn",
+        "tags": [
+          "interfaces",
+          "dependency-inversion",
+          "apply",
+          "refactoring"
+        ]
+      }
+    },
+    {
+      "id": "slide-16",
+      "title": "Combining Genericity and Information Hiding",
+      "layout": "split",
+      "blocks": [
+        {
+          "id": "block-16-synthesis",
+          "type": "bullets",
+          "content": {
+            "items": [
+              "Generic interfaces with hidden implementations",
+              "Type flexibility + implementation concealment",
+              "Single generic interface, multiple implementations",
+              "Change internals without affecting type-safe clients"
+            ]
+          }
+        },
+        {
+          "id": "block-16-design",
+          "type": "activity",
+          "content": {
+            "title": "Design a Generic Cache System",
+            "explanation": "Design CACHE<K,V> from requirements: (1) Create interface with put, get, remove, size operations. (2) Design two implementations: LRU_CACHE (evicts least-recently-used) and TTL_CACHE (time-to-live expiration). (3) Specify type constraints on K and V with justification. (4) Identify what implementation details to hide and what to expose in interface. (5) Explain how clients benefit from both genericity and information hiding.",
+            "timeEstimate": "10 minutes"
+          }
+        }
+      ],
+      "speakerNotes": "Students now create a complete generic component integrating both principles. This create-level task addresses multiple objectives: designing generic classes with constraints, building reusable components, and establishing clean interface-implementation boundaries. Expected solution: CACHE<K,V> interface with operations; LRU_CACHE uses linked structure (hidden); TTL_CACHE uses timestamps (hidden); K constrained to HASHABLE; eviction policies completely encapsulated. Discussion should highlight how interface stability enables swapping implementations and how genericity enables reuse across types. This prepares students for the collection framework case study in slide 17.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fadeIn",
+        "tags": [
+          "synthesis",
+          "create",
+          "design-activity"
+        ]
+      }
+    },
+    {
+      "id": "slide-17",
+      "title": "Case Study: Collection Frameworks",
+      "layout": "split",
+      "blocks": [
+        {
+          "id": "block-17-analysis",
+          "type": "bullets",
+          "content": {
+            "items": [
+              "Generic type parameters for elements",
+              "Interface hierarchy hides implementation diversity",
+              "Constrained genericity for specialized collections",
+              "Information hiding in data structure choices"
+            ]
+          }
+        },
+        {
+          "id": "block-17-diagram",
+          "type": "diagram",
+          "content": {
+            "prompt": "Simplified UML class diagram of collection framework. Top: Collection<E> interface. Below: List<E>, Set<E>, Map<K,V> interfaces. Bottom level: ArrayList<E>, LinkedList<E> implementing List; HashSet<E>, TreeSet<E> implementing Set; HashMap<K,V>, TreeMap<K,V> implementing Map. Use different colors for interfaces vs implementations."
+          }
+        }
+      ],
+      "speakerNotes": "Real-world example: Java Collections Framework. Generic interfaces at top—Collection<E>, List<E>, Set<E>. Multiple implementations below—ArrayList, LinkedList, HashSet, TreeSet. Clients program to interfaces, get type safety through generics, and remain independent of implementation choices. This is professional library design.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fadeIn",
+        "tags": [
+          "case-study",
+          "real-world"
+        ]
+      }
+    },
+    {
+      "id": "slide-18",
+      "title": "Key Takeaways",
+      "layout": "content",
+      "blocks": [
+        {
+          "id": "block-18-summary",
+          "type": "bullets",
+          "content": {
+            "items": [
+              "Genericity enables type-safe reuse across types",
+              "Constraints balance flexibility with required functionality",
+              "Information hiding manages complexity through encapsulation",
+              "Interface-implementation separation enables evolution",
+              "Together: robust, reusable, maintainable components"
+            ]
+          }
+        },
+        {
+          "id": "block-18-diagram",
+          "type": "diagram",
+          "content": {
+            "prompt": "Concept map showing central node 'Reusable Software Components' with four connected nodes: 'Genericity' (type parameters, constraints), 'Information Hiding' (private implementation), 'Interface Separation' (contract vs implementation), and 'Quality Attributes' (maintainability, extensibility, correctness). Use arrows to show relationships and contributions."
+          }
+        }
+      ],
+      "speakerNotes": "Let's synthesize: Genericity gives us type-safe reuse. Information hiding manages complexity. Interface separation enables evolution. Together, these principles let us build components that are reusable across contexts, maintainable over time, and correct by construction. These aren't just academic concepts—they're the foundation of professional software engineering. Master them, and you'll write better code for your entire career.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fadeIn",
+        "tags": [
+          "summary",
+          "conclusion"
+        ]
+      }
+    }
+  ]
+}

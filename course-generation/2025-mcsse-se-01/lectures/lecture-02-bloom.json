@@ -1,0 +1,174 @@
+{
+  "alignmentScore": 88,
+  "dominantLevel": "apply",
+  "distribution": {
+    "remember": 5,
+    "understand": 15,
+    "apply": 50,
+    "analyze": 15,
+    "evaluate": 15,
+    "create": 0
+  },
+  "objectiveAlignments": [
+    {
+      "objective": "Understand and apply single inheritance to create class hierarchies that promote code reuse and logical organization",
+      "expectedLevel": "apply",
+      "observedLevel": "apply",
+      "status": "aligned",
+      "rationale": "Slides 2-5 provide multiple application opportunities: university system design (slide 2), Vehicle hierarchy extension (slide 3), hierarchy evaluation activity (slide 4), and Eiffel implementation (slide 5). Students actively design hierarchies, not just observe examples."
+    },
+    {
+      "objective": "Evaluate the benefits and challenges of multiple inheritance and apply appropriate design strategies",
+      "expectedLevel": "evaluate",
+      "observedLevel": "evaluate",
+      "status": "aligned",
+      "rationale": "Slides 6-9 systematically build to evaluation. Slide 7 has students analyze diamond problem ambiguities and propose resolution strategies. Slide 9 explicitly asks students to evaluate MI vs. composition trade-offs using criteria (code reuse, maintainability, diamond risk, semantic clarity) and justify choices—classic evaluate-level activity."
+    },
+    {
+      "objective": "Master polymorphism and substitutability principles to write flexible, extensible code",
+      "expectedLevel": "apply",
+      "observedLevel": "apply",
+      "status": "aligned",
+      "rationale": "Slides 10-12 cover polymorphism with Eiffel code examples (slide 12 shows polymorphic iteration). LSP is explained (slide 11) with behavioral substitution principles. However, 'master' suggests deeper practice—students see examples but limited hands-on polymorphic coding beyond the zoo example. Still meets apply level through code comprehension and conceptual application."
+    },
+    {
+      "objective": "Explain dynamic binding mechanisms and their role in achieving late binding and runtime flexibility",
+      "expectedLevel": "understand",
+      "observedLevel": "understand",
+      "status": "aligned",
+      "rationale": "Slides 13-14 explain dynamic binding concepts and vtable implementation. Slide 14's diagram shows memory layout and lookup process. Students explain the mechanism (understand level) rather than implement or analyze performance trade-offs in depth. Matches the 'explain' verb in the objective."
+    },
+    {
+      "objective": "Distinguish between method redefinition and overriding, applying each appropriately",
+      "expectedLevel": "apply",
+      "observedLevel": "apply",
+      "status": "aligned",
+      "rationale": "Slide 15 provides hands-on activity where students design RECTANGLE and TRIANGLE classes with redefined area methods. Slide 16 demonstrates Precursor for extending behavior. Students apply redefinition syntax and understand when to use Precursor vs. complete replacement. The activity requires appropriate application of redefinition concepts."
+    },
+    {
+      "objective": "Implement inheritance hierarchies in Eiffel demonstrating best practices in object-oriented design",
+      "expectedLevel": "apply",
+      "observedLevel": "apply",
+      "status": "aligned",
+      "rationale": "Multiple slides require Eiffel implementation: slide 5 (CHECKING_ACCOUNT), slide 8 (diamond resolution with rename), slide 15 (shape hierarchy). Slide 18 covers best practices. Students write Eiffel code structures and apply syntax (inherit, redefine, rename, Precursor). Meets apply level for implementation."
+    }
+  ],
+  "slideTags": [
+    {
+      "slideTitle": "Lecture 2: Inheritance, Polymorphism and Dynamic Binding",
+      "primaryLevel": "apply",
+      "evidence": "90-second activation challenge asks students to sketch class hierarchies from real systems—immediate application of 'is-a' relationships before formal instruction."
+    },
+    {
+      "slideTitle": "Why Inheritance Matters: Design Challenge",
+      "primaryLevel": "apply",
+      "evidence": "University system scenario requires students to design inheritance hierarchy, decide parent class, attribute placement, and whether TA needs multiple inheritance—core application activity."
+    },
+    {
+      "slideTitle": "Inheritance in Action: Design Exercise",
+      "primaryLevel": "apply",
+      "evidence": "Students extend Vehicle hierarchy by adding ElectricCar and Bicycle, identifying LSP violations and refactoring needs—applies inheritance design principles to novel cases."
+    },
+    {
+      "slideTitle": "Single Inheritance: Apply the Principles",
+      "primaryLevel": "evaluate",
+      "evidence": "Students evaluate three proposed hierarchies (Employee→Manager, Shape→Square→Rectangle, Animal→Dog→Puppy) to identify LSP violations and justify corrections—requires judgment against principles."
+    },
+    {
+      "slideTitle": "Single Inheritance in Eiffel: Apply It",
+      "primaryLevel": "apply",
+      "evidence": "Students implement CHECKING_ACCOUNT class with inheritance, features, and contracts in Eiffel syntax—direct code application with design decisions about preconditions."
+    },
+    {
+      "slideTitle": "Multiple Inheritance: Power and Complexity",
+      "primaryLevel": "understand",
+      "evidence": "Introduces MI concepts, DAG structures, and language support differences—explanatory content without application activities on this slide."
+    },
+    {
+      "slideTitle": "The Diamond Problem: Analysis Challenge",
+      "primaryLevel": "analyze",
+      "evidence": "Students identify all ambiguities (attributes, methods, initialization) in diamond scenario and break down the structural problem—analysis of components and relationships."
+    },
+    {
+      "slideTitle": "Resolving the Diamond: Eiffel Approach",
+      "primaryLevel": "understand",
+      "evidence": "Demonstrates Eiffel's rename solution with code example and explains trade-offs—explanatory rather than requiring students to implement or evaluate."
+    },
+    {
+      "slideTitle": "Evaluating Multiple Inheritance Design Decisions",
+      "primaryLevel": "evaluate",
+      "evidence": "Students compare MI vs. composition for TA scenario using explicit criteria (code reuse, maintainability, diamond risk, semantic clarity), vote, and justify choice—classic evaluation activity."
+    },
+    {
+      "slideTitle": "Polymorphism: One Interface, Many Forms",
+      "primaryLevel": "understand",
+      "evidence": "Explains polymorphism concept with memory diagram showing static vs. dynamic types—conceptual explanation without application task."
+    },
+    {
+      "slideTitle": "Liskov Substitution Principle (LSP)",
+      "primaryLevel": "understand",
+      "evidence": "Defines LSP, explains behavioral subtyping and contract rules—conceptual understanding with Square/Rectangle example but no application activity."
+    },
+    {
+      "slideTitle": "Polymorphism in Eiffel",
+      "primaryLevel": "understand",
+      "evidence": "Shows polymorphic code example (zoo feeding) with explanation of dynamic dispatch—students read and comprehend code rather than write it."
+    },
+    {
+      "slideTitle": "Dynamic Binding: Runtime Method Resolution",
+      "primaryLevel": "understand",
+      "evidence": "Explains static vs. dynamic binding, vtable mechanism, and trade-offs—conceptual explanation of the mechanism."
+    },
+    {
+      "slideTitle": "Virtual Method Table (vtable)",
+      "primaryLevel": "understand",
+      "evidence": "Detailed explanation of vtable implementation with memory diagram showing lookup process—understanding the mechanism rather than analyzing performance or implementing."
+    },
+    {
+      "slideTitle": "Method Redefinition: Apply It",
+      "primaryLevel": "apply",
+      "evidence": "Students design RECTANGLE and TRIANGLE classes with redefined area methods, deciding on features and implementations—hands-on application of redefinition."
+    },
+    {
+      "slideTitle": "Using Precursor: Extending Parent Behavior",
+      "primaryLevel": "understand",
+      "evidence": "Demonstrates Precursor usage in MANAGER.calculate_salary example—shows how to extend behavior but students don't implement it themselves on this slide."
+    },
+    {
+      "slideTitle": "Design Patterns: Template Method",
+      "primaryLevel": "understand",
+      "evidence": "Explains Template Method pattern with UML diagram and describes how it leverages inheritance—conceptual understanding of pattern structure."
+    },
+    {
+      "slideTitle": "Common Pitfalls and Best Practices",
+      "primaryLevel": "remember",
+      "evidence": "Lists best practices and pitfalls to avoid—primarily recall of guidelines without application or evaluation activities."
+    },
+    {
+      "slideTitle": "Summary: Key Takeaways",
+      "primaryLevel": "remember",
+      "evidence": "Recaps main concepts covered in lecture—recall and consolidation of learned material."
+    },
+    {
+      "slideTitle": "Looking Ahead",
+      "primaryLevel": "remember",
+      "evidence": "Previews upcoming topics and assigns practice exercises—informational content about future learning."
+    }
+  ],
+  "gaps": [
+    "No create-level activities: Students never design novel inheritance architectures from scratch or synthesize new design patterns. All design tasks provide significant scaffolding (e.g., given scenarios, specific constraints).",
+    "Limited polymorphism application: While polymorphism is explained well (slides 10-12), students don't write polymorphic code themselves. The zoo example is presented, not constructed by students.",
+    "Template Method pattern (slide 17) remains at understand level: Students see the pattern but don't apply it to design a new template method hierarchy or analyze when to use it vs. alternatives.",
+    "Dynamic binding mechanism (slides 13-14) could reach analyze level: Students could trace vtable lookups for specific call sequences or compare performance implications, but activities stop at explanation.",
+    "Missing integration task: No capstone activity synthesizing multiple concepts (e.g., design a system using single inheritance, polymorphism, LSP compliance, and appropriate redefinition)."
+  ],
+  "suggestions": [
+    "Add create-level capstone: After slide 17, insert a design challenge where students architect a complete system (e.g., payment processing with multiple payment types) from requirements, justifying inheritance vs. composition choices, ensuring LSP compliance, and identifying polymorphic operations. This would address the 'master' claim in objective 3.",
+    "Elevate polymorphism to hands-on apply: On slide 12, after showing the zoo example, have students implement a similar polymorphic iteration in a different domain (e.g., processing different document types). Provide skeleton code and ask them to complete the polymorphic method.",
+    "Deepen dynamic binding to analyze: Add a slide after 14 where students trace a specific method call sequence through vtables for a multi-level hierarchy, or compare performance of dynamic vs. static binding in a given scenario with measurements.",
+    "Convert Template Method to apply: After slide 17, add an activity where students design a template method for a new domain (e.g., game level loading: load_assets, initialize_entities, start_gameplay) and implement it in Eiffel pseudocode.",
+    "Strengthen LSP application: Slide 11 explains LSP well but could add a code-level activity: provide 3 parent-child class pairs with contracts, ask students to identify which violate LSP by analyzing precondition/postcondition relationships.",
+    "Add analyze-level comparison: Insert a slide comparing inheritance vs. composition vs. interfaces for the same design problem, asking students to analyze structural differences, coupling implications, and extensibility trade-offs—moves beyond evaluation to systematic decomposition.",
+    "Integrate best practices into activities: Rather than listing pitfalls on slide 18, embed them in earlier design activities as evaluation criteria. For example, in slide 9's MI evaluation, explicitly ask students to assess hierarchy depth and encapsulation impact."
+  ]
+}

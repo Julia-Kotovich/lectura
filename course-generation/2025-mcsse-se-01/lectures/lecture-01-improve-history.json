@@ -1,0 +1,2855 @@
+[
+  {
+    "status": "completed",
+    "deck": {
+      "slides": [
+        {
+          "id": "slide-01",
+          "title": "Introduction to Software Engineering and Object-Oriented Fundamentals",
+          "layout": "title",
+          "blocks": [
+            {
+              "id": "block-01-title",
+              "type": "heading",
+              "content": "Lecture 1: Introduction to Software Engineering and Object-Oriented Fundamentals"
+            },
+            {
+              "id": "block-01-subtitle",
+              "type": "text",
+              "content": "Software Construction, Architecture and Engineering"
+            },
+            {
+              "id": "block-01-activity",
+              "type": "activity",
+              "content": {
+                "title": "Analyze: Your Software Engineering Experience",
+                "duration": "2 minutes",
+                "instructions": "Reflect on a software project you've worked on. Identify one concrete example where the code worked correctly but was difficult to modify or reuse. What made it problematic? Write down the specific issue (tight coupling, unclear structure, hardcoded values, etc.).",
+                "purpose": "Activate prior knowledge; diagnose gap between 'working code' and 'engineered systems'"
+              }
+            }
+          ],
+          "speakerNotes": "Welcome students warmly. Launch the reflection activity immediately to activate prior experience and surface the central problem this course addresses: code that works isn't enough. After 2 minutes, ask 2-3 volunteers to share examples. Listen for themes like 'couldn't change X without breaking Y' or 'copy-pasted code everywhere.' Use their responses to preview that this course provides systematic principles (quality attributes, OO design) to prevent these problems. This diagnostic helps students see why engineering discipline matters beyond basic programming competence.",
+          "metadata": {
+            "transition": "fade",
+            "animation": "none",
+            "tags": [
+              "introduction",
+              "title",
+              "active-learning",
+              "analyze"
+            ]
+          }
+        },
+        {
+          "id": "slide-02",
+          "title": "Course Structure and Objectives",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-02-heading",
+              "type": "heading",
+              "content": "Your Learning Journey"
+            },
+            {
+              "id": "block-02-structure",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Three pillars: Construction, Architecture, Engineering",
+                  "35h lectures + 35h tutorials + 55h independent study",
+                  "Assessment: 50% written exam + 50% portfolio",
+                  "Eiffel notation → transferable OO principles"
+                ]
+              }
+            },
+            {
+              "id": "block-02-activity",
+              "type": "activity",
+              "content": {
+                "title": "Apply: Map Your Prior Experience",
+                "duration": "3 minutes",
+                "instructions": "Think of a programming project you've completed (any language). Classify it: Construction (does it work?), Architecture (is it well-structured?), or Engineering (is it maintainable long-term)? Discuss with a neighbor which pillar was strongest and which needs development.",
+                "purpose": "Connect course structure to personal experience; diagnose learning needs"
+              }
+            }
+          ],
+          "speakerNotes": "After presenting structure, launch the activity to make pillars concrete. Students often conflate 'working code' with 'engineered system.' Circulate and listen for misconceptions. Debrief by noting most student projects emphasize Construction, while industry demands all three pillars. This diagnostic helps students self-assess gaps and understand why the course balances theory with practice. Emphasize portfolio allows demonstrating growth across all pillars throughout the semester.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "course-overview",
+              "logistics",
+              "active-learning"
+            ]
+          }
+        },
+        {
+          "id": "slide-03",
+          "title": "The Software Engineering Challenge",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "block-03-heading",
+              "type": "heading",
+              "content": "Why Software Engineering Matters"
+            },
+            {
+              "id": "block-03-bullets",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Modern systems: millions of lines, decades of evolution",
+                  "Industrial software ≠ academic exercises",
+                  "Ad-hoc approaches fail at scale",
+                  "Systematic methods based on proven principles",
+                  "Engineering discipline prevents costly failures"
+                ]
+              }
+            },
+            {
+              "id": "block-03-diagram",
+              "type": "diagram",
+              "content": {
+                "prompt": "Graph showing exponential growth curve of software complexity over time (1970-2025), with annotations marking major challenges: mainframes (1970s), personal computing (1980s), internet era (1990s), mobile/cloud (2010s), AI systems (2020s). Y-axis: Lines of Code (logarithmic scale), X-axis: Years"
+              }
+            }
+          ],
+          "speakerNotes": "Share the Ariane 5 rocket failure story - a $500M disaster caused by software reusing code without proper engineering analysis. Contrast a simple student calculator (100 lines) with enterprise ERP systems (millions of lines, hundreds of developers, decades of maintenance). Emphasize that 'it compiles and runs' is not enough for industrial systems. Statistics: ~70% of software projects fail or are challenged due to lack of engineering discipline.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "motivation",
+              "software-crisis"
+            ]
+          }
+        },
+        {
+          "id": "slide-04",
+          "title": "Quality Attributes: The Foundation",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-04-heading",
+              "type": "heading",
+              "content": "Four Pillars of Software Quality"
+            },
+            {
+              "id": "block-04-bullets",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Correctness: Does it do what it should?",
+                  "Robustness: Does it handle the unexpected?",
+                  "Extendibility: Can it adapt to change?",
+                  "Reusability: Can we leverage it elsewhere?"
+                ]
+              }
+            },
+            {
+              "id": "block-04-activity",
+              "type": "activity",
+              "content": {
+                "title": "Analyze & Classify",
+                "duration": "3 minutes",
+                "format": "think-pair-share",
+                "instructions": "Consider an online banking system. For each scenario below, identify which quality attribute is violated: (1) Transfer moves $99 instead of $100. (2) System crashes when user enters text in amount field. (3) Adding cryptocurrency support requires rewriting transaction code. (4) Authentication logic can't be used in mobile app.",
+                "deliverable": "Share your classification with a neighbor, then discuss one example as a class."
+              }
+            }
+          ],
+          "speakerNotes": "After presenting the four attributes, run the think-pair-share activity to move from understanding definitions to applying them in context. Give students 90 seconds individual thinking, 90 seconds pair discussion. Expected answers: (1) correctness, (2) robustness, (3) extendibility, (4) reusability. Use volunteer responses to highlight that real systems face all four challenges simultaneously. This bridges conceptual understanding to analytical recognition of quality issues in concrete scenarios, preparing students for deeper exploration in subsequent slides.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "quality-attributes",
+              "overview",
+              "active-learning"
+            ]
+          }
+        },
+        {
+          "id": "slide-05",
+          "title": "Correctness: Doing the Right Thing",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "block-05-heading",
+              "type": "heading",
+              "content": "Correctness"
+            },
+            {
+              "id": "block-05-bullets",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Performs exact tasks as specified",
+                  "Absolute property: correct or not",
+                  "Requires clear, formal specifications",
+                  "Most fundamental quality attribute",
+                  "Verification through testing and formal methods"
+                ]
+              }
+            },
+            {
+              "id": "block-05-diagram",
+              "type": "diagram",
+              "content": {
+                "prompt": "Venn diagram with two circles: 'Specification' and 'Implementation Behavior'. Show complete overlap labeled 'Correctness', partial overlap labeled 'Partial Correctness', and non-overlap labeled 'Incorrect'. Use clean, professional styling with blue and green colors."
+              }
+            }
+          ],
+          "speakerNotes": "Emphasize that correctness is binary - software either meets its specification or it doesn't. Give examples: banking transfer must move exact amount, compiler must generate semantically equivalent code, medical device must deliver precise dosage. Distinguish between specification (what) and implementation (how). Note that correctness assumes normal operating conditions - abnormal cases are handled by robustness. Mention that formal specifications enable mathematical verification.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "quality-attributes",
+              "correctness"
+            ]
+          }
+        },
+        {
+          "id": "slide-06",
+          "title": "Robustness: Handling the Unexpected",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-06-heading",
+              "type": "heading",
+              "content": "Robustness"
+            },
+            {
+              "id": "block-06-bullets",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Graceful response to abnormal conditions",
+                  "Complements correctness (exceptional vs. normal cases)",
+                  "Error handling and exception management",
+                  "Fail-safe design: maintain safety under failure",
+                  "User-friendly error messages and recovery"
+                ]
+              }
+            },
+            {
+              "id": "block-06-examples",
+              "type": "text",
+              "content": "Examples: Web server handling malformed requests, text editor auto-saving on low memory, database maintaining consistency after power failure"
+            }
+          ],
+          "speakerNotes": "Distinguish robustness from correctness: correctness handles specified cases, robustness handles unspecified/exceptional cases. Real-world example: a web server that crashes on malformed HTTP requests is not robust, even if it correctly handles valid requests. Discuss defensive programming: validate inputs, handle resource exhaustion, provide meaningful error messages. Mention fail-safe vs. fail-secure: medical devices should fail-safe (stop safely), security systems should fail-secure (deny access).",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "quality-attributes",
+              "robustness"
+            ]
+          }
+        },
+        {
+          "id": "slide-07",
+          "title": "Extendibility: Embracing Change",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "block-07-heading",
+              "type": "heading",
+              "content": "Extendibility"
+            },
+            {
+              "id": "block-07-bullets",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Ease of adapting to specification changes",
+                  "Change is inevitable in software",
+                  "Modular design and separation of concerns",
+                  "Localized changes vs. ripple effects",
+                  "Design for change from day one"
+                ]
+              }
+            },
+            {
+              "id": "block-07-diagram",
+              "type": "diagram",
+              "content": {
+                "prompt": "Side-by-side comparison showing two system architectures. Left side (Good): modular boxes with one highlighted in red showing localized change, other modules unaffected. Right side (Poor): tangled web of dependencies with one change in red causing ripple effects (shown in orange) throughout system. Label: 'Well-designed vs. Poorly-designed System Response to Change'"
+              }
+            }
+          ],
+          "speakerNotes": "Emphasize that requirements always change - new features, regulatory updates, business pivots. Example: e-commerce system adding cryptocurrency payment without restructuring entire checkout. Good design localizes changes: adding new payment method shouldn't require modifying inventory management. Mention the Open-Closed Principle preview: open for extension, closed for modification. Poor extendibility leads to maintenance nightmares and eventual system rewrites. Object-oriented mechanisms like inheritance and polymorphism support extendibility.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "quality-attributes",
+              "extendibility"
+            ]
+          }
+        },
+        {
+          "id": "slide-08",
+          "title": "Reusability: Leveraging Existing Solutions",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-08-heading",
+              "type": "heading",
+              "content": "Reusability"
+            },
+            {
+              "id": "block-08-bullets",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Using software elements across multiple applications",
+                  "Economic benefits: reduced time and cost",
+                  "Libraries, frameworks, and components",
+                  "Trade-off: generality vs. specificity",
+                  "Requires upfront design investment"
+                ]
+              }
+            },
+            {
+              "id": "block-08-diagram",
+              "type": "diagram",
+              "content": {
+                "prompt": "Pyramid diagram showing reusability spectrum. Base (widest): 'Widely Reusable Libraries' (e.g., data structures, math). Middle: 'Domain-Specific Frameworks' (e.g., web, games). Top (narrowest): 'Application-Specific Code'. Arrows showing decreasing reusability upward, increasing specialization upward."
+              }
+            }
+          ],
+          "speakerNotes": "Highlight economic impact: reusable components dramatically reduce development time. Example: standard library collections (List, Set, Map) used in millions of applications - imagine if every project reimplemented these! Discuss the reusability spectrum: highly general (math libraries) to domain-specific (authentication modules) to application-specific. Note the paradox: making something reusable requires more effort upfront (generalization, documentation, testing) but pays dividends across projects. Object-oriented features like inheritance and generics enable reusability.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "quality-attributes",
+              "reusability"
+            ]
+          }
+        },
+        {
+          "id": "slide-09",
+          "title": "Quality Attributes: Trade-offs in Practice",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-09-heading",
+              "type": "heading",
+              "content": "Analyzing Quality Attribute Trade-offs"
+            },
+            {
+              "id": "block-09-scenario",
+              "type": "text",
+              "content": "Three systems with different priorities: (A) Medical device firmware — safety-critical, infrequent updates. (B) E-commerce platform — frequent feature additions, third-party integrations. (C) Scientific computation library — used across multiple research domains."
+            },
+            {
+              "id": "block-09-activity",
+              "type": "activity",
+              "content": {
+                "title": "Think-Pair-Share (4 min)",
+                "instructions": "For each system, rank the four quality attributes (Correctness, Robustness, Extendibility, Reusability) by priority. Identify one trade-off decision each system faces. Think individually (1 min), discuss with neighbor (2 min), share insights (1 min).",
+                "deliverable": "Justify your ranking: which attribute matters most and why? What gets sacrificed?"
+              }
+            },
+            {
+              "id": "block-09-key-insights",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Medical device: Correctness/Robustness > Extendibility (stability over flexibility)",
+                  "E-commerce: Extendibility > Performance (rapid evolution essential)",
+                  "Library: Reusability/Correctness > Specificity (broad applicability)",
+                  "No universal ranking — context drives priorities"
+                ]
+              }
+            }
+          ],
+          "speakerNotes": "This activity elevates students from understanding interactions to evaluating real trade-offs. After pair discussions, solicit 2-3 responses for each system. Highlight that medical devices prioritize correctness/robustness even at the cost of harder updates (regulatory constraints, safety). E-commerce needs extendibility for competitive features, accepting some technical debt. Libraries sacrifice optimization for generality. Emphasize that recognizing these trade-offs is a core engineering skill — no design satisfies all attributes equally. Preview that OO techniques help balance competing demands systematically.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "quality-attributes",
+              "analysis",
+              "evaluation",
+              "active-learning"
+            ]
+          }
+        },
+        {
+          "id": "slide-10",
+          "title": "Why Object-Oriented Programming?",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-10-heading",
+              "type": "heading",
+              "content": "Evaluating OO vs. Procedural Approaches"
+            },
+            {
+              "id": "block-10-scenario",
+              "type": "text",
+              "content": "Scenario: Library management system tracking books, members, and loans. Two designs: (A) Procedural—separate data files (books.dat, members.dat) with functions process_loan(), calculate_fine(), update_inventory(). (B) Object-Oriented—classes BOOK, MEMBER, LOAN with encapsulated data and methods."
+            },
+            {
+              "id": "block-10-activity",
+              "type": "activity",
+              "content": {
+                "title": "Design Evaluation (4 min)",
+                "instructions": "Compare both designs against our four quality attributes. Which approach better supports correctness, robustness, extendibility, and reusability? Identify one specific advantage OO provides. Think individually (1 min), discuss with neighbor (2 min), share verdict (1 min).",
+                "deliverable": "Justify your choice: which design would you recommend and why?"
+              }
+            },
+            {
+              "id": "block-10-key-insights",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "OO: Encapsulation protects invariants (correctness/robustness)",
+                  "OO: Adding late fee policy modifies LOAN class only (extendibility)",
+                  "Procedural: Changes ripple across multiple functions",
+                  "OO: MEMBER class reusable in other university systems (reusability)"
+                ]
+              }
+            }
+          ],
+          "speakerNotes": "This evaluate-level activity asks students to critically assess design paradigms rather than passively accepting OO superiority. After pair discussions, poll the room and probe reasoning. Highlight that procedural design scatters related logic (loan processing touches multiple files/functions), making changes risky. OO localizes changes: adding email notifications affects MEMBER class only. Emphasize encapsulation's role: BOOK ensures valid ISBN, LOAN enforces return dates—invariants protected by design. Connect back to Slide 9's trade-offs: OO systematically supports quality attributes through structural mechanisms, not just conventions.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "object-oriented",
+              "evaluation",
+              "active-learning",
+              "quality-attributes"
+            ]
+          }
+        },
+        {
+          "id": "slide-11",
+          "title": "Classes: Blueprints for Objects",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "block-11-heading",
+              "type": "heading",
+              "content": "Classes"
+            },
+            {
+              "id": "block-11-bullets",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Template defining structure and behavior",
+                  "Attributes (data) and methods (operations)",
+                  "Class as a type in the type system",
+                  "Abstract data type with hidden implementation",
+                  "Unit of modularity and reuse"
+                ]
+              }
+            },
+            {
+              "id": "block-11-diagram",
+              "type": "diagram",
+              "content": {
+                "prompt": "UML class diagram showing BANK_ACCOUNT class. Top section: class name 'BANK_ACCOUNT'. Middle section (attributes): '- balance: REAL', '- account_number: STRING'. Bottom section (methods): '+ deposit(amount: REAL)', '+ withdraw(amount: REAL)', '+ get_balance(): REAL'. Use standard UML notation with minus for private, plus for public."
+              }
+            }
+          ],
+          "speakerNotes": "Introduce class as fundamental OO concept: a blueprint or template. Analogy: architectural blueprint defines structure of houses, class defines structure of objects. Class contains attributes (data, state) and methods (operations, behavior). Example: BANK_ACCOUNT class defines what it means to be a bank account - every account has balance and account number, supports deposit and withdraw. Class is also a type: variables can be declared of class type. Emphasize that class is abstract - it's a definition, not a concrete entity (that's an object).",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "object-oriented",
+              "classes"
+            ]
+          }
+        },
+        {
+          "id": "slide-12",
+          "title": "Objects: Runtime Instances",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "block-12-heading",
+              "type": "heading",
+              "content": "Objects"
+            },
+            {
+              "id": "block-12-bullets",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Runtime instance of a class",
+                  "Each object has unique identity",
+                  "Object state: current attribute values",
+                  "Lifecycle: creation, use, destruction",
+                  "Multiple objects from same class"
+                ]
+              }
+            },
+            {
+              "id": "block-12-diagram",
+              "type": "diagram",
+              "content": {
+                "prompt": "Object diagram showing three BANK_ACCOUNT instances. Top: BANK_ACCOUNT class box. Below, three object boxes connected to class with dashed arrows: 'alice_account' (balance: 1000.0, account_number: 'A001'), 'bob_account' (balance: 2500.0, account_number: 'B002'), 'carol_account' (balance: 500.0, account_number: 'C003'). Label: 'Class and its Instances'"
+              }
+            }
+          ],
+          "speakerNotes": "Distinguish class (abstract template) from object (concrete instance). Analogy: blueprint vs. actual houses built from it. Each object has identity (alice_account ≠ bob_account even if they have same balance), state (current values of all attributes), and behavior (responds to method calls). Objects are created at runtime, exist in memory, and eventually destroyed. Multiple objects can be created from same class, each with different state. Example: three bank accounts for Alice, Bob, Carol - all instances of BANK_ACCOUNT but with different balances and account numbers.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "object-oriented",
+              "objects"
+            ]
+          }
+        },
+        {
+          "id": "slide-13",
+          "title": "Encapsulation: Information Hiding",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "block-13-heading",
+              "type": "heading",
+              "content": "Encapsulation"
+            },
+            {
+              "id": "block-13-bullets",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Bundling data with operations",
+                  "Separating interface from implementation",
+                  "Public interface vs. private details",
+                  "Access control: public, private, protected",
+                  "Benefits: reduced coupling, easier maintenance"
+                ]
+              }
+            },
+            {
+              "id": "block-13-diagram",
+              "type": "diagram",
+              "content": {
+                "prompt": "Conceptual diagram of an object as a circle with thick boundary. Inside (private): 'balance: 1000.0', 'internal_state', 'implementation details'. Outside boundary (public interface): arrows pointing to 'deposit()', 'withdraw()', 'get_balance()'. External clients shown as small boxes outside, accessing only through public interface. Label: 'Encapsulation Boundary'"
+              }
+            }
+          ],
+          "speakerNotes": "Encapsulation is crucial for quality: it's the mechanism that enables extendibility and reusability. Two aspects: (1) bundling data with operations that manipulate it, (2) hiding implementation details. Example: BANK_ACCOUNT balance is private - clients can't directly modify it, must use deposit/withdraw methods. This enforces invariants (balance never goes negative) and allows implementation changes (store balance in cents vs. dollars) without affecting clients. Analogy: car dashboard (public interface) vs. engine internals (private implementation). Encapsulation reduces coupling between components.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "object-oriented",
+              "encapsulation"
+            ]
+          }
+        },
+        {
+          "id": "slide-14",
+          "title": "Introduction to Eiffel",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-14-heading",
+              "type": "heading",
+              "content": "Eiffel: A Language for Quality Software"
+            },
+            {
+              "id": "block-14-bullets",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Designed specifically for software engineering principles",
+                  "Strong support for Design by Contract",
+                  "Clear, readable syntax emphasizing concepts over tricks",
+                  "Advanced features: inheritance, genericity, multiple inheritance"
+                ]
+              }
+            },
+            {
+              "id": "block-14-activity",
+              "type": "activity",
+              "content": {
+                "title": "Analyze: Language Choice Trade-offs",
+                "instructions": "Consider these two scenarios: (1) Teaching software quality principles to MSc students, (2) Building a commercial web application. In pairs, analyze which language characteristics matter most for each scenario and justify whether Eiffel or a mainstream language (Java/Python) better serves each purpose. Focus on how language features support or hinder the four quality attributes.",
+                "duration": "3 minutes",
+                "format": "think-pair-share"
+              }
+            }
+          ],
+          "speakerNotes": "Introduce Eiffel and address 'Why not Java/Python?' Answer: Eiffel was designed by Bertrand Meyer specifically to teach software engineering principles with clean syntax emphasizing concepts. Design by Contract is built-in. The activity asks students to analyze trade-offs between pedagogical clarity and industry adoption, connecting language features to quality attributes from earlier slides. This develops critical evaluation skills: recognizing that tool choice depends on context and priorities. Debrief by emphasizing concept transferability—principles learned in Eiffel apply everywhere, like learning music theory on piano helps with any instrument.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "eiffel",
+              "introduction",
+              "analyze"
+            ]
+          }
+        },
+        {
+          "id": "slide-15",
+          "title": "Eiffel Class Structure",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "block-15-code",
+              "type": "code",
+              "content": {
+                "language": "eiffel",
+                "code": "class\n    POINT\n\ncreate\n    make\n\nfeature {NONE} -- Initialization\n\n    make (a_x, a_y: REAL)\n        do\n            x := a_x\n            y := a_y\n        end\n\nfeature -- Access\n\n    x: REAL\n    y: REAL\n\nfeature -- Measurement\n\n    distance_to (other: POINT): REAL\n        do\n            Result := sqrt((x - other.x)^2 + (y - other.y)^2)\n        end\n\nend"
+              }
+            },
+            {
+              "id": "block-15-activity",
+              "type": "activity",
+              "content": {
+                "title": "Apply: Extend the Class",
+                "instructions": "Working individually, sketch how you would add a 'translate' feature that moves the point by dx and dy amounts. What feature clause should it go in? What parameters does it need? Does it violate encapsulation if it directly modifies x and y? Compare your solution with a neighbor.",
+                "duration": "3 minutes",
+                "format": "individual-then-pair"
+              }
+            }
+          ],
+          "speakerNotes": "First walk through syntax: class declaration, create clause for constructors, feature clauses grouping related operations, attributes (x, y), methods (distance_to), Result for returns, := for assignment. Emphasize feature {NONE} means private initialization. Then launch activity: students apply the pattern by extending the class. This moves from passive observation to active construction. During debrief, highlight that translate can modify x and y because it's inside the class—encapsulation allows internal modification while controlling external access. Collect 2-3 solutions to show variation in approach.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "eiffel",
+              "syntax",
+              "code",
+              "apply"
+            ]
+          }
+        },
+        {
+          "id": "slide-16",
+          "title": "Eiffel Example: BANK_ACCOUNT",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "block-16-code",
+              "type": "code",
+              "content": {
+                "language": "eiffel",
+                "code": "class BANK_ACCOUNT\ncreate make\nfeature {NONE} -- Initialization\n    make (a_account_number: STRING)\n        do\n            account_number := a_account_number\n            balance := 0.0\n        end\nfeature {NONE} -- Implementation\n    balance: REAL  -- Private\nfeature -- Access\n    account_number: STRING\n    get_balance: REAL\n        do Result := balance end\nfeature -- Operations\n    deposit (amount: REAL)\n        require amount > 0\n        do balance := balance + amount end\n    withdraw (amount: REAL)\n        require\n            amount > 0\n            amount <= balance\n        do balance := balance - amount end\nend"
+              }
+            },
+            {
+              "id": "block-16-activity",
+              "type": "activity",
+              "content": {
+                "title": "Analyze & Extend: Overdraft Protection",
+                "instructions": "1) Analyze: Why is balance private while account_number is public? What quality attributes does this support? 2) Apply: Sketch how to add overdraft_limit feature and modify withdraw to allow overdrafts up to the limit. Which feature clause? What precondition changes? 3) Share one design decision with a neighbor.",
+                "duration": "4 minutes",
+                "format": "individual-then-pair"
+              }
+            }
+          ],
+          "speakerNotes": "Walk through encapsulation: balance is feature {NONE} (private), enforcing information hiding. Public interface: get_balance (query), deposit/withdraw (commands). Highlight require clauses as Design by Contract preview—preconditions enforce correctness. Launch activity: students first analyze design rationale (why this encapsulation?), then apply by extending functionality. This combines analytical thinking with practical application. During debrief, emphasize that overdraft_limit should be private, withdraw precondition becomes 'amount <= balance + overdraft_limit', supporting extendibility without breaking encapsulation. Collect solutions showing different approaches to initialization and validation.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "eiffel",
+              "syntax",
+              "code",
+              "encapsulation",
+              "analyze",
+              "apply"
+            ]
+          }
+        },
+        {
+          "id": "slide-17",
+          "title": "Course Roadmap",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-17-heading",
+              "type": "heading",
+              "content": "The Journey Ahead"
+            },
+            {
+              "id": "block-17-diagram",
+              "type": "diagram",
+              "content": {
+                "prompt": "Course dependency graph showing progression of topics. Foundation layer: 'Classes & Objects', 'Encapsulation'. Construction layer (arrows from foundation): 'Inheritance', 'Polymorphism', 'Genericity'. Architecture layer (arrows from construction): 'Design Patterns', 'Large-Scale Structure'. Engineering layer (arrows from all): 'Agile Methods', 'Requirements', 'Quality Processes'. Use different colors for each layer, arrows showing dependencies."
+              }
+            },
+            {
+              "id": "block-17-bullets",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Construction: inheritance, polymorphism, genericity",
+                  "Architecture: design patterns, system structure",
+                  "Engineering: agile, requirements, quality processes"
+                ]
+              }
+            }
+          ],
+          "speakerNotes": "Show how the course builds progressively. Today's fundamentals (classes, objects, encapsulation) are the foundation. Next: inheritance extends classes, polymorphism enables flexibility, genericity provides type-safe reuse. Then: design patterns as reusable architectural solutions (Strategy, Observer, etc.). Finally: engineering processes that tie it all together (Agile, Scrum, requirements engineering). Each topic builds on previous ones - you can't understand polymorphism without inheritance, can't appreciate design patterns without polymorphism. Emphasize the integration of theory and practice through tutorials and portfolio assignments.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "course-overview",
+              "roadmap"
+            ]
+          }
+        },
+        {
+          "id": "slide-18",
+          "title": "Summary and Next Steps",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-18-heading",
+              "type": "heading",
+              "content": "Key Takeaways"
+            },
+            {
+              "id": "block-18-bullets",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Software engineering requires systematic approaches",
+                  "Four quality attributes: correctness, robustness, extendibility, reusability",
+                  "Object-oriented programming supports quality through encapsulation",
+                  "Classes are templates, objects are instances",
+                  "Eiffel provides clear notation for learning OO concepts"
+                ]
+              }
+            },
+            {
+              "id": "block-18-next",
+              "type": "text",
+              "content": "Next lecture: Inheritance and Polymorphism"
+            },
+            {
+              "id": "block-18-action",
+              "type": "text",
+              "content": "Action items: Install Eiffel environment, read Touch of Class chapters 1-3, complete first tutorial exercise"
+            }
+          ],
+          "speakerNotes": "Recap the main points: (1) Software engineering is essential for industrial systems - ad-hoc approaches fail. (2) Quality attributes are the foundation - correctness, robustness, extendibility, reusability. (3) Object-oriented programming provides mechanisms to achieve quality. (4) Classes and objects are fundamental concepts, with encapsulation as key principle. (5) Eiffel notation will be our vehicle for learning. Remind students of action items: install Eiffel, read assigned chapters, attend tutorials. Preview next lecture: inheritance (extending classes) and polymorphism (flexibility through type relationships). Encourage questions and office hour visits.",
+          "metadata": {
+            "transition": "fade",
+            "animation": "fade-in",
+            "tags": [
+              "summary",
+              "conclusion"
+            ]
+          }
+        }
+      ]
+    },
+    "evaluation": {
+      "alignmentScore": 82,
+      "dominantLevel": "analyze",
+      "distribution": {
+        "remember": 8,
+        "understand": 22,
+        "apply": 28,
+        "analyze": 32,
+        "evaluate": 10,
+        "create": 0
+      },
+      "objectiveAlignments": [
+        {
+          "objective": "Articulate the key challenges in modern software engineering and explain why systematic approaches are necessary for industrial-scale systems",
+          "expectedLevel": "understand",
+          "observedLevel": "understand",
+          "status": "aligned",
+          "rationale": "Slide 3 presents challenges with examples (Ariane 5, complexity growth) and explanations of why ad-hoc approaches fail. Students explain concepts but don't analyze specific system failures or evaluate competing approaches."
+        },
+        {
+          "objective": "Define and distinguish between the four critical quality attributes: correctness, robustness, extendibility, and reusability",
+          "expectedLevel": "understand",
+          "observedLevel": "analyze",
+          "status": "aligned",
+          "rationale": "Slides 4-8 define attributes (understand level), but Slide 4 activity requires classifying violations in banking scenarios (analyze), and Slide 9 requires ranking attributes and identifying trade-offs across system types (analyze). Exceeds expected level positively."
+        },
+        {
+          "objective": "Explain the fundamental concepts of object-oriented programming and why object technology is the approach of choice for high-quality systems",
+          "expectedLevel": "understand",
+          "observedLevel": "evaluate",
+          "status": "aligned",
+          "rationale": "Slide 10 activity explicitly asks students to evaluate OO vs. procedural designs against quality attributes and justify recommendations. This exceeds the 'explain why' expectation by requiring critical assessment and justification of design choices."
+        },
+        {
+          "objective": "Describe the relationship between classes and objects, and explain the principle of encapsulation",
+          "expectedLevel": "understand",
+          "observedLevel": "understand",
+          "status": "aligned",
+          "rationale": "Slides 11-13 present definitions, diagrams, and explanations of classes, objects, and encapsulation. Content remains at explanation level without requiring students to apply these concepts to novel scenarios independently."
+        },
+        {
+          "objective": "Recognize basic Eiffel notation and understand its role in expressing object-oriented concepts",
+          "expectedLevel": "understand",
+          "observedLevel": "apply",
+          "status": "aligned",
+          "rationale": "Slides 14-16 move beyond recognition to application. Slide 15 activity requires students to extend POINT class (apply pattern), Slide 16 requires analyzing encapsulation rationale and sketching overdraft functionality (apply + analyze). Exceeds expected level."
+        },
+        {
+          "objective": "Understand the course structure, assessment components, and learning trajectory for the semester",
+          "expectedLevel": "remember",
+          "observedLevel": "apply",
+          "status": "aligned",
+          "rationale": "Slide 2 activity asks students to classify prior projects against the three pillars and diagnose learning needs, moving beyond recall to application of course framework to personal experience. Slide 17 provides structural overview (remember level)."
+        }
+      ],
+      "slideTags": [
+        {
+          "slideTitle": "Introduction to Software Engineering and Object-Oriented Fundamentals",
+          "primaryLevel": "analyze",
+          "evidence": "Activity requires analyzing past projects to identify specific quality failures (tight coupling, hardcoded values), diagnosing gap between working code and engineered systems."
+        },
+        {
+          "slideTitle": "Course Structure and Objectives",
+          "primaryLevel": "apply",
+          "evidence": "Activity requires applying three-pillar framework to classify personal projects and diagnose which pillar needs development."
+        },
+        {
+          "slideTitle": "The Software Engineering Challenge",
+          "primaryLevel": "understand",
+          "evidence": "Presents explanations of why systematic approaches are necessary with examples (Ariane 5, complexity growth), but no analytical or application tasks."
+        },
+        {
+          "slideTitle": "Quality Attributes: The Foundation",
+          "primaryLevel": "analyze",
+          "evidence": "Think-pair-share activity requires analyzing banking scenarios to classify which quality attribute is violated in each case, moving beyond definitions to diagnostic application."
+        },
+        {
+          "slideTitle": "Correctness: Doing the Right Thing",
+          "primaryLevel": "understand",
+          "evidence": "Defines correctness with examples and diagrams showing specification-implementation relationship. No activities requiring application or analysis."
+        },
+        {
+          "slideTitle": "Robustness: Handling the Unexpected",
+          "primaryLevel": "understand",
+          "evidence": "Explains robustness concept, distinguishes from correctness, provides examples. Remains at explanation level without analytical tasks."
+        },
+        {
+          "slideTitle": "Extendibility: Embracing Change",
+          "primaryLevel": "understand",
+          "evidence": "Explains extendibility with modular vs. tangled architecture diagrams. No activities requiring students to analyze or apply concepts to specific cases."
+        },
+        {
+          "slideTitle": "Reusability: Leveraging Existing Solutions",
+          "primaryLevel": "understand",
+          "evidence": "Explains reusability spectrum and trade-offs with pyramid diagram. Conceptual explanation without application or analysis activities."
+        },
+        {
+          "slideTitle": "Quality Attributes: Trade-offs in Practice",
+          "primaryLevel": "evaluate",
+          "evidence": "Activity requires ranking quality attributes for three system types, identifying trade-offs, and justifying decisions based on context—clear evaluation-level cognitive demand."
+        },
+        {
+          "slideTitle": "Why Object-Oriented Programming?",
+          "primaryLevel": "evaluate",
+          "evidence": "Activity requires comparing procedural vs. OO designs against quality attributes, recommending an approach, and justifying the choice—evaluation level."
+        },
+        {
+          "slideTitle": "Classes: Blueprints for Objects",
+          "primaryLevel": "understand",
+          "evidence": "Defines classes with UML diagram and explanations. No activities requiring application or higher-order thinking."
+        },
+        {
+          "slideTitle": "Objects: Runtime Instances",
+          "primaryLevel": "understand",
+          "evidence": "Explains object concept with instance diagrams. Distinguishes from classes but remains at explanation level."
+        },
+        {
+          "slideTitle": "Encapsulation: Information Hiding",
+          "primaryLevel": "understand",
+          "evidence": "Explains encapsulation principle with boundary diagram. No activities requiring students to apply or analyze encapsulation in code."
+        },
+        {
+          "slideTitle": "Introduction to Eiffel",
+          "primaryLevel": "analyze",
+          "evidence": "Activity requires analyzing language choice trade-offs for different scenarios (teaching vs. commercial), connecting features to quality attributes—analysis level."
+        },
+        {
+          "slideTitle": "Eiffel Class Structure",
+          "primaryLevel": "apply",
+          "evidence": "Activity requires students to extend POINT class by sketching translate feature, applying syntax patterns learned from example code."
+        },
+        {
+          "slideTitle": "Eiffel Example: BANK_ACCOUNT",
+          "primaryLevel": "analyze",
+          "evidence": "Two-part activity: (1) analyze why balance is private and what quality attributes this supports, (2) apply by extending with overdraft functionality. Primary demand is analytical."
+        },
+        {
+          "slideTitle": "Course Roadmap",
+          "primaryLevel": "understand",
+          "evidence": "Presents course structure with dependency graph showing topic progression. Explanatory content without higher-order cognitive tasks."
+        },
+        {
+          "slideTitle": "Summary and Next Steps",
+          "primaryLevel": "remember",
+          "evidence": "Recaps key points and lists action items. Recall-focused summary content."
+        }
+      ],
+      "gaps": [
+        "No create-level activities: Students never design complete solutions, propose new architectures, or synthesize novel structures. For MSc-level, at least one activity asking students to design a simple class hierarchy or propose a quality-focused refactoring would be appropriate.",
+        "Slides 5-8 (individual quality attributes) remain purely explanatory without application activities. Students could benefit from analyzing code snippets to identify which attributes are violated or applying attributes to evaluate simple design alternatives.",
+        "Slides 11-13 (classes, objects, encapsulation) are entirely passive. Adding a brief activity where students sketch a class design for a familiar domain (e.g., university course enrollment) would move from understanding to application.",
+        "Limited synthesis across concepts: While individual topics reach analyze/evaluate levels, no activity asks students to integrate multiple concepts (e.g., design a class that balances all four quality attributes, or evaluate how encapsulation specifically supports extendibility in a given design)."
+      ],
+      "suggestions": [
+        "Add create-level capstone activity: After Slide 16, include a 5-minute activity where students design a simple class (e.g., LIBRARY_BOOK with checkout/return operations) that demonstrates all four quality attributes and proper encapsulation. This synthesizes the lecture's concepts.",
+        "Enhance Slides 5-8 with mini-activities: After defining each quality attribute, provide a 30-second code snippet and ask students to identify violations. Example for Slide 5 (Correctness): Show a sorting function that works for positive numbers but fails for negatives—students identify the specification gap.",
+        "Convert Slide 13 (Encapsulation) to apply level: Add activity where students are given a poorly encapsulated class (public attributes, no validation) and sketch how to refactor it with proper encapsulation, identifying which quality attributes improve.",
+        "Strengthen integration in Slide 9: Current activity evaluates trade-offs well, but could ask students to also propose one specific design decision for each system that reflects the prioritization (e.g., 'For medical device, how would you structure update mechanisms to prioritize correctness?').",
+        "Add metacognitive reflection: Include a final slide asking students to self-assess which Bloom level they reached for each objective and identify one concept they need to practice at a higher level. This develops self-regulated learning.",
+        "Balance passive slides: Slides 11-13 are consecutive explanation slides. Insert a brief pair-share after Slide 12 where students explain class-object relationship to each other using a non-computing analogy (recipe-dish, blueprint-building), then share analogies with class to check understanding."
+      ]
+    },
+    "rounds_used": 1,
+    "before_score": 72,
+    "after_score": 82,
+    "improved_slide_ids": [
+      "slide-04",
+      "slide-09",
+      "slide-10",
+      "slide-14",
+      "slide-15",
+      "slide-16",
+      "slide-02",
+      "slide-01"
+    ],
+    "failed_slide_ids": [],
+    "improved_count": 8,
+    "reevaluated": true
+  },
+  {
+    "status": "completed",
+    "deck": {
+      "slides": [
+        {
+          "id": "slide-01",
+          "title": "Introduction to Software Engineering and Object-Oriented Fundamentals",
+          "layout": "title",
+          "blocks": [
+            {
+              "id": "block-01-title",
+              "type": "heading",
+              "content": "Lecture 1: Introduction to Software Engineering and Object-Oriented Fundamentals"
+            },
+            {
+              "id": "block-01-subtitle",
+              "type": "text",
+              "content": "Software Construction, Architecture and Engineering"
+            },
+            {
+              "id": "block-01-activity",
+              "type": "activity",
+              "content": {
+                "title": "Analyze: Your Software Engineering Experience",
+                "duration": "2 minutes",
+                "instructions": "Reflect on a software project you've worked on. Identify one concrete example where the code worked correctly but was difficult to modify or reuse. What made it problematic? Write down the specific issue (tight coupling, unclear structure, hardcoded values, etc.).",
+                "purpose": "Activate prior knowledge; diagnose gap between 'working code' and 'engineered systems'"
+              }
+            }
+          ],
+          "speakerNotes": "Welcome students warmly. Launch the reflection activity immediately to activate prior experience and surface the central problem this course addresses: code that works isn't enough. After 2 minutes, ask 2-3 volunteers to share examples. Listen for themes like 'couldn't change X without breaking Y' or 'copy-pasted code everywhere.' Use their responses to preview that this course provides systematic principles (quality attributes, OO design) to prevent these problems. This diagnostic helps students see why engineering discipline matters beyond basic programming competence.",
+          "metadata": {
+            "transition": "fade",
+            "animation": "none",
+            "tags": [
+              "introduction",
+              "title",
+              "active-learning",
+              "analyze"
+            ]
+          }
+        },
+        {
+          "id": "slide-02",
+          "title": "Course Structure and Objectives",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-02-heading",
+              "type": "heading",
+              "content": "Your Learning Journey"
+            },
+            {
+              "id": "block-02-structure",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Three pillars: Construction (correctness), Architecture (structure), Engineering (long-term quality)",
+                  "35h lectures + 35h tutorials + 55h independent study",
+                  "Assessment: 50% written exam + 50% portfolio demonstrating pillar integration",
+                  "Eiffel notation → transferable OO principles for any language"
+                ]
+              }
+            },
+            {
+              "id": "block-02-activity",
+              "type": "activity",
+              "content": {
+                "title": "Evaluate & Create: Diagnose and Redesign",
+                "duration": "4 minutes",
+                "instructions": "Select a past project. (1) Evaluate it against all three pillars using a 1-5 scale for each. (2) Identify your weakest pillar. (3) Propose one concrete improvement that would strengthen that pillar (e.g., 'Add input validation for Construction' or 'Extract reusable modules for Architecture'). Share your proposal with a neighbor and explain why it addresses the gap.",
+                "purpose": "Self-assess learning needs; create actionable improvement linked to course pillars"
+              }
+            }
+          ],
+          "speakerNotes": "Present the three-pillar framework with brief examples: Construction ensures correctness through contracts, Architecture organizes complexity via modularity, Engineering sustains quality over decades through reusability and extendibility. Launch the activity to make pillars diagnostic and actionable. Circulate during pair discussions, listening for whether students grasp pillar distinctions. Debrief by collecting 2-3 proposed improvements and highlighting how the course provides systematic techniques for each. Emphasize that portfolio assessment rewards demonstrating growth across all pillars, not just producing working code. This activity raises cognitive demand to evaluate (self-assess against criteria) and create (propose targeted solution).",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "course-overview",
+              "logistics",
+              "active-learning",
+              "evaluate",
+              "create"
+            ]
+          }
+        },
+        {
+          "id": "slide-03",
+          "title": "The Software Engineering Challenge",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-03-heading",
+              "type": "heading",
+              "content": "Why Software Engineering Matters"
+            },
+            {
+              "id": "block-03-bullets",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Modern systems: millions of lines, decades of evolution",
+                  "Industrial software ≠ academic exercises",
+                  "Ad-hoc approaches fail at scale → systematic methods required",
+                  "Example: Ariane 5 ($500M loss from reused code without analysis)"
+                ]
+              }
+            },
+            {
+              "id": "block-03-activity",
+              "type": "activity",
+              "content": {
+                "title": "Analyze & Diagnose: From Failure to Principle",
+                "duration": "3 minutes",
+                "instructions": "Read: Ariane 5 reused Ariane 4 altitude code. The new rocket's faster acceleration caused integer overflow, triggering self-destruct 37 seconds after launch. Which quality attribute(s) were violated? What engineering practice would have prevented this? Discuss with a neighbor, then propose one specific verification step the team should have performed.",
+                "purpose": "Apply quality attributes to analyze real failure; connect abstract principles to concrete engineering practices"
+              }
+            }
+          ],
+          "speakerNotes": "Present the Ariane 5 case as a concrete failure illustrating why systematic engineering matters. Launch the activity to move students from passively hearing the story to actively diagnosing it using quality concepts. Expected answers: robustness violated (didn't handle unexpected input range), extendibility violated (reuse without adaptation). Prevention: specification analysis, range testing, contracts. Debrief by collecting proposed verification steps, highlighting that engineering discipline means validating assumptions during reuse. This raises cognitive demand to analyze (diagnose root cause) and apply (map failure to quality framework), preparing students for the detailed quality attributes in Slide 4.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "motivation",
+              "software-crisis",
+              "active-learning",
+              "analyze"
+            ]
+          }
+        },
+        {
+          "id": "slide-04",
+          "title": "Quality Attributes: The Foundation",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-04-heading",
+              "type": "heading",
+              "content": "Four Pillars of Software Quality"
+            },
+            {
+              "id": "block-04-bullets",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Correctness: Does it do what it should?",
+                  "Robustness: Does it handle the unexpected?",
+                  "Extendibility: Can it adapt to change?",
+                  "Reusability: Can we leverage it elsewhere?"
+                ]
+              }
+            },
+            {
+              "id": "block-04-activity",
+              "type": "activity",
+              "content": {
+                "title": "Diagnose, Classify & Propose Solutions",
+                "duration": "4 minutes",
+                "format": "think-pair-share",
+                "instructions": "Online banking system scenarios: (1) Transfer moves $99 instead of $100. (2) System crashes on text in amount field. (3) Adding crypto requires rewriting transaction code. (4) Authentication can't be reused in mobile app. First, classify which quality attribute each violates. Then, propose one concrete design decision or practice that would prevent scenario (3). Share your solution with a neighbor and refine it together.",
+                "deliverable": "Classification + one specific prevention strategy for extendibility failure"
+              }
+            }
+          ],
+          "speakerNotes": "After introducing the four attributes, launch the activity. Give 90 seconds for individual classification and solution proposal, then 90 seconds pair discussion to refine prevention strategies, finally 60 seconds class debrief. Expected classifications: (1) correctness, (2) robustness, (3) extendibility, (4) reusability. For scenario 3, look for answers like 'use abstract payment interface' or 'separate transaction logic from payment method.' This elevates from pure classification to proposing preventive design decisions, bridging analysis to evaluation/creation. Highlight that quality attributes guide concrete architectural choices, preparing students for deeper attribute exploration in subsequent slides.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "quality-attributes",
+              "overview",
+              "active-learning",
+              "evaluate",
+              "create"
+            ]
+          }
+        },
+        {
+          "id": "slide-05",
+          "title": "Correctness: Doing the Right Thing",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-05-heading",
+              "type": "heading",
+              "content": "Correctness"
+            },
+            {
+              "id": "block-05-bullets",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Performs exact tasks as specified",
+                  "Binary property: correct or incorrect",
+                  "Requires clear, formal specifications",
+                  "Most fundamental quality attribute"
+                ]
+              }
+            },
+            {
+              "id": "block-05-activity",
+              "type": "activity",
+              "content": {
+                "title": "Identify Correctness Violations",
+                "duration": "2 minutes",
+                "format": "individual-then-poll",
+                "instructions": "Analyze this code snippet: A sort_list function specification states 'Sort integers in ascending order.' Implementation uses bubble sort but has condition: if (list[i] > list[i+1]) swap(). Which input reveals incorrectness? (A) [3,1,2] (B) [-5,3,-1] (C) [1,2,3] (D) All work correctly. Identify the answer and explain why it violates the specification.",
+                "deliverable": "Answer selection with one-sentence justification"
+              }
+            }
+          ],
+          "speakerNotes": "Launch activity immediately after defining correctness. Answer is D—the code is actually correct for the specification. This challenges students to analyze specification-implementation alignment rather than just spotting bugs. After polling, reveal answer and emphasize that correctness requires complete specification coverage. If time permits, modify scenario: change spec to 'Sort all numbers' but keep integer-only implementation—now inputs with floats reveal incorrectness. Connect to next slide: correctness assumes valid inputs; invalid inputs relate to robustness.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "quality-attributes",
+              "correctness",
+              "active-learning",
+              "analyze"
+            ]
+          }
+        },
+        {
+          "id": "slide-06",
+          "title": "Robustness: Handling the Unexpected",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-06-heading",
+              "type": "heading",
+              "content": "Robustness"
+            },
+            {
+              "id": "block-06-bullets",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Graceful response to abnormal conditions",
+                  "Complements correctness (exceptional vs. normal cases)",
+                  "Error handling and exception management",
+                  "Fail-safe design: maintain safety under failure"
+                ]
+              }
+            },
+            {
+              "id": "block-06-activity",
+              "type": "activity",
+              "content": {
+                "title": "Diagnose Robustness Failures",
+                "duration": "3 minutes",
+                "format": "individual-then-pair",
+                "instructions": "Analyze these two implementations of withdraw(amount) for a bank account: (A) Subtracts amount from balance without checks. (B) Checks if amount > balance, displays 'Error: Insufficient funds' and prevents withdrawal. For each scenario, identify which implementation fails robustness and explain what abnormal condition is mishandled: (1) User enters -50 as amount (2) Database connection drops mid-withdrawal (3) User enters 'abc' as amount. Propose one improvement for the most critical gap.",
+                "deliverable": "Identify failure cases and propose one robustness enhancement"
+              }
+            }
+          ],
+          "speakerNotes": "Launch activity after defining robustness. Both implementations have robustness gaps: (A) fails all scenarios; (B) handles overdraft but not negative inputs, connection failures, or type errors. Critical gap is transaction consistency (scenario 2). Students should recognize robustness requires anticipating multiple abnormal conditions beyond obvious cases. After pairs discuss, poll for most critical gap and collect improvement proposals (e.g., transaction rollback, input validation). Connect to extendibility: robust error handling structures affect how easily we add new validations later.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "quality-attributes",
+              "robustness",
+              "active-learning",
+              "analyze"
+            ]
+          }
+        },
+        {
+          "id": "slide-07",
+          "title": "Extendibility: Embracing Change",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "block-07-heading",
+              "type": "heading",
+              "content": "Extendibility"
+            },
+            {
+              "id": "block-07-bullets",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Ease of adapting to specification changes",
+                  "Change is inevitable in software",
+                  "Modular design and separation of concerns",
+                  "Localized changes vs. ripple effects",
+                  "Design for change from day one"
+                ]
+              }
+            },
+            {
+              "id": "block-07-diagram",
+              "type": "diagram",
+              "content": {
+                "prompt": "Side-by-side comparison showing two system architectures. Left side (Good): modular boxes with one highlighted in red showing localized change, other modules unaffected. Right side (Poor): tangled web of dependencies with one change in red causing ripple effects (shown in orange) throughout system. Label: 'Well-designed vs. Poorly-designed System Response to Change'"
+              }
+            }
+          ],
+          "speakerNotes": "Emphasize that requirements always change - new features, regulatory updates, business pivots. Example: e-commerce system adding cryptocurrency payment without restructuring entire checkout. Good design localizes changes: adding new payment method shouldn't require modifying inventory management. Mention the Open-Closed Principle preview: open for extension, closed for modification. Poor extendibility leads to maintenance nightmares and eventual system rewrites. Object-oriented mechanisms like inheritance and polymorphism support extendibility.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "quality-attributes",
+              "extendibility"
+            ]
+          }
+        },
+        {
+          "id": "slide-08",
+          "title": "Reusability: Leveraging Existing Solutions",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-08-heading",
+              "type": "heading",
+              "content": "Reusability"
+            },
+            {
+              "id": "block-08-bullets",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Using software elements across multiple applications",
+                  "Economic benefits: reduced time and cost",
+                  "Libraries, frameworks, and components",
+                  "Trade-off: generality vs. specificity",
+                  "Requires upfront design investment"
+                ]
+              }
+            },
+            {
+              "id": "block-08-diagram",
+              "type": "diagram",
+              "content": {
+                "prompt": "Pyramid diagram showing reusability spectrum. Base (widest): 'Widely Reusable Libraries' (e.g., data structures, math). Middle: 'Domain-Specific Frameworks' (e.g., web, games). Top (narrowest): 'Application-Specific Code'. Arrows showing decreasing reusability upward, increasing specialization upward."
+              }
+            }
+          ],
+          "speakerNotes": "Highlight economic impact: reusable components dramatically reduce development time. Example: standard library collections (List, Set, Map) used in millions of applications - imagine if every project reimplemented these! Discuss the reusability spectrum: highly general (math libraries) to domain-specific (authentication modules) to application-specific. Note the paradox: making something reusable requires more effort upfront (generalization, documentation, testing) but pays dividends across projects. Object-oriented features like inheritance and generics enable reusability.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "quality-attributes",
+              "reusability"
+            ]
+          }
+        },
+        {
+          "id": "slide-09",
+          "title": "Quality Attributes: Trade-offs in Practice",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-09-heading",
+              "type": "heading",
+              "content": "Analyzing Quality Attribute Trade-offs"
+            },
+            {
+              "id": "block-09-scenario",
+              "type": "text",
+              "content": "Three systems with different priorities: (A) Medical device firmware—safety-critical, infrequent updates. (B) E-commerce platform—frequent feature additions, third-party integrations. (C) Scientific computation library—used across multiple research domains."
+            },
+            {
+              "id": "block-09-activity",
+              "type": "activity",
+              "content": {
+                "title": "Evaluate & Propose (5 min)",
+                "instructions": "For each system, rank the four quality attributes by priority AND propose one concrete design decision that reflects your ranking. Example: 'Medical device prioritizes correctness, so I'd require formal verification of all updates before deployment.' Think individually (1.5 min), discuss with neighbor (2.5 min), share one proposal (1 min).",
+                "deliverable": "Ranking + specific design decision for at least one system"
+              }
+            },
+            {
+              "id": "block-09-key-insights",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Medical: Correctness/Robustness > Extendibility (formal methods, extensive testing, update restrictions)",
+                  "E-commerce: Extendibility > Performance (plugin architecture, API versioning, feature flags)",
+                  "Library: Reusability/Correctness > Specificity (generic interfaces, comprehensive test suites)",
+                  "Trade-offs require explicit design choices—not just priorities"
+                ]
+              }
+            }
+          ],
+          "speakerNotes": "This enhanced activity pushes students from evaluation to creation by requiring concrete design proposals. After pair discussions, solicit 2-3 design decisions per system and probe how they operationalize priorities. Highlight examples: medical devices might use immutable data structures (correctness), e-commerce might adopt microservices (extendibility), libraries might use abstract base classes (reusability). Emphasize that recognizing trade-offs is insufficient—engineers must translate priorities into architectural choices. Preview that OO mechanisms (encapsulation, inheritance, polymorphism) provide systematic tools for implementing these decisions, which upcoming slides will explore.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "quality-attributes",
+              "evaluation",
+              "create",
+              "active-learning",
+              "design-decisions"
+            ]
+          }
+        },
+        {
+          "id": "slide-10",
+          "title": "Why Object-Oriented Programming?",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-10-heading",
+              "type": "heading",
+              "content": "Evaluating OO vs. Procedural Approaches"
+            },
+            {
+              "id": "block-10-scenario",
+              "type": "text",
+              "content": "Scenario: Library management system tracking books, members, and loans. Two designs: (A) Procedural—separate data files (books.dat, members.dat) with functions process_loan(), calculate_fine(), update_inventory(). (B) Object-Oriented—classes BOOK, MEMBER, LOAN with encapsulated data and methods."
+            },
+            {
+              "id": "block-10-activity",
+              "type": "activity",
+              "content": {
+                "title": "Design Evaluation (4 min)",
+                "instructions": "Compare both designs against our four quality attributes. Which approach better supports correctness, robustness, extendibility, and reusability? Identify one specific advantage OO provides. Think individually (1 min), discuss with neighbor (2 min), share verdict (1 min).",
+                "deliverable": "Justify your choice: which design would you recommend and why?"
+              }
+            },
+            {
+              "id": "block-10-key-insights",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "OO: Encapsulation protects invariants (correctness/robustness)",
+                  "OO: Adding late fee policy modifies LOAN class only (extendibility)",
+                  "Procedural: Changes ripple across multiple functions",
+                  "OO: MEMBER class reusable in other university systems (reusability)"
+                ]
+              }
+            }
+          ],
+          "speakerNotes": "This evaluate-level activity asks students to critically assess design paradigms rather than passively accepting OO superiority. After pair discussions, poll the room and probe reasoning. Highlight that procedural design scatters related logic (loan processing touches multiple files/functions), making changes risky. OO localizes changes: adding email notifications affects MEMBER class only. Emphasize encapsulation's role: BOOK ensures valid ISBN, LOAN enforces return dates—invariants protected by design. Connect back to Slide 9's trade-offs: OO systematically supports quality attributes through structural mechanisms, not just conventions.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "object-oriented",
+              "evaluation",
+              "active-learning",
+              "quality-attributes"
+            ]
+          }
+        },
+        {
+          "id": "slide-11",
+          "title": "Classes: Blueprints for Objects",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "block-11-heading",
+              "type": "heading",
+              "content": "Classes"
+            },
+            {
+              "id": "block-11-bullets",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Template defining structure and behavior",
+                  "Attributes (data) and methods (operations)",
+                  "Class as a type in the type system",
+                  "Abstract data type with hidden implementation",
+                  "Unit of modularity and reuse"
+                ]
+              }
+            },
+            {
+              "id": "block-11-diagram",
+              "type": "diagram",
+              "content": {
+                "prompt": "UML class diagram showing BANK_ACCOUNT class. Top section: class name 'BANK_ACCOUNT'. Middle section (attributes): '- balance: REAL', '- account_number: STRING'. Bottom section (methods): '+ deposit(amount: REAL)', '+ withdraw(amount: REAL)', '+ get_balance(): REAL'. Use standard UML notation with minus for private, plus for public."
+              }
+            }
+          ],
+          "speakerNotes": "Introduce class as fundamental OO concept: a blueprint or template. Analogy: architectural blueprint defines structure of houses, class defines structure of objects. Class contains attributes (data, state) and methods (operations, behavior). Example: BANK_ACCOUNT class defines what it means to be a bank account - every account has balance and account number, supports deposit and withdraw. Class is also a type: variables can be declared of class type. Emphasize that class is abstract - it's a definition, not a concrete entity (that's an object).",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "object-oriented",
+              "classes"
+            ]
+          }
+        },
+        {
+          "id": "slide-12",
+          "title": "Objects: Runtime Instances",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "block-12-heading",
+              "type": "heading",
+              "content": "Objects"
+            },
+            {
+              "id": "block-12-bullets",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Runtime instance of a class",
+                  "Each object has unique identity",
+                  "Object state: current attribute values",
+                  "Lifecycle: creation, use, destruction",
+                  "Multiple objects from same class"
+                ]
+              }
+            },
+            {
+              "id": "block-12-diagram",
+              "type": "diagram",
+              "content": {
+                "prompt": "Object diagram showing three BANK_ACCOUNT instances. Top: BANK_ACCOUNT class box. Below, three object boxes connected to class with dashed arrows: 'alice_account' (balance: 1000.0, account_number: 'A001'), 'bob_account' (balance: 2500.0, account_number: 'B002'), 'carol_account' (balance: 500.0, account_number: 'C003'). Label: 'Class and its Instances'"
+              }
+            }
+          ],
+          "speakerNotes": "Distinguish class (abstract template) from object (concrete instance). Analogy: blueprint vs. actual houses built from it. Each object has identity (alice_account ≠ bob_account even if they have same balance), state (current values of all attributes), and behavior (responds to method calls). Objects are created at runtime, exist in memory, and eventually destroyed. Multiple objects can be created from same class, each with different state. Example: three bank accounts for Alice, Bob, Carol - all instances of BANK_ACCOUNT but with different balances and account numbers.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "object-oriented",
+              "objects"
+            ]
+          }
+        },
+        {
+          "id": "slide-13",
+          "title": "Encapsulation: Information Hiding",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "block-13-heading",
+              "type": "heading",
+              "content": "Encapsulation"
+            },
+            {
+              "id": "block-13-bullets",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Bundling data with operations",
+                  "Separating interface from implementation",
+                  "Public interface vs. private details",
+                  "Access control: public, private, protected",
+                  "Benefits: reduced coupling, easier maintenance"
+                ]
+              }
+            },
+            {
+              "id": "block-13-diagram",
+              "type": "diagram",
+              "content": {
+                "prompt": "Conceptual diagram of an object as a circle with thick boundary. Inside (private): 'balance: 1000.0', 'internal_state', 'implementation details'. Outside boundary (public interface): arrows pointing to 'deposit()', 'withdraw()', 'get_balance()'. External clients shown as small boxes outside, accessing only through public interface. Label: 'Encapsulation Boundary'"
+              }
+            }
+          ],
+          "speakerNotes": "Encapsulation is crucial for quality: it's the mechanism that enables extendibility and reusability. Two aspects: (1) bundling data with operations that manipulate it, (2) hiding implementation details. Example: BANK_ACCOUNT balance is private - clients can't directly modify it, must use deposit/withdraw methods. This enforces invariants (balance never goes negative) and allows implementation changes (store balance in cents vs. dollars) without affecting clients. Analogy: car dashboard (public interface) vs. engine internals (private implementation). Encapsulation reduces coupling between components.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "object-oriented",
+              "encapsulation"
+            ]
+          }
+        },
+        {
+          "id": "slide-14",
+          "title": "Introduction to Eiffel",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-14-heading",
+              "type": "heading",
+              "content": "Eiffel: A Language for Quality Software"
+            },
+            {
+              "id": "block-14-bullets",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Designed specifically for software engineering principles",
+                  "Strong support for Design by Contract",
+                  "Clear, readable syntax emphasizing concepts over tricks",
+                  "Advanced features: inheritance, genericity, multiple inheritance"
+                ]
+              }
+            },
+            {
+              "id": "block-14-activity",
+              "type": "activity",
+              "content": {
+                "title": "Analyze: Language Choice Trade-offs",
+                "instructions": "Consider these two scenarios: (1) Teaching software quality principles to MSc students, (2) Building a commercial web application. In pairs, analyze which language characteristics matter most for each scenario and justify whether Eiffel or a mainstream language (Java/Python) better serves each purpose. Focus on how language features support or hinder the four quality attributes.",
+                "duration": "3 minutes",
+                "format": "think-pair-share"
+              }
+            }
+          ],
+          "speakerNotes": "Introduce Eiffel and address 'Why not Java/Python?' Answer: Eiffel was designed by Bertrand Meyer specifically to teach software engineering principles with clean syntax emphasizing concepts. Design by Contract is built-in. The activity asks students to analyze trade-offs between pedagogical clarity and industry adoption, connecting language features to quality attributes from earlier slides. This develops critical evaluation skills: recognizing that tool choice depends on context and priorities. Debrief by emphasizing concept transferability—principles learned in Eiffel apply everywhere, like learning music theory on piano helps with any instrument.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "eiffel",
+              "introduction",
+              "analyze"
+            ]
+          }
+        },
+        {
+          "id": "slide-15",
+          "title": "Eiffel Class Structure",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "block-15-code",
+              "type": "code",
+              "content": {
+                "language": "eiffel",
+                "code": "class POINT\ncreate make\nfeature {NONE} -- Initialization\n    make (a_x, a_y: REAL)\n        do\n            x := a_x\n            y := a_y\n        end\nfeature -- Access\n    x: REAL\n    y: REAL\nfeature -- Measurement\n    distance_to (other: POINT): REAL\n        do\n            Result := sqrt((x - other.x)^2 + (y - other.y)^2)\n        end\nend"
+              }
+            },
+            {
+              "id": "block-15-activity",
+              "type": "activity",
+              "content": {
+                "title": "Create: Design CIRCLE Class",
+                "instructions": "Design a complete CIRCLE class with center (POINT), radius (REAL), and operations: make, area, contains (tests if a point is inside). Sketch the class structure showing: (1) Which features are public/private and why, (2) How your design supports correctness and encapsulation, (3) One precondition that prevents misuse. Share your design rationale with a neighbor, focusing on which quality attributes your decisions prioritize.",
+                "duration": "5 minutes",
+                "format": "individual-then-pair"
+              }
+            }
+          ],
+          "speakerNotes": "Walk through POINT syntax: class/create clauses, feature grouping, attributes versus methods, Result keyword, assignment operator. Emphasize feature {NONE} for private initialization. Launch activity: students synthesize a complete class design from scratch, integrating syntax patterns with quality principles from earlier slides. This elevates from applying a single pattern to creating a cohesive design. During debrief, collect designs on board showing different encapsulation choices (is radius public?), preconditions (radius > 0 in make), and how decisions reflect quality trade-offs. Highlight that internal use of POINT demonstrates composition.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "eiffel",
+              "syntax",
+              "code",
+              "create",
+              "design"
+            ]
+          }
+        },
+        {
+          "id": "slide-16",
+          "title": "Eiffel Example: BANK_ACCOUNT",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "block-16-code",
+              "type": "code",
+              "content": {
+                "language": "eiffel",
+                "code": "class BANK_ACCOUNT\ncreate make\nfeature {NONE} -- Initialization\n    make (a_account_number: STRING)\n        do\n            account_number := a_account_number\n            balance := 0.0\n        end\nfeature {NONE} -- Implementation\n    balance: REAL  -- Private\nfeature -- Access\n    account_number: STRING\n    get_balance: REAL\n        do Result := balance end\nfeature -- Operations\n    deposit (amount: REAL)\n        require amount > 0\n        do balance := balance + amount end\n    withdraw (amount: REAL)\n        require\n            amount > 0\n            amount <= balance\n        do balance := balance - amount end\nend"
+              }
+            },
+            {
+              "id": "block-16-activity",
+              "type": "activity",
+              "content": {
+                "title": "Analyze & Extend: Overdraft Protection",
+                "instructions": "1) Analyze: Why is balance private while account_number is public? What quality attributes does this support? 2) Apply: Sketch how to add overdraft_limit feature and modify withdraw to allow overdrafts up to the limit. Which feature clause? What precondition changes? 3) Share one design decision with a neighbor.",
+                "duration": "4 minutes",
+                "format": "individual-then-pair"
+              }
+            }
+          ],
+          "speakerNotes": "Walk through encapsulation: balance is feature {NONE} (private), enforcing information hiding. Public interface: get_balance (query), deposit/withdraw (commands). Highlight require clauses as Design by Contract preview—preconditions enforce correctness. Launch activity: students first analyze design rationale (why this encapsulation?), then apply by extending functionality. This combines analytical thinking with practical application. During debrief, emphasize that overdraft_limit should be private, withdraw precondition becomes 'amount <= balance + overdraft_limit', supporting extendibility without breaking encapsulation. Collect solutions showing different approaches to initialization and validation.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "eiffel",
+              "syntax",
+              "code",
+              "encapsulation",
+              "analyze",
+              "apply"
+            ]
+          }
+        },
+        {
+          "id": "slide-17",
+          "title": "Course Roadmap: Your Learning Path",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "block-17-diagram",
+              "type": "diagram",
+              "content": {
+                "prompt": "Course dependency graph showing progression of topics. Foundation layer: 'Classes & Objects', 'Encapsulation'. Construction layer (arrows from foundation): 'Inheritance', 'Polymorphism', 'Genericity'. Architecture layer (arrows from construction): 'Design Patterns', 'Large-Scale Structure'. Engineering layer (arrows from all): 'Agile Methods', 'Requirements', 'Quality Processes'. Use different colors for each layer, arrows showing dependencies."
+              }
+            },
+            {
+              "id": "block-17-activity",
+              "type": "activity",
+              "content": {
+                "title": "Map Your Learning: Predict & Connect",
+                "instructions": "Study the roadmap. Choose ONE upcoming topic (inheritance, polymorphism, design patterns, or agile methods). In 3 minutes: 1) Predict: Which quality attribute(s) will this topic primarily support? Why? 2) Connect: How might this topic build on encapsulation from today? Write 2-3 sentences, then share with a neighbor.",
+                "duration": "3 minutes",
+                "format": "individual-then-pair"
+              }
+            }
+          ],
+          "speakerNotes": "Present the roadmap as a learning journey with clear dependencies. Launch activity to activate predictive thinking: students analyze how future topics connect to today's foundations and quality attributes. Common predictions: inheritance supports extendibility/reusability, polymorphism enables robustness through flexible interfaces, design patterns support reusability, agile supports correctness through iteration. During debrief, validate predictions and emphasize that each layer builds systematically—you can't master patterns without polymorphism, can't apply agile without understanding quality attributes. This metacognitive exercise helps students see the course as integrated rather than isolated topics.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "course-overview",
+              "roadmap",
+              "analyze",
+              "predict"
+            ]
+          }
+        },
+        {
+          "id": "slide-18",
+          "title": "Summary and Next Steps",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-18-heading",
+              "type": "heading",
+              "content": "Key Takeaways"
+            },
+            {
+              "id": "block-18-bullets",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Software engineering requires systematic approaches",
+                  "Four quality attributes: correctness, robustness, extendibility, reusability",
+                  "Object-oriented programming supports quality through encapsulation",
+                  "Classes are templates, objects are instances",
+                  "Eiffel provides clear notation for learning OO concepts"
+                ]
+              }
+            },
+            {
+              "id": "block-18-next",
+              "type": "text",
+              "content": "Next lecture: Inheritance and Polymorphism"
+            },
+            {
+              "id": "block-18-action",
+              "type": "text",
+              "content": "Action items: Install Eiffel environment, read Touch of Class chapters 1-3, complete first tutorial exercise"
+            }
+          ],
+          "speakerNotes": "Recap the main points: (1) Software engineering is essential for industrial systems - ad-hoc approaches fail. (2) Quality attributes are the foundation - correctness, robustness, extendibility, reusability. (3) Object-oriented programming provides mechanisms to achieve quality. (4) Classes and objects are fundamental concepts, with encapsulation as key principle. (5) Eiffel notation will be our vehicle for learning. Remind students of action items: install Eiffel, read assigned chapters, attend tutorials. Preview next lecture: inheritance (extending classes) and polymorphism (flexibility through type relationships). Encourage questions and office hour visits.",
+          "metadata": {
+            "transition": "fade",
+            "animation": "fade-in",
+            "tags": [
+              "summary",
+              "conclusion"
+            ]
+          }
+        }
+      ]
+    },
+    "evaluation": {
+      "alignmentScore": 88,
+      "dominantLevel": "analyze",
+      "distribution": {
+        "remember": 5,
+        "understand": 15,
+        "apply": 25,
+        "analyze": 35,
+        "evaluate": 12,
+        "create": 8
+      },
+      "objectiveAlignments": [
+        {
+          "objective": "Articulate the key challenges in modern software engineering and explain why systematic approaches are necessary for industrial-scale systems",
+          "expectedLevel": "understand",
+          "observedLevel": "analyze",
+          "status": "partially_aligned",
+          "rationale": "Objective asks students to 'articulate' and 'explain' (understand level), but slide-03 activity requires analyzing Ariane 5 failure to diagnose root causes and map to quality framework, elevating to analyze level. Slide-01 activity also pushes to analyze by diagnosing gaps between working code and engineered systems. Content exceeds objective's cognitive demand."
+        },
+        {
+          "objective": "Define and distinguish between the four critical quality attributes: correctness, robustness, extendibility, and reusability",
+          "expectedLevel": "understand",
+          "observedLevel": "evaluate",
+          "status": "partially_aligned",
+          "rationale": "Objective uses 'define and distinguish' (understand level), but slides 04-09 require evaluating designs against quality criteria, proposing solutions, and justifying trade-offs. Slide-04 asks students to classify violations AND propose prevention strategies. Slide-09 requires ranking attributes and proposing concrete design decisions. Activities consistently operate at evaluate level, significantly exceeding the stated objective."
+        },
+        {
+          "objective": "Explain the fundamental concepts of object-oriented programming and why object technology is the approach of choice for high-quality systems",
+          "expectedLevel": "understand",
+          "observedLevel": "evaluate",
+          "status": "partially_aligned",
+          "rationale": "Objective asks to 'explain' (understand level), but slide-10 activity requires evaluating OO vs. procedural designs against quality attributes and justifying design recommendations. Students must critically assess paradigm trade-offs rather than simply explaining OO concepts. Observed level exceeds expected by two levels."
+        },
+        {
+          "objective": "Describe the relationship between classes and objects, and explain the principle of encapsulation",
+          "expectedLevel": "understand",
+          "observedLevel": "analyze",
+          "status": "partially_aligned",
+          "rationale": "Objective uses 'describe' and 'explain' (understand level). Slides 11-13 provide definitions and diagrams at understand level. However, slide-16 activity requires analyzing why specific features are public/private and what quality attributes this supports, pushing to analyze level. Mixed delivery with some content at expected level and activities exceeding it."
+        },
+        {
+          "objective": "Recognize basic Eiffel notation and understand its role in expressing object-oriented concepts",
+          "expectedLevel": "understand",
+          "observedLevel": "create",
+          "status": "misaligned",
+          "rationale": "Objective asks to 'recognize' and 'understand' (understand level), but slide-15 activity requires students to design a complete CIRCLE class from scratch, making decisions about public/private features, preconditions, and quality trade-offs. This is create level (synthesizing new structures). Slide-16 also requires extending BANK_ACCOUNT with overdraft functionality. Observed level exceeds expected by three levels, indicating significant misalignment."
+        },
+        {
+          "objective": "Understand the course structure, assessment components, and learning trajectory for the semester",
+          "expectedLevel": "understand",
+          "observedLevel": "evaluate",
+          "status": "partially_aligned",
+          "rationale": "Objective uses 'understand' (understand level), but slide-02 activity requires self-assessing past projects against three pillars using criteria and proposing targeted improvements. Slide-17 requires predicting which quality attributes future topics support and connecting to current foundations. Both activities require evaluation and metacognitive analysis, exceeding the stated objective."
+        }
+      ],
+      "slideTags": [
+        {
+          "slideTitle": "Introduction to Software Engineering and Object-Oriented Fundamentals",
+          "primaryLevel": "analyze",
+          "evidence": "Activity requires analyzing past projects to diagnose gaps between working code and engineered systems, identifying specific issues like tight coupling or unclear structure."
+        },
+        {
+          "slideTitle": "Course Structure and Objectives",
+          "primaryLevel": "evaluate",
+          "evidence": "Activity requires evaluating past projects against three pillars using 1-5 scale, identifying weakest pillar, and proposing concrete improvements with justification."
+        },
+        {
+          "slideTitle": "The Software Engineering Challenge",
+          "primaryLevel": "analyze",
+          "evidence": "Activity requires analyzing Ariane 5 failure to diagnose which quality attributes were violated and proposing specific verification steps to prevent recurrence."
+        },
+        {
+          "slideTitle": "Quality Attributes: The Foundation",
+          "primaryLevel": "evaluate",
+          "evidence": "Activity requires classifying violations AND proposing concrete design decisions to prevent extendibility failures, moving beyond classification to solution design."
+        },
+        {
+          "slideTitle": "Correctness: Doing the Right Thing",
+          "primaryLevel": "analyze",
+          "evidence": "Activity requires analyzing code against specification to identify whether implementation correctly satisfies requirements, testing specification-implementation alignment."
+        },
+        {
+          "slideTitle": "Robustness: Handling the Unexpected",
+          "primaryLevel": "analyze",
+          "evidence": "Activity requires diagnosing which abnormal conditions are mishandled in two implementations and proposing robustness enhancements for critical gaps."
+        },
+        {
+          "slideTitle": "Extendibility: Embracing Change",
+          "primaryLevel": "understand",
+          "evidence": "Slide presents definitions and diagrams explaining extendibility concept with modular vs. tangled architecture comparison. No activity requiring higher-order thinking."
+        },
+        {
+          "slideTitle": "Reusability: Leveraging Existing Solutions",
+          "primaryLevel": "understand",
+          "evidence": "Slide presents definitions and reusability spectrum diagram. Content explains concepts but does not require application, analysis, or evaluation."
+        },
+        {
+          "slideTitle": "Quality Attributes: Trade-offs in Practice",
+          "primaryLevel": "evaluate",
+          "evidence": "Activity requires ranking quality attributes by priority for three systems AND proposing concrete design decisions reflecting those rankings, with justification of choices."
+        },
+        {
+          "slideTitle": "Why Object-Oriented Programming?",
+          "primaryLevel": "evaluate",
+          "evidence": "Activity requires comparing OO vs. procedural designs against four quality attributes, identifying specific advantages, and recommending a design with justification."
+        },
+        {
+          "slideTitle": "Classes: Blueprints for Objects",
+          "primaryLevel": "understand",
+          "evidence": "Slide presents class definition with UML diagram showing BANK_ACCOUNT structure. Content explains concept but does not require higher-order cognitive engagement."
+        },
+        {
+          "slideTitle": "Objects: Runtime Instances",
+          "primaryLevel": "understand",
+          "evidence": "Slide presents object definition with diagram showing three BANK_ACCOUNT instances. Content explains class-object relationship but remains at comprehension level."
+        },
+        {
+          "slideTitle": "Encapsulation: Information Hiding",
+          "primaryLevel": "understand",
+          "evidence": "Slide presents encapsulation definition with conceptual diagram of public interface vs. private implementation. Explanatory content without application or analysis."
+        },
+        {
+          "slideTitle": "Introduction to Eiffel",
+          "primaryLevel": "analyze",
+          "evidence": "Activity requires analyzing language choice trade-offs for two scenarios, justifying whether Eiffel or mainstream languages better serve each purpose based on quality attributes."
+        },
+        {
+          "slideTitle": "Eiffel Class Structure",
+          "primaryLevel": "create",
+          "evidence": "Activity requires designing complete CIRCLE class from scratch, making decisions about public/private features, preconditions, and quality trade-offs with design rationale."
+        },
+        {
+          "slideTitle": "Eiffel Example: BANK_ACCOUNT",
+          "primaryLevel": "analyze",
+          "evidence": "Activity requires analyzing encapsulation rationale (why balance is private) and applying by extending with overdraft functionality, including precondition modifications."
+        },
+        {
+          "slideTitle": "Course Roadmap: Your Learning Path",
+          "primaryLevel": "analyze",
+          "evidence": "Activity requires predicting which quality attributes future topics support and connecting them to encapsulation foundations, demonstrating metacognitive analysis."
+        },
+        {
+          "slideTitle": "Summary and Next Steps",
+          "primaryLevel": "remember",
+          "evidence": "Slide recaps main points and lists action items. Content focuses on recall of key concepts covered without requiring application or higher-order thinking."
+        }
+      ],
+      "gaps": [
+        "Systematic misalignment: All six learning objectives are stated at understand level, but 100% of slides with activities operate at analyze/evaluate/create levels. This creates expectation mismatch between stated objectives and actual cognitive demands.",
+        "Missing scaffolding for create-level tasks: Slide-15 jumps directly to designing a complete class without intermediate apply-level practice. Students need guided application of Eiffel syntax patterns before synthesizing original designs.",
+        "Slides 07-08 (extendibility, reusability) lack activities: These slides remain at understand level while surrounding slides engage analyze/evaluate. This creates uneven cognitive demand distribution and missed opportunities to apply quality attribute analysis.",
+        "No explicit remember-level foundation for Eiffel syntax: Slide-15 presents code example but doesn't isolate basic syntax elements (assignment operator, Result keyword, feature clauses) for recognition before requiring design synthesis.",
+        "Objective 5 (Eiffel notation) shows three-level gap: Stated as 'recognize and understand' but assessed through class design creation. Either revise objective to 'Design classes using Eiffel notation' or add intermediate apply-level activities."
+      ],
+      "suggestions": [
+        "Revise learning objectives to match actual cognitive demands: Change objective 2 to 'Evaluate software designs against the four quality attributes and propose improvements'; change objective 5 to 'Apply Eiffel notation to design classes demonstrating encapsulation and quality principles.' This aligns expectations with MSc-level rigor.",
+        "Add apply-level scaffolding before slide-15: Insert activity where students complete partially-written Eiffel class (fill in missing features, fix syntax errors) to practice notation application before creating original designs.",
+        "Enhance slides 07-08 with analysis activities: For extendibility, provide two architectures and ask students to predict change impact. For reusability, analyze existing library components to classify reusability level and identify design decisions enabling reuse.",
+        "Create explicit Eiffel syntax reference: Add slide between 14-15 with annotated code highlighting key notation elements (feature clauses, access control, Result, assignment). Include brief recognition quiz before design activity.",
+        "Balance evaluate/create with more apply activities: Add intermediate exercises like 'Implement deposit method given class skeleton' or 'Add get_account_number query to existing class' to build confidence before complex design tasks.",
+        "Strengthen objective-assessment alignment: Slide-02 activity (evaluate projects against pillars) directly assesses course structure objective but at wrong level. Either revise objective to 'Evaluate personal learning needs against course pillars' or change activity to mapping course topics to personal goals (understand level).",
+        "Add metacognitive closure to high-demand activities: After slide-15 CIRCLE design, explicitly ask 'Which Bloom level did this activity require? How does designing a class differ from explaining encapsulation?' This helps students recognize cognitive progression and builds self-regulated learning."
+      ]
+    },
+    "rounds_used": 2,
+    "before_score": 82,
+    "after_score": 88,
+    "improved_slide_ids": [
+      "slide-02",
+      "slide-09",
+      "slide-15",
+      "slide-17",
+      "slide-03",
+      "slide-04",
+      "slide-05",
+      "slide-06"
+    ],
+    "failed_slide_ids": [],
+    "improved_count": 8,
+    "reevaluated": true
+  },
+  {
+    "status": "completed",
+    "deck": {
+      "slides": [
+        {
+          "id": "slide-01",
+          "title": "Introduction to Software Engineering and Object-Oriented Fundamentals",
+          "layout": "title",
+          "blocks": [
+            {
+              "id": "block-01-title",
+              "type": "heading",
+              "content": "Lecture 1: Introduction to Software Engineering and Object-Oriented Fundamentals"
+            },
+            {
+              "id": "block-01-subtitle",
+              "type": "text",
+              "content": "Software Construction, Architecture and Engineering"
+            },
+            {
+              "id": "block-01-activity",
+              "type": "activity",
+              "content": {
+                "title": "Analyze: Your Software Engineering Experience",
+                "duration": "2 minutes",
+                "instructions": "Reflect on a software project you've worked on. Identify one concrete example where the code worked correctly but was difficult to modify or reuse. What made it problematic? Write down the specific issue (tight coupling, unclear structure, hardcoded values, etc.).",
+                "purpose": "Activate prior knowledge; diagnose gap between 'working code' and 'engineered systems'"
+              }
+            }
+          ],
+          "speakerNotes": "Welcome students warmly. Launch the reflection activity immediately to activate prior experience and surface the central problem this course addresses: code that works isn't enough. After 2 minutes, ask 2-3 volunteers to share examples. Listen for themes like 'couldn't change X without breaking Y' or 'copy-pasted code everywhere.' Use their responses to preview that this course provides systematic principles (quality attributes, OO design) to prevent these problems. This diagnostic helps students see why engineering discipline matters beyond basic programming competence.",
+          "metadata": {
+            "transition": "fade",
+            "animation": "none",
+            "tags": [
+              "introduction",
+              "title",
+              "active-learning",
+              "analyze"
+            ]
+          }
+        },
+        {
+          "id": "slide-02",
+          "title": "Course Structure and Objectives",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-02-heading",
+              "type": "heading",
+              "content": "Your Learning Journey"
+            },
+            {
+              "id": "block-02-structure",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Three pillars: Construction (correctness), Architecture (structure), Engineering (long-term quality)",
+                  "35h lectures + 35h tutorials + 55h independent study",
+                  "Assessment: 50% written exam + 50% portfolio demonstrating pillar integration",
+                  "Eiffel notation → transferable OO principles for any language"
+                ]
+              }
+            },
+            {
+              "id": "block-02-activity",
+              "type": "activity",
+              "content": {
+                "title": "Evaluate & Create: Diagnose and Redesign",
+                "duration": "4 minutes",
+                "instructions": "Select a past project. (1) Evaluate it against all three pillars using a 1-5 scale for each. (2) Identify your weakest pillar. (3) Propose one concrete improvement that would strengthen that pillar (e.g., 'Add input validation for Construction' or 'Extract reusable modules for Architecture'). Share your proposal with a neighbor and explain why it addresses the gap.",
+                "purpose": "Self-assess learning needs; create actionable improvement linked to course pillars"
+              }
+            }
+          ],
+          "speakerNotes": "Present the three-pillar framework with brief examples: Construction ensures correctness through contracts, Architecture organizes complexity via modularity, Engineering sustains quality over decades through reusability and extendibility. Launch the activity to make pillars diagnostic and actionable. Circulate during pair discussions, listening for whether students grasp pillar distinctions. Debrief by collecting 2-3 proposed improvements and highlighting how the course provides systematic techniques for each. Emphasize that portfolio assessment rewards demonstrating growth across all pillars, not just producing working code. This activity raises cognitive demand to evaluate (self-assess against criteria) and create (propose targeted solution).",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "course-overview",
+              "logistics",
+              "active-learning",
+              "evaluate",
+              "create"
+            ]
+          }
+        },
+        {
+          "id": "slide-03",
+          "title": "The Software Engineering Challenge",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-03-heading",
+              "type": "heading",
+              "content": "Why Software Engineering Matters"
+            },
+            {
+              "id": "block-03-bullets",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Modern systems: millions of lines, decades of evolution",
+                  "Industrial software ≠ academic exercises",
+                  "Ad-hoc approaches fail at scale → systematic methods required",
+                  "Example: Ariane 5 ($500M loss from reused code without analysis)"
+                ]
+              }
+            },
+            {
+              "id": "block-03-activity",
+              "type": "activity",
+              "content": {
+                "title": "Analyze & Diagnose: From Failure to Principle",
+                "duration": "3 minutes",
+                "instructions": "Read: Ariane 5 reused Ariane 4 altitude code. The new rocket's faster acceleration caused integer overflow, triggering self-destruct 37 seconds after launch. Which quality attribute(s) were violated? What engineering practice would have prevented this? Discuss with a neighbor, then propose one specific verification step the team should have performed.",
+                "purpose": "Apply quality attributes to analyze real failure; connect abstract principles to concrete engineering practices"
+              }
+            }
+          ],
+          "speakerNotes": "Present the Ariane 5 case as a concrete failure illustrating why systematic engineering matters. Launch the activity to move students from passively hearing the story to actively diagnosing it using quality concepts. Expected answers: robustness violated (didn't handle unexpected input range), extendibility violated (reuse without adaptation). Prevention: specification analysis, range testing, contracts. Debrief by collecting proposed verification steps, highlighting that engineering discipline means validating assumptions during reuse. This raises cognitive demand to analyze (diagnose root cause) and apply (map failure to quality framework), preparing students for the detailed quality attributes in Slide 4.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "motivation",
+              "software-crisis",
+              "active-learning",
+              "analyze"
+            ]
+          }
+        },
+        {
+          "id": "slide-04",
+          "title": "Quality Attributes: The Foundation",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-04-heading",
+              "type": "heading",
+              "content": "Four Pillars of Software Quality"
+            },
+            {
+              "id": "block-04-bullets",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Correctness: Does it do what it should?",
+                  "Robustness: Does it handle the unexpected?",
+                  "Extendibility: Can it adapt to change?",
+                  "Reusability: Can we leverage it elsewhere?"
+                ]
+              }
+            },
+            {
+              "id": "block-04-activity",
+              "type": "activity",
+              "content": {
+                "title": "Diagnose, Classify & Propose Solutions",
+                "duration": "4 minutes",
+                "format": "think-pair-share",
+                "instructions": "Online banking system scenarios: (1) Transfer moves $99 instead of $100. (2) System crashes on text in amount field. (3) Adding crypto requires rewriting transaction code. (4) Authentication can't be reused in mobile app. First, classify which quality attribute each violates. Then, propose one concrete design decision or practice that would prevent scenario (3). Share your solution with a neighbor and refine it together.",
+                "deliverable": "Classification + one specific prevention strategy for extendibility failure"
+              }
+            }
+          ],
+          "speakerNotes": "After introducing the four attributes, launch the activity. Give 90 seconds for individual classification and solution proposal, then 90 seconds pair discussion to refine prevention strategies, finally 60 seconds class debrief. Expected classifications: (1) correctness, (2) robustness, (3) extendibility, (4) reusability. For scenario 3, look for answers like 'use abstract payment interface' or 'separate transaction logic from payment method.' This elevates from pure classification to proposing preventive design decisions, bridging analysis to evaluation/creation. Highlight that quality attributes guide concrete architectural choices, preparing students for deeper attribute exploration in subsequent slides.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "quality-attributes",
+              "overview",
+              "active-learning",
+              "evaluate",
+              "create"
+            ]
+          }
+        },
+        {
+          "id": "slide-05",
+          "title": "Correctness: Doing the Right Thing",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-05-heading",
+              "type": "heading",
+              "content": "Correctness"
+            },
+            {
+              "id": "block-05-bullets",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Performs exact tasks as specified",
+                  "Binary property: correct or incorrect",
+                  "Requires clear, formal specifications",
+                  "Most fundamental quality attribute"
+                ]
+              }
+            },
+            {
+              "id": "block-05-activity",
+              "type": "activity",
+              "content": {
+                "title": "Identify Correctness Violations",
+                "duration": "2 minutes",
+                "format": "individual-then-poll",
+                "instructions": "Analyze this code snippet: A sort_list function specification states 'Sort integers in ascending order.' Implementation uses bubble sort but has condition: if (list[i] > list[i+1]) swap(). Which input reveals incorrectness? (A) [3,1,2] (B) [-5,3,-1] (C) [1,2,3] (D) All work correctly. Identify the answer and explain why it violates the specification.",
+                "deliverable": "Answer selection with one-sentence justification"
+              }
+            }
+          ],
+          "speakerNotes": "Launch activity immediately after defining correctness. Answer is D—the code is actually correct for the specification. This challenges students to analyze specification-implementation alignment rather than just spotting bugs. After polling, reveal answer and emphasize that correctness requires complete specification coverage. If time permits, modify scenario: change spec to 'Sort all numbers' but keep integer-only implementation—now inputs with floats reveal incorrectness. Connect to next slide: correctness assumes valid inputs; invalid inputs relate to robustness.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "quality-attributes",
+              "correctness",
+              "active-learning",
+              "analyze"
+            ]
+          }
+        },
+        {
+          "id": "slide-06",
+          "title": "Robustness: Handling the Unexpected",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-06-heading",
+              "type": "heading",
+              "content": "Robustness"
+            },
+            {
+              "id": "block-06-bullets",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Graceful response to abnormal conditions",
+                  "Complements correctness (exceptional vs. normal cases)",
+                  "Error handling and exception management",
+                  "Fail-safe design: maintain safety under failure"
+                ]
+              }
+            },
+            {
+              "id": "block-06-activity",
+              "type": "activity",
+              "content": {
+                "title": "Diagnose Robustness Failures",
+                "duration": "3 minutes",
+                "format": "individual-then-pair",
+                "instructions": "Analyze these two implementations of withdraw(amount) for a bank account: (A) Subtracts amount from balance without checks. (B) Checks if amount > balance, displays 'Error: Insufficient funds' and prevents withdrawal. For each scenario, identify which implementation fails robustness and explain what abnormal condition is mishandled: (1) User enters -50 as amount (2) Database connection drops mid-withdrawal (3) User enters 'abc' as amount. Propose one improvement for the most critical gap.",
+                "deliverable": "Identify failure cases and propose one robustness enhancement"
+              }
+            }
+          ],
+          "speakerNotes": "Launch activity after defining robustness. Both implementations have robustness gaps: (A) fails all scenarios; (B) handles overdraft but not negative inputs, connection failures, or type errors. Critical gap is transaction consistency (scenario 2). Students should recognize robustness requires anticipating multiple abnormal conditions beyond obvious cases. After pairs discuss, poll for most critical gap and collect improvement proposals (e.g., transaction rollback, input validation). Connect to extendibility: robust error handling structures affect how easily we add new validations later.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "quality-attributes",
+              "robustness",
+              "active-learning",
+              "analyze"
+            ]
+          }
+        },
+        {
+          "id": "slide-07",
+          "title": "Extendibility: Embracing Change",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "block-07-heading",
+              "type": "heading",
+              "content": "Extendibility"
+            },
+            {
+              "id": "block-07-bullets",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Ease of adapting to specification changes",
+                  "Change is inevitable in software",
+                  "Modular design and separation of concerns",
+                  "Localized changes vs. ripple effects",
+                  "Design for change from day one"
+                ]
+              }
+            },
+            {
+              "id": "block-07-diagram",
+              "type": "diagram",
+              "content": {
+                "prompt": "Side-by-side comparison showing two system architectures. Left side (Good): modular boxes with one highlighted in red showing localized change, other modules unaffected. Right side (Poor): tangled web of dependencies with one change in red causing ripple effects (shown in orange) throughout system. Label: 'Well-designed vs. Poorly-designed System Response to Change'"
+              }
+            }
+          ],
+          "speakerNotes": "Emphasize that requirements always change - new features, regulatory updates, business pivots. Example: e-commerce system adding cryptocurrency payment without restructuring entire checkout. Good design localizes changes: adding new payment method shouldn't require modifying inventory management. Mention the Open-Closed Principle preview: open for extension, closed for modification. Poor extendibility leads to maintenance nightmares and eventual system rewrites. Object-oriented mechanisms like inheritance and polymorphism support extendibility.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "quality-attributes",
+              "extendibility"
+            ]
+          }
+        },
+        {
+          "id": "slide-08",
+          "title": "Reusability: Leveraging Existing Solutions",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-08-heading",
+              "type": "heading",
+              "content": "Reusability"
+            },
+            {
+              "id": "block-08-bullets",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Using software elements across multiple applications",
+                  "Economic benefits: reduced time and cost",
+                  "Libraries, frameworks, and components",
+                  "Trade-off: generality vs. specificity",
+                  "Requires upfront design investment"
+                ]
+              }
+            },
+            {
+              "id": "block-08-diagram",
+              "type": "diagram",
+              "content": {
+                "prompt": "Pyramid diagram showing reusability spectrum. Base (widest): 'Widely Reusable Libraries' (e.g., data structures, math). Middle: 'Domain-Specific Frameworks' (e.g., web, games). Top (narrowest): 'Application-Specific Code'. Arrows showing decreasing reusability upward, increasing specialization upward."
+              }
+            }
+          ],
+          "speakerNotes": "Highlight economic impact: reusable components dramatically reduce development time. Example: standard library collections (List, Set, Map) used in millions of applications - imagine if every project reimplemented these! Discuss the reusability spectrum: highly general (math libraries) to domain-specific (authentication modules) to application-specific. Note the paradox: making something reusable requires more effort upfront (generalization, documentation, testing) but pays dividends across projects. Object-oriented features like inheritance and generics enable reusability.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "quality-attributes",
+              "reusability"
+            ]
+          }
+        },
+        {
+          "id": "slide-09",
+          "title": "Quality Attributes: Trade-offs in Practice",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-09-heading",
+              "type": "heading",
+              "content": "Analyzing Quality Attribute Trade-offs"
+            },
+            {
+              "id": "block-09-scenario",
+              "type": "text",
+              "content": "Three systems with different priorities: (A) Medical device firmware—safety-critical, infrequent updates. (B) E-commerce platform—frequent feature additions, third-party integrations. (C) Scientific computation library—used across multiple research domains."
+            },
+            {
+              "id": "block-09-activity",
+              "type": "activity",
+              "content": {
+                "title": "Evaluate & Propose (5 min)",
+                "instructions": "For each system, rank the four quality attributes by priority AND propose one concrete design decision that reflects your ranking. Example: 'Medical device prioritizes correctness, so I'd require formal verification of all updates before deployment.' Think individually (1.5 min), discuss with neighbor (2.5 min), share one proposal (1 min).",
+                "deliverable": "Ranking + specific design decision for at least one system"
+              }
+            },
+            {
+              "id": "block-09-key-insights",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Medical: Correctness/Robustness > Extendibility (formal methods, extensive testing, update restrictions)",
+                  "E-commerce: Extendibility > Performance (plugin architecture, API versioning, feature flags)",
+                  "Library: Reusability/Correctness > Specificity (generic interfaces, comprehensive test suites)",
+                  "Trade-offs require explicit design choices—not just priorities"
+                ]
+              }
+            }
+          ],
+          "speakerNotes": "This enhanced activity pushes students from evaluation to creation by requiring concrete design proposals. After pair discussions, solicit 2-3 design decisions per system and probe how they operationalize priorities. Highlight examples: medical devices might use immutable data structures (correctness), e-commerce might adopt microservices (extendibility), libraries might use abstract base classes (reusability). Emphasize that recognizing trade-offs is insufficient—engineers must translate priorities into architectural choices. Preview that OO mechanisms (encapsulation, inheritance, polymorphism) provide systematic tools for implementing these decisions, which upcoming slides will explore.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "quality-attributes",
+              "evaluation",
+              "create",
+              "active-learning",
+              "design-decisions"
+            ]
+          }
+        },
+        {
+          "id": "slide-10",
+          "title": "Why Object-Oriented Programming?",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-10-heading",
+              "type": "heading",
+              "content": "Evaluating OO vs. Procedural Approaches"
+            },
+            {
+              "id": "block-10-scenario",
+              "type": "text",
+              "content": "Scenario: Library management system tracking books, members, and loans. Two designs: (A) Procedural—separate data files (books.dat, members.dat) with functions process_loan(), calculate_fine(), update_inventory(). (B) Object-Oriented—classes BOOK, MEMBER, LOAN with encapsulated data and methods."
+            },
+            {
+              "id": "block-10-activity",
+              "type": "activity",
+              "content": {
+                "title": "Design Evaluation (4 min)",
+                "instructions": "Compare both designs against our four quality attributes. Which approach better supports correctness, robustness, extendibility, and reusability? Identify one specific advantage OO provides. Think individually (1 min), discuss with neighbor (2 min), share verdict (1 min).",
+                "deliverable": "Justify your choice: which design would you recommend and why?"
+              }
+            },
+            {
+              "id": "block-10-key-insights",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "OO: Encapsulation protects invariants (correctness/robustness)",
+                  "OO: Adding late fee policy modifies LOAN class only (extendibility)",
+                  "Procedural: Changes ripple across multiple functions",
+                  "OO: MEMBER class reusable in other university systems (reusability)"
+                ]
+              }
+            }
+          ],
+          "speakerNotes": "This evaluate-level activity asks students to critically assess design paradigms rather than passively accepting OO superiority. After pair discussions, poll the room and probe reasoning. Highlight that procedural design scatters related logic (loan processing touches multiple files/functions), making changes risky. OO localizes changes: adding email notifications affects MEMBER class only. Emphasize encapsulation's role: BOOK ensures valid ISBN, LOAN enforces return dates—invariants protected by design. Connect back to Slide 9's trade-offs: OO systematically supports quality attributes through structural mechanisms, not just conventions.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "object-oriented",
+              "evaluation",
+              "active-learning",
+              "quality-attributes"
+            ]
+          }
+        },
+        {
+          "id": "slide-11",
+          "title": "Classes: Blueprints for Objects",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "block-11-heading",
+              "type": "heading",
+              "content": "Classes"
+            },
+            {
+              "id": "block-11-bullets",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Template defining structure and behavior",
+                  "Attributes (data) and methods (operations)",
+                  "Class as a type in the type system",
+                  "Abstract data type with hidden implementation",
+                  "Unit of modularity and reuse"
+                ]
+              }
+            },
+            {
+              "id": "block-11-diagram",
+              "type": "diagram",
+              "content": {
+                "prompt": "UML class diagram showing BANK_ACCOUNT class. Top section: class name 'BANK_ACCOUNT'. Middle section (attributes): '- balance: REAL', '- account_number: STRING'. Bottom section (methods): '+ deposit(amount: REAL)', '+ withdraw(amount: REAL)', '+ get_balance(): REAL'. Use standard UML notation with minus for private, plus for public."
+              }
+            }
+          ],
+          "speakerNotes": "Introduce class as fundamental OO concept: a blueprint or template. Analogy: architectural blueprint defines structure of houses, class defines structure of objects. Class contains attributes (data, state) and methods (operations, behavior). Example: BANK_ACCOUNT class defines what it means to be a bank account - every account has balance and account number, supports deposit and withdraw. Class is also a type: variables can be declared of class type. Emphasize that class is abstract - it's a definition, not a concrete entity (that's an object).",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "object-oriented",
+              "classes"
+            ]
+          }
+        },
+        {
+          "id": "slide-12",
+          "title": "Objects: Runtime Instances",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "block-12-heading",
+              "type": "heading",
+              "content": "Objects"
+            },
+            {
+              "id": "block-12-bullets",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Runtime instance of a class",
+                  "Each object has unique identity",
+                  "Object state: current attribute values",
+                  "Lifecycle: creation, use, destruction",
+                  "Multiple objects from same class"
+                ]
+              }
+            },
+            {
+              "id": "block-12-diagram",
+              "type": "diagram",
+              "content": {
+                "prompt": "Object diagram showing three BANK_ACCOUNT instances. Top: BANK_ACCOUNT class box. Below, three object boxes connected to class with dashed arrows: 'alice_account' (balance: 1000.0, account_number: 'A001'), 'bob_account' (balance: 2500.0, account_number: 'B002'), 'carol_account' (balance: 500.0, account_number: 'C003'). Label: 'Class and its Instances'"
+              }
+            }
+          ],
+          "speakerNotes": "Distinguish class (abstract template) from object (concrete instance). Analogy: blueprint vs. actual houses built from it. Each object has identity (alice_account ≠ bob_account even if they have same balance), state (current values of all attributes), and behavior (responds to method calls). Objects are created at runtime, exist in memory, and eventually destroyed. Multiple objects can be created from same class, each with different state. Example: three bank accounts for Alice, Bob, Carol - all instances of BANK_ACCOUNT but with different balances and account numbers.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "object-oriented",
+              "objects"
+            ]
+          }
+        },
+        {
+          "id": "slide-13",
+          "title": "Encapsulation: Information Hiding",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "block-13-heading",
+              "type": "heading",
+              "content": "Encapsulation"
+            },
+            {
+              "id": "block-13-bullets",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Bundling data with operations",
+                  "Separating interface from implementation",
+                  "Public interface vs. private details",
+                  "Access control: public, private, protected",
+                  "Benefits: reduced coupling, easier maintenance"
+                ]
+              }
+            },
+            {
+              "id": "block-13-diagram",
+              "type": "diagram",
+              "content": {
+                "prompt": "Conceptual diagram of an object as a circle with thick boundary. Inside (private): 'balance: 1000.0', 'internal_state', 'implementation details'. Outside boundary (public interface): arrows pointing to 'deposit()', 'withdraw()', 'get_balance()'. External clients shown as small boxes outside, accessing only through public interface. Label: 'Encapsulation Boundary'"
+              }
+            }
+          ],
+          "speakerNotes": "Encapsulation is crucial for quality: it's the mechanism that enables extendibility and reusability. Two aspects: (1) bundling data with operations that manipulate it, (2) hiding implementation details. Example: BANK_ACCOUNT balance is private - clients can't directly modify it, must use deposit/withdraw methods. This enforces invariants (balance never goes negative) and allows implementation changes (store balance in cents vs. dollars) without affecting clients. Analogy: car dashboard (public interface) vs. engine internals (private implementation). Encapsulation reduces coupling between components.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "object-oriented",
+              "encapsulation"
+            ]
+          }
+        },
+        {
+          "id": "slide-14",
+          "title": "Introduction to Eiffel",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-14-heading",
+              "type": "heading",
+              "content": "Eiffel: A Language for Quality Software"
+            },
+            {
+              "id": "block-14-bullets",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Designed specifically for software engineering principles",
+                  "Strong support for Design by Contract",
+                  "Clear, readable syntax emphasizing concepts over tricks",
+                  "Advanced features: inheritance, genericity, multiple inheritance"
+                ]
+              }
+            },
+            {
+              "id": "block-14-activity",
+              "type": "activity",
+              "content": {
+                "title": "Analyze: Language Choice Trade-offs",
+                "instructions": "Consider these two scenarios: (1) Teaching software quality principles to MSc students, (2) Building a commercial web application. In pairs, analyze which language characteristics matter most for each scenario and justify whether Eiffel or a mainstream language (Java/Python) better serves each purpose. Focus on how language features support or hinder the four quality attributes.",
+                "duration": "3 minutes",
+                "format": "think-pair-share"
+              }
+            }
+          ],
+          "speakerNotes": "Introduce Eiffel and address 'Why not Java/Python?' Answer: Eiffel was designed by Bertrand Meyer specifically to teach software engineering principles with clean syntax emphasizing concepts. Design by Contract is built-in. The activity asks students to analyze trade-offs between pedagogical clarity and industry adoption, connecting language features to quality attributes from earlier slides. This develops critical evaluation skills: recognizing that tool choice depends on context and priorities. Debrief by emphasizing concept transferability—principles learned in Eiffel apply everywhere, like learning music theory on piano helps with any instrument.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "eiffel",
+              "introduction",
+              "analyze"
+            ]
+          }
+        },
+        {
+          "id": "slide-15",
+          "title": "Eiffel Class Structure",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "block-15-code",
+              "type": "code",
+              "content": {
+                "language": "eiffel",
+                "code": "class POINT\ncreate make\nfeature {NONE} -- Initialization\n    make (a_x, a_y: REAL)\n        do\n            x := a_x\n            y := a_y\n        end\nfeature -- Access\n    x: REAL\n    y: REAL\nfeature -- Measurement\n    distance_to (other: POINT): REAL\n        do\n            Result := sqrt((x - other.x)^2 + (y - other.y)^2)\n        end\nend"
+              }
+            },
+            {
+              "id": "block-15-activity",
+              "type": "activity",
+              "content": {
+                "title": "Create: Design CIRCLE Class",
+                "instructions": "Design a complete CIRCLE class with center (POINT), radius (REAL), and operations: make, area, contains (tests if a point is inside). Sketch the class structure showing: (1) Which features are public/private and why, (2) How your design supports correctness and encapsulation, (3) One precondition that prevents misuse. Share your design rationale with a neighbor, focusing on which quality attributes your decisions prioritize.",
+                "duration": "5 minutes",
+                "format": "individual-then-pair"
+              }
+            }
+          ],
+          "speakerNotes": "Walk through POINT syntax: class/create clauses, feature grouping, attributes versus methods, Result keyword, assignment operator. Emphasize feature {NONE} for private initialization. Launch activity: students synthesize a complete class design from scratch, integrating syntax patterns with quality principles from earlier slides. This elevates from applying a single pattern to creating a cohesive design. During debrief, collect designs on board showing different encapsulation choices (is radius public?), preconditions (radius > 0 in make), and how decisions reflect quality trade-offs. Highlight that internal use of POINT demonstrates composition.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "eiffel",
+              "syntax",
+              "code",
+              "create",
+              "design"
+            ]
+          }
+        },
+        {
+          "id": "slide-16",
+          "title": "Eiffel Example: BANK_ACCOUNT",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "block-16-code",
+              "type": "code",
+              "content": {
+                "language": "eiffel",
+                "code": "class BANK_ACCOUNT\ncreate make\nfeature {NONE} -- Initialization\n    make (a_account_number: STRING)\n        do\n            account_number := a_account_number\n            balance := 0.0\n        end\nfeature {NONE} -- Implementation\n    balance: REAL  -- Private\nfeature -- Access\n    account_number: STRING\n    get_balance: REAL\n        do Result := balance end\nfeature -- Operations\n    deposit (amount: REAL)\n        require amount > 0\n        do balance := balance + amount end\n    withdraw (amount: REAL)\n        require\n            amount > 0\n            amount <= balance\n        do balance := balance - amount end\nend"
+              }
+            },
+            {
+              "id": "block-16-activity",
+              "type": "activity",
+              "content": {
+                "title": "Analyze & Extend: Overdraft Protection",
+                "instructions": "1) Analyze: Why is balance private while account_number is public? What quality attributes does this support? 2) Apply: Sketch how to add overdraft_limit feature and modify withdraw to allow overdrafts up to the limit. Which feature clause? What precondition changes? 3) Share one design decision with a neighbor.",
+                "duration": "4 minutes",
+                "format": "individual-then-pair"
+              }
+            }
+          ],
+          "speakerNotes": "Walk through encapsulation: balance is feature {NONE} (private), enforcing information hiding. Public interface: get_balance (query), deposit/withdraw (commands). Highlight require clauses as Design by Contract preview—preconditions enforce correctness. Launch activity: students first analyze design rationale (why this encapsulation?), then apply by extending functionality. This combines analytical thinking with practical application. During debrief, emphasize that overdraft_limit should be private, withdraw precondition becomes 'amount <= balance + overdraft_limit', supporting extendibility without breaking encapsulation. Collect solutions showing different approaches to initialization and validation.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "eiffel",
+              "syntax",
+              "code",
+              "encapsulation",
+              "analyze",
+              "apply"
+            ]
+          }
+        },
+        {
+          "id": "slide-17",
+          "title": "Course Roadmap: Your Learning Path",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "block-17-diagram",
+              "type": "diagram",
+              "content": {
+                "prompt": "Course dependency graph showing progression of topics. Foundation layer: 'Classes & Objects', 'Encapsulation'. Construction layer (arrows from foundation): 'Inheritance', 'Polymorphism', 'Genericity'. Architecture layer (arrows from construction): 'Design Patterns', 'Large-Scale Structure'. Engineering layer (arrows from all): 'Agile Methods', 'Requirements', 'Quality Processes'. Use different colors for each layer, arrows showing dependencies."
+              }
+            },
+            {
+              "id": "block-17-activity",
+              "type": "activity",
+              "content": {
+                "title": "Map Your Learning: Predict & Connect",
+                "instructions": "Study the roadmap. Choose ONE upcoming topic (inheritance, polymorphism, design patterns, or agile methods). In 3 minutes: 1) Predict: Which quality attribute(s) will this topic primarily support? Why? 2) Connect: How might this topic build on encapsulation from today? Write 2-3 sentences, then share with a neighbor.",
+                "duration": "3 minutes",
+                "format": "individual-then-pair"
+              }
+            }
+          ],
+          "speakerNotes": "Present the roadmap as a learning journey with clear dependencies. Launch activity to activate predictive thinking: students analyze how future topics connect to today's foundations and quality attributes. Common predictions: inheritance supports extendibility/reusability, polymorphism enables robustness through flexible interfaces, design patterns support reusability, agile supports correctness through iteration. During debrief, validate predictions and emphasize that each layer builds systematically—you can't master patterns without polymorphism, can't apply agile without understanding quality attributes. This metacognitive exercise helps students see the course as integrated rather than isolated topics.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "course-overview",
+              "roadmap",
+              "analyze",
+              "predict"
+            ]
+          }
+        },
+        {
+          "id": "slide-18",
+          "title": "Summary and Next Steps",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "block-18-heading",
+              "type": "heading",
+              "content": "Key Takeaways"
+            },
+            {
+              "id": "block-18-bullets",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Software engineering requires systematic approaches",
+                  "Four quality attributes: correctness, robustness, extendibility, reusability",
+                  "Object-oriented programming supports quality through encapsulation",
+                  "Classes are templates, objects are instances",
+                  "Eiffel provides clear notation for learning OO concepts"
+                ]
+              }
+            },
+            {
+              "id": "block-18-next",
+              "type": "text",
+              "content": "Next lecture: Inheritance and Polymorphism"
+            },
+            {
+              "id": "block-18-action",
+              "type": "text",
+              "content": "Action items: Install Eiffel environment, read Touch of Class chapters 1-3, complete first tutorial exercise"
+            }
+          ],
+          "speakerNotes": "Recap the main points: (1) Software engineering is essential for industrial systems - ad-hoc approaches fail. (2) Quality attributes are the foundation - correctness, robustness, extendibility, reusability. (3) Object-oriented programming provides mechanisms to achieve quality. (4) Classes and objects are fundamental concepts, with encapsulation as key principle. (5) Eiffel notation will be our vehicle for learning. Remind students of action items: install Eiffel, read assigned chapters, attend tutorials. Preview next lecture: inheritance (extending classes) and polymorphism (flexibility through type relationships). Encourage questions and office hour visits.",
+          "metadata": {
+            "transition": "fade",
+            "animation": "fade-in",
+            "tags": [
+              "summary",
+              "conclusion"
+            ]
+          }
+        }
+      ]
+    },
+    "evaluation": {
+      "alignmentScore": 88,
+      "dominantLevel": "analyze",
+      "distribution": {
+        "remember": 5,
+        "understand": 15,
+        "apply": 25,
+        "analyze": 35,
+        "evaluate": 12,
+        "create": 8
+      },
+      "objectiveAlignments": [
+        {
+          "objective": "Articulate the key challenges in modern software engineering and explain why systematic approaches are necessary for industrial-scale systems",
+          "expectedLevel": "understand",
+          "observedLevel": "analyze",
+          "status": "partially_aligned",
+          "rationale": "Objective asks students to 'articulate' and 'explain' (understand level), but slide-03 activity requires analyzing Ariane 5 failure to diagnose root causes and map to quality framework, elevating to analyze level. Slide-01 activity also pushes to analyze by diagnosing gaps between working code and engineered systems. Content exceeds objective's cognitive demand."
+        },
+        {
+          "objective": "Define and distinguish between the four critical quality attributes: correctness, robustness, extendibility, and reusability",
+          "expectedLevel": "understand",
+          "observedLevel": "evaluate",
+          "status": "partially_aligned",
+          "rationale": "Objective uses 'define and distinguish' (understand level), but slides 04-09 require evaluating designs against quality criteria, proposing solutions, and justifying trade-offs. Slide-04 asks students to classify violations AND propose prevention strategies. Slide-09 requires ranking attributes and proposing concrete design decisions. Activities consistently operate at evaluate level, significantly exceeding the stated objective."
+        },
+        {
+          "objective": "Explain the fundamental concepts of object-oriented programming and why object technology is the approach of choice for high-quality systems",
+          "expectedLevel": "understand",
+          "observedLevel": "evaluate",
+          "status": "partially_aligned",
+          "rationale": "Objective asks to 'explain' (understand level), but slide-10 activity requires evaluating OO vs. procedural designs against quality attributes and justifying design recommendations. Students must critically assess paradigm trade-offs rather than simply explaining OO concepts. Observed level exceeds expected by two levels."
+        },
+        {
+          "objective": "Describe the relationship between classes and objects, and explain the principle of encapsulation",
+          "expectedLevel": "understand",
+          "observedLevel": "analyze",
+          "status": "partially_aligned",
+          "rationale": "Objective uses 'describe' and 'explain' (understand level). Slides 11-13 provide definitions and diagrams at understand level. However, slide-16 activity requires analyzing why specific features are public/private and what quality attributes this supports, pushing to analyze level. Mixed delivery with some content at expected level and activities exceeding it."
+        },
+        {
+          "objective": "Recognize basic Eiffel notation and understand its role in expressing object-oriented concepts",
+          "expectedLevel": "understand",
+          "observedLevel": "create",
+          "status": "misaligned",
+          "rationale": "Objective asks to 'recognize' and 'understand' (understand level), but slide-15 activity requires students to design a complete CIRCLE class from scratch, making decisions about public/private features, preconditions, and quality trade-offs. This is create level (synthesizing new structures). Slide-16 also requires extending BANK_ACCOUNT with overdraft functionality. Observed level exceeds expected by three levels, indicating significant misalignment."
+        },
+        {
+          "objective": "Understand the course structure, assessment components, and learning trajectory for the semester",
+          "expectedLevel": "understand",
+          "observedLevel": "evaluate",
+          "status": "partially_aligned",
+          "rationale": "Objective uses 'understand' (understand level), but slide-02 activity requires self-assessing past projects against three pillars using criteria and proposing targeted improvements. Slide-17 requires predicting which quality attributes future topics support and connecting to current foundations. Both activities require evaluation and metacognitive analysis, exceeding the stated objective."
+        }
+      ],
+      "slideTags": [
+        {
+          "slideTitle": "Introduction to Software Engineering and Object-Oriented Fundamentals",
+          "primaryLevel": "analyze",
+          "evidence": "Activity requires analyzing past projects to diagnose gaps between working code and engineered systems, identifying specific issues like tight coupling or unclear structure."
+        },
+        {
+          "slideTitle": "Course Structure and Objectives",
+          "primaryLevel": "evaluate",
+          "evidence": "Activity requires evaluating past projects against three pillars using 1-5 scale, identifying weakest pillar, and proposing concrete improvements with justification."
+        },
+        {
+          "slideTitle": "The Software Engineering Challenge",
+          "primaryLevel": "analyze",
+          "evidence": "Activity requires analyzing Ariane 5 failure to diagnose which quality attributes were violated and proposing specific verification steps to prevent recurrence."
+        },
+        {
+          "slideTitle": "Quality Attributes: The Foundation",
+          "primaryLevel": "evaluate",
+          "evidence": "Activity requires classifying violations AND proposing concrete design decisions to prevent extendibility failures, moving beyond classification to solution design."
+        },
+        {
+          "slideTitle": "Correctness: Doing the Right Thing",
+          "primaryLevel": "analyze",
+          "evidence": "Activity requires analyzing code against specification to identify whether implementation correctly satisfies requirements, testing specification-implementation alignment."
+        },
+        {
+          "slideTitle": "Robustness: Handling the Unexpected",
+          "primaryLevel": "analyze",
+          "evidence": "Activity requires diagnosing which abnormal conditions are mishandled in two implementations and proposing robustness enhancements for critical gaps."
+        },
+        {
+          "slideTitle": "Extendibility: Embracing Change",
+          "primaryLevel": "understand",
+          "evidence": "Slide presents definitions and diagrams explaining extendibility concept with modular vs. tangled architecture comparison. No activity requiring higher-order thinking."
+        },
+        {
+          "slideTitle": "Reusability: Leveraging Existing Solutions",
+          "primaryLevel": "understand",
+          "evidence": "Slide presents definitions and reusability spectrum diagram. Content explains concepts but does not require application, analysis, or evaluation."
+        },
+        {
+          "slideTitle": "Quality Attributes: Trade-offs in Practice",
+          "primaryLevel": "evaluate",
+          "evidence": "Activity requires ranking quality attributes by priority for three systems AND proposing concrete design decisions reflecting those rankings, with justification of choices."
+        },
+        {
+          "slideTitle": "Why Object-Oriented Programming?",
+          "primaryLevel": "evaluate",
+          "evidence": "Activity requires comparing OO vs. procedural designs against four quality attributes, identifying specific advantages, and recommending a design with justification."
+        },
+        {
+          "slideTitle": "Classes: Blueprints for Objects",
+          "primaryLevel": "understand",
+          "evidence": "Slide presents class definition with UML diagram showing BANK_ACCOUNT structure. Content explains concept but does not require higher-order cognitive engagement."
+        },
+        {
+          "slideTitle": "Objects: Runtime Instances",
+          "primaryLevel": "understand",
+          "evidence": "Slide presents object definition with diagram showing three BANK_ACCOUNT instances. Content explains class-object relationship but remains at comprehension level."
+        },
+        {
+          "slideTitle": "Encapsulation: Information Hiding",
+          "primaryLevel": "understand",
+          "evidence": "Slide presents encapsulation definition with conceptual diagram of public interface vs. private implementation. Explanatory content without application or analysis."
+        },
+        {
+          "slideTitle": "Introduction to Eiffel",
+          "primaryLevel": "analyze",
+          "evidence": "Activity requires analyzing language choice trade-offs for two scenarios, justifying whether Eiffel or mainstream languages better serve each purpose based on quality attributes."
+        },
+        {
+          "slideTitle": "Eiffel Class Structure",
+          "primaryLevel": "create",
+          "evidence": "Activity requires designing complete CIRCLE class from scratch, making decisions about public/private features, preconditions, and quality trade-offs with design rationale."
+        },
+        {
+          "slideTitle": "Eiffel Example: BANK_ACCOUNT",
+          "primaryLevel": "analyze",
+          "evidence": "Activity requires analyzing encapsulation rationale (why balance is private) and applying by extending with overdraft functionality, including precondition modifications."
+        },
+        {
+          "slideTitle": "Course Roadmap: Your Learning Path",
+          "primaryLevel": "analyze",
+          "evidence": "Activity requires predicting which quality attributes future topics support and connecting them to encapsulation foundations, demonstrating metacognitive analysis."
+        },
+        {
+          "slideTitle": "Summary and Next Steps",
+          "primaryLevel": "remember",
+          "evidence": "Slide recaps main points and lists action items. Content focuses on recall of key concepts covered without requiring application or higher-order thinking."
+        }
+      ],
+      "gaps": [
+        "Systematic misalignment: All six learning objectives are stated at understand level, but 100% of slides with activities operate at analyze/evaluate/create levels. This creates expectation mismatch between stated objectives and actual cognitive demands.",
+        "Missing scaffolding for create-level tasks: Slide-15 jumps directly to designing a complete class without intermediate apply-level practice. Students need guided application of Eiffel syntax patterns before synthesizing original designs.",
+        "Slides 07-08 (extendibility, reusability) lack activities: These slides remain at understand level while surrounding slides engage analyze/evaluate. This creates uneven cognitive demand distribution and missed opportunities to apply quality attribute analysis.",
+        "No explicit remember-level foundation for Eiffel syntax: Slide-15 presents code example but doesn't isolate basic syntax elements (assignment operator, Result keyword, feature clauses) for recognition before requiring design synthesis.",
+        "Objective 5 (Eiffel notation) shows three-level gap: Stated as 'recognize and understand' but assessed through class design creation. Either revise objective to 'Design classes using Eiffel notation' or add intermediate apply-level activities."
+      ],
+      "suggestions": [
+        "Revise learning objectives to match actual cognitive demands: Change objective 2 to 'Evaluate software designs against the four quality attributes and propose improvements'; change objective 5 to 'Apply Eiffel notation to design classes demonstrating encapsulation and quality principles.' This aligns expectations with MSc-level rigor.",
+        "Add apply-level scaffolding before slide-15: Insert activity where students complete partially-written Eiffel class (fill in missing features, fix syntax errors) to practice notation application before creating original designs.",
+        "Enhance slides 07-08 with analysis activities: For extendibility, provide two architectures and ask students to predict change impact. For reusability, analyze existing library components to classify reusability level and identify design decisions enabling reuse.",
+        "Create explicit Eiffel syntax reference: Add slide between 14-15 with annotated code highlighting key notation elements (feature clauses, access control, Result, assignment). Include brief recognition quiz before design activity.",
+        "Balance evaluate/create with more apply activities: Add intermediate exercises like 'Implement deposit method given class skeleton' or 'Add get_account_number query to existing class' to build confidence before complex design tasks.",
+        "Strengthen objective-assessment alignment: Slide-02 activity (evaluate projects against pillars) directly assesses course structure objective but at wrong level. Either revise objective to 'Evaluate personal learning needs against course pillars' or change activity to mapping course topics to personal goals (understand level).",
+        "Add metacognitive closure to high-demand activities: After slide-15 CIRCLE design, explicitly ask 'Which Bloom level did this activity require? How does designing a class differ from explaining encapsulation?' This helps students recognize cognitive progression and builds self-regulated learning."
+      ]
+    },
+    "rounds_used": 3,
+    "before_score": 88,
+    "after_score": 88,
+    "improved_slide_ids": [
+      "slide-02",
+      "slide-03",
+      "slide-04",
+      "slide-08",
+      "slide-09",
+      "slide-10",
+      "slide-14",
+      "slide-15"
+    ],
+    "failed_slide_ids": [],
+    "improved_count": 8,
+    "reevaluated": true,
+    "kept_best": true,
+    "raw_after_score": 78
+  }
+]

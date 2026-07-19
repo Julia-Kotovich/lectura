@@ -1,0 +1,469 @@
+{
+  "title": "Lecture 5. Fundamental Design Patterns I: Creational and Structural Patterns",
+  "summary": "This lecture introduces essential design patterns for object creation and structural composition in software engineering. Students will learn the Gang of Four patterns including Singleton, Factory Method, Abstract Factory, Adapter, Composite, and Decorator. The lecture emphasizes practical application, pattern selection criteria, and real-world implementation strategies within object-oriented systems.",
+  "learningObjectives": [
+    "Understand the purpose and motivation behind design patterns in software construction",
+    "Apply creational patterns (Singleton, Factory Method, Abstract Factory) to solve object creation problems",
+    "Apply structural patterns (Adapter, Composite, Decorator) to organize class and object composition",
+    "Evaluate and select appropriate patterns based on design requirements and trade-offs",
+    "Implement design patterns using object-oriented principles including inheritance, polymorphism, and encapsulation",
+    "Recognize design patterns in real-world software systems and frameworks"
+  ],
+  "targetSlideCount": 18,
+  "estimatedStudyMinutes": 180,
+  "sections": [
+    {
+      "title": "Introduction to Design Patterns",
+      "learningGoals": [
+        "Understand what design patterns are and why they matter",
+        "Recognize the historical context and Gang of Four contribution",
+        "Identify the three main categories of design patterns"
+      ],
+      "subsections": [
+        {
+          "title": "What Are Design Patterns?",
+          "keyPoints": [
+            "Reusable solutions to commonly occurring problems in software design",
+            "Not finished code, but templates for solving problems in various contexts",
+            "Capture expert knowledge and best practices accumulated over decades",
+            "Provide a shared vocabulary for developers to communicate design decisions",
+            "Balance between flexibility, reusability, and complexity"
+          ],
+          "examples": [
+            "Analogy: Architectural patterns in building construction (arches, columns)",
+            "Recipe vs. actual meal: pattern vs. implementation"
+          ],
+          "suggestedDiagram": "Conceptual diagram showing problem-pattern-solution relationship"
+        },
+        {
+          "title": "Gang of Four and Pattern Categories",
+          "keyPoints": [
+            "Design Patterns book (1994) by Gamma, Helm, Johnson, Vlissides",
+            "23 classic patterns organized into three categories",
+            "Creational patterns: object creation mechanisms",
+            "Structural patterns: object and class composition",
+            "Behavioral patterns: object interaction and responsibility (next lecture)",
+            "Patterns work together and complement each other"
+          ],
+          "examples": [
+            "Java Collections Framework uses multiple patterns",
+            "GUI frameworks heavily rely on structural and behavioral patterns"
+          ],
+          "suggestedDiagram": "Taxonomy diagram showing the three pattern categories with examples"
+        }
+      ],
+      "exercises": [
+        "Identify potential design problems in a given code snippet that could benefit from patterns",
+        "Match common software design problems to appropriate pattern categories"
+      ]
+    },
+    {
+      "title": "Creational Patterns: Singleton",
+      "learningGoals": [
+        "Understand when and why to use Singleton pattern",
+        "Implement thread-safe Singleton in object-oriented languages",
+        "Recognize the trade-offs and criticisms of Singleton"
+      ],
+      "subsections": [
+        {
+          "title": "Singleton Pattern: Intent and Structure",
+          "keyPoints": [
+            "Intent: Ensure a class has only one instance and provide global access point",
+            "Use when exactly one object is needed to coordinate actions across system",
+            "Private constructor prevents external instantiation",
+            "Static method provides controlled access to the single instance",
+            "Lazy vs. eager initialization strategies"
+          ],
+          "examples": [
+            "Configuration manager for application settings",
+            "Logger instance shared across application",
+            "Database connection pool manager",
+            "Device driver for hardware resource"
+          ],
+          "suggestedDiagram": "UML class diagram showing Singleton structure with private constructor and getInstance() method"
+        },
+        {
+          "title": "Singleton Implementation and Concerns",
+          "keyPoints": [
+            "Thread-safety issues in multi-threaded environments",
+            "Double-checked locking pattern for lazy initialization",
+            "Enum-based Singleton in Java (best practice)",
+            "Criticisms: global state, testing difficulties, hidden dependencies",
+            "Violates Single Responsibility Principle (manages lifecycle + business logic)",
+            "Consider alternatives: dependency injection, factory patterns"
+          ],
+          "examples": [
+            "Thread-safe Singleton implementation in Java and Python",
+            "Problems with Singleton in unit testing (mocking difficulties)",
+            "Refactoring Singleton to dependency-injected service"
+          ],
+          "suggestedDiagram": "Code comparison showing naive vs. thread-safe Singleton implementations"
+        }
+      ],
+      "exercises": [
+        "Implement a thread-safe Singleton for a configuration manager",
+        "Identify problems in a given Singleton implementation",
+        "Refactor code using Singleton to use dependency injection instead"
+      ]
+    },
+    {
+      "title": "Creational Patterns: Factory Method",
+      "learningGoals": [
+        "Apply Factory Method to delegate object creation to subclasses",
+        "Understand the relationship between Factory Method and polymorphism",
+        "Distinguish between Factory Method and simple factory functions"
+      ],
+      "subsections": [
+        {
+          "title": "Factory Method Pattern: Intent and Structure",
+          "keyPoints": [
+            "Intent: Define interface for creating objects, let subclasses decide which class to instantiate",
+            "Defers instantiation to subclasses through inheritance",
+            "Creator class declares factory method returning product type",
+            "Concrete creators override factory method to return specific product instances",
+            "Promotes loose coupling between creator and concrete products",
+            "Follows Open/Closed Principle: open for extension, closed for modification"
+          ],
+          "examples": [
+            "Document editor creating different document types (Text, Spreadsheet, Presentation)",
+            "GUI framework creating platform-specific UI components",
+            "Logistics system with different transport methods (Truck, Ship, Plane)"
+          ],
+          "suggestedDiagram": "UML class diagram showing Creator-Product hierarchy with factory method"
+        },
+        {
+          "title": "Factory Method in Practice",
+          "keyPoints": [
+            "Template Method pattern often uses Factory Method",
+            "Parallel class hierarchies: creators and products",
+            "Can use parameters to select product variant within same factory method",
+            "Difference from static factory methods (simple factories)",
+            "When to use: when class cannot anticipate type of objects to create",
+            "Trade-off: requires subclassing, increases number of classes"
+          ],
+          "examples": [
+            "Java Iterator pattern (Collection.iterator() factory method)",
+            "Framework hooks for application-specific object creation",
+            "Game engine creating different enemy types based on level"
+          ],
+          "suggestedDiagram": "Sequence diagram showing factory method invocation and object creation flow"
+        }
+      ],
+      "exercises": [
+        "Design a Factory Method solution for a payment processing system with multiple payment types",
+        "Extend existing Factory Method implementation to support new product variant",
+        "Compare Factory Method vs. direct instantiation in terms of flexibility and complexity"
+      ]
+    },
+    {
+      "title": "Creational Patterns: Abstract Factory",
+      "learningGoals": [
+        "Apply Abstract Factory to create families of related objects",
+        "Understand how Abstract Factory ensures product compatibility",
+        "Distinguish Abstract Factory from Factory Method"
+      ],
+      "subsections": [
+        {
+          "title": "Abstract Factory Pattern: Intent and Structure",
+          "keyPoints": [
+            "Intent: Provide interface for creating families of related/dependent objects without specifying concrete classes",
+            "Creates multiple products that are designed to work together",
+            "Abstract factory declares creation methods for each product type",
+            "Concrete factories implement methods to create specific product variants",
+            "Ensures products from same family are used together",
+            "Client code works with factories and products through abstract interfaces"
+          ],
+          "examples": [
+            "UI toolkit creating widgets for different platforms (Windows, macOS, Linux)",
+            "Furniture shop creating matching furniture sets (Victorian, Modern, ArtDeco)",
+            "Game creating themed environment elements (Medieval, SciFi, Fantasy)"
+          ],
+          "suggestedDiagram": "UML class diagram showing Abstract Factory with multiple product families"
+        },
+        {
+          "title": "Abstract Factory vs. Factory Method",
+          "keyPoints": [
+            "Abstract Factory uses object composition, Factory Method uses inheritance",
+            "Abstract Factory creates product families, Factory Method creates single products",
+            "Abstract Factory often implemented using Factory Methods",
+            "Adding new product types requires changing all factory interfaces (limitation)",
+            "Adding new product families only requires new concrete factory (strength)",
+            "Consider when product variants must be used together consistently"
+          ],
+          "examples": [
+            "Cross-platform GUI framework ensuring consistent look-and-feel",
+            "Database abstraction layer with different SQL dialects and connection types",
+            "Document converter supporting multiple input/output format combinations"
+          ],
+          "suggestedDiagram": "Comparison table and diagram showing Factory Method vs. Abstract Factory"
+        }
+      ],
+      "exercises": [
+        "Design Abstract Factory for cross-platform notification system (email, SMS, push)",
+        "Extend Abstract Factory to support new product family without modifying existing code",
+        "Identify when to use Factory Method vs. Abstract Factory in given scenarios"
+      ]
+    },
+    {
+      "title": "Structural Patterns: Adapter",
+      "learningGoals": [
+        "Apply Adapter pattern to integrate incompatible interfaces",
+        "Implement both class and object adapters",
+        "Recognize adapter usage in existing frameworks and libraries"
+      ],
+      "subsections": [
+        {
+          "title": "Adapter Pattern: Intent and Structure",
+          "keyPoints": [
+            "Intent: Convert interface of class into another interface clients expect",
+            "Allows classes with incompatible interfaces to work together",
+            "Two variants: Class Adapter (inheritance) and Object Adapter (composition)",
+            "Wraps existing class with new interface without modifying original code",
+            "Promotes reusability of existing code in new contexts",
+            "Also known as Wrapper pattern"
+          ],
+          "examples": [
+            "Integrating third-party library with different interface than your system expects",
+            "Legacy system integration with modern applications",
+            "Power adapter analogy: US plug to European socket",
+            "Java InputStreamReader adapting InputStream to Reader interface"
+          ],
+          "suggestedDiagram": "UML class diagram showing both Class Adapter and Object Adapter structures"
+        },
+        {
+          "title": "Adapter Implementation Strategies",
+          "keyPoints": [
+            "Object Adapter: uses composition, more flexible, can adapt multiple adaptees",
+            "Class Adapter: uses multiple inheritance (where supported), more efficient",
+            "Two-way adapters allow interface to work in both directions",
+            "Adapter can add additional functionality beyond interface conversion",
+            "Trade-off: adds indirection layer, slight performance overhead",
+            "Consider when: cannot modify existing code, need to use several existing subclasses"
+          ],
+          "examples": [
+            "Adapting legacy Rectangle class to modern Shape interface",
+            "Database driver adapters for different DBMS vendors",
+            "Media player adapter supporting various audio formats"
+          ],
+          "suggestedDiagram": "Code example showing Object Adapter implementation with delegation"
+        }
+      ],
+      "exercises": [
+        "Implement adapter to integrate third-party logging library with your application's logger interface",
+        "Design two-way adapter for bidirectional communication between incompatible systems",
+        "Identify adapters in Java Collections Framework or other standard libraries"
+      ]
+    },
+    {
+      "title": "Structural Patterns: Composite",
+      "learningGoals": [
+        "Apply Composite pattern to represent part-whole hierarchies",
+        "Implement tree structures with uniform treatment of individual and composite objects",
+        "Understand recursive composition and its applications"
+      ],
+      "subsections": [
+        {
+          "title": "Composite Pattern: Intent and Structure",
+          "keyPoints": [
+            "Intent: Compose objects into tree structures to represent part-whole hierarchies",
+            "Lets clients treat individual objects and compositions uniformly",
+            "Component interface defines operations for both leaf and composite objects",
+            "Leaf represents primitive objects with no children",
+            "Composite stores child components and implements child-related operations",
+            "Recursive composition: composites can contain other composites"
+          ],
+          "examples": [
+            "File system: files and directories (directories contain files and other directories)",
+            "GUI components: containers and widgets (panels contain buttons, labels, other panels)",
+            "Organization hierarchy: employees and departments",
+            "Graphic drawing: shapes and groups of shapes"
+          ],
+          "suggestedDiagram": "UML class diagram showing Component-Leaf-Composite structure with tree visualization"
+        },
+        {
+          "title": "Composite Pattern Implementation",
+          "keyPoints": [
+            "Transparency vs. safety trade-off in component interface design",
+            "Transparent: child management in Component (uniform but unsafe for leaves)",
+            "Safe: child management only in Composite (safe but not uniform)",
+            "Parent references for traversing tree upward",
+            "Ordering of children may or may not matter",
+            "Caching results for performance optimization",
+            "Visitor pattern often used with Composite for operations"
+          ],
+          "examples": [
+            "Menu system with nested menus and menu items",
+            "Expression tree for mathematical expressions or compilers",
+            "Scene graph in 3D graphics engines",
+            "Document structure with sections, paragraphs, and text runs"
+          ],
+          "suggestedDiagram": "Sequence diagram showing recursive operation execution through composite tree"
+        }
+      ],
+      "exercises": [
+        "Implement Composite pattern for file system with size calculation operation",
+        "Design organization chart using Composite with salary calculation across hierarchy",
+        "Add new operation to existing Composite structure without modifying existing classes"
+      ]
+    },
+    {
+      "title": "Structural Patterns: Decorator",
+      "learningGoals": [
+        "Apply Decorator pattern to add responsibilities dynamically",
+        "Understand how Decorator provides flexible alternative to subclassing",
+        "Implement decorator chains for combining multiple behaviors"
+      ],
+      "subsections": [
+        {
+          "title": "Decorator Pattern: Intent and Structure",
+          "keyPoints": [
+            "Intent: Attach additional responsibilities to object dynamically",
+            "Provides flexible alternative to subclassing for extending functionality",
+            "Decorator conforms to interface of component it decorates",
+            "Decorator contains reference to component and forwards requests to it",
+            "Can add behavior before/after forwarding request",
+            "Multiple decorators can be stacked to combine behaviors"
+          ],
+          "examples": [
+            "Java I/O streams: BufferedInputStream wrapping FileInputStream",
+            "GUI components: adding scrollbars, borders to windows",
+            "Coffee shop: adding milk, sugar, whipped cream to coffee",
+            "Text formatting: adding bold, italic, underline to text"
+          ],
+          "suggestedDiagram": "UML class diagram showing Component-ConcreteComponent-Decorator structure"
+        },
+        {
+          "title": "Decorator vs. Inheritance and Implementation",
+          "keyPoints": [
+            "Decorator adds responsibilities at runtime, inheritance at compile-time",
+            "Avoids feature-laden classes high in hierarchy",
+            "More flexible than static inheritance: can mix and match decorators",
+            "Can apply multiple decorators in different orders",
+            "Drawback: many small objects, can complicate debugging",
+            "Component interface must be sufficient for all decorators",
+            "Decorator is not identical to component (identity issues)"
+          ],
+          "examples": [
+            "Stream processing pipeline with multiple filters",
+            "Middleware chain in web frameworks",
+            "Notification system with multiple delivery channels",
+            "Data compression and encryption layers"
+          ],
+          "suggestedDiagram": "Object diagram showing decorator chain with multiple decorators wrapping component"
+        }
+      ],
+      "exercises": [
+        "Implement decorator chain for text processing (encryption, compression, encoding)",
+        "Design notification system using decorators for different delivery methods",
+        "Compare decorator approach vs. inheritance for adding features to a class"
+      ]
+    },
+    {
+      "title": "Pattern Selection and Application",
+      "learningGoals": [
+        "Evaluate design problems to select appropriate patterns",
+        "Understand trade-offs and consequences of pattern choices",
+        "Recognize when not to use patterns (anti-patterns)"
+      ],
+      "subsections": [
+        {
+          "title": "Criteria for Pattern Selection",
+          "keyPoints": [
+            "Identify the design problem and forces at play",
+            "Consider flexibility requirements: compile-time vs. runtime",
+            "Evaluate coupling and cohesion implications",
+            "Assess complexity cost vs. flexibility benefit",
+            "Consider team familiarity and maintainability",
+            "Multiple patterns may solve same problem differently",
+            "Patterns are not always the answer: YAGNI principle"
+          ],
+          "examples": [
+            "Choosing between Factory Method and Abstract Factory based on product families",
+            "Adapter vs. Facade for interface simplification needs",
+            "When Singleton is actually appropriate vs. dependency injection",
+            "Decorator vs. Strategy for adding behavior"
+          ],
+          "suggestedDiagram": "Decision tree or flowchart for pattern selection based on requirements"
+        },
+        {
+          "title": "Patterns in Real-World Systems",
+          "keyPoints": [
+            "Patterns rarely appear in isolation in real systems",
+            "Patterns collaborate and complement each other",
+            "Framework design heavily relies on pattern combinations",
+            "Recognizing patterns in existing code aids understanding",
+            "Refactoring to patterns vs. designing with patterns upfront",
+            "Over-engineering risk: applying patterns unnecessarily",
+            "Pattern evolution: modern interpretations and variations"
+          ],
+          "examples": [
+            "Java Collections Framework: Iterator, Factory Method, Composite",
+            "Spring Framework: Singleton, Factory, Proxy, Template Method",
+            "GUI frameworks: Composite, Decorator, Observer, Strategy",
+            "ORM frameworks: Factory, Proxy, Template Method",
+            "Refactoring example: evolving simple code to pattern-based design"
+          ],
+          "suggestedDiagram": "Architecture diagram showing multiple patterns working together in a framework"
+        }
+      ],
+      "exercises": [
+        "Analyze given codebase to identify which patterns are used and why",
+        "Select appropriate patterns for a new system design scenario with specific requirements",
+        "Refactor procedural code to incorporate appropriate design patterns",
+        "Critique over-engineered code that misuses patterns"
+      ]
+    },
+    {
+      "title": "Summary and Next Steps",
+      "learningGoals": [
+        "Consolidate understanding of creational and structural patterns",
+        "Preview behavioral patterns for next lecture",
+        "Connect patterns to course learning objectives"
+      ],
+      "subsections": [
+        {
+          "title": "Lecture Recap and Integration",
+          "keyPoints": [
+            "Creational patterns: Singleton, Factory Method, Abstract Factory control object creation",
+            "Structural patterns: Adapter, Composite, Decorator organize object composition",
+            "Patterns embody object-oriented principles: encapsulation, inheritance, polymorphism",
+            "Pattern selection depends on specific design forces and trade-offs",
+            "Patterns provide vocabulary for design communication",
+            "Next lecture: Behavioral patterns (Observer, Strategy, Visitor, Template Method)",
+            "Connection to ILO 4: Apply fundamental design patterns"
+          ],
+          "examples": [
+            "How patterns support Design by Contract (ILO 3)",
+            "Patterns enabling high-quality, extendible, reusable systems",
+            "Preparation for advanced patterns in later modules"
+          ],
+          "suggestedDiagram": "Summary matrix showing all covered patterns with intent and key characteristics"
+        }
+      ],
+      "exercises": [
+        "Complete tutorial exercises implementing each pattern",
+        "Prepare for next lecture by reading about Observer and Strategy patterns",
+        "Portfolio assignment: Design small system using at least three patterns from this lecture"
+      ]
+    }
+  ],
+  "suggestedResources": [
+    "Gamma, E., Helm, R., Johnson, R., & Vlissides, J. (1994). Design Patterns: Elements of Reusable Object-Oriented Software. Addison-Wesley.",
+    "Freeman, E., & Freeman, E. (2004). Head First Design Patterns. O'Reilly Media.",
+    "Meyer, B. (2009). Touch of Class: Learning to Program Well Using Objects and Contracts (Chapters on reusability and design patterns).",
+    "Refactoring Guru - Design Patterns (online resource with visual explanations): https://refactoring.guru/design-patterns",
+    "Source Making - Design Patterns (online tutorials and examples): https://sourcemaking.com/design_patterns",
+    "Java Design Patterns repository on GitHub with practical implementations",
+    "Martin, R. C. (2017). Clean Architecture (for understanding pattern application in larger contexts)."
+  ],
+  "assessmentIdeas": [
+    "Portfolio assignment: Implement a small application using at least three design patterns with justification for choices",
+    "Code review exercise: Identify patterns in provided codebase and suggest improvements",
+    "Design critique: Evaluate given design and recommend appropriate patterns to address identified issues",
+    "Pattern selection quiz: Given scenarios, select most appropriate pattern with reasoning",
+    "Refactoring exercise: Transform procedural code to pattern-based object-oriented design",
+    "Comparative analysis: Implement same functionality using different patterns and compare trade-offs",
+    "Written examination questions on pattern intent, structure, and application (aligns with 50% written exam)",
+    "Tutorial exercises: Hands-on implementation of each pattern in Eiffel or chosen OO language"
+  ]
+}

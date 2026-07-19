@@ -1,0 +1,2933 @@
+[
+  {
+    "status": "completed",
+    "deck": {
+      "slides": [
+        {
+          "id": "slide-1",
+          "title": "Requirements Engineering Fundamentals",
+          "layout": "title",
+          "blocks": [
+            {
+              "id": "title-1",
+              "type": "heading",
+              "content": "Lecture 8: Requirements Engineering Fundamentals"
+            },
+            {
+              "id": "subtitle-1",
+              "type": "text",
+              "content": "Systematic Approaches to Defining Software Requirements"
+            }
+          ],
+          "speakerNotes": "Welcome to Lecture 8 on Requirements Engineering. This lecture covers the foundation of successful software projects - understanding and documenting what the system should do. Emphasize that 60-70% of software failures trace back to requirements issues, making this one of the most critical topics in software engineering.",
+          "metadata": {
+            "transition": "fade",
+            "animation": "none",
+            "tags": [
+              "introduction",
+              "title"
+            ]
+          }
+        },
+        {
+          "id": "slide-2",
+          "title": "What is Requirements Engineering?",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "definition-1",
+              "type": "text",
+              "content": "**Requirements Engineering**: Systematic process of defining, documenting, and maintaining software requirements\n\n**Key Impact**: 60-70% of software failures trace to requirements issues\n\n**Core Challenge**: Bridge between stakeholder needs and system implementation"
+            },
+            {
+              "id": "activity-1",
+              "type": "activity",
+              "content": {
+                "title": "Analyze: Problem vs. Solution Statements",
+                "instruction": "Classify each statement as a valid requirement (problem-focused) or premature solution. Justify your reasoning.",
+                "items": [
+                  "A. The system must process 10,000 transactions per second",
+                  "B. The system must use Apache Kafka for messaging",
+                  "C. Users must receive order confirmation within 2 seconds",
+                  "D. The application must be built with React framework",
+                  "E. The system must support users in 15 languages"
+                ],
+                "timeEstimate": "3 minutes",
+                "explanation": "Valid requirements: A (performance NFR), C (performance NFR), E (functional). B and D are implementation solutions, not requirements—they constrain how to build, not what to build. Requirements specify the problem; design specifies the solution."
+              }
+            }
+          ],
+          "speakerNotes": "After presenting the definition, engage students in analytical thinking about what constitutes a proper requirement. Walk through the activity, emphasizing that requirements describe the problem space (what/why) while design addresses solution space (how). Discuss how B and D might be valid if they're genuine constraints from stakeholders, but typically they're premature design decisions. Connect to real failures: Denver Airport baggage system failed partly because requirements mixed business needs with technical solutions. This distinction is foundational for all subsequent RE activities.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "introduction",
+              "definition",
+              "analyze"
+            ]
+          }
+        },
+        {
+          "id": "slide-3",
+          "title": "The Requirements Engineering Process",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "diagram-1",
+              "type": "diagram",
+              "content": {
+                "prompt": "Circular process diagram showing four connected activities: Elicitation → Analysis → Specification → Validation, with Requirements Management in the center. Include feedback arrows connecting all activities in both directions. Use professional colors and clear labels."
+              }
+            },
+            {
+              "id": "activity-1",
+              "type": "activity",
+              "content": {
+                "title": "Apply: Trace Through the RE Process",
+                "instruction": "A stakeholder requests: 'Users complain checkout takes too long.' Trace this through the RE process—what happens at each stage?",
+                "items": [
+                  "Elicitation: What questions would you ask? What techniques?",
+                  "Analysis: What underlying needs might this reveal?",
+                  "Specification: Draft one concrete requirement",
+                  "Validation: How would you verify it's correct?",
+                  "Management: What if scope changes mid-development?"
+                ],
+                "timeEstimate": "4 minutes",
+                "explanation": "Sample responses: Elicitation—interview users, observe checkout sessions, ask 'How long is acceptable?' Analysis—need for performance improvement, possibly usability issues. Specification—'Checkout process shall complete in ≤30 seconds for 95% of transactions.' Validation—prototype testing, stakeholder review. Management—trace impact to UI design, backend APIs, test cases."
+              }
+            }
+          ],
+          "speakerNotes": "Present the process model, then engage students in applying it to a realistic scenario. Walk through each stage, emphasizing the iterative nature—validation might reveal the real problem is confusing UI, not speed, requiring new elicitation. Highlight how one vague complaint transforms through systematic RE into testable requirements. Discuss how different elicitation techniques (observation vs interviews) might yield different insights. Connect to next slide's deep dive into elicitation techniques, noting students will soon learn which techniques work best for different situations.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "process",
+              "overview",
+              "apply"
+            ]
+          }
+        },
+        {
+          "id": "slide-4",
+          "title": "Requirements Elicitation Techniques",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "bullets-3",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Interviews: Structured and unstructured conversations",
+                  "Workshops: Facilitated group sessions for collaboration",
+                  "Observation: Watching users in natural work environment",
+                  "Prototyping: Using mockups to elicit feedback",
+                  "Document Analysis: Reviewing existing systems and regulations"
+                ]
+              }
+            },
+            {
+              "id": "activity-1",
+              "type": "activity",
+              "content": {
+                "title": "Apply: Select Elicitation Techniques",
+                "instruction": "For each scenario, choose 2-3 techniques and justify your selection:",
+                "items": [
+                  "Medical device software—users are surgeons, strict regulations exist",
+                  "Consumer mobile app—target users are teenagers, no legacy system",
+                  "Internal HR system replacement—existing workflows documented, users resistant to change"
+                ],
+                "timeEstimate": "3 minutes",
+                "explanation": "Sample: Medical device—Document analysis (regulations), observation (OR procedures), structured interviews (safety protocols). Mobile app—Prototyping (visual feedback), workshops (collaborative design), unstructured interviews (exploratory needs). HR system—Document analysis (current workflows), observation (actual vs documented processes), workshops (address resistance). Justifications should reference stakeholder characteristics, domain constraints, and technique strengths."
+              }
+            }
+          ],
+          "speakerNotes": "Present the five core techniques briefly, then immediately engage students in applying them to realistic contexts. The activity requires analytical thinking—students must consider stakeholder characteristics, domain constraints, and technique strengths/limitations. Emphasize that technique selection is not arbitrary; it depends on project context. Discuss how medical device needs documentation for compliance while teenagers respond better to visual prototypes. This bridges to the next slide's deep dive into interviews and workshops, where students will see how to execute these techniques effectively.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "elicitation",
+              "techniques",
+              "apply"
+            ]
+          }
+        },
+        {
+          "id": "slide-5",
+          "title": "Interviews and Workshops",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "bullets-4",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Structured: Predefined questions, consistent format",
+                  "Unstructured: Exploratory, open-ended discussions",
+                  "Workshops: Facilitated group sessions (JAD, brainstorming)",
+                  "Open-ended questions uncover unstated needs"
+                ]
+              }
+            },
+            {
+              "id": "activity-1",
+              "type": "activity",
+              "content": {
+                "title": "Apply: Design Interview Questions",
+                "instruction": "For this scenario, write 3 interview questions (1 structured, 2 open-ended): You're building a library management system. Your stakeholder is a head librarian who manages circulation, cataloging, and patron services.",
+                "items": [
+                  "What makes a good vs. poor question?",
+                  "How do open-ended questions reveal hidden requirements?"
+                ],
+                "timeEstimate": "3 minutes",
+                "explanation": "Good structured: 'How many books does your library circulate daily?' (quantifiable). Good open-ended: 'Walk me through what happens when a patron reports a lost book' (reveals workflow); 'What frustrates you most about the current system?' (uncovers pain points). Poor: leading questions, yes/no questions, jargon-heavy phrasing. Open-ended questions let stakeholders describe context, workarounds, and priorities in their own terms."
+              }
+            }
+          ],
+          "speakerNotes": "After presenting techniques, have students apply them by crafting actual interview questions for a realistic scenario. This moves from understanding what interviews are to applying question design principles. Discuss student responses: structured questions gather facts (circulation volume, staff count), while open-ended questions reveal processes and pain points. Emphasize avoiding leading questions ('Don't you think automated renewals would help?') and closed yes/no questions. For workshops, briefly mention JAD sessions and facilitation techniques like dot voting for prioritization. This prepares students for the observation and prototyping techniques on the next slide.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "elicitation",
+              "interviews",
+              "workshops",
+              "apply"
+            ]
+          }
+        },
+        {
+          "id": "slide-6",
+          "title": "Observation and Prototyping",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "bullets-5",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Observation: Watch users in natural environment to uncover tacit knowledge",
+                  "Contextual inquiry: observation + concurrent interviews",
+                  "Prototyping: Paper → Wireframes → Interactive mockups",
+                  "Throwaway vs. evolutionary prototypes"
+                ]
+              }
+            },
+            {
+              "id": "activity-1",
+              "type": "activity",
+              "content": {
+                "title": "Apply: Choose Your Technique",
+                "instruction": "For each scenario, select observation OR prototyping and justify your choice:\n\nA) Hospital emergency room triage system—nurses handle critical decisions under time pressure\n\nB) Consumer mobile app for meal planning—target users are busy parents, feature set uncertain",
+                "items": [
+                  "What factors make one technique more suitable?",
+                  "Could you combine both? How?"
+                ],
+                "timeEstimate": "3 minutes",
+                "explanation": "A) Observation preferred—triage involves tacit expertise, high-stakes workflows, and context-dependent decisions that nurses may not articulate in interviews. Watching actual triage reveals workarounds and decision patterns. B) Prototyping preferred—uncertain requirements benefit from early feedback; low-fidelity mockups quickly validate feature priorities with parents. Combining both: observe current meal-planning behavior, then prototype solutions based on observed pain points."
+              }
+            }
+          ],
+          "speakerNotes": "This activity elevates the slide from understand to apply by requiring technique selection and justification for realistic contexts. Guide students to consider: observation excels when processes are tacit, complex, or context-dependent (medical workflows, expert tasks); prototyping works when requirements are uncertain or users struggle to articulate needs abstractly. Discuss how observation reveals what people actually do versus what they say, while prototypes make abstract requirements concrete. Emphasize that techniques often combine—observe first to understand context, then prototype solutions. This bridges to functional requirements on the next slide, where documented behaviors come from elicitation.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "elicitation",
+              "observation",
+              "prototyping",
+              "apply"
+            ]
+          }
+        },
+        {
+          "id": "slide-7",
+          "title": "Functional Requirements",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "definition-2",
+              "type": "text",
+              "content": "What the system must do - specific behaviors and functions\n\n• Describe system inputs, outputs, and transformations\n• Expressed as 'The system shall...' statements\n• Directly testable through functional testing"
+            },
+            {
+              "id": "activity-2",
+              "type": "activity",
+              "content": {
+                "title": "Apply: Write Functional Requirements",
+                "instruction": "A university needs a course registration system. Given these stakeholder needs, write 3 functional requirements using proper format:\n\n• Students want to see which courses fit their schedule\n• Professors need to know enrollment numbers\n• System must prevent double-booking classrooms",
+                "items": [
+                  "Use 'The system shall...' format",
+                  "Make each requirement atomic and testable",
+                  "Identify inputs, outputs, or transformations"
+                ],
+                "timeEstimate": "4 minutes",
+                "explanation": "Sample answers: FR-001: The system shall display a visual schedule showing time conflicts when a student selects a course. FR-002: The system shall provide real-time enrollment counts to instructors for their assigned courses. FR-003: The system shall reject room assignments that create scheduling conflicts for the same location and time slot. Each requirement specifies observable system behavior that can be verified through testing."
+              }
+            }
+          ],
+          "speakerNotes": "This activity elevates the slide from understand to apply by requiring students to transform stakeholder needs into properly formatted functional requirements. After individual work, share sample answers and discuss common mistakes: vague verbs, multiple requirements in one statement, or non-testable phrasing. Emphasize that good FRs specify observable behavior without prescribing implementation. Ask students to identify the input/output/transformation in each requirement. This directly supports the objective to document requirements using industry standards and bridges to NFRs on the next slide, where quality attributes complement functional behavior.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "requirements",
+              "functional",
+              "apply",
+              "documentation"
+            ]
+          }
+        },
+        {
+          "id": "slide-8",
+          "title": "Non-Functional Requirements",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "definition-3",
+              "type": "text",
+              "content": "How well the system performs - quality attributes that constrain solutions\n\n• Performance, Security, Usability, Reliability, Maintainability\n• Drive architectural decisions (NFRs often determine system structure)\n• Must be quantified with measurable criteria\n• Categories from ISO 25010 quality model"
+            },
+            {
+              "id": "activity-nfr",
+              "type": "activity",
+              "content": {
+                "title": "Analyze: Categorize & Evaluate Requirements",
+                "instruction": "Examine these requirements. For each: (1) Classify as Functional, Non-Functional, or Constraint, (2) Identify quality issues, (3) Rewrite poorly specified NFRs with measurable criteria.",
+                "items": [
+                  "REQ-A: System must be very fast and responsive",
+                  "REQ-B: System shall generate monthly reports in PDF format",
+                  "REQ-C: Application must be developed using React framework",
+                  "REQ-D: System should be easy to use for all users"
+                ],
+                "timeEstimate": "5 minutes",
+                "explanation": "REQ-A: NFR (performance) - too vague. Better: 'System shall load pages within 1.5 seconds for 95% of requests.' REQ-B: Functional - specifies system behavior. REQ-C: Constraint - mandates technology choice. REQ-D: NFR (usability) - unmeasurable. Better: 'Users shall complete core tasks with ≤3 clicks and no training.' This exercise develops analyze-level skills for distinguishing requirement types and evaluate-level skills for assessing quality against measurability criteria."
+              }
+            }
+          ],
+          "speakerNotes": "This activity addresses two objectives: distinguishing functional/non-functional requirements (analyze level) and validating requirement quality (evaluate level). After individual work, discuss classifications and common NFR mistakes: vague terms without metrics. Emphasize that NFRs like 'fast' or 'user-friendly' are untestable. Show how quantified NFRs drive architecture: 99.9% availability requires redundancy; sub-second response times may necessitate caching layers. Connect to validation criteria on slide 15 and architectural impact discussions.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "requirements",
+              "non-functional",
+              "analyze",
+              "evaluate"
+            ]
+          }
+        },
+        {
+          "id": "slide-9",
+          "title": "Constraints and Domain Requirements",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "definition-constraints",
+              "type": "text",
+              "content": "Constraints: Non-negotiable limitations (technology mandates, regulations, budget)\nDomain Requirements: Application-specific needs from the problem domain (medical, financial, legal)\n\nBoth limit solution space and drive architectural decisions"
+            },
+            {
+              "id": "activity-classify",
+              "type": "activity",
+              "content": {
+                "title": "Analyze: Classify Requirements",
+                "instruction": "Categorize each requirement as Functional, Non-Functional, Constraint, or Domain Requirement. Justify your classification and identify any that span multiple categories.",
+                "items": [
+                  "System must use PostgreSQL 12 or higher",
+                  "Healthcare records must be retained for 7 years",
+                  "Users shall reset passwords via email verification",
+                  "Payment processing must comply with PCI-DSS Level 1",
+                  "System shall process 10,000 transactions per second",
+                  "Application must be deployed on AWS infrastructure"
+                ],
+                "timeEstimate": "4 minutes",
+                "explanation": "PostgreSQL requirement: Constraint (technology mandate). 7-year retention: Domain requirement AND constraint (legal/healthcare domain). Password reset: Functional (system behavior). PCI-DSS: Domain requirement AND constraint (payment domain + regulation). 10K TPS: Non-functional (performance). AWS deployment: Constraint (platform mandate). Some requirements span categories—recognizing overlaps requires analytical thinking about requirement nature and origin."
+              }
+            }
+          ],
+          "speakerNotes": "This activity addresses the analyze-level objective for distinguishing requirement types. After individual classification, discuss borderline cases that span categories—many domain requirements also function as constraints. Emphasize that constraints narrow design choices (PostgreSQL eliminates NoSQL options), while domain requirements reflect specialized knowledge (HIPAA, PCI-DSS require domain expertise to identify). Connect to slide 8's NFR discussion and slide 10's documentation structure. Ask: How would you discover domain requirements during elicitation? What happens if domain constraints are missed early?",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "requirements",
+              "constraints",
+              "domain",
+              "analyze"
+            ]
+          }
+        },
+        {
+          "id": "slide-10",
+          "title": "Requirements Specification Documents",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "text-3",
+              "type": "text",
+              "content": "IEEE 830 / ISO/IEC/IEEE 29148 Standard Structure"
+            },
+            {
+              "id": "bullets-10",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Introduction: Purpose, scope, definitions, overview",
+                  "Overall Description: Product perspective, functions, user characteristics",
+                  "Specific Requirements: Detailed functional and non-functional requirements",
+                  "Appendices: Models, analysis, supporting information"
+                ]
+              }
+            },
+            {
+              "id": "text-4",
+              "type": "text",
+              "content": "Quality Characteristics: Clear, Unambiguous, Testable, Consistent, Complete"
+            }
+          ],
+          "speakerNotes": "Introduce the IEEE 830 standard as the industry-standard SRS structure. Emphasize that good requirements documentation follows consistent formats for different audiences. The five quality characteristics are critical: Clear (understandable), Unambiguous (one interpretation), Testable (verifiable), Consistent (no contradictions), Complete (nothing missing). Preview that we'll practice writing quality requirements next.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "documentation",
+              "standards",
+              "SRS"
+            ]
+          }
+        },
+        {
+          "id": "slide-11",
+          "title": "Writing Quality Requirements",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "bullets-11",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Modal verbs: 'shall' (mandatory), 'should' (desirable), 'may' (optional)",
+                  "Avoid ambiguous terms without quantification",
+                  "One requirement per statement (atomic)",
+                  "Each requirement must be verifiable"
+                ]
+              }
+            },
+            {
+              "id": "code-3",
+              "type": "code",
+              "content": {
+                "language": "text",
+                "code": "❌ Poor: 'The system should be secure and easy to use'\n\n✓ Good: 'The system shall require authentication using \n   username and password before accessing user data'\n\n❌ Poor: 'The system will handle lots of users'\n\n✓ Good: 'The system shall support 10,000 concurrent \n   users with response time < 3 seconds'"
+              }
+            }
+          ],
+          "speakerNotes": "This is a critical skill - writing testable, unambiguous requirements. Walk through the poor vs. good examples. Poor examples use vague terms (secure, easy, lots) and combine multiple requirements. Good examples are specific, quantified, and atomic. Practice exercise: Have students identify problems in poorly-written requirements. Emphasize testability - if you can't verify it, it's not a good requirement.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "documentation",
+              "quality",
+              "examples"
+            ]
+          }
+        },
+        {
+          "id": "slide-12",
+          "title": "Use Case Fundamentals",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "definition-4",
+              "type": "text",
+              "content": "Description of system behavior from user perspective to achieve a goal"
+            },
+            {
+              "id": "bullets-12",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Actors: Users or external systems",
+                  "Use Cases: Goals the actors want to achieve",
+                  "Relationships: Include, extend, generalization"
+                ]
+              }
+            },
+            {
+              "id": "diagram-3",
+              "type": "diagram",
+              "content": {
+                "prompt": "UML use case diagram for online shopping system. Show Customer actor (stick figure) connected to use cases: Browse Products, Add to Cart, Checkout, Track Order. Show Admin actor connected to Manage Inventory. Include 'Authenticate User' use case with <<include>> relationship to Checkout. Use standard UML notation with ovals for use cases and lines for associations."
+              }
+            }
+          ],
+          "speakerNotes": "Use cases model functional requirements from the user's perspective. Focus on goals, not implementation. Actors are roles (Customer, Admin), not specific people. Use cases capture interactions to achieve goals. Explain include (mandatory sub-behavior) vs. extend (optional variation). The diagram provides a high-level view; detailed descriptions come next. ATM example: Withdraw Cash includes Authenticate User.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "use-cases",
+              "UML",
+              "modeling"
+            ]
+          }
+        },
+        {
+          "id": "slide-13",
+          "title": "Use Case Descriptions",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "text-5",
+              "type": "text",
+              "content": "Structured Template for Detailed Use Case Documentation"
+            },
+            {
+              "id": "code-4",
+              "type": "code",
+              "content": {
+                "language": "text",
+                "code": "Use Case: Process Online Order\nActors: Customer, Payment System, Inventory System\nPreconditions: Customer is authenticated, cart is not empty\nPostconditions: Order is confirmed, inventory updated, payment processed\n\nMain Flow:\n1. Customer reviews cart and selects checkout\n2. System displays shipping options\n3. Customer selects shipping method and enters address\n4. System calculates total with shipping and tax\n5. Customer enters payment information\n6. System validates payment with Payment System\n7. System confirms order and sends confirmation email\n\nAlternative Flow 3a: Invalid address\n3a.1 System displays address validation error\n3a.2 Customer corrects address\n3a.3 Resume at step 4"
+              }
+            }
+          ],
+          "speakerNotes": "Detailed use case descriptions complement diagrams. Walk through the template structure: preconditions (what must be true before), postconditions (what's true after), main flow (happy path), alternative flows (exceptions and variations). Emphasize numbering for traceability. Alternative flows handle errors and variations - they're critical for complete requirements. Example 3a shows how to handle invalid input and resume the main flow.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "use-cases",
+              "documentation",
+              "template"
+            ]
+          }
+        },
+        {
+          "id": "slide-14",
+          "title": "User Stories in Agile",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "text-6",
+              "type": "text",
+              "content": "As a [role], I want [feature] so that [benefit]"
+            },
+            {
+              "id": "bullets-13",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "INVEST: Independent, Negotiable, Valuable, Estimable, Small, Testable",
+                  "Acceptance criteria define completion conditions",
+                  "Lightweight, conversation-focused requirements"
+                ]
+              }
+            },
+            {
+              "id": "code-5",
+              "type": "code",
+              "content": {
+                "language": "text",
+                "code": "User Story:\n\"As a registered user, I want to save items to a wishlist \nso that I can purchase them later\"\n\nAcceptance Criteria:\n- User can add items from product page to wishlist\n- User can view all wishlist items on dedicated page\n- User can remove items from wishlist\n- Wishlist persists across login sessions\n- User receives notification if wishlist item goes on sale"
+              }
+            }
+          ],
+          "speakerNotes": "User stories are the agile alternative to detailed use cases. Format emphasizes role, feature, and business value. INVEST criteria ensure stories are well-formed: Independent (can be developed separately), Negotiable (details can be discussed), Valuable (delivers user value), Estimable (team can estimate effort), Small (fits in sprint), Testable (clear completion criteria). Acceptance criteria are critical - they define 'done'. Compare to use cases: stories are placeholders for conversation, use cases are complete specifications.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "agile",
+              "user-stories",
+              "requirements"
+            ]
+          }
+        },
+        {
+          "id": "slide-15",
+          "title": "Requirements Validation",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "heading-2",
+              "type": "heading",
+              "content": "Ensuring Requirements Quality Before Implementation"
+            },
+            {
+              "id": "bullets-14",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Reviews and Inspections: Peer review, walkthroughs, formal inspections",
+                  "Prototyping Validation: Stakeholder feedback on mockups",
+                  "Model Validation: Checking completeness and consistency",
+                  "Test Case Generation: Deriving tests to verify testability"
+                ]
+              }
+            },
+            {
+              "id": "text-7",
+              "type": "text",
+              "content": "Validation Checklist: Completeness, Consistency, Feasibility, Testability, Clarity"
+            }
+          ],
+          "speakerNotes": "Validation ensures requirements are correct before committing to design and implementation. Reviews catch defects early when they're cheapest to fix. Formal inspections use checklists and defined roles (author, moderator, reviewers). Prototypes validate UI and interaction requirements with actual users. Model validation checks for missing scenarios or contradictions. Test case generation verifies each requirement is testable. Emphasize: validation is not the same as verification (which happens after implementation).",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "validation",
+              "quality-assurance",
+              "review"
+            ]
+          }
+        },
+        {
+          "id": "slide-16",
+          "title": "Requirements Traceability and Management",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "bullets-15",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Traceability: Link requirements to sources, design, code, tests",
+                  "Change Management: Process for requesting and approving changes",
+                  "Version Control: Track requirements evolution",
+                  "Impact Analysis: Understand effects of changes"
+                ]
+              }
+            },
+            {
+              "id": "diagram-4",
+              "type": "diagram",
+              "content": {
+                "prompt": "Requirements traceability matrix showing bidirectional arrows connecting: Stakeholder Needs → Requirements → Design Components → Code Modules → Test Cases. Display as a flow diagram with forward traceability arrows going left-to-right and backward traceability arrows going right-to-left. Use different colors for forward and backward traceability."
+              }
+            }
+          ],
+          "speakerNotes": "Traceability maintains relationships between requirements and other artifacts. Forward traceability: stakeholder need → requirement → design → code → test. Backward traceability: test → code → design → requirement → need. Critical for impact analysis: 'If we change this requirement, what design, code, and tests are affected?' Change management process prevents scope creep: request → evaluate impact → approve/reject → implement → verify. Tools like JIRA, Azure DevOps help manage traceability at scale.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "traceability",
+              "management",
+              "change-control"
+            ]
+          }
+        },
+        {
+          "id": "slide-17",
+          "title": "Requirements Prioritization",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "bullets-16",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "MoSCoW: Must have, Should have, Could have, Won't have",
+                  "Value vs. Effort Matrix: Identify quick wins",
+                  "Kano Model: Basic, performance, excitement features",
+                  "Balance business value, risk, and dependencies"
+                ]
+              }
+            },
+            {
+              "id": "diagram-5",
+              "type": "diagram",
+              "content": {
+                "prompt": "2x2 matrix with axes labeled 'Business Value' (vertical, Low to High) and 'Implementation Effort' (horizontal, Low to High). Four quadrants labeled: High Value/Low Effort = 'Quick Wins', High Value/High Effort = 'Strategic', Low Value/Low Effort = 'Fill-ins', Low Value/High Effort = 'Avoid'. Plot 6-8 sample requirements as dots in different quadrants."
+              }
+            }
+          ],
+          "speakerNotes": "Prioritization is essential for release planning and managing scope. MoSCoW helps identify MVP (Must-haves only). Value-Effort matrix identifies quick wins (high value, low effort) and items to avoid (low value, high effort). Kano model distinguishes basic features (expected), performance features (more is better), and excitement features (delighters). Stakeholder negotiation is often needed when priorities conflict. Example: Marketing wants feature X for competitive advantage, but Engineering recommends addressing technical debt first.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "prioritization",
+              "planning",
+              "decision-making"
+            ]
+          }
+        },
+        {
+          "id": "slide-18",
+          "title": "Best Practices and Common Pitfalls",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "text-8",
+              "type": "text",
+              "content": "Best Practices"
+            },
+            {
+              "id": "bullets-17",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Involve stakeholders early and continuously",
+                  "Use multiple elicitation techniques for triangulation",
+                  "Validate requirements before implementation",
+                  "Maintain traceability for impact analysis"
+                ]
+              }
+            },
+            {
+              "id": "text-9",
+              "type": "text",
+              "content": "Common Pitfalls"
+            },
+            {
+              "id": "bullets-18",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Gold plating: Unnecessary features → Strict prioritization",
+                  "Scope creep: Uncontrolled additions → Change control",
+                  "Ambiguous requirements: Unclear specs → Structured templates",
+                  "Insufficient validation: Assumed correctness → Systematic reviews"
+                ]
+              }
+            }
+          ],
+          "speakerNotes": "Synthesize key lessons. Best practices: stakeholder involvement prevents misunderstandings, multiple techniques catch more requirements, early validation prevents costly rework, traceability supports change management. Common pitfalls with mitigations: gold plating (building unnecessary features) - use strict prioritization; scope creep (uncontrolled additions) - enforce change control; ambiguity (unclear specs) - use templates and reviews; insufficient validation (assuming correctness) - implement systematic validation. Share success story: agile project reduced rework 40% through incremental requirements refinement.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "best-practices",
+              "pitfalls",
+              "lessons-learned"
+            ]
+          }
+        },
+        {
+          "id": "slide-19",
+          "title": "Summary and Next Steps",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "heading-3",
+              "type": "heading",
+              "content": "Key Takeaways"
+            },
+            {
+              "id": "bullets-19",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Requirements engineering is systematic: elicitation, analysis, specification, validation, management",
+                  "Multiple elicitation techniques reveal different requirement types",
+                  "Distinguish functional (what) from non-functional (how well) requirements",
+                  "Document using use cases, user stories, and structured specifications",
+                  "Validate early, manage changes, maintain traceability"
+                ]
+              }
+            },
+            {
+              "id": "text-10",
+              "type": "text",
+              "content": "Next: Apply these concepts in your project - create SRS document with requirements, use cases, and traceability matrix"
+            }
+          ],
+          "speakerNotes": "Conclude by reinforcing the five key learning objectives. Requirements engineering is the foundation for successful software projects - getting requirements right prevents costly rework later. Emphasize the connection to upcoming lectures: requirements inform architecture decisions (Lecture 9) and drive testing strategies (Lecture 12). Preview the assignment: students will create a complete SRS document for a medium-sized system, applying all techniques learned today. Encourage questions and provide office hours for assignment support.",
+          "metadata": {
+            "transition": "fade",
+            "animation": "fade-out",
+            "tags": [
+              "summary",
+              "conclusion",
+              "next-steps"
+            ]
+          }
+        }
+      ]
+    },
+    "evaluation": {
+      "alignmentScore": 78,
+      "dominantLevel": "apply",
+      "distribution": {
+        "remember": 10,
+        "understand": 25,
+        "apply": 45,
+        "analyze": 15,
+        "evaluate": 5,
+        "create": 0
+      },
+      "objectiveAlignments": [
+        {
+          "objective": "Understand the requirements engineering process and its role in software development lifecycle",
+          "expectedLevel": "understand",
+          "observedLevel": "apply",
+          "status": "partially_aligned",
+          "rationale": "Slides 2-3 present the RE process definition and model (understand level), but slide 3's activity elevates this to apply level by having students trace a stakeholder complaint through all RE stages. The activity requires applying process knowledge to a realistic scenario, exceeding the understand-level objective."
+        },
+        {
+          "objective": "Apply various requirements elicitation techniques to gather stakeholder needs effectively",
+          "expectedLevel": "apply",
+          "observedLevel": "apply",
+          "status": "aligned",
+          "rationale": "Slides 4-6 systematically address this objective at the apply level. Slide 4 requires selecting appropriate techniques for three different scenarios with justification. Slide 5 has students design interview questions for a library system. Slide 6 requires choosing between observation and prototyping for medical and consumer contexts. All activities involve applying elicitation techniques to realistic situations."
+        },
+        {
+          "objective": "Distinguish between functional and non-functional requirements and categorize them appropriately",
+          "expectedLevel": "analyze",
+          "observedLevel": "analyze",
+          "status": "aligned",
+          "rationale": "Slides 7-9 address this at the analyze level. Slide 2's activity includes basic categorization (A-E statements). Slide 8's activity requires classifying requirements AND identifying quality issues, which involves breaking down requirements to assess their nature. Slide 9's activity explicitly requires categorizing requirements and recognizing when they span multiple categories (e.g., domain requirements that are also constraints), demonstrating analytical thinking."
+        },
+        {
+          "objective": "Document requirements using industry-standard techniques including use cases and scenarios",
+          "expectedLevel": "apply",
+          "observedLevel": "understand",
+          "status": "partially_aligned",
+          "rationale": "Slides 10-14 cover documentation techniques but remain primarily at the understand level. Slide 7 has students write functional requirements (apply level), but use case slides (12-13) and user stories (14) present templates and examples without requiring students to create complete use cases or stories. Students see what good documentation looks like but don't practice producing it themselves. Missing: activities where students write complete use case descriptions or user stories for given scenarios."
+        },
+        {
+          "objective": "Validate requirements for completeness, consistency, and feasibility",
+          "expectedLevel": "evaluate",
+          "observedLevel": "evaluate",
+          "status": "aligned",
+          "rationale": "Slide 8's activity addresses validation at the evaluate level by requiring students to identify quality issues in requirements and assess them against measurability criteria. Students must critique REQ-A and REQ-D as unmeasurable and rewrite them with quantified criteria. Slide 15 presents validation techniques (understand level), but slide 8's activity operationalizes the evaluate-level objective by having students assess requirement quality against established criteria."
+        },
+        {
+          "objective": "Manage requirements changes throughout the software development process",
+          "expectedLevel": "apply",
+          "observedLevel": "understand",
+          "status": "partially_aligned",
+          "rationale": "Slides 16-17 cover requirements management (traceability, change control, prioritization) but remain at the understand level. Slide 3's activity briefly mentions 'What if scope changes mid-development?' but doesn't require students to work through change management processes. Missing: activities where students perform impact analysis, evaluate change requests, or apply prioritization frameworks to make trade-off decisions. Content is presented but not practiced."
+        }
+      ],
+      "slideTags": [
+        {
+          "slideTitle": "Requirements Engineering Fundamentals",
+          "primaryLevel": "remember",
+          "evidence": "Title slide with no cognitive demand beyond recognizing the lecture topic"
+        },
+        {
+          "slideTitle": "What is Requirements Engineering?",
+          "primaryLevel": "analyze",
+          "evidence": "Activity requires analyzing statements to distinguish valid requirements from premature solutions, breaking down each to identify whether it specifies problem or solution space"
+        },
+        {
+          "slideTitle": "The Requirements Engineering Process",
+          "primaryLevel": "apply",
+          "evidence": "Activity requires applying the RE process model to trace a stakeholder complaint through elicitation, analysis, specification, validation, and management stages"
+        },
+        {
+          "slideTitle": "Requirements Elicitation Techniques",
+          "primaryLevel": "apply",
+          "evidence": "Activity requires selecting 2-3 appropriate elicitation techniques for three different scenarios and justifying selections based on stakeholder characteristics and domain constraints"
+        },
+        {
+          "slideTitle": "Interviews and Workshops",
+          "primaryLevel": "apply",
+          "evidence": "Activity requires designing interview questions (1 structured, 2 open-ended) for a library management system scenario, applying question design principles"
+        },
+        {
+          "slideTitle": "Observation and Prototyping",
+          "primaryLevel": "apply",
+          "evidence": "Activity requires choosing between observation and prototyping for two scenarios and justifying the choice based on context factors like tacit knowledge and requirement uncertainty"
+        },
+        {
+          "slideTitle": "Functional Requirements",
+          "primaryLevel": "apply",
+          "evidence": "Activity requires transforming stakeholder needs into properly formatted functional requirements using 'The system shall...' format with testable criteria"
+        },
+        {
+          "slideTitle": "Non-Functional Requirements",
+          "primaryLevel": "evaluate",
+          "evidence": "Activity requires both analyzing (classifying requirements) and evaluating (assessing quality against measurability criteria, rewriting vague NFRs with quantified metrics)"
+        },
+        {
+          "slideTitle": "Constraints and Domain Requirements",
+          "primaryLevel": "analyze",
+          "evidence": "Activity requires categorizing requirements and identifying those that span multiple categories, demonstrating analytical breakdown of requirement nature and origin"
+        },
+        {
+          "slideTitle": "Requirements Specification Documents",
+          "primaryLevel": "understand",
+          "evidence": "Presents IEEE 830 standard structure and quality characteristics without activities requiring application or analysis"
+        },
+        {
+          "slideTitle": "Writing Quality Requirements",
+          "primaryLevel": "understand",
+          "evidence": "Shows poor vs. good examples of requirements with explanations, but no activity requiring students to write or critique requirements themselves"
+        },
+        {
+          "slideTitle": "Use Case Fundamentals",
+          "primaryLevel": "understand",
+          "evidence": "Defines use case concepts and shows example diagram, but no activity requiring students to create or analyze use cases"
+        },
+        {
+          "slideTitle": "Use Case Descriptions",
+          "primaryLevel": "understand",
+          "evidence": "Presents detailed use case template with example, but students only observe the structure rather than creating their own"
+        },
+        {
+          "slideTitle": "User Stories in Agile",
+          "primaryLevel": "understand",
+          "evidence": "Explains user story format, INVEST criteria, and shows example with acceptance criteria, but no practice activity"
+        },
+        {
+          "slideTitle": "Requirements Validation",
+          "primaryLevel": "understand",
+          "evidence": "Lists validation techniques and checklist without requiring students to perform validation on actual requirements"
+        },
+        {
+          "slideTitle": "Requirements Traceability and Management",
+          "primaryLevel": "understand",
+          "evidence": "Explains traceability concepts and change management process with diagram, but no application activity"
+        },
+        {
+          "slideTitle": "Requirements Prioritization",
+          "primaryLevel": "understand",
+          "evidence": "Presents prioritization frameworks (MoSCoW, Value-Effort matrix, Kano) without requiring students to apply them to prioritize actual requirements"
+        },
+        {
+          "slideTitle": "Best Practices and Common Pitfalls",
+          "primaryLevel": "understand",
+          "evidence": "Synthesizes lessons learned and common mistakes with mitigations, primarily recall and comprehension of best practices"
+        },
+        {
+          "slideTitle": "Summary and Next Steps",
+          "primaryLevel": "remember",
+          "evidence": "Reviews key takeaways and previews assignment, primarily recall of lecture content"
+        }
+      ],
+      "gaps": [
+        "Create-level activities are completely absent. Students never design complete requirements artifacts from scratch (e.g., create a full SRS section, design a complete use case model for a system, or synthesize requirements from multiple conflicting stakeholder perspectives).",
+        "Documentation objective (use cases, scenarios) lacks apply-level practice. Slides 12-14 present templates and examples but don't require students to produce documentation artifacts. Students see what good use cases look like but don't write them.",
+        "Requirements management objective lacks application activities. Slides 16-17 explain traceability and change control but don't have students perform impact analysis, evaluate change requests, or work through prioritization trade-offs.",
+        "Validation activities are limited to one slide (slide 8). While that activity effectively addresses evaluate-level thinking, additional validation practice across different requirement types would strengthen this critical objective.",
+        "No synthesis activities that integrate multiple RE concepts. Students practice individual skills (elicitation technique selection, requirement writing, categorization) but never combine them in realistic end-to-end scenarios like 'elicit, document, and validate requirements for this stakeholder interview transcript.'"
+      ],
+      "suggestions": [
+        "Add create-level capstone activity: Provide students with a brief system description and stakeholder interview transcripts. Have them produce a mini-SRS section including 5 functional requirements, 3 NFRs, one complete use case description, and a traceability matrix linking requirements to stakeholder needs. This integrates elicitation, documentation, and management objectives at the create level.",
+        "Elevate slide 13 (Use Case Descriptions) to apply level: Replace or supplement the example with an activity where students write a complete use case description for a given scenario (e.g., 'Write the use case for a student withdrawing from a course, including preconditions, main flow, and at least two alternative flows').",
+        "Add apply-level activity to slide 16 (Requirements Management): Present a change request scenario (e.g., 'Stakeholder requests adding biometric authentication to the login system'). Have students perform impact analysis using a provided traceability matrix, identify affected design/code/test artifacts, and recommend approve/reject with justification.",
+        "Strengthen slide 17 (Prioritization) with application: Provide 8-10 requirements with business value and effort estimates. Have students apply MoSCoW categorization and plot them on the Value-Effort matrix, then justify which requirements belong in MVP vs. future releases.",
+        "Add evaluate-level activity to slide 15 (Validation): Provide a set of 6-8 requirements with various quality issues (ambiguity, untestability, inconsistency). Have students systematically validate them using the completeness/consistency/feasibility/testability/clarity checklist, identify specific defects, and propose corrections.",
+        "Consider adding a create-level activity where students design an elicitation plan: Given a project description (e.g., healthcare appointment scheduling system), have students select 3-4 elicitation techniques, justify their choices, design specific questions/observation protocols, and explain how techniques complement each other for triangulation.",
+        "Slide 14 (User Stories) could include apply-level practice: Provide 3-4 feature descriptions and have students write properly formatted user stories with INVEST-compliant acceptance criteria. This would align the documentation objective with its apply-level expectation."
+      ]
+    },
+    "rounds_used": 1,
+    "before_score": 72,
+    "after_score": 78,
+    "improved_slide_ids": [
+      "slide-2",
+      "slide-3",
+      "slide-4",
+      "slide-5",
+      "slide-6",
+      "slide-7",
+      "slide-8",
+      "slide-9"
+    ],
+    "failed_slide_ids": [],
+    "improved_count": 8,
+    "reevaluated": true
+  },
+  {
+    "status": "completed",
+    "deck": {
+      "slides": [
+        {
+          "id": "slide-1",
+          "title": "Requirements Engineering Fundamentals",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "title-1",
+              "type": "heading",
+              "content": "Lecture 8: Requirements Engineering Fundamentals"
+            },
+            {
+              "id": "context-1",
+              "type": "text",
+              "content": "**Today's Challenge**: You'll design a requirements engineering approach for a real system\n\n**By End of Lecture**: Create complete requirements artifacts integrating elicitation, documentation, and validation"
+            },
+            {
+              "id": "activity-1",
+              "type": "activity",
+              "content": {
+                "title": "Preview: Diagnose the Requirements Failure",
+                "instruction": "Read this project failure summary. Identify which RE process stage(s) failed and what specific practices could have prevented the failure.",
+                "items": [
+                  "**Case**: University registration system launched with 'fast performance' requirement. System handled 50 users acceptably but crashed with 5,000 during actual registration. Developers claimed they met the requirement; stakeholders were furious.",
+                  "**Your Task**: (1) Which RE stage failed? (2) What specific requirement quality was violated? (3) Write one corrected requirement that would have prevented this failure."
+                ],
+                "timeEstimate": "3 minutes",
+                "explanation": "Elicitation and specification stages failed. The requirement violated testability and measurability—'fast' is ambiguous. Corrected: 'System must process course registration requests for 5,000 concurrent users with 95th percentile response time ≤2 seconds.' This previews why systematic RE practices matter."
+              }
+            }
+          ],
+          "speakerNotes": "Open with the activity to immediately engage students at analyze level and establish real stakes for RE. After discussion, reveal that this reflects actual failures costing millions. Emphasize that today they'll learn and apply systematic practices to prevent such disasters. Preview the capstone: by lecture end, they'll create requirements artifacts for a system scenario, integrating all RE stages. This sets expectations for create-level work and frames the lecture as building toward practical synthesis, not just concept coverage.",
+          "metadata": {
+            "transition": "fade",
+            "animation": "fade-in",
+            "tags": [
+              "introduction",
+              "analyze",
+              "preview"
+            ]
+          }
+        },
+        {
+          "id": "slide-2",
+          "title": "What is Requirements Engineering?",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "definition-1",
+              "type": "text",
+              "content": "**Requirements Engineering**: Systematic process of defining, documenting, and maintaining software requirements\n\n**Key Impact**: 60-70% of software failures trace to requirements issues\n\n**Core Challenge**: Bridge between stakeholder needs and system implementation"
+            },
+            {
+              "id": "activity-1",
+              "type": "activity",
+              "content": {
+                "title": "Analyze: Problem vs. Solution Statements",
+                "instruction": "Classify each statement as a valid requirement (problem-focused) or premature solution. Justify your reasoning.",
+                "items": [
+                  "A. The system must process 10,000 transactions per second",
+                  "B. The system must use Apache Kafka for messaging",
+                  "C. Users must receive order confirmation within 2 seconds",
+                  "D. The application must be built with React framework",
+                  "E. The system must support users in 15 languages"
+                ],
+                "timeEstimate": "3 minutes",
+                "explanation": "Valid requirements: A (performance NFR), C (performance NFR), E (functional). B and D are implementation solutions, not requirements—they constrain how to build, not what to build. Requirements specify the problem; design specifies the solution."
+              }
+            }
+          ],
+          "speakerNotes": "After presenting the definition, engage students in analytical thinking about what constitutes a proper requirement. Walk through the activity, emphasizing that requirements describe the problem space (what/why) while design addresses solution space (how). Discuss how B and D might be valid if they're genuine constraints from stakeholders, but typically they're premature design decisions. Connect to real failures: Denver Airport baggage system failed partly because requirements mixed business needs with technical solutions. This distinction is foundational for all subsequent RE activities.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "introduction",
+              "definition",
+              "analyze"
+            ]
+          }
+        },
+        {
+          "id": "slide-3",
+          "title": "The Requirements Engineering Process",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "diagram-1",
+              "type": "diagram",
+              "content": {
+                "prompt": "Circular process diagram showing four connected activities: Elicitation → Analysis → Specification → Validation, with Requirements Management in the center. Include feedback arrows connecting all activities in both directions. Use professional colors and clear labels."
+              }
+            },
+            {
+              "id": "activity-1",
+              "type": "activity",
+              "content": {
+                "title": "Apply: Trace Through the RE Process",
+                "instruction": "A stakeholder requests: 'Users complain checkout takes too long.' Trace this through the RE process—what happens at each stage?",
+                "items": [
+                  "Elicitation: What questions would you ask? What techniques?",
+                  "Analysis: What underlying needs might this reveal?",
+                  "Specification: Draft one concrete requirement",
+                  "Validation: How would you verify it's correct?",
+                  "Management: What if scope changes mid-development?"
+                ],
+                "timeEstimate": "4 minutes",
+                "explanation": "Sample responses: Elicitation—interview users, observe checkout sessions, ask 'How long is acceptable?' Analysis—need for performance improvement, possibly usability issues. Specification—'Checkout process shall complete in ≤30 seconds for 95% of transactions.' Validation—prototype testing, stakeholder review. Management—trace impact to UI design, backend APIs, test cases."
+              }
+            }
+          ],
+          "speakerNotes": "Present the process model, then engage students in applying it to a realistic scenario. Walk through each stage, emphasizing the iterative nature—validation might reveal the real problem is confusing UI, not speed, requiring new elicitation. Highlight how one vague complaint transforms through systematic RE into testable requirements. Discuss how different elicitation techniques (observation vs interviews) might yield different insights. Connect to next slide's deep dive into elicitation techniques, noting students will soon learn which techniques work best for different situations.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "process",
+              "overview",
+              "apply"
+            ]
+          }
+        },
+        {
+          "id": "slide-4",
+          "title": "Requirements Elicitation Techniques",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "bullets-3",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Interviews: Structured and unstructured conversations",
+                  "Workshops: Facilitated group sessions for collaboration",
+                  "Observation: Watching users in natural work environment",
+                  "Prototyping: Using mockups to elicit feedback",
+                  "Document Analysis: Reviewing existing systems and regulations"
+                ]
+              }
+            },
+            {
+              "id": "activity-1",
+              "type": "activity",
+              "content": {
+                "title": "Apply: Select Elicitation Techniques",
+                "instruction": "For each scenario, choose 2-3 techniques and justify your selection:",
+                "items": [
+                  "Medical device software—users are surgeons, strict regulations exist",
+                  "Consumer mobile app—target users are teenagers, no legacy system",
+                  "Internal HR system replacement—existing workflows documented, users resistant to change"
+                ],
+                "timeEstimate": "3 minutes",
+                "explanation": "Sample: Medical device—Document analysis (regulations), observation (OR procedures), structured interviews (safety protocols). Mobile app—Prototyping (visual feedback), workshops (collaborative design), unstructured interviews (exploratory needs). HR system—Document analysis (current workflows), observation (actual vs documented processes), workshops (address resistance). Justifications should reference stakeholder characteristics, domain constraints, and technique strengths."
+              }
+            }
+          ],
+          "speakerNotes": "Present the five core techniques briefly, then immediately engage students in applying them to realistic contexts. The activity requires analytical thinking—students must consider stakeholder characteristics, domain constraints, and technique strengths/limitations. Emphasize that technique selection is not arbitrary; it depends on project context. Discuss how medical device needs documentation for compliance while teenagers respond better to visual prototypes. This bridges to the next slide's deep dive into interviews and workshops, where students will see how to execute these techniques effectively.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "elicitation",
+              "techniques",
+              "apply"
+            ]
+          }
+        },
+        {
+          "id": "slide-5",
+          "title": "Interviews and Workshops",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "bullets-4",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Structured: Predefined questions, consistent format",
+                  "Unstructured: Exploratory, open-ended discussions",
+                  "Workshops: Facilitated group sessions (JAD, brainstorming)",
+                  "Open-ended questions uncover unstated needs"
+                ]
+              }
+            },
+            {
+              "id": "activity-1",
+              "type": "activity",
+              "content": {
+                "title": "Apply: Design Interview Questions",
+                "instruction": "For this scenario, write 3 interview questions (1 structured, 2 open-ended): You're building a library management system. Your stakeholder is a head librarian who manages circulation, cataloging, and patron services.",
+                "items": [
+                  "What makes a good vs. poor question?",
+                  "How do open-ended questions reveal hidden requirements?"
+                ],
+                "timeEstimate": "3 minutes",
+                "explanation": "Good structured: 'How many books does your library circulate daily?' (quantifiable). Good open-ended: 'Walk me through what happens when a patron reports a lost book' (reveals workflow); 'What frustrates you most about the current system?' (uncovers pain points). Poor: leading questions, yes/no questions, jargon-heavy phrasing. Open-ended questions let stakeholders describe context, workarounds, and priorities in their own terms."
+              }
+            }
+          ],
+          "speakerNotes": "After presenting techniques, have students apply them by crafting actual interview questions for a realistic scenario. This moves from understanding what interviews are to applying question design principles. Discuss student responses: structured questions gather facts (circulation volume, staff count), while open-ended questions reveal processes and pain points. Emphasize avoiding leading questions ('Don't you think automated renewals would help?') and closed yes/no questions. For workshops, briefly mention JAD sessions and facilitation techniques like dot voting for prioritization. This prepares students for the observation and prototyping techniques on the next slide.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "elicitation",
+              "interviews",
+              "workshops",
+              "apply"
+            ]
+          }
+        },
+        {
+          "id": "slide-6",
+          "title": "Observation and Prototyping",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "bullets-5",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Observation: Watch users in natural environment to uncover tacit knowledge",
+                  "Contextual inquiry: observation + concurrent interviews",
+                  "Prototyping: Paper → Wireframes → Interactive mockups",
+                  "Throwaway vs. evolutionary prototypes"
+                ]
+              }
+            },
+            {
+              "id": "activity-1",
+              "type": "activity",
+              "content": {
+                "title": "Apply: Choose Your Technique",
+                "instruction": "For each scenario, select observation OR prototyping and justify your choice:\n\nA) Hospital emergency room triage system—nurses handle critical decisions under time pressure\n\nB) Consumer mobile app for meal planning—target users are busy parents, feature set uncertain",
+                "items": [
+                  "What factors make one technique more suitable?",
+                  "Could you combine both? How?"
+                ],
+                "timeEstimate": "3 minutes",
+                "explanation": "A) Observation preferred—triage involves tacit expertise, high-stakes workflows, and context-dependent decisions that nurses may not articulate in interviews. Watching actual triage reveals workarounds and decision patterns. B) Prototyping preferred—uncertain requirements benefit from early feedback; low-fidelity mockups quickly validate feature priorities with parents. Combining both: observe current meal-planning behavior, then prototype solutions based on observed pain points."
+              }
+            }
+          ],
+          "speakerNotes": "This activity elevates the slide from understand to apply by requiring technique selection and justification for realistic contexts. Guide students to consider: observation excels when processes are tacit, complex, or context-dependent (medical workflows, expert tasks); prototyping works when requirements are uncertain or users struggle to articulate needs abstractly. Discuss how observation reveals what people actually do versus what they say, while prototypes make abstract requirements concrete. Emphasize that techniques often combine—observe first to understand context, then prototype solutions. This bridges to functional requirements on the next slide, where documented behaviors come from elicitation.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "elicitation",
+              "observation",
+              "prototyping",
+              "apply"
+            ]
+          }
+        },
+        {
+          "id": "slide-7",
+          "title": "Functional Requirements",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "definition-2",
+              "type": "text",
+              "content": "What the system must do - specific behaviors and functions\n\n• Describe system inputs, outputs, and transformations\n• Expressed as 'The system shall...' statements\n• Directly testable through functional testing"
+            },
+            {
+              "id": "activity-2",
+              "type": "activity",
+              "content": {
+                "title": "Apply: Write Functional Requirements",
+                "instruction": "A university needs a course registration system. Given these stakeholder needs, write 3 functional requirements using proper format:\n\n• Students want to see which courses fit their schedule\n• Professors need to know enrollment numbers\n• System must prevent double-booking classrooms",
+                "items": [
+                  "Use 'The system shall...' format",
+                  "Make each requirement atomic and testable",
+                  "Identify inputs, outputs, or transformations"
+                ],
+                "timeEstimate": "4 minutes",
+                "explanation": "Sample answers: FR-001: The system shall display a visual schedule showing time conflicts when a student selects a course. FR-002: The system shall provide real-time enrollment counts to instructors for their assigned courses. FR-003: The system shall reject room assignments that create scheduling conflicts for the same location and time slot. Each requirement specifies observable system behavior that can be verified through testing."
+              }
+            }
+          ],
+          "speakerNotes": "This activity elevates the slide from understand to apply by requiring students to transform stakeholder needs into properly formatted functional requirements. After individual work, share sample answers and discuss common mistakes: vague verbs, multiple requirements in one statement, or non-testable phrasing. Emphasize that good FRs specify observable behavior without prescribing implementation. Ask students to identify the input/output/transformation in each requirement. This directly supports the objective to document requirements using industry standards and bridges to NFRs on the next slide, where quality attributes complement functional behavior.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "requirements",
+              "functional",
+              "apply",
+              "documentation"
+            ]
+          }
+        },
+        {
+          "id": "slide-8",
+          "title": "Non-Functional Requirements",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "definition-3",
+              "type": "text",
+              "content": "How well the system performs - quality attributes that constrain solutions\n\n• Performance, Security, Usability, Reliability, Maintainability\n• Drive architectural decisions (NFRs often determine system structure)\n• Must be quantified with measurable criteria\n• Categories from ISO 25010 quality model"
+            },
+            {
+              "id": "activity-nfr",
+              "type": "activity",
+              "content": {
+                "title": "Analyze: Categorize & Evaluate Requirements",
+                "instruction": "Examine these requirements. For each: (1) Classify as Functional, Non-Functional, or Constraint, (2) Identify quality issues, (3) Rewrite poorly specified NFRs with measurable criteria.",
+                "items": [
+                  "REQ-A: System must be very fast and responsive",
+                  "REQ-B: System shall generate monthly reports in PDF format",
+                  "REQ-C: Application must be developed using React framework",
+                  "REQ-D: System should be easy to use for all users"
+                ],
+                "timeEstimate": "5 minutes",
+                "explanation": "REQ-A: NFR (performance) - too vague. Better: 'System shall load pages within 1.5 seconds for 95% of requests.' REQ-B: Functional - specifies system behavior. REQ-C: Constraint - mandates technology choice. REQ-D: NFR (usability) - unmeasurable. Better: 'Users shall complete core tasks with ≤3 clicks and no training.' This exercise develops analyze-level skills for distinguishing requirement types and evaluate-level skills for assessing quality against measurability criteria."
+              }
+            }
+          ],
+          "speakerNotes": "This activity addresses two objectives: distinguishing functional/non-functional requirements (analyze level) and validating requirement quality (evaluate level). After individual work, discuss classifications and common NFR mistakes: vague terms without metrics. Emphasize that NFRs like 'fast' or 'user-friendly' are untestable. Show how quantified NFRs drive architecture: 99.9% availability requires redundancy; sub-second response times may necessitate caching layers. Connect to validation criteria on slide 15 and architectural impact discussions.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "requirements",
+              "non-functional",
+              "analyze",
+              "evaluate"
+            ]
+          }
+        },
+        {
+          "id": "slide-9",
+          "title": "Constraints and Domain Requirements",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "definition-constraints",
+              "type": "text",
+              "content": "Constraints: Non-negotiable limitations (technology mandates, regulations, budget)\nDomain Requirements: Application-specific needs from the problem domain (medical, financial, legal)\n\nBoth limit solution space and drive architectural decisions"
+            },
+            {
+              "id": "activity-classify",
+              "type": "activity",
+              "content": {
+                "title": "Analyze: Classify Requirements",
+                "instruction": "Categorize each requirement as Functional, Non-Functional, Constraint, or Domain Requirement. Justify your classification and identify any that span multiple categories.",
+                "items": [
+                  "System must use PostgreSQL 12 or higher",
+                  "Healthcare records must be retained for 7 years",
+                  "Users shall reset passwords via email verification",
+                  "Payment processing must comply with PCI-DSS Level 1",
+                  "System shall process 10,000 transactions per second",
+                  "Application must be deployed on AWS infrastructure"
+                ],
+                "timeEstimate": "4 minutes",
+                "explanation": "PostgreSQL requirement: Constraint (technology mandate). 7-year retention: Domain requirement AND constraint (legal/healthcare domain). Password reset: Functional (system behavior). PCI-DSS: Domain requirement AND constraint (payment domain + regulation). 10K TPS: Non-functional (performance). AWS deployment: Constraint (platform mandate). Some requirements span categories—recognizing overlaps requires analytical thinking about requirement nature and origin."
+              }
+            }
+          ],
+          "speakerNotes": "This activity addresses the analyze-level objective for distinguishing requirement types. After individual classification, discuss borderline cases that span categories—many domain requirements also function as constraints. Emphasize that constraints narrow design choices (PostgreSQL eliminates NoSQL options), while domain requirements reflect specialized knowledge (HIPAA, PCI-DSS require domain expertise to identify). Connect to slide 8's NFR discussion and slide 10's documentation structure. Ask: How would you discover domain requirements during elicitation? What happens if domain constraints are missed early?",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "requirements",
+              "constraints",
+              "domain",
+              "analyze"
+            ]
+          }
+        },
+        {
+          "id": "slide-10",
+          "title": "Requirements Specification Documents",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "srs-structure",
+              "type": "text",
+              "content": "IEEE 830 / ISO/IEC/IEEE 29148 Standard Structure:\n\n1. Introduction: Purpose, scope, definitions, overview\n2. Overall Description: Product perspective, functions, user characteristics\n3. Specific Requirements: Detailed functional and non-functional requirements\n4. Appendices: Models, analysis, supporting information\n\nQuality Characteristics: Clear, Unambiguous, Testable, Consistent, Complete"
+            },
+            {
+              "id": "activity-document",
+              "type": "activity",
+              "content": {
+                "title": "Apply: Structure an SRS Section",
+                "instruction": "You're documenting requirements for a university course registration system. Using the IEEE 830 structure, organize these items into the correct SRS sections (Introduction, Overall Description, Specific Requirements, or Appendices). Then identify which quality characteristic each violates:\n\n• 'Students can register for courses'\n• Glossary defining 'prerequisite', 'credit hour', 'waitlist'\n• 'System should be user-friendly'\n• Entity-relationship diagram of course-student relationships\n• Target users: undergraduate/graduate students, faculty advisors\n• 'The system shall allow students to add courses to their schedule if prerequisites are met and seats are available'",
+                "timeEstimate": "4 minutes",
+                "explanation": "Correct placement: Glossary→Introduction; User types→Overall Description; ER diagram→Appendices; Three requirements→Specific Requirements. Quality issues: 'can register' is ambiguous (missing constraints), 'user-friendly' is untestable (no criteria), last requirement is clear and testable. This apply-level activity supports the documentation objective by having students practice organizing content into standard SRS structure while evaluating requirement quality."
+              }
+            }
+          ],
+          "speakerNotes": "This activity elevates the slide from understand to apply level by requiring students to actively use the IEEE 830 structure rather than just reading about it. After individual work, discuss why proper organization matters: stakeholders find information predictably, reviewers can verify completeness section-by-section, and developers know where to look for specific requirement types. Highlight that the poorly-written requirements would go in Specific Requirements but need improvement first—this bridges to slide 11's quality guidelines. Ask: What happens if requirements are scattered randomly through a document? How does standard structure support validation?",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "documentation",
+              "standards",
+              "SRS",
+              "apply"
+            ]
+          }
+        },
+        {
+          "id": "slide-11",
+          "title": "Writing Quality Requirements",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "bullets-11",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Modal verbs: 'shall' (mandatory), 'should' (desirable), 'may' (optional)",
+                  "Avoid ambiguous terms without quantification",
+                  "One requirement per statement (atomic)",
+                  "Each requirement must be verifiable"
+                ]
+              }
+            },
+            {
+              "id": "code-3",
+              "type": "code",
+              "content": {
+                "language": "text",
+                "code": "❌ Poor: 'The system should be secure and easy to use'\n\n✓ Good: 'The system shall require authentication using \n   username and password before accessing user data'\n\n❌ Poor: 'The system will handle lots of users'\n\n✓ Good: 'The system shall support 10,000 concurrent \n   users with response time < 3 seconds'"
+              }
+            },
+            {
+              "id": "activity-11",
+              "type": "activity",
+              "content": {
+                "title": "Requirement Quality Analysis",
+                "duration": "5 minutes",
+                "instructions": "Evaluate these requirements using the quality checklist (clear, unambiguous, testable, consistent, atomic). Identify specific defects in each:\n\n1. 'The mobile app shall be fast and responsive'\n2. 'The system must support many payment methods and be secure'\n3. 'Users should be able to easily search for products'\n\nFor each defect found, rewrite the requirement to fix it. Be specific and quantifiable.",
+                "deliverable": "List of defects identified and corrected requirements"
+              }
+            }
+          ],
+          "speakerNotes": "After reviewing the guidelines and examples, students now apply quality criteria to evaluate and correct poorly-written requirements. Walk through the activity: requirement 1 lacks quantification (how fast?), 2 violates atomicity (two requirements), 3 is ambiguous (easily?). Students should produce corrected versions like 'The mobile app shall load the home screen within 2 seconds on 4G networks.' This apply-level activity directly supports the documentation objective and prepares students for writing complete use cases in upcoming slides.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "documentation",
+              "quality",
+              "apply",
+              "activity"
+            ]
+          }
+        },
+        {
+          "id": "slide-12",
+          "title": "Use Case Fundamentals",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "definition-4",
+              "type": "text",
+              "content": "Description of system behavior from user perspective to achieve a goal"
+            },
+            {
+              "id": "bullets-12",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Actors: Users or external systems",
+                  "Use Cases: Goals the actors want to achieve",
+                  "Relationships: Include, extend, generalization"
+                ]
+              }
+            },
+            {
+              "id": "diagram-3",
+              "type": "diagram",
+              "content": {
+                "prompt": "UML use case diagram for online shopping system. Show Customer actor (stick figure) connected to use cases: Browse Products, Add to Cart, Checkout, Track Order. Show Admin actor connected to Manage Inventory. Include 'Authenticate User' use case with <<include>> relationship to Checkout. Use standard UML notation with ovals for use cases and lines for associations."
+              }
+            }
+          ],
+          "speakerNotes": "Use cases model functional requirements from the user's perspective. Focus on goals, not implementation. Actors are roles (Customer, Admin), not specific people. Use cases capture interactions to achieve goals. Explain include (mandatory sub-behavior) vs. extend (optional variation). The diagram provides a high-level view; detailed descriptions come next. ATM example: Withdraw Cash includes Authenticate User.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "use-cases",
+              "UML",
+              "modeling"
+            ]
+          }
+        },
+        {
+          "id": "slide-13",
+          "title": "Use Case Descriptions",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "text-5",
+              "type": "text",
+              "content": "Structured Template for Detailed Use Case Documentation"
+            },
+            {
+              "id": "code-4",
+              "type": "code",
+              "content": {
+                "language": "text",
+                "code": "Use Case: [Name]\nActors: [Primary and secondary actors]\nPreconditions: [What must be true before execution]\nPostconditions: [System state after successful completion]\n\nMain Flow:\n1. [Actor action]\n2. [System response]\n...\n\nAlternative Flow [step]a: [Exception/variation name]\n[step]a.1 [How system handles the exception]\n[step]a.2 [Resume point or termination]"
+              }
+            },
+            {
+              "id": "activity-13",
+              "type": "activity",
+              "content": {
+                "title": "Write a Complete Use Case",
+                "duration": "8 minutes",
+                "type": "individual",
+                "instructions": "Scenario: A university student wants to drop a course before the deadline. Write a complete use case description including: actors, preconditions, postconditions, main flow (at least 5 steps), and two alternative flows (e.g., past deadline, course required for major). Use the template structure provided above.",
+                "deliverable": "Complete use case description following the template format"
+              }
+            }
+          ],
+          "speakerNotes": "This activity elevates use case knowledge to apply level by requiring students to create documentation from scratch. Provide the template, then have students work individually. Emphasize: preconditions establish context, postconditions define success state, main flow is the happy path, alternative flows handle exceptions. Common student mistakes: forgetting to resume main flow, writing implementation details instead of user-system interactions, incomplete preconditions. After 8 minutes, share 1-2 student examples and discuss completeness. This directly addresses the documentation objective's apply-level expectation.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "use-cases",
+              "documentation",
+              "template",
+              "apply"
+            ]
+          }
+        },
+        {
+          "id": "slide-14",
+          "title": "User Stories in Agile",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "text-6",
+              "type": "text",
+              "content": "As a [role], I want [feature] so that [benefit]"
+            },
+            {
+              "id": "bullets-13",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "INVEST: Independent, Negotiable, Valuable, Estimable, Small, Testable",
+                  "Acceptance criteria define 'done' and enable testing",
+                  "Lightweight alternative to detailed use cases"
+                ]
+              }
+            },
+            {
+              "id": "activity-14",
+              "type": "activity",
+              "content": {
+                "title": "Write User Stories with Acceptance Criteria",
+                "duration": "7 minutes",
+                "type": "individual",
+                "instructions": "You're building a library management system. Write properly formatted user stories with complete acceptance criteria for these features: (1) Student reserves a book online, (2) Librarian processes overdue fines, (3) Faculty member requests book purchase. Each story must follow the role-feature-benefit format and include 3-5 testable acceptance criteria. Ensure stories meet INVEST criteria.",
+                "deliverable": "Three complete user stories with acceptance criteria"
+              }
+            }
+          ],
+          "speakerNotes": "This activity elevates the slide to apply level, directly addressing the documentation objective gap. Students must create user stories from feature descriptions, not just read examples. Emphasize the role-feature-benefit structure captures business value, while acceptance criteria make stories testable. Common mistakes: vague acceptance criteria, missing the 'so that' benefit clause, stories too large or dependent. After 7 minutes, share one student example per feature and evaluate against INVEST criteria as a class. This practice bridges agile documentation techniques with the broader requirements documentation objective.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "agile",
+              "user-stories",
+              "requirements",
+              "apply"
+            ]
+          }
+        },
+        {
+          "id": "slide-15",
+          "title": "Requirements Validation",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "heading-2",
+              "type": "heading",
+              "content": "Ensuring Requirements Quality Before Implementation"
+            },
+            {
+              "id": "bullets-14",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Reviews: Peer review, walkthroughs, formal inspections with checklists",
+                  "Prototyping: Validate UI/interaction requirements with stakeholders",
+                  "Model Validation: Check completeness, consistency, missing scenarios",
+                  "Quality Criteria: Completeness, Consistency, Feasibility, Testability, Clarity"
+                ]
+              }
+            },
+            {
+              "id": "activity-15",
+              "type": "activity",
+              "content": {
+                "title": "Validate Requirements and Identify Defects",
+                "duration": "8 minutes",
+                "type": "individual",
+                "instructions": "Review these six requirements for an online course registration system using the validation checklist (completeness, consistency, feasibility, testability, clarity): (1) 'The system shall be user-friendly', (2) 'Students can register for courses', (3) 'System responds quickly to user actions', (4) 'Students must complete prerequisites before registering for advanced courses', (5) 'Maximum class size is 30 students and unlimited for online courses', (6) 'Registration confirmation sent via email within 24 hours'. Identify specific quality defects in each requirement and propose corrected versions.",
+                "deliverable": "Defect analysis with corrections for all six requirements"
+              }
+            }
+          ],
+          "speakerNotes": "This evaluate-level activity addresses the validation objective gap by requiring students to systematically apply quality criteria to actual requirements. Requirements contain deliberate defects: vague terms (user-friendly, quickly), missing preconditions, inconsistencies, and untestable criteria. After 8 minutes, discuss findings. Requirement 1 lacks measurable criteria; 2 is incomplete (missing constraints); 3 is untestable; 4 needs explicit prerequisite checking mechanism; 5 has contradictory constraints; 6 is testable but may be infeasible. Emphasize validation catches defects before costly implementation. This practice strengthens critical requirements quality assessment skills.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "validation",
+              "quality-assurance",
+              "evaluate"
+            ]
+          }
+        },
+        {
+          "id": "slide-16",
+          "title": "Requirements Traceability and Management",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "bullets-15",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Traceability: Link requirements to sources, design, code, tests",
+                  "Change Management: Process for requesting and approving changes",
+                  "Impact Analysis: Understand ripple effects of changes",
+                  "Version Control: Track requirements evolution over time"
+                ]
+              }
+            },
+            {
+              "id": "diagram-4",
+              "type": "diagram",
+              "content": {
+                "prompt": "Requirements traceability matrix showing bidirectional arrows connecting: Stakeholder Needs → Requirements → Design Components → Code Modules → Test Cases. Display as a flow diagram with forward traceability arrows going left-to-right and backward traceability arrows going right-to-left. Use different colors for forward and backward traceability."
+              }
+            },
+            {
+              "id": "activity-16",
+              "type": "activity",
+              "content": {
+                "title": "Perform Impact Analysis for Change Request",
+                "duration": "7 minutes",
+                "type": "individual",
+                "instructions": "A stakeholder requests adding biometric fingerprint authentication to replace password login (Req-12). Using the provided traceability matrix showing Req-12 traces to: LoginUI design component, AuthenticationModule code, and 8 test cases (TC-45 through TC-52). Perform impact analysis: (1) List all artifacts affected by this change, (2) Identify new artifacts needed, (3) Estimate effort as Low/Medium/High, (4) Recommend approve/reject with justification considering security benefits vs. implementation cost.",
+                "deliverable": "Impact analysis report with approval recommendation"
+              }
+            }
+          ],
+          "speakerNotes": "This apply-level activity addresses the requirements management objective gap by having students work through a realistic change request scenario. Students must trace dependencies using the provided matrix, identify cascading impacts across design/code/test layers, and make a justified decision. After 7 minutes, discuss findings. Expected impacts: LoginUI redesign, AuthenticationModule rewrite, hardware integration, all 8 tests must be updated, plus new biometric tests needed. High effort but high security value. Emphasize that traceability enables systematic impact analysis, preventing overlooked dependencies. This practice develops critical change management skills needed in real projects.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "traceability",
+              "management",
+              "change-control",
+              "apply"
+            ]
+          }
+        },
+        {
+          "id": "slide-17",
+          "title": "Requirements Prioritization",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "bullets-16",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "MoSCoW: Must have, Should have, Could have, Won't have",
+                  "Value vs. Effort Matrix: Identify quick wins and items to avoid",
+                  "Kano Model: Basic, performance, excitement features",
+                  "Balance business value, technical risk, and dependencies"
+                ]
+              }
+            },
+            {
+              "id": "diagram-5",
+              "type": "diagram",
+              "content": {
+                "prompt": "2x2 matrix with axes labeled 'Business Value' (vertical, Low to High) and 'Implementation Effort' (horizontal, Low to High). Four quadrants labeled: High Value/Low Effort = 'Quick Wins', High Value/High Effort = 'Strategic', Low Value/Low Effort = 'Fill-ins', Low Value/High Effort = 'Avoid'. Show empty matrix ready for plotting requirements."
+              }
+            },
+            {
+              "id": "activity-17",
+              "type": "activity",
+              "content": {
+                "title": "Apply Prioritization Frameworks",
+                "duration": "8 minutes",
+                "type": "individual",
+                "instructions": "You have 10 requirements for an e-commerce system with business value (1-10) and effort estimates (1-10 story points): R1-Checkout(V:9,E:3), R2-Wishlist(V:4,E:2), R3-Reviews(V:7,E:5), R4-PaymentGateway(V:10,E:8), R5-SearchFilters(V:8,E:4), R6-SocialShare(V:3,E:6), R7-OrderTracking(V:9,E:7), R8-GuestCheckout(V:6,E:2), R9-Recommendations(V:5,E:9), R10-MultiCurrency(V:7,E:8). Tasks: (1) Categorize each using MoSCoW for MVP release, (2) Plot all on Value-Effort matrix, (3) Identify top 3 MVP requirements with justification.",
+                "deliverable": "MoSCoW categories, plotted matrix, justified MVP selection"
+              }
+            }
+          ],
+          "speakerNotes": "This apply-level activity addresses the requirements management objective gap by having students work through realistic prioritization trade-offs. Students must apply multiple frameworks (MoSCoW, Value-Effort matrix) to make defensible decisions about MVP scope. After 8 minutes, discuss results. Expected MVP: R1, R4, R5 (high value, manageable effort). R4 is Must despite high effort (payment essential). R6 and R9 should be Won't/Avoid (low value, high effort). Emphasize that prioritization requires balancing stakeholder desires against constraints. This develops critical release planning skills needed when resources are limited.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "prioritization",
+              "planning",
+              "decision-making",
+              "apply"
+            ]
+          }
+        },
+        {
+          "id": "slide-18",
+          "title": "Best Practices and Common Pitfalls",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "text-8",
+              "type": "text",
+              "content": "Best Practices"
+            },
+            {
+              "id": "bullets-17",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Involve stakeholders early and continuously",
+                  "Use multiple elicitation techniques for triangulation",
+                  "Validate requirements before implementation",
+                  "Maintain traceability for impact analysis"
+                ]
+              }
+            },
+            {
+              "id": "text-9",
+              "type": "text",
+              "content": "Common Pitfalls"
+            },
+            {
+              "id": "bullets-18",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Gold plating: Unnecessary features → Strict prioritization",
+                  "Scope creep: Uncontrolled additions → Change control",
+                  "Ambiguous requirements: Unclear specs → Structured templates",
+                  "Insufficient validation: Assumed correctness → Systematic reviews"
+                ]
+              }
+            }
+          ],
+          "speakerNotes": "Synthesize key lessons. Best practices: stakeholder involvement prevents misunderstandings, multiple techniques catch more requirements, early validation prevents costly rework, traceability supports change management. Common pitfalls with mitigations: gold plating (building unnecessary features) - use strict prioritization; scope creep (uncontrolled additions) - enforce change control; ambiguity (unclear specs) - use templates and reviews; insufficient validation (assuming correctness) - implement systematic validation. Share success story: agile project reduced rework 40% through incremental requirements refinement.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "best-practices",
+              "pitfalls",
+              "lessons-learned"
+            ]
+          }
+        },
+        {
+          "id": "slide-19",
+          "title": "Summary and Next Steps",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "heading-3",
+              "type": "heading",
+              "content": "Key Takeaways"
+            },
+            {
+              "id": "bullets-19",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Requirements engineering is systematic: elicitation, analysis, specification, validation, management",
+                  "Multiple elicitation techniques reveal different requirement types",
+                  "Distinguish functional (what) from non-functional (how well) requirements",
+                  "Document using use cases, user stories, and structured specifications",
+                  "Validate early, manage changes, maintain traceability"
+                ]
+              }
+            },
+            {
+              "id": "text-10",
+              "type": "text",
+              "content": "Next: Apply these concepts in your project - create SRS document with requirements, use cases, and traceability matrix"
+            }
+          ],
+          "speakerNotes": "Conclude by reinforcing the five key learning objectives. Requirements engineering is the foundation for successful software projects - getting requirements right prevents costly rework later. Emphasize the connection to upcoming lectures: requirements inform architecture decisions (Lecture 9) and drive testing strategies (Lecture 12). Preview the assignment: students will create a complete SRS document for a medium-sized system, applying all techniques learned today. Encourage questions and provide office hours for assignment support.",
+          "metadata": {
+            "transition": "fade",
+            "animation": "fade-out",
+            "tags": [
+              "summary",
+              "conclusion",
+              "next-steps"
+            ]
+          }
+        }
+      ]
+    },
+    "evaluation": {
+      "alignmentScore": 78,
+      "dominantLevel": "apply",
+      "distribution": {
+        "remember": 5,
+        "understand": 15,
+        "apply": 50,
+        "analyze": 20,
+        "evaluate": 10,
+        "create": 0
+      },
+      "objectiveAlignments": [
+        {
+          "objective": "Understand the requirements engineering process and its role in software development lifecycle",
+          "expectedLevel": "understand",
+          "observedLevel": "apply",
+          "status": "aligned",
+          "rationale": "Slides 2-3 present the RE process definition and model, then immediately engage students in applying the process to realistic scenarios (tracing a stakeholder complaint through all RE stages). The apply-level activity on slide 3 demonstrates understanding through application, which exceeds the understand-level objective."
+        },
+        {
+          "objective": "Apply various requirements elicitation techniques to gather stakeholder needs effectively",
+          "expectedLevel": "apply",
+          "observedLevel": "apply",
+          "status": "aligned",
+          "rationale": "Slides 4-6 systematically address this objective. Slide 4 requires students to select appropriate techniques for three different scenarios with justification. Slide 5 has students design interview questions for a library system. Slide 6 requires technique selection between observation and prototyping with justification. All activities require applying elicitation knowledge to realistic contexts."
+        },
+        {
+          "objective": "Distinguish between functional and non-functional requirements and categorize them appropriately",
+          "expectedLevel": "analyze",
+          "observedLevel": "analyze",
+          "status": "aligned",
+          "rationale": "Slides 7-9 directly address this objective at the analyze level. Slide 8's activity requires students to classify requirements as functional/non-functional/constraint, identify quality issues, and rewrite poorly specified NFRs. Slide 9 extends this with constraint and domain requirement classification, including recognition of requirements that span multiple categories. Both activities require analytical decomposition and categorization."
+        },
+        {
+          "objective": "Document requirements using industry-standard techniques including use cases and scenarios",
+          "expectedLevel": "apply",
+          "observedLevel": "apply",
+          "status": "aligned",
+          "rationale": "Slides 10-14 comprehensively address documentation. Slide 10 requires organizing content into IEEE 830 SRS structure. Slide 11 has students evaluate and rewrite requirements for quality. Slide 13 requires writing a complete use case from scratch following the template. Slide 14 requires creating user stories with acceptance criteria. All activities involve applying documentation standards to produce artifacts."
+        },
+        {
+          "objective": "Validate requirements for completeness, consistency, and feasibility",
+          "expectedLevel": "evaluate",
+          "observedLevel": "evaluate",
+          "status": "aligned",
+          "rationale": "Slide 15 directly addresses validation at the evaluate level. The activity requires students to systematically apply quality criteria (completeness, consistency, feasibility, testability, clarity) to six requirements, identify specific defects, and propose corrections. This is evaluation-level work: making judgments based on criteria and standards."
+        },
+        {
+          "objective": "Manage requirements changes throughout the software development process",
+          "expectedLevel": "apply",
+          "observedLevel": "apply",
+          "status": "aligned",
+          "rationale": "Slides 16-17 address requirements management. Slide 16 requires performing impact analysis for a change request using a traceability matrix, identifying affected artifacts, and making an approve/reject recommendation. Slide 17 requires applying MoSCoW and Value-Effort prioritization frameworks to make MVP decisions. Both activities demonstrate application of management techniques to realistic scenarios."
+        }
+      ],
+      "slideTags": [
+        {
+          "slideTitle": "Requirements Engineering Fundamentals",
+          "primaryLevel": "analyze",
+          "evidence": "Opening activity requires diagnosing which RE stage failed, identifying violated quality criteria, and writing a corrected requirement—all analytical tasks breaking down a failure case."
+        },
+        {
+          "slideTitle": "What is Requirements Engineering?",
+          "primaryLevel": "analyze",
+          "evidence": "Activity requires classifying statements as requirements vs. solutions and justifying reasoning, demonstrating analytical distinction between problem and solution spaces."
+        },
+        {
+          "slideTitle": "The Requirements Engineering Process",
+          "primaryLevel": "apply",
+          "evidence": "Activity traces a stakeholder complaint through all RE process stages, requiring application of the process model to a realistic scenario with specific outputs at each stage."
+        },
+        {
+          "slideTitle": "Requirements Elicitation Techniques",
+          "primaryLevel": "apply",
+          "evidence": "Activity requires selecting 2-3 elicitation techniques for three different scenarios with justification based on stakeholder characteristics and domain constraints."
+        },
+        {
+          "slideTitle": "Interviews and Workshops",
+          "primaryLevel": "apply",
+          "evidence": "Activity requires designing interview questions (structured and open-ended) for a library management system scenario, applying question design principles."
+        },
+        {
+          "slideTitle": "Observation and Prototyping",
+          "primaryLevel": "apply",
+          "evidence": "Activity requires selecting between observation and prototyping techniques for two scenarios and justifying choices based on context factors."
+        },
+        {
+          "slideTitle": "Functional Requirements",
+          "primaryLevel": "apply",
+          "evidence": "Activity requires transforming stakeholder needs into properly formatted functional requirements using 'system shall' format with testable criteria."
+        },
+        {
+          "slideTitle": "Non-Functional Requirements",
+          "primaryLevel": "analyze",
+          "evidence": "Activity requires classifying requirements as functional/non-functional/constraint, identifying quality issues (analyze), and evaluating against measurability criteria (evaluate). Dual-level activity with analyze as primary."
+        },
+        {
+          "slideTitle": "Constraints and Domain Requirements",
+          "primaryLevel": "analyze",
+          "evidence": "Activity requires categorizing requirements into four types, justifying classifications, and identifying requirements that span multiple categories—analytical decomposition."
+        },
+        {
+          "slideTitle": "Requirements Specification Documents",
+          "primaryLevel": "apply",
+          "evidence": "Activity requires organizing items into correct IEEE 830 SRS sections and identifying quality characteristic violations, applying documentation standards."
+        },
+        {
+          "slideTitle": "Writing Quality Requirements",
+          "primaryLevel": "apply",
+          "evidence": "Activity requires evaluating requirements against quality checklist, identifying defects, and rewriting corrected versions—application of quality guidelines."
+        },
+        {
+          "slideTitle": "Use Case Fundamentals",
+          "primaryLevel": "understand",
+          "evidence": "Slide presents use case concepts with diagram but lacks hands-on activity. Content explains actors, use cases, and relationships but doesn't require students to apply this knowledge."
+        },
+        {
+          "slideTitle": "Use Case Descriptions",
+          "primaryLevel": "apply",
+          "evidence": "Activity requires writing a complete use case description from scratch for a course drop scenario, including all template components—clear application of documentation technique."
+        },
+        {
+          "slideTitle": "User Stories in Agile",
+          "primaryLevel": "apply",
+          "evidence": "Activity requires writing three user stories with acceptance criteria following role-feature-benefit format and INVEST criteria for library system features."
+        },
+        {
+          "slideTitle": "Requirements Validation",
+          "primaryLevel": "evaluate",
+          "evidence": "Activity requires systematically applying validation criteria to six requirements, identifying specific quality defects, and proposing corrections—evaluation-level judgment."
+        },
+        {
+          "slideTitle": "Requirements Traceability and Management",
+          "primaryLevel": "apply",
+          "evidence": "Activity requires performing impact analysis using a traceability matrix, identifying affected artifacts, estimating effort, and making approval recommendation."
+        },
+        {
+          "slideTitle": "Requirements Prioritization",
+          "primaryLevel": "apply",
+          "evidence": "Activity requires applying MoSCoW and Value-Effort matrix frameworks to 10 requirements, categorizing them, plotting on matrix, and justifying MVP selection."
+        },
+        {
+          "slideTitle": "Best Practices and Common Pitfalls",
+          "primaryLevel": "understand",
+          "evidence": "Slide synthesizes best practices and pitfalls with mitigations but lacks activity requiring students to apply or analyze these concepts in context."
+        },
+        {
+          "slideTitle": "Summary and Next Steps",
+          "primaryLevel": "remember",
+          "evidence": "Summary slide reviewing key takeaways and previewing next steps—primarily recall and reinforcement of covered material."
+        }
+      ],
+      "gaps": [
+        "No create-level activities despite MSc-level course. Students never design a complete requirements engineering approach or synthesize multiple techniques into an integrated solution.",
+        "Slide 1 promises 'By End of Lecture: Create complete requirements artifacts integrating elicitation, documentation, and validation' but no capstone create-level activity appears in the deck to fulfill this promise.",
+        "Slide 12 (Use Case Fundamentals) drops to understand level with no hands-on activity, creating a cognitive gap before the apply-level activity on slide 13.",
+        "Missing opportunities for students to evaluate trade-offs between different elicitation techniques, documentation approaches, or validation methods—most activities apply single techniques rather than comparing alternatives.",
+        "No activity requiring students to critique or improve an existing SRS document, which would develop evaluate-level skills for assessing complete requirement sets.",
+        "Limited integration across RE stages—activities treat elicitation, documentation, validation, and management as separate rather than requiring students to work through multiple stages for the same system."
+      ],
+      "suggestions": [
+        "Add a capstone create-level activity (slides 18-19 or new slide 20) where students design a complete RE approach for a novel system scenario, integrating elicitation technique selection, requirement documentation, validation strategy, and change management plan. This would fulfill the slide 1 promise and address the create-level gap.",
+        "Enhance slide 12 with a brief apply-level activity: given a scenario, have students identify actors and use cases before seeing the diagram, then compare their analysis to the provided example.",
+        "Add an evaluate-level activity comparing elicitation techniques: present a complex scenario and have students evaluate which combination of 3-4 techniques would be most effective, justifying their choices by analyzing strengths/limitations of each.",
+        "Include a requirements set critique activity: provide a partial SRS with deliberate issues spanning multiple requirement types, and have students perform a comprehensive evaluation identifying problems in elicitation coverage, documentation quality, and validation gaps.",
+        "Create an integrated case study spanning slides 4-16: introduce a single system scenario early, then have students progressively build requirements artifacts for it (elicitation plan → requirements list → use cases → validation report → change impact analysis). This would demonstrate how RE stages connect.",
+        "Add analyze-level comparison activities: have students compare use cases vs. user stories for the same feature, analyzing when each documentation approach is more appropriate based on project context.",
+        "Strengthen the validation objective coverage by adding an activity where students design a validation checklist customized for a specific domain (e.g., medical devices requiring safety validation vs. consumer apps requiring usability validation)."
+      ]
+    },
+    "rounds_used": 2,
+    "before_score": 78,
+    "after_score": 78,
+    "improved_slide_ids": [
+      "slide-11",
+      "slide-13",
+      "slide-14",
+      "slide-15",
+      "slide-16",
+      "slide-17",
+      "slide-1",
+      "slide-10"
+    ],
+    "failed_slide_ids": [],
+    "improved_count": 8,
+    "reevaluated": true
+  },
+  {
+    "status": "completed",
+    "deck": {
+      "slides": [
+        {
+          "id": "slide-1",
+          "title": "Requirements Engineering Fundamentals",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "title-1",
+              "type": "heading",
+              "content": "Lecture 8: Requirements Engineering Fundamentals"
+            },
+            {
+              "id": "context-1",
+              "type": "text",
+              "content": "**Today's Challenge**: You'll design a requirements engineering approach for a real system\n\n**By End of Lecture**: Create complete requirements artifacts integrating elicitation, documentation, and validation"
+            },
+            {
+              "id": "activity-1",
+              "type": "activity",
+              "content": {
+                "title": "Preview: Diagnose the Requirements Failure",
+                "instruction": "Read this project failure summary. Identify which RE process stage(s) failed and what specific practices could have prevented the failure.",
+                "items": [
+                  "**Case**: University registration system launched with 'fast performance' requirement. System handled 50 users acceptably but crashed with 5,000 during actual registration. Developers claimed they met the requirement; stakeholders were furious.",
+                  "**Your Task**: (1) Which RE stage failed? (2) What specific requirement quality was violated? (3) Write one corrected requirement that would have prevented this failure."
+                ],
+                "timeEstimate": "3 minutes",
+                "explanation": "Elicitation and specification stages failed. The requirement violated testability and measurability—'fast' is ambiguous. Corrected: 'System must process course registration requests for 5,000 concurrent users with 95th percentile response time ≤2 seconds.' This previews why systematic RE practices matter."
+              }
+            }
+          ],
+          "speakerNotes": "Open with the activity to immediately engage students at analyze level and establish real stakes for RE. After discussion, reveal that this reflects actual failures costing millions. Emphasize that today they'll learn and apply systematic practices to prevent such disasters. Preview the capstone: by lecture end, they'll create requirements artifacts for a system scenario, integrating all RE stages. This sets expectations for create-level work and frames the lecture as building toward practical synthesis, not just concept coverage.",
+          "metadata": {
+            "transition": "fade",
+            "animation": "fade-in",
+            "tags": [
+              "introduction",
+              "analyze",
+              "preview"
+            ]
+          }
+        },
+        {
+          "id": "slide-2",
+          "title": "What is Requirements Engineering?",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "definition-1",
+              "type": "text",
+              "content": "**Requirements Engineering**: Systematic process of defining, documenting, and maintaining software requirements\n\n**Key Impact**: 60-70% of software failures trace to requirements issues\n\n**Core Challenge**: Bridge between stakeholder needs and system implementation"
+            },
+            {
+              "id": "activity-1",
+              "type": "activity",
+              "content": {
+                "title": "Evaluate: Requirements Quality Assessment",
+                "instruction": "Evaluate each statement as a requirement. If valid, classify type (functional/NFR). If invalid, diagnose the flaw and rewrite it as a proper requirement.",
+                "items": [
+                  "A. The system must process 10,000 transactions per second",
+                  "B. The system must use Apache Kafka for messaging",
+                  "C. Users must receive order confirmation within 2 seconds",
+                  "D. The system should be user-friendly and fast",
+                  "E. The application must support accessibility features"
+                ],
+                "timeEstimate": "4 minutes",
+                "explanation": "A: Valid NFR (performance, testable). B: Invalid—premature solution; rewrite as 'System must reliably deliver messages between services with <100ms latency.' C: Valid NFR (performance). D: Invalid—vague, untestable; rewrite with metrics. E: Invalid—too broad; rewrite specifying WCAG 2.1 AA compliance. This evaluates requirement quality across multiple dimensions: problem vs. solution focus, testability, specificity."
+              }
+            }
+          ],
+          "speakerNotes": "Present the definition emphasizing the problem-solution bridge. The activity now requires evaluate-level thinking: students must judge quality against multiple criteria (testability, specificity, problem-focus), then synthesize corrections. Walk through examples highlighting that even statement E, which sounds like a requirement, fails specificity tests. Discuss how B might be valid if it's a genuine stakeholder constraint, but usually reflects premature design. Connect to real failures where vague requirements like D caused project disputes. This evaluation skill is foundational for all subsequent RE stages—students must recognize quality issues before learning elicitation and documentation techniques.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "introduction",
+              "definition",
+              "evaluate"
+            ]
+          }
+        },
+        {
+          "id": "slide-3",
+          "title": "The Requirements Engineering Process",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "diagram-1",
+              "type": "diagram",
+              "content": {
+                "prompt": "Circular process diagram showing four connected activities: Elicitation → Analysis → Specification → Validation, with Requirements Management in the center. Include feedback arrows connecting all activities in both directions. Use professional colors and clear labels."
+              }
+            },
+            {
+              "id": "activity-1",
+              "type": "activity",
+              "content": {
+                "title": "Create: Design an RE Approach",
+                "instruction": "Your team is building a university course registration system. Create an integrated RE plan covering all process stages:",
+                "items": [
+                  "Elicitation: Select 3 techniques and justify each based on stakeholder types (students, faculty, registrars)",
+                  "Analysis: Identify 2 potential conflicts between stakeholder needs",
+                  "Specification: Draft 1 functional and 1 non-functional requirement",
+                  "Validation: Design a validation strategy addressing both requirement types",
+                  "Management: Propose a traceability approach for handling changes"
+                ],
+                "timeEstimate": "5 minutes",
+                "explanation": "Students must synthesize knowledge across all RE stages into a cohesive plan. Sample: Elicitation—workshops (collaborative design), observation (current registration), interviews (registrar constraints). Analysis—students want flexibility vs. registrars need enrollment caps. Specification—'System shall prevent course enrollment exceeding capacity' (functional); 'Registration confirmation shall display within 3 seconds' (NFR). Validation—prototype with students, compliance review with registrars. Management—use case to code traceability matrix."
+              }
+            }
+          ],
+          "speakerNotes": "Present the process model emphasizing its iterative, integrated nature. The create-level activity requires students to design a complete RE approach, synthesizing technique selection, conflict resolution, requirement formulation, and validation planning into one coherent strategy. This addresses the deck's create-level gap and demonstrates how RE stages interconnect rather than operate independently. Guide students to justify choices based on stakeholder characteristics and domain constraints. Discuss how their elicitation choices impact what conflicts emerge in analysis, which then shapes specification and validation approaches. This integrated thinking prepares them for the detailed technique exploration in subsequent slides.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "process",
+              "overview",
+              "create"
+            ]
+          }
+        },
+        {
+          "id": "slide-4",
+          "title": "Requirements Elicitation Techniques",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "bullets-3",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Interviews: Structured and unstructured conversations",
+                  "Workshops: Facilitated group sessions for collaboration",
+                  "Observation: Watching users in natural work environment",
+                  "Prototyping: Using mockups to elicit feedback",
+                  "Document Analysis: Reviewing existing systems and regulations"
+                ]
+              }
+            },
+            {
+              "id": "activity-1",
+              "type": "activity",
+              "content": {
+                "title": "Evaluate: Compare Elicitation Strategies",
+                "instruction": "A city is building a 311 service request system (report potholes, noise complaints, etc.). Stakeholders: residents (diverse tech literacy), dispatchers (process experts), city council (budget constraints), legacy paper-based system exists. Evaluate TWO competing elicitation strategies:",
+                "items": [
+                  "Strategy A: Document analysis + structured interviews + prototyping",
+                  "Strategy B: Observation + workshops + unstructured interviews",
+                  "Which strategy better addresses this context? Justify by analyzing trade-offs in coverage, cost, stakeholder engagement, and risk of missing requirements."
+                ],
+                "timeEstimate": "4 minutes",
+                "explanation": "Strategy A captures regulations and current processes but may miss resident pain points and dispatcher workarounds. Strategy B reveals actual workflows and builds buy-in but risks missing compliance requirements. Best answer recognizes need for hybrid approach: document analysis for compliance baseline, observation for workflow reality, workshops for collaborative design addressing resistance, prototyping for resident feedback. Evaluation should weigh technique strengths against project constraints."
+              }
+            }
+          ],
+          "speakerNotes": "Present the five core techniques briefly, emphasizing that effective elicitation requires strategic combination rather than single-technique application. The evaluate-level activity requires students to analyze trade-offs between two realistic strategies, considering stakeholder diversity, domain constraints, and technique limitations. Guide discussion toward recognizing that neither strategy alone suffices—successful RE requires evaluating context to design integrated approaches. This prepares students for the next slide's deep dive into interviews and workshops, where they'll apply specific techniques within broader strategic thinking.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "elicitation",
+              "techniques",
+              "evaluate"
+            ]
+          }
+        },
+        {
+          "id": "slide-5",
+          "title": "Interviews and Workshops",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "bullets-4",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Structured: Predefined questions, consistent format",
+                  "Unstructured: Exploratory, open-ended discussions",
+                  "Workshops: Facilitated group sessions (JAD, brainstorming)",
+                  "Open-ended questions uncover unstated needs"
+                ]
+              }
+            },
+            {
+              "id": "activity-1",
+              "type": "activity",
+              "content": {
+                "title": "Apply: Design Interview Questions",
+                "instruction": "For this scenario, write 3 interview questions (1 structured, 2 open-ended): You're building a library management system. Your stakeholder is a head librarian who manages circulation, cataloging, and patron services.",
+                "items": [
+                  "What makes a good vs. poor question?",
+                  "How do open-ended questions reveal hidden requirements?"
+                ],
+                "timeEstimate": "3 minutes",
+                "explanation": "Good structured: 'How many books does your library circulate daily?' (quantifiable). Good open-ended: 'Walk me through what happens when a patron reports a lost book' (reveals workflow); 'What frustrates you most about the current system?' (uncovers pain points). Poor: leading questions, yes/no questions, jargon-heavy phrasing. Open-ended questions let stakeholders describe context, workarounds, and priorities in their own terms."
+              }
+            }
+          ],
+          "speakerNotes": "After presenting techniques, have students apply them by crafting actual interview questions for a realistic scenario. This moves from understanding what interviews are to applying question design principles. Discuss student responses: structured questions gather facts (circulation volume, staff count), while open-ended questions reveal processes and pain points. Emphasize avoiding leading questions ('Don't you think automated renewals would help?') and closed yes/no questions. For workshops, briefly mention JAD sessions and facilitation techniques like dot voting for prioritization. This prepares students for the observation and prototyping techniques on the next slide.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "elicitation",
+              "interviews",
+              "workshops",
+              "apply"
+            ]
+          }
+        },
+        {
+          "id": "slide-6",
+          "title": "Observation and Prototyping",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "bullets-5",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Observation: Watch users in natural environment to uncover tacit knowledge",
+                  "Contextual inquiry: observation + concurrent interviews",
+                  "Prototyping: Paper → Wireframes → Interactive mockups",
+                  "Throwaway vs. evolutionary prototypes"
+                ]
+              }
+            },
+            {
+              "id": "activity-1",
+              "type": "activity",
+              "content": {
+                "title": "Apply: Choose Your Technique",
+                "instruction": "For each scenario, select observation OR prototyping and justify your choice:\n\nA) Hospital emergency room triage system—nurses handle critical decisions under time pressure\n\nB) Consumer mobile app for meal planning—target users are busy parents, feature set uncertain",
+                "items": [
+                  "What factors make one technique more suitable?",
+                  "Could you combine both? How?"
+                ],
+                "timeEstimate": "3 minutes",
+                "explanation": "A) Observation preferred—triage involves tacit expertise, high-stakes workflows, and context-dependent decisions that nurses may not articulate in interviews. Watching actual triage reveals workarounds and decision patterns. B) Prototyping preferred—uncertain requirements benefit from early feedback; low-fidelity mockups quickly validate feature priorities with parents. Combining both: observe current meal-planning behavior, then prototype solutions based on observed pain points."
+              }
+            }
+          ],
+          "speakerNotes": "This activity elevates the slide from understand to apply by requiring technique selection and justification for realistic contexts. Guide students to consider: observation excels when processes are tacit, complex, or context-dependent (medical workflows, expert tasks); prototyping works when requirements are uncertain or users struggle to articulate needs abstractly. Discuss how observation reveals what people actually do versus what they say, while prototypes make abstract requirements concrete. Emphasize that techniques often combine—observe first to understand context, then prototype solutions. This bridges to functional requirements on the next slide, where documented behaviors come from elicitation.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "elicitation",
+              "observation",
+              "prototyping",
+              "apply"
+            ]
+          }
+        },
+        {
+          "id": "slide-7",
+          "title": "Functional Requirements",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "definition-2",
+              "type": "text",
+              "content": "What the system must do - specific behaviors and functions\n\n• Describe system inputs, outputs, and transformations\n• Expressed as 'The system shall...' statements\n• Directly testable through functional testing\n• Must be atomic, unambiguous, and traceable"
+            },
+            {
+              "id": "activity-2",
+              "type": "activity",
+              "content": {
+                "title": "Analyze & Evaluate: Critique and Improve Requirements",
+                "instruction": "A university course registration system has these requirements. For each: (1) Identify specific quality problems (ambiguity, atomicity, testability), (2) Classify severity (critical/minor), (3) Rewrite to fix all issues.\n\nFR-1: The system shall allow students to register for courses and manage their schedules efficiently.\n\nFR-2: The system should send notifications when enrollment changes.\n\nFR-3: Professors can view enrollment data.",
+                "items": [
+                  "What makes each requirement untestable or ambiguous?",
+                  "How would you verify your improved versions?"
+                ],
+                "timeEstimate": "5 minutes",
+                "explanation": "FR-1: Multiple requirements (register + manage), vague 'efficiently'. Critical—untestable. Fix: Split into 'shall allow students to add/drop courses' and 'shall display schedule conflicts'. FR-2: 'Should' vs. 'shall', undefined 'notifications'. Critical—ambiguous trigger/recipient. Fix: 'shall email instructors within 5 minutes when enrollment exceeds capacity'. FR-3: Missing 'shall', vague 'data'. Minor—incomplete. Fix: 'shall display current enrollment count and student roster for assigned courses'."
+              }
+            }
+          ],
+          "speakerNotes": "This analyze/evaluate activity develops critical assessment skills by requiring students to diagnose requirement defects and judge their severity before fixing them. After individual work, discuss how FR-1 violates atomicity, FR-2 lacks precision in trigger conditions and recipients, and FR-3 uses weak language. Emphasize that evaluating existing requirements is essential for validation and reviews. Connect quality criteria (atomic, unambiguous, testable, traceable) to validation techniques on slide 15. This prepares students to critique complete requirement sets and bridges to NFRs where similar quality issues appear.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "requirements",
+              "functional",
+              "analyze",
+              "evaluate",
+              "validation"
+            ]
+          }
+        },
+        {
+          "id": "slide-8",
+          "title": "Non-Functional Requirements",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "definition-3",
+              "type": "text",
+              "content": "How well the system performs - quality attributes that constrain solutions\n\n• Performance, Security, Usability, Reliability, Maintainability\n• Drive architectural decisions (NFRs often determine system structure)\n• Must be quantified with measurable criteria\n• Categories from ISO 25010 quality model"
+            },
+            {
+              "id": "activity-nfr-evaluate",
+              "type": "activity",
+              "content": {
+                "title": "Evaluate: Compare NFR Specification Approaches",
+                "instruction": "A mobile banking app needs performance requirements. Three teams proposed different specifications. Evaluate each approach: (1) Assess completeness and testability, (2) Identify which architectural decisions each would drive, (3) Recommend the best approach with justification.\n\nTeam A: 'App shall respond quickly to user actions'\nTeam B: 'App shall load account dashboard in <2s on 4G; process transfers in <3s; support 50K concurrent users'\nTeam C: 'App shall achieve 95th percentile response time <1.5s for all transactions under normal load conditions'",
+                "timeEstimate": "6 minutes",
+                "explanation": "Team A: Untestable, no architectural guidance—fails completely. Team B: Testable and specific but lacks percentile thinking (what about worst-case?); drives caching, CDN decisions. Team C: Best—percentile metrics reveal tail latency, 'normal load' needs definition but approach is sound; drives performance monitoring architecture. Evaluation criteria: measurability, architectural impact, edge case coverage. This develops evaluate-level skills for assessing NFR quality and understanding architecture-requirement tradeoffs."
+              }
+            }
+          ],
+          "speakerNotes": "This evaluate-level activity addresses the gap in comparing requirement specification approaches. After individual evaluation, facilitate discussion on why percentile-based metrics (Team C) better capture user experience than averages, and how vague NFRs (Team A) provide no architectural guidance. Connect to slide 7's requirement quality criteria and slide 9's constraints. Emphasize that NFR specification choices directly impact system architecture: Team B's concurrent user requirement necessitates load balancing and horizontal scaling. Ask students how they would validate each team's requirements and what test scenarios would expose specification weaknesses.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "requirements",
+              "non-functional",
+              "evaluate",
+              "architecture"
+            ]
+          }
+        },
+        {
+          "id": "slide-9",
+          "title": "Constraints and Domain Requirements",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "definition-constraints",
+              "type": "text",
+              "content": "Constraints: Non-negotiable limitations (technology mandates, regulations, budget)\nDomain Requirements: Application-specific needs from the problem domain (medical, financial, legal)\n\nBoth limit solution space and drive architectural decisions\n\nKey Challenge: Requirements often span multiple categories—recognizing overlaps requires understanding requirement origin, impact, and negotiability"
+            },
+            {
+              "id": "activity-evaluate-tradeoffs",
+              "type": "activity",
+              "content": {
+                "title": "Evaluate: Assess Requirement Trade-offs and Elicitation Needs",
+                "instruction": "A fintech startup building a payment platform received these requirements. For each: (1) Classify as Functional/NFR/Constraint/Domain (note overlaps), (2) Assess negotiability and architectural impact, (3) Recommend which elicitation technique(s) would best uncover related requirements.\n\n• 'Must process refunds within 24 hours per consumer protection law'\n• 'System shall use microservices architecture'\n• 'Support 50K TPS with 99.99% uptime'\n• 'Comply with PCI-DSS and regional data residency laws'\n• 'Users reset passwords via SMS or email'",
+                "timeEstimate": "7 minutes",
+                "explanation": "Refund: Domain+Constraint (legal), non-negotiable, needs document analysis+legal expert interview. Microservices: Constraint (if mandated) or NFR (if preference), negotiable if justified, needs stakeholder interviews to understand rationale. TPS/uptime: NFR (performance/reliability), somewhat negotiable, needs load analysis+competitive benchmarking. PCI-DSS: Domain+Constraint, non-negotiable, needs compliance specialist consultation+regulatory document review. Password reset: Functional, negotiable, needs user interviews+usability testing. Evaluation criteria: requirement origin, flexibility, discovery methods."
+              }
+            }
+          ],
+          "speakerNotes": "This evaluate-level activity addresses the gap in comparing elicitation techniques and assessing requirement trade-offs. After individual work, discuss how requirement classification affects elicitation strategy: domain requirements need domain experts, constraints need stakeholder interviews to assess flexibility. Highlight that the microservices requirement might be a premature design decision disguised as a constraint—evaluating negotiability prevents over-constraining solutions. Connect to slide 8's NFRs and slide 10's documentation. Ask: How would misclassifying a negotiable preference as a constraint harm the project? Which requirements would you challenge with stakeholders and why?",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "requirements",
+              "constraints",
+              "domain",
+              "evaluate",
+              "elicitation"
+            ]
+          }
+        },
+        {
+          "id": "slide-10",
+          "title": "Requirements Specification Documents",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "srs-structure",
+              "type": "text",
+              "content": "IEEE 830 / ISO/IEC/IEEE 29148 Standard Structure:\n\n1. Introduction: Purpose, scope, definitions, overview\n2. Overall Description: Product perspective, functions, user characteristics\n3. Specific Requirements: Detailed functional and non-functional requirements\n4. Appendices: Models, analysis, supporting information\n\nQuality Characteristics: Clear, Unambiguous, Testable, Consistent, Complete"
+            },
+            {
+              "id": "activity-document",
+              "type": "activity",
+              "content": {
+                "title": "Apply: Structure an SRS Section",
+                "instruction": "You're documenting requirements for a university course registration system. Using the IEEE 830 structure, organize these items into the correct SRS sections (Introduction, Overall Description, Specific Requirements, or Appendices). Then identify which quality characteristic each violates:\n\n• 'Students can register for courses'\n• Glossary defining 'prerequisite', 'credit hour', 'waitlist'\n• 'System should be user-friendly'\n• Entity-relationship diagram of course-student relationships\n• Target users: undergraduate/graduate students, faculty advisors\n• 'The system shall allow students to add courses to their schedule if prerequisites are met and seats are available'",
+                "timeEstimate": "4 minutes",
+                "explanation": "Correct placement: Glossary→Introduction; User types→Overall Description; ER diagram→Appendices; Three requirements→Specific Requirements. Quality issues: 'can register' is ambiguous (missing constraints), 'user-friendly' is untestable (no criteria), last requirement is clear and testable. This apply-level activity supports the documentation objective by having students practice organizing content into standard SRS structure while evaluating requirement quality."
+              }
+            }
+          ],
+          "speakerNotes": "This activity elevates the slide from understand to apply level by requiring students to actively use the IEEE 830 structure rather than just reading about it. After individual work, discuss why proper organization matters: stakeholders find information predictably, reviewers can verify completeness section-by-section, and developers know where to look for specific requirement types. Highlight that the poorly-written requirements would go in Specific Requirements but need improvement first—this bridges to slide 11's quality guidelines. Ask: What happens if requirements are scattered randomly through a document? How does standard structure support validation?",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "documentation",
+              "standards",
+              "SRS",
+              "apply"
+            ]
+          }
+        },
+        {
+          "id": "slide-11",
+          "title": "Writing Quality Requirements",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "bullets-11",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Modal verbs: 'shall' (mandatory), 'should' (desirable), 'may' (optional)",
+                  "Avoid ambiguous terms without quantification",
+                  "One requirement per statement (atomic)",
+                  "Each requirement must be verifiable"
+                ]
+              }
+            },
+            {
+              "id": "code-3",
+              "type": "code",
+              "content": {
+                "language": "text",
+                "code": "❌ Poor: 'The system should be secure and easy to use'\n\n✓ Good: 'The system shall require authentication using \n   username and password before accessing user data'\n\n❌ Poor: 'The system will handle lots of users'\n\n✓ Good: 'The system shall support 10,000 concurrent \n   users with response time < 3 seconds'"
+              }
+            },
+            {
+              "id": "activity-evaluate",
+              "type": "activity",
+              "content": {
+                "title": "Evaluate: Requirements Quality Trade-offs",
+                "instruction": "A team debates these requirements for a healthcare app. Evaluate each version, identify which quality characteristics conflict, and recommend the best version with justification:\n\nVersion A: 'System shall encrypt all data using AES-256 and complete login within 1 second'\nVersion B: 'System shall ensure data security and reasonable performance'\nVersion C: 'System shall encrypt patient records; login time shall be under 3 seconds'\n\nConsider: testability, atomicity, feasibility, stakeholder needs. Which would you accept into the SRS and why? What risks does each version pose?",
+                "timeEstimate": "5 minutes",
+                "explanation": "This evaluate-level activity requires analyzing trade-offs between specificity and feasibility, assessing which quality characteristics matter most in context, and justifying decisions—moving beyond applying guidelines to evaluating competing valid approaches. Students must recognize Version A may be over-constrained (security vs. speed trade-off), Version B is untestable, and Version C balances specificity with feasibility. Supports documentation and validation objectives."
+              }
+            }
+          ],
+          "speakerNotes": "This activity elevates the slide to evaluate level by requiring students to assess competing requirement formulations rather than just fixing defects. After individual analysis, facilitate discussion: Why might Version A fail feasibility review despite being specific? How does domain (healthcare) influence which version is appropriate? What validation methods would catch issues in each version? This bridges to slide 12's use cases by showing that good requirements balance multiple quality dimensions. The trade-off analysis prepares students for real-world scenarios where perfect requirements are impossible and stakeholder negotiation is necessary.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "documentation",
+              "quality",
+              "evaluate",
+              "activity"
+            ]
+          }
+        },
+        {
+          "id": "slide-12",
+          "title": "Use Case Fundamentals",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "definition-4",
+              "type": "text",
+              "content": "Description of system behavior from user perspective to achieve a goal. **Actors**: Users or external systems. **Use Cases**: Goals actors want to achieve. **Relationships**: Include (mandatory sub-behavior), extend (optional variation), generalization (specialized actor/use case)."
+            },
+            {
+              "id": "diagram-3",
+              "type": "diagram",
+              "content": {
+                "prompt": "UML use case diagram for online shopping system. Show Customer actor (stick figure) connected to use cases: Browse Products, Add to Cart, Checkout, Track Order. Show Admin actor connected to Manage Inventory. Include 'Authenticate User' use case with <<include>> relationship to Checkout. Use standard UML notation with ovals for use cases and lines for associations."
+              }
+            },
+            {
+              "id": "activity-12",
+              "type": "activity",
+              "content": {
+                "title": "Identify Actors & Use Cases",
+                "instruction": "Scenario: A smart home system controls lighting, temperature, and security. Before viewing the diagram above, identify: (1) at least 3 actors (consider different user roles and external systems), (2) at least 4 use cases these actors need, (3) one <<include>> relationship. Compare your analysis with a partner, then we'll discuss how it maps to the shopping example shown.",
+                "timeEstimate": "4 minutes",
+                "explanation": "This apply-level activity bridges the cognitive gap before slide 13 by having students construct their own use case model before seeing detailed templates. Students practice identifying actors and goals from requirements, preparing them for the complete documentation task ahead."
+              }
+            }
+          ],
+          "speakerNotes": "Have students work individually for 2 minutes, then pair-share for 2 minutes before class discussion. Common challenges: confusing actors with specific people rather than roles, identifying implementation steps instead of user goals, missing external system actors like weather services or alarm monitoring. After sharing, highlight how the shopping diagram illustrates the same concepts they just applied. Emphasize that use cases capture what the system must do, not how it does it. This prepares students for writing detailed use case descriptions in the next slide's activity.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "use-cases",
+              "UML",
+              "modeling",
+              "apply",
+              "activity"
+            ]
+          }
+        },
+        {
+          "id": "slide-13",
+          "title": "Use Case Descriptions",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "text-5",
+              "type": "text",
+              "content": "Structured Template for Detailed Use Case Documentation"
+            },
+            {
+              "id": "code-4",
+              "type": "code",
+              "content": {
+                "language": "text",
+                "code": "Use Case: [Name]\nActors: [Primary and secondary actors]\nPreconditions: [What must be true before execution]\nPostconditions: [System state after successful completion]\n\nMain Flow:\n1. [Actor action]\n2. [System response]\n...\n\nAlternative Flow [step]a: [Exception/variation name]\n[step]a.1 [How system handles the exception]\n[step]a.2 [Resume point or termination]"
+              }
+            },
+            {
+              "id": "activity-13",
+              "type": "activity",
+              "content": {
+                "title": "Write a Complete Use Case",
+                "duration": "8 minutes",
+                "type": "individual",
+                "instructions": "Scenario: A university student wants to drop a course before the deadline. Write a complete use case description including: actors, preconditions, postconditions, main flow (at least 5 steps), and two alternative flows (e.g., past deadline, course required for major). Use the template structure provided above.",
+                "deliverable": "Complete use case description following the template format"
+              }
+            }
+          ],
+          "speakerNotes": "This activity elevates use case knowledge to apply level by requiring students to create documentation from scratch. Provide the template, then have students work individually. Emphasize: preconditions establish context, postconditions define success state, main flow is the happy path, alternative flows handle exceptions. Common student mistakes: forgetting to resume main flow, writing implementation details instead of user-system interactions, incomplete preconditions. After 8 minutes, share 1-2 student examples and discuss completeness. This directly addresses the documentation objective's apply-level expectation.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "use-cases",
+              "documentation",
+              "template",
+              "apply"
+            ]
+          }
+        },
+        {
+          "id": "slide-14",
+          "title": "User Stories in Agile",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "text-6",
+              "type": "text",
+              "content": "As a [role], I want [feature] so that [benefit]"
+            },
+            {
+              "id": "bullets-13",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "INVEST: Independent, Negotiable, Valuable, Estimable, Small, Testable",
+                  "Acceptance criteria define 'done' and enable testing",
+                  "Lightweight alternative to detailed use cases"
+                ]
+              }
+            },
+            {
+              "id": "activity-14",
+              "type": "activity",
+              "content": {
+                "title": "Write User Stories with Acceptance Criteria",
+                "duration": "7 minutes",
+                "type": "individual",
+                "instructions": "You're building a library management system. Write properly formatted user stories with complete acceptance criteria for these features: (1) Student reserves a book online, (2) Librarian processes overdue fines, (3) Faculty member requests book purchase. Each story must follow the role-feature-benefit format and include 3-5 testable acceptance criteria. Ensure stories meet INVEST criteria.",
+                "deliverable": "Three complete user stories with acceptance criteria"
+              }
+            }
+          ],
+          "speakerNotes": "This activity elevates the slide to apply level, directly addressing the documentation objective gap. Students must create user stories from feature descriptions, not just read examples. Emphasize the role-feature-benefit structure captures business value, while acceptance criteria make stories testable. Common mistakes: vague acceptance criteria, missing the 'so that' benefit clause, stories too large or dependent. After 7 minutes, share one student example per feature and evaluate against INVEST criteria as a class. This practice bridges agile documentation techniques with the broader requirements documentation objective.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "agile",
+              "user-stories",
+              "requirements",
+              "apply"
+            ]
+          }
+        },
+        {
+          "id": "slide-15",
+          "title": "Requirements Validation",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "heading-2",
+              "type": "heading",
+              "content": "Ensuring Requirements Quality Before Implementation"
+            },
+            {
+              "id": "bullets-14",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Reviews: Peer review, walkthroughs, formal inspections with checklists",
+                  "Prototyping: Validate UI/interaction requirements with stakeholders",
+                  "Model Validation: Check completeness, consistency, missing scenarios",
+                  "Quality Criteria: Completeness, Consistency, Feasibility, Testability, Clarity"
+                ]
+              }
+            },
+            {
+              "id": "activity-15",
+              "type": "activity",
+              "content": {
+                "title": "Validate Requirements and Identify Defects",
+                "duration": "8 minutes",
+                "type": "individual",
+                "instructions": "Review these six requirements for an online course registration system using the validation checklist (completeness, consistency, feasibility, testability, clarity): (1) 'The system shall be user-friendly', (2) 'Students can register for courses', (3) 'System responds quickly to user actions', (4) 'Students must complete prerequisites before registering for advanced courses', (5) 'Maximum class size is 30 students and unlimited for online courses', (6) 'Registration confirmation sent via email within 24 hours'. Identify specific quality defects in each requirement and propose corrected versions.",
+                "deliverable": "Defect analysis with corrections for all six requirements"
+              }
+            }
+          ],
+          "speakerNotes": "This evaluate-level activity addresses the validation objective gap by requiring students to systematically apply quality criteria to actual requirements. Requirements contain deliberate defects: vague terms (user-friendly, quickly), missing preconditions, inconsistencies, and untestable criteria. After 8 minutes, discuss findings. Requirement 1 lacks measurable criteria; 2 is incomplete (missing constraints); 3 is untestable; 4 needs explicit prerequisite checking mechanism; 5 has contradictory constraints; 6 is testable but may be infeasible. Emphasize validation catches defects before costly implementation. This practice strengthens critical requirements quality assessment skills.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "validation",
+              "quality-assurance",
+              "evaluate"
+            ]
+          }
+        },
+        {
+          "id": "slide-16",
+          "title": "Requirements Traceability and Management",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "bullets-15",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Traceability: Link requirements to sources, design, code, tests",
+                  "Change Management: Process for requesting and approving changes",
+                  "Impact Analysis: Understand ripple effects of changes",
+                  "Version Control: Track requirements evolution over time"
+                ]
+              }
+            },
+            {
+              "id": "diagram-4",
+              "type": "diagram",
+              "content": {
+                "prompt": "Requirements traceability matrix showing bidirectional arrows connecting: Stakeholder Needs → Requirements → Design Components → Code Modules → Test Cases. Display as a flow diagram with forward traceability arrows going left-to-right and backward traceability arrows going right-to-left. Use different colors for forward and backward traceability."
+              }
+            },
+            {
+              "id": "activity-16",
+              "type": "activity",
+              "content": {
+                "title": "Perform Impact Analysis for Change Request",
+                "duration": "7 minutes",
+                "type": "individual",
+                "instructions": "A stakeholder requests adding biometric fingerprint authentication to replace password login (Req-12). Using the provided traceability matrix showing Req-12 traces to: LoginUI design component, AuthenticationModule code, and 8 test cases (TC-45 through TC-52). Perform impact analysis: (1) List all artifacts affected by this change, (2) Identify new artifacts needed, (3) Estimate effort as Low/Medium/High, (4) Recommend approve/reject with justification considering security benefits vs. implementation cost.",
+                "deliverable": "Impact analysis report with approval recommendation"
+              }
+            }
+          ],
+          "speakerNotes": "This apply-level activity addresses the requirements management objective gap by having students work through a realistic change request scenario. Students must trace dependencies using the provided matrix, identify cascading impacts across design/code/test layers, and make a justified decision. After 7 minutes, discuss findings. Expected impacts: LoginUI redesign, AuthenticationModule rewrite, hardware integration, all 8 tests must be updated, plus new biometric tests needed. High effort but high security value. Emphasize that traceability enables systematic impact analysis, preventing overlooked dependencies. This practice develops critical change management skills needed in real projects.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "traceability",
+              "management",
+              "change-control",
+              "apply"
+            ]
+          }
+        },
+        {
+          "id": "slide-17",
+          "title": "Requirements Prioritization",
+          "layout": "split",
+          "blocks": [
+            {
+              "id": "bullets-16",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "MoSCoW: Must have, Should have, Could have, Won't have",
+                  "Value vs. Effort Matrix: Identify quick wins and items to avoid",
+                  "Kano Model: Basic, performance, excitement features",
+                  "Balance business value, technical risk, and dependencies"
+                ]
+              }
+            },
+            {
+              "id": "diagram-5",
+              "type": "diagram",
+              "content": {
+                "prompt": "2x2 matrix with axes labeled 'Business Value' (vertical, Low to High) and 'Implementation Effort' (horizontal, Low to High). Four quadrants labeled: High Value/Low Effort = 'Quick Wins', High Value/High Effort = 'Strategic', Low Value/Low Effort = 'Fill-ins', Low Value/High Effort = 'Avoid'. Show empty matrix ready for plotting requirements."
+              }
+            },
+            {
+              "id": "activity-17",
+              "type": "activity",
+              "content": {
+                "title": "Apply Prioritization Frameworks",
+                "duration": "8 minutes",
+                "type": "individual",
+                "instructions": "You have 10 requirements for an e-commerce system with business value (1-10) and effort estimates (1-10 story points): R1-Checkout(V:9,E:3), R2-Wishlist(V:4,E:2), R3-Reviews(V:7,E:5), R4-PaymentGateway(V:10,E:8), R5-SearchFilters(V:8,E:4), R6-SocialShare(V:3,E:6), R7-OrderTracking(V:9,E:7), R8-GuestCheckout(V:6,E:2), R9-Recommendations(V:5,E:9), R10-MultiCurrency(V:7,E:8). Tasks: (1) Categorize each using MoSCoW for MVP release, (2) Plot all on Value-Effort matrix, (3) Identify top 3 MVP requirements with justification.",
+                "deliverable": "MoSCoW categories, plotted matrix, justified MVP selection"
+              }
+            }
+          ],
+          "speakerNotes": "This apply-level activity addresses the requirements management objective gap by having students work through realistic prioritization trade-offs. Students must apply multiple frameworks (MoSCoW, Value-Effort matrix) to make defensible decisions about MVP scope. After 8 minutes, discuss results. Expected MVP: R1, R4, R5 (high value, manageable effort). R4 is Must despite high effort (payment essential). R6 and R9 should be Won't/Avoid (low value, high effort). Emphasize that prioritization requires balancing stakeholder desires against constraints. This develops critical release planning skills needed when resources are limited.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "prioritization",
+              "planning",
+              "decision-making",
+              "apply"
+            ]
+          }
+        },
+        {
+          "id": "slide-18",
+          "title": "Best Practices and Common Pitfalls",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "text-8",
+              "type": "text",
+              "content": "Best Practices"
+            },
+            {
+              "id": "bullets-17",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Involve stakeholders early and continuously",
+                  "Use multiple elicitation techniques for triangulation",
+                  "Validate requirements before implementation",
+                  "Maintain traceability for impact analysis"
+                ]
+              }
+            },
+            {
+              "id": "text-9",
+              "type": "text",
+              "content": "Common Pitfalls"
+            },
+            {
+              "id": "bullets-18",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Gold plating: Unnecessary features → Strict prioritization",
+                  "Scope creep: Uncontrolled additions → Change control",
+                  "Ambiguous requirements: Unclear specs → Structured templates",
+                  "Insufficient validation: Assumed correctness → Systematic reviews"
+                ]
+              }
+            }
+          ],
+          "speakerNotes": "Synthesize key lessons. Best practices: stakeholder involvement prevents misunderstandings, multiple techniques catch more requirements, early validation prevents costly rework, traceability supports change management. Common pitfalls with mitigations: gold plating (building unnecessary features) - use strict prioritization; scope creep (uncontrolled additions) - enforce change control; ambiguity (unclear specs) - use templates and reviews; insufficient validation (assuming correctness) - implement systematic validation. Share success story: agile project reduced rework 40% through incremental requirements refinement.",
+          "metadata": {
+            "transition": "slide",
+            "animation": "fade-in",
+            "tags": [
+              "best-practices",
+              "pitfalls",
+              "lessons-learned"
+            ]
+          }
+        },
+        {
+          "id": "slide-19",
+          "title": "Summary and Next Steps",
+          "layout": "content",
+          "blocks": [
+            {
+              "id": "heading-3",
+              "type": "heading",
+              "content": "Key Takeaways"
+            },
+            {
+              "id": "bullets-19",
+              "type": "bullets",
+              "content": {
+                "items": [
+                  "Requirements engineering is systematic: elicitation, analysis, specification, validation, management",
+                  "Multiple elicitation techniques reveal different requirement types",
+                  "Distinguish functional (what) from non-functional (how well) requirements",
+                  "Document using use cases, user stories, and structured specifications",
+                  "Validate early, manage changes, maintain traceability"
+                ]
+              }
+            },
+            {
+              "id": "text-10",
+              "type": "text",
+              "content": "Next: Apply these concepts in your project - create SRS document with requirements, use cases, and traceability matrix"
+            }
+          ],
+          "speakerNotes": "Conclude by reinforcing the five key learning objectives. Requirements engineering is the foundation for successful software projects - getting requirements right prevents costly rework later. Emphasize the connection to upcoming lectures: requirements inform architecture decisions (Lecture 9) and drive testing strategies (Lecture 12). Preview the assignment: students will create a complete SRS document for a medium-sized system, applying all techniques learned today. Encourage questions and provide office hours for assignment support.",
+          "metadata": {
+            "transition": "fade",
+            "animation": "fade-out",
+            "tags": [
+              "summary",
+              "conclusion",
+              "next-steps"
+            ]
+          }
+        }
+      ]
+    },
+    "evaluation": {
+      "alignmentScore": 88,
+      "dominantLevel": "apply",
+      "distribution": {
+        "remember": 5,
+        "understand": 15,
+        "apply": 40,
+        "analyze": 20,
+        "evaluate": 15,
+        "create": 5
+      },
+      "objectiveAlignments": [
+        {
+          "objective": "Understand the requirements engineering process and its role in software development lifecycle",
+          "expectedLevel": "understand",
+          "observedLevel": "create",
+          "status": "aligned",
+          "rationale": "Slide 3 activity requires students to design an integrated RE approach covering all process stages, synthesizing elicitation, analysis, specification, validation, and management into a coherent plan. This exceeds the understand-level objective by requiring students to create a complete RE strategy, demonstrating deep understanding through synthesis."
+        },
+        {
+          "objective": "Apply various requirements elicitation techniques to gather stakeholder needs effectively",
+          "expectedLevel": "apply",
+          "observedLevel": "apply",
+          "status": "aligned",
+          "rationale": "Slides 4-6 provide multiple apply-level activities: slide 4 requires evaluating elicitation strategies for specific contexts, slide 5 has students design interview questions for a library system, and slide 6 requires selecting appropriate techniques (observation vs. prototyping) for different scenarios. Students actively use elicitation techniques rather than just identifying them."
+        },
+        {
+          "objective": "Distinguish between functional and non-functional requirements and categorize them appropriately",
+          "expectedLevel": "analyze",
+          "observedLevel": "evaluate",
+          "status": "aligned",
+          "rationale": "Slides 7-9 exceed the analyze-level objective. Slide 7 requires students to critique requirements and identify quality problems, slide 8 has students evaluate competing NFR specification approaches and assess architectural impacts, and slide 9 requires classifying requirements with overlapping categories while assessing negotiability and elicitation needs. This moves beyond simple categorization to evaluation of quality and trade-offs."
+        },
+        {
+          "objective": "Document requirements using industry-standard techniques including use cases and scenarios",
+          "expectedLevel": "apply",
+          "observedLevel": "apply",
+          "status": "aligned",
+          "rationale": "Slides 10-14 provide extensive apply-level practice: slide 10 requires organizing content into IEEE 830 SRS structure, slide 13 has students write complete use case descriptions from scratch, and slide 14 requires creating user stories with acceptance criteria. Students actively produce documentation artifacts using standard templates and formats."
+        },
+        {
+          "objective": "Validate requirements for completeness, consistency, and feasibility",
+          "expectedLevel": "evaluate",
+          "observedLevel": "evaluate",
+          "status": "aligned",
+          "rationale": "Slide 15 activity requires students to systematically apply validation criteria (completeness, consistency, feasibility, testability, clarity) to six requirements, identify specific quality defects, and propose corrections. This is authentic evaluate-level work where students judge requirement quality against established criteria and justify their assessments."
+        },
+        {
+          "objective": "Manage requirements changes throughout the software development process",
+          "expectedLevel": "apply",
+          "observedLevel": "apply",
+          "status": "aligned",
+          "rationale": "Slides 16-17 address requirements management through apply-level activities: slide 16 requires performing impact analysis for a change request using traceability matrices, and slide 17 has students apply prioritization frameworks (MoSCoW, Value-Effort matrix) to make MVP decisions. Students actively use management techniques to solve realistic scenarios."
+        }
+      ],
+      "slideTags": [
+        {
+          "slideTitle": "Requirements Engineering Fundamentals",
+          "primaryLevel": "analyze",
+          "evidence": "Opening activity requires diagnosing which RE stage failed and identifying violated requirement qualities, then synthesizing a corrected requirement—analyzing failure patterns and creating solutions."
+        },
+        {
+          "slideTitle": "What is Requirements Engineering?",
+          "primaryLevel": "evaluate",
+          "evidence": "Activity requires evaluating five requirement statements against multiple quality criteria (testability, specificity, problem-focus), classifying valid ones, and rewriting invalid ones—judging quality and synthesizing improvements."
+        },
+        {
+          "slideTitle": "The Requirements Engineering Process",
+          "primaryLevel": "create",
+          "evidence": "Activity requires designing a complete RE approach integrating all process stages: selecting elicitation techniques with justification, identifying conflicts, drafting requirements, designing validation strategy, and proposing traceability—synthesizing a coherent plan."
+        },
+        {
+          "slideTitle": "Requirements Elicitation Techniques",
+          "primaryLevel": "evaluate",
+          "evidence": "Activity requires comparing two elicitation strategies for a 311 system, analyzing trade-offs in coverage/cost/engagement/risk, and justifying which better addresses context—evaluating competing approaches against multiple criteria."
+        },
+        {
+          "slideTitle": "Interviews and Workshops",
+          "primaryLevel": "apply",
+          "evidence": "Activity requires designing interview questions (structured and open-ended) for a library system stakeholder, applying question design principles to elicit requirements effectively."
+        },
+        {
+          "slideTitle": "Observation and Prototyping",
+          "primaryLevel": "apply",
+          "evidence": "Activity requires selecting appropriate elicitation technique (observation or prototyping) for two scenarios and justifying choices based on context factors—applying technique selection criteria."
+        },
+        {
+          "slideTitle": "Functional Requirements",
+          "primaryLevel": "evaluate",
+          "evidence": "Activity requires identifying quality problems in three requirements, classifying severity, and rewriting to fix issues—evaluating requirement quality and synthesizing improvements."
+        },
+        {
+          "slideTitle": "Non-Functional Requirements",
+          "primaryLevel": "evaluate",
+          "evidence": "Activity requires evaluating three NFR specification approaches, assessing completeness/testability, identifying architectural impacts, and recommending best approach—judging quality against multiple criteria."
+        },
+        {
+          "slideTitle": "Constraints and Domain Requirements",
+          "primaryLevel": "evaluate",
+          "evidence": "Activity requires classifying five requirements (noting overlaps), assessing negotiability and architectural impact, and recommending elicitation techniques—evaluating requirement characteristics and trade-offs."
+        },
+        {
+          "slideTitle": "Requirements Specification Documents",
+          "primaryLevel": "apply",
+          "evidence": "Activity requires organizing items into correct IEEE 830 SRS sections and identifying quality violations—applying standard structure and quality criteria."
+        },
+        {
+          "slideTitle": "Writing Quality Requirements",
+          "primaryLevel": "evaluate",
+          "evidence": "Activity requires evaluating three requirement versions, identifying conflicting quality characteristics, and recommending best version with risk assessment—judging trade-offs between competing valid approaches."
+        },
+        {
+          "slideTitle": "Use Case Fundamentals",
+          "primaryLevel": "apply",
+          "evidence": "Activity requires identifying actors and use cases for a smart home system before seeing examples—applying use case modeling concepts to construct a model from scratch."
+        },
+        {
+          "slideTitle": "Use Case Descriptions",
+          "primaryLevel": "apply",
+          "evidence": "Activity requires writing a complete use case description including actors, preconditions, postconditions, main flow, and alternative flows—applying template structure to create documentation."
+        },
+        {
+          "slideTitle": "User Stories in Agile",
+          "primaryLevel": "apply",
+          "evidence": "Activity requires writing three user stories with acceptance criteria following role-feature-benefit format and INVEST criteria—applying agile documentation techniques."
+        },
+        {
+          "slideTitle": "Requirements Validation",
+          "primaryLevel": "evaluate",
+          "evidence": "Activity requires reviewing six requirements using validation checklist, identifying specific quality defects, and proposing corrections—evaluating requirement quality systematically."
+        },
+        {
+          "slideTitle": "Requirements Traceability and Management",
+          "primaryLevel": "apply",
+          "evidence": "Activity requires performing impact analysis for a change request using traceability matrix, identifying affected artifacts, and making approval recommendation—applying change management techniques."
+        },
+        {
+          "slideTitle": "Requirements Prioritization",
+          "primaryLevel": "apply",
+          "evidence": "Activity requires categorizing ten requirements using MoSCoW, plotting on Value-Effort matrix, and selecting top 3 MVP requirements with justification—applying prioritization frameworks."
+        },
+        {
+          "slideTitle": "Best Practices and Common Pitfalls",
+          "primaryLevel": "understand",
+          "evidence": "Content summarizes best practices and common pitfalls with mitigations—explaining lessons learned without requiring application or evaluation."
+        },
+        {
+          "slideTitle": "Summary and Next Steps",
+          "primaryLevel": "remember",
+          "evidence": "Content reviews key takeaways and previews next steps—recalling main concepts covered in the lecture."
+        }
+      ],
+      "gaps": [
+        "Limited create-level opportunities: Only slide 3 requires students to design/synthesize a complete solution from scratch. For MSc-level work, consider adding 1-2 more activities requiring students to create comprehensive artifacts (e.g., complete SRS section, requirements management plan).",
+        "Slide 18 (Best Practices) remains at understand level without application. Consider adding a brief case study where students must identify which pitfall occurred and propose the appropriate mitigation strategy.",
+        "No explicit activity connecting requirements to downstream SDLC phases. Consider adding an analyze-level activity where students trace how a requirement change impacts design, implementation, and testing artifacts."
+      ],
+      "suggestions": [
+        "Strengthen create-level engagement: Add a capstone activity (possibly replacing or enhancing slide 18) where students synthesize a mini-SRS for a novel system scenario, integrating elicitation strategy, functional/non-functional requirements, use cases, validation plan, and traceability approach. This would provide authentic create-level assessment.",
+        "Enhance slide 18 cognitive demand: Replace passive best practices summary with an analyze/evaluate activity. Present 2-3 project failure scenarios and have students diagnose which pitfall occurred, evaluate severity, and recommend specific RE practices that would have prevented the failure.",
+        "Add metacognitive reflection: Include a brief activity where students evaluate their own RE approach from slide 3 after learning all techniques, identifying what they would change and why. This creates-level self-assessment reinforces learning.",
+        "Consider adding requirements-to-architecture bridge: Since next lecture covers architecture, add an analyze-level activity where students examine how specific NFRs (performance, security, scalability) constrain architectural choices, preparing them for design decisions.",
+        "Balance activity duration: Several activities (slides 11, 13, 15, 16, 17) require 7-8 minutes. Consider whether this allows sufficient depth or if some should be extended to 10 minutes for more thorough work, or shortened to 5 minutes with paired discussion to maintain engagement."
+      ]
+    },
+    "rounds_used": 3,
+    "before_score": 78,
+    "after_score": 88,
+    "improved_slide_ids": [
+      "slide-2",
+      "slide-3",
+      "slide-4",
+      "slide-7",
+      "slide-8",
+      "slide-9",
+      "slide-11",
+      "slide-12"
+    ],
+    "failed_slide_ids": [],
+    "improved_count": 8,
+    "reevaluated": true
+  }
+]

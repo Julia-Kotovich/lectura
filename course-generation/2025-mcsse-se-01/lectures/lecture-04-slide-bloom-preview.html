@@ -1,0 +1,321 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8" />
+<title>Lecture 4. Design by Contract: Assertions and Program Correctness — Bloom preview</title>
+<style>
+body{margin:0;font:14px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#111827;background:#f8fafc}
+.page{max-width:1100px;margin:0 auto;padding:32px 24px 80px}
+.hero,.card,.panel{background:#fff;border:1px solid #e5e7eb;border-radius:16px;padding:22px;margin-bottom:18px}
+h1{margin:0 0 6px;font-size:28px} h2{margin:2px 0 0;font-size:20px}
+.muted{color:#6b7280}
+.metrics{display:flex;gap:24px;margin-top:14px}
+.metrics b{font-size:24px;display:block}
+table{border-collapse:collapse} td{padding:6px 10px;border-bottom:1px solid #e5e7eb}
+.bar{height:8px;width:140px;background:#e5e7eb;border-radius:99px;overflow:hidden}
+.bar span{display:block;height:100%;border-radius:99px}
+.card header{display:flex;justify-content:space-between;gap:16px;border-bottom:1px solid #e5e7eb;padding-bottom:12px;margin-bottom:12px}
+.kicker{color:#6b7280;font-size:12px;text-transform:uppercase;letter-spacing:.08em}
+.level{border:1px solid;border-radius:99px;padding:5px 10px;font-weight:700;font-size:12px;white-space:nowrap;align-self:flex-start}
+.evidence{padding:10px 12px;border-left:4px solid #8b5cf6;background:#f5f3ff;border-radius:8px;margin:10px 0}
+.block{border:1px solid #e5e7eb;border-radius:10px;padding:10px 12px;margin:8px 0}
+.block-label{color:#6b7280;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px}
+pre{white-space:pre-wrap;background:#0f172a;color:#e5e7eb;padding:10px;border-radius:8px;overflow:auto}
+ul{margin:4px 0 0 20px;padding:0} p{margin:6px 0}
+details{margin-top:10px;color:#374151} summary{cursor:pointer;color:#6b7280;font-weight:700}
+@media print{body{background:#fff}.card{break-inside:avoid}}
+</style></head><body><div class="page">
+<section class="hero"><h1>Lecture 4. Design by Contract: Assertions and Program Correctness</h1>
+<p class="muted">Slide-by-slide Bloom preview · generated 2026-07-12 12:41 UTC</p>
+<div class="metrics">
+<div><span class="muted">Bloom score</span><b>88</b></div>
+<div><span class="muted">Dominant level</span><b>Analyze</b></div>
+<div><span class="muted">Slides</span><b>18</b></div>
+</div></section>
+<section class="panel"><h2>Bloom distribution</h2><table><tr><td>Remember</td><td>5%</td><td><div class="bar"><span style="width:5%;background:#64748b"></span></div></td></tr><tr><td>Understand</td><td>10%</td><td><div class="bar"><span style="width:10%;background:#3b82f6"></span></div></td></tr><tr><td>Apply</td><td>30%</td><td><div class="bar"><span style="width:30%;background:#10b981"></span></div></td></tr><tr><td>Analyze</td><td>35%</td><td><div class="bar"><span style="width:35%;background:#f59e0b"></span></div></td></tr><tr><td>Evaluate</td><td>15%</td><td><div class="bar"><span style="width:15%;background:#f97316"></span></div></td></tr><tr><td>Create</td><td>5%</td><td><div class="bar"><span style="width:5%;background:#8b5cf6"></span></div></td></tr></table></section>
+<article class="card">
+<header><div><div class="kicker">Slide 01 · split</div>
+<h2>Design by Contract: Assertions and Program Correctness</h2></div>
+<span class="level" style="border-color:#10b981;color:#10b981">Apply</span></header>
+<div class="evidence"><strong>Bloom evidence:</strong> Students propose a check for Ariane 5 overflow and decide placement (caller vs. callee), applying problem-solving to a real failure case before formal concepts are introduced.</div>
+<div class="block"><div class="block-label">heading</div><p>Lecture 4: Design by Contract</p></div><div class="block"><div class="block-label">text</div><p>**The $370M Question:**
+
+Ariane 5 rocket exploded 37 seconds after launch (1996). Root cause: reused Ariane 4 code assumed velocity ≤ 32,767. Ariane 5&#x27;s faster trajectory produced velocity = 42,000.
+
+`short encoded = (short) velocity; // overflow!`
+
+Could a single line of code have prevented this?</p></div><div class="block"><div class="block-label">activity</div><p><strong>Activity:</strong> Pre-Lecture Challenge</p></div>
+<details open><summary>Speaker notes</summary><p>Open with the Ariane 5 disaster to establish stakes and motivate DbC. Give students 2 minutes to propose a solution before formal contract concepts are introduced—this primes analytical thinking and reveals intuitions about responsibility and error detection. Collect a few responses, then explain that today&#x27;s lecture provides systematic tools (preconditions, postconditions, invariants) to prevent such failures. This opening applies problem-solving to a real case and sets up the &#x27;evaluate&#x27; question of responsibility assignment that recurs throughout DbC.</p></details>
+</article><article class="card">
+<header><div><div class="kicker">Slide 02 · split</div>
+<h2>Diagnosing the Ariane 5 Failure</h2></div>
+<span class="level" style="border-color:#f97316;color:#f97316">Evaluate</span></header>
+<div class="evidence"><strong>Bloom evidence:</strong> Students write a precondition and evaluate responsibility assignment (client vs. supplier) with justification considering reusability and fault localization—evaluate-level trade-off analysis.</div>
+<div class="block"><div class="block-label">code</div><pre>// Ariane 4 -&gt; Ariane 5 reused code
+double velocity = getHorizontalVelocity();
+// velocity range: 0..32767 (Ariane 4)
+// velocity range: 0..65535 (Ariane 5)
+short encoded = (short) velocity;
+sendToGuidanceSystem(encoded);</pre></div><div class="block"><div class="block-label">activity</div><p><strong>Activity:</strong> Apply Contract Analysis</p></div>
+<details open><summary>Speaker notes</summary><p>Present the Ariane 5 code scenario and give students 2-3 minutes to work individually or in pairs. They must write a precondition (e.g., &#x27;requires velocity &gt;= 0 &amp;&amp; velocity &lt;= 32767&#x27;) and decide whether it belongs to the conversion method or the caller. Facilitate discussion: placing it in the supplier makes the contract explicit and enables reuse checking; placing it in the client distributes responsibility but risks silent failures. This applies contract reasoning to a real failure and evaluates design trade-offs, addressing the &#x27;apply&#x27; and &#x27;evaluate&#x27; gaps for the precondition-writing objective.</p></details>
+</article><article class="card">
+<header><div><div class="kicker">Slide 03 · split</div>
+<h2>The Contract Metaphor</h2></div>
+<span class="level" style="border-color:#8b5cf6;color:#8b5cf6">Create</span></header>
+<div class="evidence"><strong>Bloom evidence:</strong> Students design complete contracts for BankAccount.withdraw() and transfer(), analyze how contracts compose, and identify specification gaps (missing atomicity guarantee)—create-level synthesis with completeness debugging.</div>
+<div class="block"><div class="block-label">diagram</div><p><strong>Prompt:</strong> Create a diagram showing two parties (Client and Supplier) with arrows indicating obligations and benefits. Client side: Obligation: Satisfy Precondition, Benefit: Postcondition Guaranteed. Supplier side: Obligation: Establish Postcondition, Benefit: Assume Precondition. Use contract document icon in center.</p></div><div class="block"><div class="block-label">activity</div><p><strong>Activity:</strong> Create &amp; Analyze: Multi-Method Contract Design</p></div>
+<details open><summary>Speaker notes</summary><p>Give students 4-5 minutes to design complete contracts. Expected: withdraw precondition &#x27;amount &gt; 0 &amp;&amp; amount &lt;= balance&#x27;, postcondition &#x27;balance == old balance - amount&#x27;; transfer must ensure &#x27;amount &lt;= this.balance&#x27; before calling withdraw. Invariant: &#x27;balance &gt;= 0&#x27;. Composition insight: transfer&#x27;s precondition must imply withdraw&#x27;s. Missing guarantee: specification doesn&#x27;t ensure atomicity or handle toAccount == this. Discuss how students identified the gap—this create-level activity addresses the missing contract composition analysis and completeness debugging gaps while strengthening invariant practice beyond just preconditions and postconditions.</p></details>
+</article><article class="card">
+<header><div><div class="kicker">Slide 04 · split</div>
+<h2>DbC Core Principles</h2></div>
+<span class="level" style="border-color:#f97316;color:#f97316">Evaluate</span></header>
+<div class="evidence"><strong>Bloom evidence:</strong> Students compare DbC vs. defensive programming across multiple dimensions (bug localization, performance, API clarity) and justify when to use each approach—evaluate-level critical analysis.</div>
+<div class="block"><div class="block-label">bullets</div><ul><li>Separate specification (what) from implementation (how)</li><li>Make contracts explicit and machine-checkable</li><li>Fail fast when contracts violated</li></ul></div><div class="block"><div class="block-label">activity</div><p><strong>Activity:</strong> Evaluate: DbC vs. Defensive Programming</p></div>
+<details open><summary>Speaker notes</summary><p>Give students 3-4 minutes to analyze both approaches. Expected insights: DbC localizes caller bugs immediately (fail fast at source), defensive catches at callee (error propagated). DbC avoids redundant checks (performance), defensive is safer for untrusted clients. DbC requires discipline, defensive is forgiving. Guide discussion toward context: DbC for internal modules with trusted callers, defensive for public APIs or security-critical code. This evaluate-level activity addresses the gap in critical analysis of when DbC is appropriate versus alternatives, supporting the evaluate objective about how contracts contribute to reliability.</p></details>
+</article><article class="card">
+<header><div><div class="kicker">Slide 05 · split</div>
+<h2>Preconditions: Client Obligations</h2></div>
+<span class="level" style="border-color:#10b981;color:#10b981">Apply</span></header>
+<div class="evidence"><strong>Bloom evidence:</strong> Students trace buggy Stack.pop() code to identify precondition violations, locate the bug in caller code, and analyze why defensive checks mask rather than fix contract violations—apply-level debugging.</div>
+<div class="block"><div class="block-label">text</div><p>Preconditions define valid states for calling a routine—constraints on arguments and object state that the CLIENT must ensure.
+
+**Key Principle:** Client responsibility to ensure; supplier right to assume (no defensive checks). Violations indicate bugs in the caller.</p></div><div class="block"><div class="block-label">code</div><pre>class Stack&lt;T&gt; {
+  // Precondition: !isEmpty()
+  public T pop() {
+    // No check needed—caller&#x27;s job!
+    return items[--size];
+  }
+}
+
+// CLIENT CODE:
+if (!stack.isEmpty()) {
+  item = stack.pop(); // Valid
+}
+stack.pop(); // BUG: violates precondition</pre></div><div class="block"><div class="block-label">activity</div><p><strong>Activity:</strong> Apply: Trace Responsibility</p></div>
+<details open><summary>Speaker notes</summary><p>This apply-level activity moves beyond explaining preconditions to analyzing buggy code through the DbC lens. Expected answers: Line with bare pop() violates precondition; bug is in caller (failed to check); fix by adding isEmpty() guard. Key insight: defensive checks in pop() hide the caller&#x27;s bug—it still violates the contract, just doesn&#x27;t crash. This reinforces that preconditions shift responsibility and enable fail-fast at the true bug source. Poll students on the defensive check question to surface the common misconception that exception handling fixes contract violations. Connects to slide 4&#x27;s DbC vs. defensive programming comparison.</p></details>
+</article><article class="card">
+<header><div><div class="kicker">Slide 06 · content</div>
+<h2>Practice: Writing Preconditions</h2></div>
+<span class="level" style="border-color:#10b981;color:#10b981">Apply</span></header>
+<div class="evidence"><strong>Bloom evidence:</strong> Students write preconditions for PriorityQueue.removeHighest(), Matrix.multiply(), and FileProcessor.processLines(), justifying why each constraint is caller responsibility—apply-level contract writing.</div>
+<div class="block"><div class="block-label">text</div><p>Given these method signatures, determine appropriate preconditions. Consider argument validity, object state constraints, and what the CLIENT must guarantee.</p></div><div class="block"><div class="block-label">code</div><pre>class PriorityQueue&lt;T&gt; {
+    // What preconditions?
+    public T removeHighest() { ... }
+}
+
+class Matrix {
+    // What preconditions?
+    public Matrix multiply(Matrix other) { ... }
+}
+
+class FileProcessor {
+    // What preconditions?
+    public void processLines(String path, int maxLines) { ... }
+}</pre></div><div class="block"><div class="block-label">activity</div><p><strong>Activity:</strong> Think-Pair-Share (3 min)</p><p><strong>Instructions:</strong> For each method: (1) List all preconditions needed, (2) Justify why each is the caller&#x27;s responsibility vs. supplier&#x27;s, (3) Write as formal boolean expressions. Compare with a partner—did you identify the same constraints? Discuss: What happens if preconditions are too weak? Too strong?</p></div>
+<details open><summary>Speaker notes</summary><p>This active learning exercise moves students from seeing examples to writing contracts themselves. Expected answers: removeHighest needs !isEmpty(); multiply needs compatible dimensions (this.cols == other.rows); processLines needs path != null, file exists/readable, maxLines &gt; 0. After pair discussion, poll the class and address common issues: forgetting null checks, confusing preconditions with postconditions, over-specifying. Emphasize the analysis required: why is dimension compatibility a precondition rather than throwing an exception? This supports the &#x27;write and apply&#x27; objective at true apply level.</p></details>
+</article><article class="card">
+<header><div><div class="kicker">Slide 07 · content</div>
+<h2>Writing Effective Preconditions</h2></div>
+<span class="level" style="border-color:#f97316;color:#f97316">Evaluate</span></header>
+<div class="evidence"><strong>Bloom evidence:</strong> Students evaluate three precondition options (A/B/C) for Account.withdraw() using four criteria (precise, complete, minimal, pure) and justify the best choice considering reusability vs. correctness—evaluate-level design judgment.</div>
+<div class="block"><div class="block-label">bullets</div><ul><li>Precise: boolean expressions, not prose (x &gt; 0, not &#x27;x is positive&#x27;)</li><li>Complete: cover all constraints (nulls, boundaries, state)</li><li>Minimal: weakest condition that ensures correctness</li><li>Pure: no side effects in contract expressions</li></ul></div><div class="block"><div class="block-label">code</div><pre>class Account {
+    private double balance;
+    
+    // EVALUATE: Which precondition is best?
+    // A: require balance &gt;= amount
+    // B: require amount &gt; 0 &amp;&amp; balance &gt;= amount
+    // C: require amount &gt; 0 &amp;&amp; amount &lt;= 1000 &amp;&amp; balance &gt;= amount
+    public void withdraw(double amount) { ... }
+}</pre></div><div class="block"><div class="block-label">activity</div><p><strong>Activity:</strong> Evaluate &amp; Justify (4 min)</p><p><strong>Instructions:</strong> Individually: Choose the best precondition (A/B/C) and write 2-3 sentence justification using the four criteria above. Then pair up: Compare choices. If you disagree, debate using criteria—is one over-specified? Missing constraints? Does it enable maximum reusability while ensuring correctness? Prepare to defend your choice to the class.</p></div>
+<details open><summary>Speaker notes</summary><p>This evaluate-level activity requires students to apply all four criteria simultaneously and make a justified design decision. Expected answer: B is best. A is incomplete (missing amount &gt; 0 allows negative withdrawals). C is over-specified (arbitrary 1000 limit reduces reusability without correctness benefit). During debrief, emphasize trade-offs: stronger preconditions are easier to implement but limit clients. Weaker preconditions increase reusability but may require more complex implementations. This bridges to postconditions next slide and supports the apply-level objective for writing contracts.</p></details>
+</article><article class="card">
+<header><div><div class="kicker">Slide 08 · content</div>
+<h2>Postconditions: Supplier Guarantees</h2></div>
+<span class="level" style="border-color:#f59e0b;color:#f59e0b">Analyze</span></header>
+<div class="evidence"><strong>Bloom evidence:</strong> Students identify missing guarantees in transfer() postcondition, trace how preconditions propagate through withdraw() calls, and analyze contract composition—analyze-level completeness debugging and compositional reasoning.</div>
+<div class="block"><div class="block-label">text</div><p>**Postconditions** specify guarantees about return values and state changes—what the supplier promises if preconditions are met.
+
+**Key principle:** Client relies on postcondition without inspecting code. Violations indicate implementation bugs.</p></div><div class="block"><div class="block-label">code</div><pre>// require: amount &gt; 0 &amp;&amp; balance &gt;= amount
+// ensure: balance == old(balance) - amount
+public void withdraw(double amount)
+
+// require: !isEmpty()
+// ensure: size() == old(size()) - 1 &amp;&amp; returns old(first())
+public T removeFirst()
+
+// INCOMPLETE SPECIFICATION - what&#x27;s missing?
+// require: src != null &amp;&amp; dest != null
+// ensure: dest.balance == old(dest.balance) + amount
+public void transfer(Account src, Account dest, double amount) {
+    src.withdraw(amount);  // calls contracted method
+    dest.deposit(amount);  // calls contracted method
+}</pre></div><div class="block"><div class="block-label">activity</div><p><strong>Activity:</strong> Analyze: Debug Contract Completeness (6 min)</p><p><strong>Instructions:</strong> The transfer() postcondition is incomplete. Working in pairs: (1) Identify ALL missing guarantees (what about src.balance? return values from withdraw/deposit? edge cases?). (2) Trace how transfer&#x27;s precondition must strengthen to satisfy withdraw&#x27;s precondition—what constraint propagates? (3) Write the complete, minimal postcondition. Deliverable: List of missing guarantees + corrected specification. Be ready to explain how contracts compose through method calls.</p></div>
+<details open><summary>Speaker notes</summary><p>This slide elevates from apply to analyze by introducing contract composition and completeness debugging. The transfer() example requires students to trace precondition propagation (transfer must ensure src.balance &gt;= amount to satisfy withdraw&#x27;s precondition) and identify missing postcondition guarantees (src balance change, both method success, no exception thrown). This addresses two identified gaps: multi-method contract reasoning and contract completeness analysis. During debrief, emphasize that calling contracted methods creates obligations—the caller&#x27;s precondition must imply the callee&#x27;s. Common mistakes: forgetting source account state change, not considering exception cases. This prepares students for &#x27;old&#x27; keyword mechanics in slide 9 while building compositional reasoning skills.</p></details>
+</article><article class="card">
+<header><div><div class="kicker">Slide 09 · split</div>
+<h2>Postconditions with &#x27;old&#x27;: Specifying State Changes</h2></div>
+<span class="level" style="border-color:#f59e0b;color:#f59e0b">Analyze</span></header>
+<div class="evidence"><strong>Bloom evidence:</strong> Students debug incomplete postconditions (withdraw, merge) to identify missing guarantees, then analyze contract propagation in transferFunds() that calls withdraw() and deposit()—analyze-level compositional reasoning.</div>
+<div class="block"><div class="block-label">text</div><p>The **old** keyword captures pre-state values to specify relational postconditions—guarantees about how state changes.
+
+**Examples:**
+```java
+// ensure: balance == old(balance) + amount
+public void deposit(double amount)
+
+// ensure: size() == old(size()) + 1 &amp;&amp;
+//         top() == x &amp;&amp; !isEmpty()
+public void push(T x)
+
+// ensure: isPermutation(array, old(array))
+public void sort(int[] array)
+```
+
+**Contract composition:** When methods call other contracted methods, preconditions must propagate.</p></div><div class="block"><div class="block-label">activity</div><p><strong>Activity:</strong> Analyze: Debug &amp; Compose Contracts (7 min)</p><p><strong>Instructions:</strong> **Part 1 (3 min):** Identify ALL missing guarantees in these incomplete postconditions:
+```
+// ensure: balance == old(balance) - amount
+withdraw(double amt)  // What about return value? Exceptions?
+
+// ensure: returns sorted list
+merge(List&lt;Integer&gt; a, b)  // Missing element guarantees?
+```
+
+**Part 2 (4 min):** Analyze contract propagation:
+```
+transferFunds(Account src, Account dst, double amt) {
+  src.withdraw(amt);  // require: amt &gt; 0 &amp;&amp; balance &gt;= amt
+  dst.deposit(amt);   // require: amt &gt; 0
+}
+```
+What must transferFunds&#x27; precondition guarantee? Write complete pre/postconditions. Pair-share findings.</p></div>
+<details open><summary>Speaker notes</summary><p>This slide elevates from apply to analyze by requiring students to debug incomplete specifications and trace contract propagation through method calls—addressing two identified gaps. Part 1 targets completeness analysis: withdraw is missing void return specification and exception cases; merge omits element preservation guarantees. Part 2 addresses multi-method reasoning: transferFunds must ensure src.balance &gt;= amt to satisfy withdraw&#x27;s precondition, and its postcondition must cover both account state changes. During debrief, emphasize that calling contracted methods creates obligations—the caller inherits callee preconditions. Common mistakes include forgetting exception specifications and source account state changes. This prepares students for systematic completeness checking in slide 10.</p></details>
+</article><article class="card">
+<header><div><div class="kicker">Slide 10 · split</div>
+<h2>Complete Behavioral Specification</h2></div>
+<span class="level" style="border-color:#f59e0b;color:#f59e0b">Analyze</span></header>
+<div class="evidence"><strong>Bloom evidence:</strong> Students systematically identify missing guarantees in merge(), authenticate(), and remove() using a completeness checklist, then synthesize a complete corrected specification—analyze-level debugging with systematic verification.</div>
+<div class="block"><div class="block-label">text</div><p>**Complete postconditions** fully characterize ALL outcomes:
+
+```java
+// require: array is sorted
+// ensure: (result &gt;= 0 ==&gt; array[result] == key) &amp;&amp;
+//         (result == -1 ==&gt; key not in array)
+public int binarySearch(int[] array, int key)
+
+// ensure: isSorted(array) &amp;&amp;
+//         isPermutation(array, old(array)) &amp;&amp;
+//         array.length == old(array.length)
+public void sort(int[] array)
+```
+
+**Completeness checklist:** All cases? All state changes? Return value? Edge cases?</p></div><div class="block"><div class="block-label">activity</div><p><strong>Activity:</strong> Analyze &amp; Debug: Identify Missing Guarantees (6 min)</p><p><strong>Instructions:</strong> **Part 1 (3 min):** These postconditions are INCOMPLETE. Identify ALL missing guarantees:
+```java
+// ensure: returns sorted list
+merge(List&lt;Integer&gt; a, b)
+
+// ensure: returns true if valid credentials
+authenticate(String user, String pwd)
+
+// ensure: size() == old(size()) - 1
+remove(T item)  // from Set
+```
+
+**Part 2 (3 min):** Fix ONE specification to be complete. Use checklist to verify coverage. Pair-share: critique partner&#x27;s fix for completeness.</p></div>
+<details open><summary>Speaker notes</summary><p>This slide elevates from apply to analyze by requiring systematic debugging of incomplete specifications using the completeness checklist. Part 1 targets gap identification: merge missing element preservation and input relationship; authenticate missing false-case semantics and security properties; remove missing return-value/membership relationship and what happens if item absent. Part 2 requires students to synthesize a complete fix and justify it. During debrief, emphasize common incompleteness patterns: forgetting negative cases, omitting return value semantics, and underspecifying state changes. This directly addresses the contract completeness analysis gap and prepares students for slide 11&#x27;s invariant design by reinforcing systematic specification thinking.</p></details>
+</article><article class="card">
+<header><div><div class="kicker">Slide 11 · split</div>
+<h2>Class Invariants: Designing Object Consistency</h2></div>
+<span class="level" style="border-color:#10b981;color:#10b981">Apply</span></header>
+<div class="evidence"><strong>Bloom evidence:</strong> Students design 2-3 invariants for CircularBuffer relating count, capacity, head, and tail fields, applying the invariant concept to a concrete data structure with multiple related constraints.</div>
+<div class="block"><div class="block-label">text</div><p>Invariant: A property that must hold for all instances at all stable times (before and after any public method call).
+
+• Captures consistency constraints of the abstraction
+• Constructor must establish it; every public method must preserve it
+• May be temporarily violated during execution</p></div><div class="block"><div class="block-label">diagram</div><p><strong>Prompt:</strong> State diagram showing method execution timeline. Show &#x27;Invariant holds&#x27; states before method call and after method completion, with &#x27;Invariant may be violated&#x27; during method execution. Use green checkmarks for stable states and yellow caution symbol for execution state.</p></div><div class="block"><div class="block-label">activity</div><p><strong>Activity:</strong> Design Challenge</p></div>
+<details open><summary>Speaker notes</summary><p>After explaining invariants conceptually, students apply the concept by designing invariants for a concrete data structure. CircularBuffer requires multiple related invariants (0 &lt;= count &lt;= capacity, head/tail within bounds, count reflects actual items). Common student mistakes: forgetting boundary conditions, not relating all fields, or writing invariants that can&#x27;t be maintained. During pair discussion, circulate and identify interesting approaches. Follow-up questions: &#x27;How does enqueue preserve your invariants?&#x27; &#x27;What preconditions do your invariants imply?&#x27; This bridges understanding to application, supporting the &#x27;write and apply invariants&#x27; objective.</p></details>
+</article><article class="card">
+<header><div><div class="kicker">Slide 12 · split</div>
+<h2>Invariant Preservation Analysis</h2></div>
+<span class="level" style="border-color:#8b5cf6;color:#8b5cf6">Create</span></header>
+<div class="evidence"><strong>Bloom evidence:</strong> Students trace invariant preservation through dequeue/enqueue sequence, then design replace() method by composing existing contracts, discovering that it inherits both preconditions—create-level contract synthesis through composition.</div>
+<div class="block"><div class="block-label">code</div><pre>class BoundedQueue&lt;T&gt; {
+  private T[] items;
+  private int head, tail, count, capacity;
+  // INV: 0 &lt;= count &lt;= capacity
+  // INV: 0 &lt;= head, tail &lt; capacity
+  // INV: count == actual items stored
+  
+  public void enqueue(T item) {
+    // PRE: count &lt; capacity
+    items[tail] = item;
+    tail = (tail + 1) % capacity;
+    count++;
+    // POST: count == old(count) + 1
+  }
+  
+  public T dequeue() {
+    // PRE: count &gt; 0
+    T result = items[head];
+    head = (head + 1) % capacity;
+    count--;
+    return result;
+    // POST: count == old(count) - 1
+  }
+}</pre></div><div class="block"><div class="block-label">activity</div><p><strong>Activity:</strong> Multi-Method Contract Composition</p></div>
+<details open><summary>Speaker notes</summary><p>This elevated activity addresses two gaps: multi-method contract reasoning and invariant design practice. Students must trace contract composition across method boundaries—analyzing how dequeue&#x27;s postcondition enables enqueue&#x27;s precondition. The replace() design task raises cognitive demand to create-level: students synthesize a new contract by composing existing ones, discovering that replace() inherits dequeue&#x27;s precondition (count &gt; 0) AND enqueue&#x27;s precondition (count &lt; capacity), requiring count &gt;= 1. During debrief, ask: &#x27;Can replace() have weaker preconditions than calling dequeue+enqueue separately?&#x27; This reveals how contract composition constrains design and connects invariant preservation to method orchestration, supporting both &#x27;write invariants&#x27; and &#x27;apply DbC principles&#x27; objectives.</p></details>
+</article><article class="card">
+<header><div><div class="kicker">Slide 13 · content</div>
+<h2>Assertion Monitoring: Strategy Design Exercise</h2></div>
+<span class="level" style="border-color:#f97316;color:#f97316">Evaluate</span></header>
+<div class="evidence"><strong>Bloom evidence:</strong> Students design monitoring strategy with performance constraints, then revise decisions based on measurement data showing OrderValidator caught $2M bug but RiskAnalyzer exceeds budget—evaluate-level data-driven decision-making with cost/benefit analysis.</div>
+<div class="block"><div class="block-label">text</div><p>**Scenario:** Your team maintains a financial trading system:
+• **OrderValidator** (validates trades, ~500 calls/sec, complex invariants checking order consistency)
+• **PriceCalculator** (computes prices, ~10K calls/sec, simple null/range preconditions)
+• **RiskAnalyzer** (analyzes portfolios, ~50 calls/sec, expensive postconditions verifying regulatory compliance)
+
+Production performance budget: max 8% overhead from assertions.</p></div><div class="block"><div class="block-label">activity</div><p><strong>Activity:</strong> Instrumentation &amp; Data-Driven Evaluation</p></div><div class="block"><div class="block-label">bullets</div><ul><li>Evaluate cost/benefit with actual data, not assumptions</li><li>Financial correctness may justify exceeding performance budgets</li><li>Consider selective monitoring: disable in PriceCalculator, enable in OrderValidator/RiskAnalyzer</li><li>Missing info: bug detection rates, failure costs, audit requirements</li></ul></div>
+<details open><summary>Speaker notes</summary><p>This two-phase exercise raises cognitive demand by adding measurement data that contradicts initial assumptions, forcing students to revise decisions based on evidence—authentic evaluate-level work. Phase 1 establishes baseline reasoning. Phase 2 introduces realistic complications: OrderValidator&#x27;s high value despite cost, PriceCalculator&#x27;s prohibitive overhead despite simplicity, RiskAnalyzer exceeding budget. The &#x27;additional information&#x27; question pushes toward create-level by having students identify gaps in decision criteria. Debrief should emphasize that real engineering requires iterative refinement as data emerges, and that contracts serve debugging (caught $2M bug), not runtime validation. Connect to next slide&#x27;s debugging focus by noting violations indicate bugs requiring fixes, not production handling.</p></details>
+</article><article class="card">
+<header><div><div class="kicker">Slide 14 · content</div>
+<h2>Contract-Based Debugging</h2></div>
+<span class="level" style="border-color:#f59e0b;color:#f59e0b">Analyze</span></header>
+<div class="evidence"><strong>Bloom evidence:</strong> Students analyze four failure cases in BankAccount.transfer() to identify which contract failed, which component has the bug, and what fix is needed—analyze-level fault localization through multi-method contract composition.</div>
+<div class="block"><div class="block-label">bullets</div><ul><li>Precondition violation → bug in CALLER</li><li>Postcondition violation → bug in CALLEE implementation</li><li>Invariant violation → bug in CLASS implementation</li><li>Contracts provide automatic fault localization</li></ul></div><div class="block"><div class="block-label">activity</div><p><strong>Activity:</strong> Multi-Method Contract Debugging</p></div><div class="block"><div class="block-label">bullets</div><ul><li>A: transfer() caller bug—didn&#x27;t verify sufficient funds</li><li>B: deposit() implementation bug—fix method logic</li><li>C: transfer() implementation bug—missing rollback on failure</li><li>D: deposit() class bug—violated invariant maintenance</li></ul></div>
+<details open><summary>Speaker notes</summary><p>This analyze-level activity addresses the &#x27;multi-method contract reasoning&#x27; gap by having students trace contract composition through call chains. Students must distinguish between caller obligations, method implementation bugs, and invariant maintenance failures across three methods. The transfer scenario is realistic and shows how contracts localize faults even in complex interactions. Case C is subtle—postcondition failure in transfer despite withdraw/deposit succeeding suggests atomicity/rollback bug. Case D shows invariant violations can occur even when individual method postconditions pass. Debrief should emphasize that contract violations always indicate bugs requiring fixes, never runtime error handling, connecting to previous slide&#x27;s debugging-not-validation theme.</p></details>
+</article><article class="card">
+<header><div><div class="kicker">Slide 15 · content</div>
+<h2>The Liskov Substitution Principle</h2></div>
+<span class="level" style="border-color:#f59e0b;color:#f59e0b">Analyze</span></header>
+<div class="evidence"><strong>Bloom evidence:</strong> Students analyze Square/Rectangle, ReadOnlyList, and SortedSet to determine LSP violations, identify which client expectations break, and explain how contracts would expose violations—analyze-level behavioral subtyping reasoning.</div>
+<div class="block"><div class="block-label">heading</div><p>Behavioral Subtyping Through Contracts</p></div><div class="block"><div class="block-label">quote</div><p>Objects of a subtype must be substitutable for objects of the supertype without breaking program correctness.</p></div><div class="block"><div class="block-label">bullets</div><ul><li>Structural compatibility ≠ behavioral compatibility</li><li>Contracts formalize LSP: subtypes honor supertype obligations</li><li>Violation breaks polymorphism and client assumptions</li></ul></div><div class="block"><div class="block-label">activity</div><p><strong>Activity:</strong> Identify LSP Violations</p><p><strong>Instructions:</strong> Analyze three inheritance examples: (1) Square extends Rectangle with setWidth() setting both dimensions; (2) ReadOnlyList extends List but throws exception on add(); (3) SortedSet extends Set ensuring iteration order. For each: Does it violate LSP? Why or why not? Which client expectations break? How would contracts expose the violation?</p></div>
+<details open><summary>Speaker notes</summary><p>This analyze-level activity targets the &#x27;Apply contract inheritance rules and understand behavioral subtyping&#x27; objective. Students must evaluate whether inheritance hierarchies preserve substitutability by reasoning about behavioral expectations. Square/Rectangle violates LSP because clients expect independent width/height modification—contracts would show postcondition violation. ReadOnlyList clearly violates by strengthening preconditions (add() now requires false). SortedSet doesn&#x27;t violate LSP—it strengthens postconditions (adds ordering guarantee) which is safe. Guide discussion to connect violations with contract rules from next slide, showing how weakening/strengthening rules prevent these problems.</p></details>
+</article><article class="card">
+<header><div><div class="kicker">Slide 16 · content</div>
+<h2>Contract Inheritance Rules</h2></div>
+<span class="level" style="border-color:#8b5cf6;color:#8b5cf6">Create</span></header>
+<div class="evidence"><strong>Bloom evidence:</strong> Students design BankAccount hierarchy with transfer() composing withdraw/deposit, create PremiumAccount with weakened invariants, analyze precondition composition, and evaluate whether RestrictedAccount violates LSP by tracing polymorphic calls—create-level hierarchy design with compositional analysis.</div>
+<div class="block"><div class="block-label">bullets</div><ul><li>Preconditions: may only WEAKEN (require less)</li><li>Postconditions: may only STRENGTHEN (promise more)</li><li>Invariants: may only STRENGTHEN (add constraints)</li></ul></div><div class="block"><div class="block-label">code</div><pre>class Shape {
+  // require: true
+  // ensure: area &gt;= 0
+  double area() {...}
+}
+
+class Circle extends Shape {
+  // require: true (same - OK)
+  // ensure: area &gt;= 0 &amp;&amp; area == PI*r*r (stronger - OK)
+  double area() {...}
+}</pre></div><div class="block"><div class="block-label">activity</div><p><strong>Activity:</strong> Design Contracted Hierarchy + Analyze Composition</p><p><strong>Instructions:</strong> Design a BankAccount hierarchy: (1) Create Account.transfer(to, amt) that calls withdraw() then deposit(). Specify all contracts including invariants (balance constraints). (2) Design PremiumAccount subclass allowing $500 overdraft—write its withdraw() contract. (3) Analyze: when transfer() calls withdraw(), how do preconditions compose? If withdraw() fails its postcondition, what happens to transfer()&#x27;s guarantee? (4) Evaluate: does RestrictedAccount.withdraw() requiring amt&lt;=100 violate LSP? Trace through a polymorphic transfer() call to show where substitutability breaks.</p></div>
+<details open><summary>Speaker notes</summary><p>This create/analyze activity addresses multiple gaps: designing complete contracted classes, analyzing contract composition through call chains, and applying inheritance rules. Guide students to see that transfer()&#x27;s precondition must satisfy withdraw()&#x27;s requirements, and its postcondition depends on both method postconditions holding. PremiumAccount weakens balance&gt;=0 to balance&gt;=-500 (legal). RestrictedAccount&#x27;s amt&lt;=100 strengthens precondition illegally—polymorphic transfer(500) expects success with Account but fails with RestrictedAccount. Emphasize how composition reveals why inheritance rules matter: violated contracts propagate through call chains, breaking client code that relies on supertype guarantees. Connect to LSP from previous slide and trade-offs in next slide.</p></details>
+</article><article class="card">
+<header><div><div class="kicker">Slide 17 · content</div>
+<h2>Evaluating DbC Trade-offs</h2></div>
+<span class="level" style="border-color:#f97316;color:#f97316">Evaluate</span></header>
+<div class="evidence"><strong>Bloom evidence:</strong> Students evaluate whether DbC should be used in three contexts (public API, internal module, real-time system), comparing DbC to defensive programming/static typing/formal verification with justified recommendations—evaluate-level critical analysis of appropriateness.</div>
+<div class="block"><div class="block-label">heading</div><p>When Should You Use Design by Contract?</p></div><div class="block"><div class="block-label">text</div><p>Consider three contexts: (A) Public library API used by thousands of developers, (B) Internal module within a single application, (C) Real-time embedded system with strict performance constraints.</p></div><div class="block"><div class="block-label">activity</div><p><strong>Activity:</strong> Critical Analysis Task</p><p><strong>Instructions:</strong> For each context, evaluate: (1) Should DbC be used? Why or why not? (2) What are the trade-offs between assertion overhead and safety? (3) How does DbC compare to alternatives like defensive programming, static typing, or formal verification? Justify your recommendations considering reliability needs, performance constraints, and development costs.</p></div><div class="block"><div class="block-label">bullets</div><ul><li>What happens if contract checking adds 10% runtime overhead?</li><li>When should preconditions throw exceptions vs. use assertions?</li><li>How do you balance contract specificity with API flexibility?</li></ul></div>
+<details open><summary>Speaker notes</summary><p>This evaluate-level activity addresses the objective &#x27;Evaluate how contracts contribute to program reliability.&#x27; Guide discussion toward nuanced analysis: (A) public APIs benefit from clear contracts but might need defensive checks since clients are untrusted; (B) internal modules are ideal for DbC—controlled environment, easier debugging; (C) real-time systems face trade-offs—disable runtime checks in production but use during development. Highlight that DbC isn&#x27;t universally appropriate—context matters. Emphasize comparing approaches: defensive programming duplicates checks but handles untrusted input; static types catch some errors at compile-time; DbC provides runtime verification with documentation benefits. Push students beyond &#x27;DbC is good&#x27; to &#x27;DbC is appropriate when...&#x27;</p></details>
+</article><article class="card">
+<header><div><div class="kicker">Slide 18 · content</div>
+<h2>Summary and Next Steps</h2></div>
+<span class="level" style="border-color:#3b82f6;color:#3b82f6">Understand</span></header>
+<div class="evidence"><strong>Bloom evidence:</strong> Summary slide reinforces key concepts (preconditions, postconditions, invariants, inheritance rules) and points to resources—understand-level consolidation without new cognitive demands.</div>
+<div class="block"><div class="block-label">heading</div><p>Key Takeaways</p></div><div class="block"><div class="block-label">bullets</div><ul><li>Preconditions: client obligations before calling</li><li>Postconditions: supplier guarantees after execution</li><li>Invariants: consistency constraints for objects</li><li>Contract inheritance ensures behavioral subtyping</li><li>DbC enables systematic verification and debugging</li></ul></div><div class="block"><div class="block-label">text</div><p>Practice: Apply DbC in your next assignment. Read Meyer&#x27;s &#x27;Object-Oriented Software Construction&#x27; for deeper understanding. Experiment with assertion monitoring tools.</p></div>
+<details open><summary>Speaker notes</summary><p>Wrap up by reinforcing the three pillars: preconditions (what clients must ensure), postconditions (what suppliers must deliver), and invariants (what objects must maintain). Emphasize that contract inheritance isn&#x27;t just a theoretical nicety—it&#x27;s essential for correct polymorphism. Encourage students to start thinking in contracts: before writing any method, ask &#x27;what are the preconditions and postconditions?&#x27; Mention that upcoming assignments will require DbC annotations. Point to resources: Meyer&#x27;s book is the definitive reference, and tools like JML for Java or Eiffel Studio provide practical experience. End with questions and preview next lecture&#x27;s connection to testing.</p></details>
+</article>
+</div></body></html>

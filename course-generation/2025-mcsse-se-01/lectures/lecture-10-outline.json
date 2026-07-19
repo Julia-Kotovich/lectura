@@ -1,0 +1,571 @@
+{
+  "title": "Lecture 10: Software Engineering Process and Quality Assurance",
+  "summary": "This lecture synthesizes the key concepts from the Software Construction, Architecture and Engineering module, focusing on software engineering processes, quality assurance practices, and professional development methodologies. Students will explore software development lifecycle models, testing strategies, configuration management, continuous integration/deployment, and software metrics. The lecture integrates object-oriented principles, design patterns, Design by Contract, and agile methods into a cohesive framework for building high-quality industrial software systems.",
+  "learningObjectives": [
+    "Understand and compare major software development lifecycle models and their applicability",
+    "Apply quality assurance principles and testing strategies to ensure software reliability",
+    "Implement configuration management and version control practices in team environments",
+    "Design and deploy continuous integration/continuous deployment (CI/CD) pipelines",
+    "Select and apply appropriate software metrics to measure quality and progress",
+    "Synthesize OO principles, design patterns, contracts, and agile methods into cohesive development practices"
+  ],
+  "targetSlideCount": 18,
+  "estimatedStudyMinutes": 180,
+  "sections": [
+    {
+      "title": "Introduction and Course Context",
+      "learningGoals": [
+        "Understand the role of process and quality assurance in software engineering",
+        "Recognize how this lecture synthesizes previous course concepts"
+      ],
+      "subsections": [
+        {
+          "title": "Software Engineering as a Systematic Discipline",
+          "keyPoints": [
+            "Software engineering enables construction of industrial-scale, high-quality systems",
+            "Systematic approaches based on decades of best practices",
+            "Quality attributes: correctness, robustness, extendibility, reusability",
+            "Integration of construction, architecture, and engineering principles"
+          ],
+          "examples": [
+            "Evolution from ad-hoc programming to systematic software engineering",
+            "Case study: Large-scale system failures due to lack of process discipline"
+          ],
+          "suggestedDiagram": "Triangle diagram showing Construction, Architecture, and Engineering as three pillars supporting Quality Software"
+        },
+        {
+          "title": "Lecture Roadmap and Learning Journey",
+          "keyPoints": [
+            "Overview of topics: SDLC models, QA, testing, configuration management, CI/CD, metrics",
+            "Connection to previous lectures: OO principles, patterns, contracts, agile",
+            "Professional software development context",
+            "Preparation for advanced software engineering courses"
+          ],
+          "examples": [
+            "Timeline showing progression through the course topics",
+            "Real-world software engineering workflow diagram"
+          ],
+          "suggestedDiagram": "Mind map connecting lecture topics to previous course concepts and learning outcomes"
+        }
+      ],
+      "exercises": [
+        "Reflect on a software project you've worked on: What processes were followed? What quality issues arose?",
+        "Identify which quality attributes (correctness, robustness, extendibility, reusability) were priorities in different software systems you use daily"
+      ]
+    },
+    {
+      "title": "Software Development Lifecycle Models",
+      "learningGoals": [
+        "Compare and contrast major SDLC models",
+        "Select appropriate lifecycle models for different project contexts",
+        "Understand the evolution from traditional to modern approaches"
+      ],
+      "subsections": [
+        {
+          "title": "Traditional Lifecycle Models",
+          "keyPoints": [
+            "Waterfall model: sequential phases (requirements, design, implementation, testing, maintenance)",
+            "V-Model: emphasizes verification and validation at each stage",
+            "Spiral model: iterative risk-driven approach",
+            "Strengths and limitations of traditional models"
+          ],
+          "examples": [
+            "Waterfall: NASA space shuttle software development",
+            "V-Model: automotive safety-critical systems",
+            "Spiral: large defense projects with high uncertainty"
+          ],
+          "suggestedDiagram": "Comparative visualization of Waterfall, V-Model, and Spiral model flows"
+        },
+        {
+          "title": "Iterative and Agile Lifecycle Models",
+          "keyPoints": [
+            "Iterative development: incremental delivery and feedback loops",
+            "Agile manifesto principles: individuals, working software, collaboration, responding to change",
+            "Scrum: sprints, roles (Product Owner, Scrum Master, Team), ceremonies",
+            "Extreme Programming (XP): pair programming, TDD, continuous integration",
+            "Kanban: visualizing workflow, limiting work in progress"
+          ],
+          "examples": [
+            "Scrum sprint cycle for web application development",
+            "XP practices in startup environments",
+            "Kanban board for continuous delivery teams"
+          ],
+          "suggestedDiagram": "Scrum framework diagram showing sprints, ceremonies, and artifacts"
+        },
+        {
+          "title": "Selecting the Right Model",
+          "keyPoints": [
+            "Project characteristics: size, complexity, requirements stability, risk",
+            "Team factors: experience, distribution, organizational culture",
+            "Domain constraints: regulatory requirements, safety criticality",
+            "Hybrid approaches: combining elements from multiple models",
+            "Modern trend: adaptive, lean, and DevOps-oriented approaches"
+          ],
+          "examples": [
+            "Regulated medical device software: hybrid waterfall-agile",
+            "Startup MVP development: pure agile/Scrum",
+            "Enterprise system migration: phased iterative approach"
+          ],
+          "suggestedDiagram": "Decision matrix for selecting SDLC models based on project characteristics"
+        }
+      ],
+      "exercises": [
+        "Given three project scenarios (safety-critical system, startup product, enterprise migration), recommend and justify an appropriate SDLC model for each",
+        "Analyze a failed software project and identify how lifecycle model choice contributed to problems"
+      ]
+    },
+    {
+      "title": "Quality Assurance and Testing Overview",
+      "learningGoals": [
+        "Understand comprehensive quality assurance principles",
+        "Distinguish between verification and validation",
+        "Apply systematic testing strategies"
+      ],
+      "subsections": [
+        {
+          "title": "Quality Assurance Fundamentals",
+          "keyPoints": [
+            "Quality cannot be guaranteed a priori—must be verified during and after development",
+            "Verification vs. Validation: building the product right vs. building the right product",
+            "Quality attributes: functionality, reliability, usability, efficiency, maintainability, portability",
+            "Cost of quality: prevention, appraisal, internal failure, external failure",
+            "Quality assurance vs. quality control"
+          ],
+          "examples": [
+            "Design by Contract as verification mechanism",
+            "User acceptance testing as validation",
+            "Cost escalation: bug found in requirements vs. production"
+          ],
+          "suggestedDiagram": "Quality assurance pyramid showing prevention, detection, and correction layers"
+        },
+        {
+          "title": "Testing Strategies and Levels",
+          "keyPoints": [
+            "Testing levels: unit, integration, system, acceptance",
+            "Testing types: functional, structural (white-box), black-box, regression",
+            "Test-Driven Development (TDD): write tests first, red-green-refactor cycle",
+            "Behavior-Driven Development (BDD): specification by example",
+            "Test coverage metrics: statement, branch, path, condition coverage"
+          ],
+          "examples": [
+            "JUnit tests for individual classes (unit testing)",
+            "Integration testing of database and business logic layers",
+            "System testing of complete e-commerce application",
+            "TDD cycle for implementing a sorting algorithm"
+          ],
+          "suggestedDiagram": "Testing pyramid showing unit tests (base), integration tests (middle), system/acceptance tests (top)"
+        },
+        {
+          "title": "Advanced Testing Techniques",
+          "keyPoints": [
+            "Equivalence partitioning and boundary value analysis",
+            "Mutation testing: introducing faults to test test quality",
+            "Property-based testing: generating test cases from specifications",
+            "Performance and load testing",
+            "Security testing and vulnerability assessment",
+            "Integration with Design by Contract: preconditions, postconditions, invariants as test oracles"
+          ],
+          "examples": [
+            "Boundary value analysis for input validation",
+            "Mutation testing to improve test suite effectiveness",
+            "Contract violations caught during testing vs. production",
+            "Load testing for Black Friday e-commerce traffic"
+          ],
+          "suggestedDiagram": "Flow diagram showing how contracts guide test case generation and oracle definition"
+        }
+      ],
+      "exercises": [
+        "Design a comprehensive test plan for a banking transaction system, including all testing levels",
+        "Write unit tests for a class with Design by Contract specifications, ensuring contracts are verified",
+        "Calculate and interpret test coverage metrics for a given code base"
+      ]
+    },
+    {
+      "title": "Configuration Management and Version Control",
+      "learningGoals": [
+        "Apply version control best practices in team environments",
+        "Implement effective branching and merging strategies",
+        "Manage software configurations and releases"
+      ],
+      "subsections": [
+        {
+          "title": "Version Control Fundamentals",
+          "keyPoints": [
+            "Purpose: tracking changes, collaboration, history, rollback capability",
+            "Centralized vs. distributed version control systems",
+            "Git fundamentals: repositories, commits, branches, merges",
+            "Commit best practices: atomic commits, meaningful messages, frequent commits",
+            "Repository structure and organization"
+          ],
+          "examples": [
+            "Git workflow for feature development",
+            "Commit message conventions (conventional commits)",
+            "Repository structure for multi-module project"
+          ],
+          "suggestedDiagram": "Git branching model showing main, develop, feature, release, and hotfix branches"
+        },
+        {
+          "title": "Branching Strategies and Workflows",
+          "keyPoints": [
+            "Git Flow: main, develop, feature, release, hotfix branches",
+            "GitHub Flow: simplified model with main and feature branches",
+            "Trunk-based development: short-lived branches, frequent integration",
+            "Pull/merge requests: code review, discussion, approval",
+            "Conflict resolution strategies",
+            "Tag management for releases"
+          ],
+          "examples": [
+            "Git Flow for release-driven development",
+            "GitHub Flow for continuous deployment",
+            "Trunk-based development for high-velocity teams",
+            "Resolving merge conflicts in collaborative development"
+          ],
+          "suggestedDiagram": "Comparison table of Git Flow, GitHub Flow, and trunk-based development"
+        },
+        {
+          "title": "Configuration Management Beyond Version Control",
+          "keyPoints": [
+            "Configuration items: source code, documentation, build scripts, dependencies",
+            "Dependency management: package managers, version pinning, lock files",
+            "Environment configuration: development, staging, production",
+            "Infrastructure as Code: version-controlled infrastructure definitions",
+            "Release management: versioning schemes (semantic versioning), release notes, changelogs"
+          ],
+          "examples": [
+            "Package.json/requirements.txt for dependency management",
+            "Docker compose files for environment configuration",
+            "Semantic versioning: 2.1.3 (major.minor.patch)",
+            "Automated changelog generation from commit history"
+          ],
+          "suggestedDiagram": "Configuration management scope diagram showing all configuration items and their relationships"
+        }
+      ],
+      "exercises": [
+        "Set up a Git repository with appropriate branching strategy for a team project",
+        "Resolve a complex merge conflict scenario",
+        "Design a release management process including versioning and changelog generation"
+      ]
+    },
+    {
+      "title": "Continuous Integration and Deployment",
+      "learningGoals": [
+        "Design and implement CI/CD pipelines",
+        "Automate build, test, and deployment processes",
+        "Apply DevOps principles to software delivery"
+      ],
+      "subsections": [
+        {
+          "title": "Continuous Integration Principles",
+          "keyPoints": [
+            "CI definition: frequent integration of code changes with automated verification",
+            "Core practices: automated builds, automated testing, fast feedback",
+            "CI server/platform: Jenkins, GitLab CI, GitHub Actions, CircleCI",
+            "Build automation: compilation, dependency resolution, artifact generation",
+            "Automated testing in CI: unit tests, integration tests, static analysis",
+            "Build status visibility: dashboards, notifications, badges"
+          ],
+          "examples": [
+            "GitHub Actions workflow for Java project with Maven",
+            "CI pipeline detecting broken builds within minutes",
+            "Automated code quality checks with SonarQube",
+            "Build status badge on repository README"
+          ],
+          "suggestedDiagram": "CI pipeline flow: commit → build → test → report → notify"
+        },
+        {
+          "title": "Continuous Deployment and Delivery",
+          "keyPoints": [
+            "Continuous Delivery: automated pipeline to production-ready state",
+            "Continuous Deployment: automated deployment to production",
+            "Deployment strategies: blue-green, canary, rolling updates, feature flags",
+            "Environment promotion: dev → staging → production",
+            "Automated acceptance testing and smoke tests",
+            "Rollback mechanisms and disaster recovery"
+          ],
+          "examples": [
+            "Blue-green deployment for zero-downtime releases",
+            "Canary deployment: gradual rollout to 5%, 25%, 100% of users",
+            "Feature flags for controlled feature activation",
+            "Automated rollback on failed health checks"
+          ],
+          "suggestedDiagram": "CD pipeline showing stages from code commit to production deployment with gates"
+        },
+        {
+          "title": "DevOps Culture and Practices",
+          "keyPoints": [
+            "DevOps philosophy: breaking down silos between development and operations",
+            "Infrastructure as Code: Terraform, CloudFormation, Ansible",
+            "Monitoring and observability: logs, metrics, traces, alerts",
+            "Feedback loops: from production back to development",
+            "Blameless post-mortems and continuous improvement",
+            "Integration with agile: DevOps as technical enabler of agility"
+          ],
+          "examples": [
+            "Terraform scripts for provisioning cloud infrastructure",
+            "Prometheus and Grafana for monitoring",
+            "Post-mortem analysis of production incident",
+            "Feedback from production metrics influencing sprint priorities"
+          ],
+          "suggestedDiagram": "DevOps infinity loop showing plan, code, build, test, release, deploy, operate, monitor"
+        }
+      ],
+      "exercises": [
+        "Design a complete CI/CD pipeline for a web application including all stages and quality gates",
+        "Implement a GitHub Actions workflow with automated testing and deployment",
+        "Plan a deployment strategy for a high-traffic application requiring zero downtime"
+      ]
+    },
+    {
+      "title": "Software Metrics and Measurement",
+      "learningGoals": [
+        "Select appropriate metrics for different quality attributes",
+        "Interpret metrics to make informed decisions",
+        "Avoid common pitfalls in software measurement"
+      ],
+      "subsections": [
+        {
+          "title": "Metrics Fundamentals and Categories",
+          "keyPoints": [
+            "Purpose of metrics: visibility, control, improvement, prediction",
+            "Product metrics: size, complexity, quality attributes",
+            "Process metrics: productivity, defect rates, cycle time",
+            "Project metrics: effort, schedule, cost",
+            "Goal-Question-Metric (GQM) approach to metric selection",
+            "Metrics vs. measurements vs. indicators"
+          ],
+          "examples": [
+            "Lines of code (LOC) as size metric",
+            "Cyclomatic complexity for code complexity",
+            "Defect density (defects per KLOC)",
+            "Sprint velocity in agile projects",
+            "GQM example: Goal (improve reliability) → Question (how many defects?) → Metric (defect density)"
+          ],
+          "suggestedDiagram": "GQM pyramid showing goals at top, questions in middle, metrics at bottom"
+        },
+        {
+          "title": "Code Quality Metrics",
+          "keyPoints": [
+            "Complexity metrics: cyclomatic complexity, cognitive complexity, nesting depth",
+            "Coupling and cohesion metrics: afferent/efferent coupling, LCOM",
+            "Object-oriented metrics: depth of inheritance tree, number of children",
+            "Code coverage: statement, branch, path coverage",
+            "Technical debt metrics: code smells, duplication, maintainability index",
+            "Static analysis tool integration"
+          ],
+          "examples": [
+            "Cyclomatic complexity > 10 indicating refactoring need",
+            "High coupling between modules reducing maintainability",
+            "Deep inheritance hierarchies (DIT > 5) causing fragility",
+            "80% code coverage as quality gate",
+            "SonarQube technical debt estimation"
+          ],
+          "suggestedDiagram": "Dashboard showing multiple code quality metrics with thresholds and trends"
+        },
+        {
+          "title": "Process and Project Metrics",
+          "keyPoints": [
+            "Velocity and throughput in agile development",
+            "Lead time and cycle time for features",
+            "Defect detection and removal efficiency",
+            "Burndown and burnup charts",
+            "Mean Time To Recovery (MTTR) and Mean Time Between Failures (MTBF)",
+            "Metrics pitfalls: Goodhart's Law, gaming metrics, vanity metrics"
+          ],
+          "examples": [
+            "Sprint velocity tracking over time",
+            "Cumulative flow diagram showing work in progress",
+            "Defect detection rate in testing vs. production",
+            "MTTR reduction through improved CI/CD",
+            "Warning: LOC as productivity metric leading to code bloat"
+          ],
+          "suggestedDiagram": "Burndown chart showing planned vs. actual work over sprint duration"
+        }
+      ],
+      "exercises": [
+        "Calculate cyclomatic complexity for a given code module and suggest refactoring",
+        "Design a metrics dashboard for a development team using GQM approach",
+        "Analyze a set of metrics and identify potential gaming or misinterpretation issues"
+      ]
+    },
+    {
+      "title": "Integration: OO Principles, Patterns, Contracts, and Agile",
+      "learningGoals": [
+        "Synthesize course concepts into cohesive development practices",
+        "Apply integrated approach to real-world software development",
+        "Understand synergies between different software engineering techniques"
+      ],
+      "subsections": [
+        {
+          "title": "Object-Oriented Principles in Process Context",
+          "keyPoints": [
+            "Encapsulation supporting modularity and parallel development",
+            "Inheritance and polymorphism enabling extensibility and reusability",
+            "Information hiding facilitating team coordination and change management",
+            "Multiple inheritance and genericity in complex system design",
+            "OO principles supporting iterative and incremental development",
+            "Refactoring as continuous improvement practice"
+          ],
+          "examples": [
+            "Encapsulated modules allowing independent team development",
+            "Polymorphism enabling plugin architectures for extensibility",
+            "Refactoring legacy code incrementally in sprints",
+            "Generic collections supporting reusable components"
+          ],
+          "suggestedDiagram": "Diagram showing how OO principles support agile practices and quality attributes"
+        },
+        {
+          "title": "Design Patterns in Architectural Strategy",
+          "keyPoints": [
+            "Observer pattern for event-driven architectures and loose coupling",
+            "Visitor pattern for extensible operations on object structures",
+            "Strategy pattern for algorithm variation and testability",
+            "Factory patterns for object creation and dependency management",
+            "Patterns supporting Design by Contract: Template Method, Command",
+            "Patterns in continuous evolution: refactoring to patterns"
+          ],
+          "examples": [
+            "Observer pattern in MVC architecture for UI updates",
+            "Visitor pattern for compiler AST traversal with new operations",
+            "Strategy pattern with contracts defining algorithm preconditions",
+            "Factory pattern enabling dependency injection for testing",
+            "Refactoring from conditional logic to Strategy pattern"
+          ],
+          "suggestedDiagram": "Pattern relationship diagram showing how patterns work together in system architecture"
+        },
+        {
+          "title": "Design by Contract in Quality Assurance",
+          "keyPoints": [
+            "Contracts as executable specifications: preconditions, postconditions, invariants",
+            "Contracts supporting testing: test oracle generation, input validation",
+            "Contracts in defensive programming and reliability",
+            "Contract-driven development workflow: specify, implement, test, verify",
+            "Contracts in documentation and team communication",
+            "Runtime assertion checking vs. static verification"
+          ],
+          "examples": [
+            "Precondition violation caught early preventing data corruption",
+            "Postconditions as automated test oracles",
+            "Class invariants ensuring object consistency",
+            "Contract inheritance and behavioral subtyping (Liskov Substitution Principle)",
+            "Contracts documenting API expectations for team members"
+          ],
+          "suggestedDiagram": "Contract-driven development cycle: specify contracts → implement → test with contracts → verify → refine"
+        },
+        {
+          "title": "Agile Methods Integrating All Concepts",
+          "keyPoints": [
+            "Agile as framework integrating OO, patterns, contracts, testing, CI/CD",
+            "User stories and acceptance criteria as high-level contracts",
+            "Test-Driven Development combining testing and design",
+            "Continuous refactoring applying patterns and OO principles",
+            "Sprint retrospectives for process improvement using metrics",
+            "Sustainable pace and technical excellence"
+          ],
+          "examples": [
+            "User story with acceptance criteria as behavioral contract",
+            "TDD cycle: write test (contract) → implement → refactor (apply patterns)",
+            "Sprint retrospective using velocity and quality metrics",
+            "Continuous integration enforcing contract checking",
+            "Pair programming for knowledge sharing and quality"
+          ],
+          "suggestedDiagram": "Integrated development workflow showing agile ceremonies, OO practices, contracts, patterns, and CI/CD"
+        }
+      ],
+      "exercises": [
+        "Design a feature using integrated approach: user story → contracts → TDD → patterns → CI/CD",
+        "Refactor a code module applying OO principles, patterns, and contracts while maintaining test coverage",
+        "Plan a sprint incorporating all course concepts: OO design, contracts, testing, CI/CD, metrics"
+      ]
+    },
+    {
+      "title": "Course Review and Synthesis",
+      "learningGoals": [
+        "Review and consolidate key concepts from the entire course",
+        "Understand connections between construction, architecture, and engineering",
+        "Prepare for advanced software engineering studies"
+      ],
+      "subsections": [
+        {
+          "title": "Course Journey: From Fundamentals to Integration",
+          "keyPoints": [
+            "Construction: OO programming, inheritance, polymorphism, genericity",
+            "Architecture: design patterns, large-scale structure, modularity",
+            "Engineering: agile methods, requirements, testing, process, quality",
+            "Integration: how all concepts work together in professional development",
+            "Key learning outcomes achieved: ILOs 1-6 review",
+            "Preparation for advanced topics and professional practice"
+          ],
+          "examples": [
+            "Evolution of a project through the course: from simple OO program to architected system with quality assurance",
+            "Case study: applying all course concepts to a real-world project",
+            "Student portfolio projects demonstrating integrated skills"
+          ],
+          "suggestedDiagram": "Course concept map showing relationships between all major topics"
+        },
+        {
+          "title": "Professional Software Development Best Practices",
+          "keyPoints": [
+            "Technical excellence: clean code, solid design, comprehensive testing",
+            "Process discipline: version control, CI/CD, metrics-driven improvement",
+            "Team collaboration: code reviews, pair programming, documentation",
+            "Continuous learning: staying current with evolving practices",
+            "Balancing trade-offs: time, quality, features, technical debt",
+            "Ethical considerations: reliability, security, privacy, societal impact"
+          ],
+          "examples": [
+            "Code review checklist incorporating course principles",
+            "Technical debt management strategy",
+            "Balancing feature delivery with quality in sprint planning",
+            "Professional responsibility in safety-critical systems"
+          ],
+          "suggestedDiagram": "Professional software engineer competency model showing technical, process, and soft skills"
+        },
+        {
+          "title": "Looking Ahead: Advanced Topics and Career Paths",
+          "keyPoints": [
+            "Advanced Software Engineering course (MCSSE-SE-04-A) preview",
+            "Specialized areas: distributed systems, security, AI/ML engineering, DevOps",
+            "Research directions: formal methods, program analysis, software evolution",
+            "Industry roles: software engineer, architect, quality engineer, DevOps engineer",
+            "Continuous professional development resources",
+            "Final exam preparation and portfolio assessment guidance"
+          ],
+          "examples": [
+            "Career path from junior developer to software architect",
+            "Open source contribution as learning opportunity",
+            "Professional certifications and their value",
+            "Research opportunities in software engineering"
+          ],
+          "suggestedDiagram": "Career and learning pathway diagram showing progression and specialization options"
+        }
+      ],
+      "exercises": [
+        "Create a personal development plan identifying strengths and areas for improvement based on course ILOs",
+        "Design a comprehensive software project incorporating all course concepts as exam preparation",
+        "Reflect on course learning: write a synthesis essay connecting construction, architecture, and engineering"
+      ]
+    }
+  ],
+  "suggestedResources": [
+    "Ghezzi, C., Jazayeri, M. and Mandrioli, D (2003). Fundamentals of Software Engineering (2nd Edition) - Chapters on process models and quality assurance",
+    "Meyer, B (2009). Touch of Class: Learning to Program Well Using Objects and Contracts - Chapters on Design by Contract and testing",
+    "Pfleeger, S. and Atlee, J.M. (2010). Software Engineering: Theory and Practice (4th Edition) - Chapters on SDLC, testing, and metrics",
+    "Martin Fowler's blog and books: Refactoring, Continuous Integration, patterns",
+    "The Agile Manifesto and Scrum Guide for agile principles",
+    "Git documentation and Pro Git book for version control best practices",
+    "GitHub Actions, GitLab CI, or Jenkins documentation for CI/CD implementation",
+    "SonarQube documentation for code quality metrics and static analysis",
+    "IEEE and ACM Software Engineering standards and guidelines",
+    "Course lecture slides and tutorial materials from previous sessions"
+  ],
+  "assessmentIdeas": [
+    "Portfolio assessment: Comprehensive project demonstrating OO design, patterns, contracts, testing, CI/CD pipeline, and metrics tracking",
+    "Written examination: Theoretical questions on SDLC models, quality assurance principles, testing strategies, and process integration",
+    "Case study analysis: Evaluate a real-world software project's process, identify issues, and propose improvements using course concepts",
+    "Design exercise: Create a complete development plan for a given system including architecture, contracts, test strategy, CI/CD pipeline, and metrics",
+    "Code review assignment: Review provided code for OO principles, pattern application, contract specifications, testability, and quality metrics",
+    "Process design: Design a complete software engineering process integrating agile methods, version control workflow, CI/CD, and quality gates",
+    "Reflection essay: Synthesize course learning by explaining how construction, architecture, and engineering principles work together",
+    "Practical implementation: Implement a feature using TDD, apply design patterns, specify contracts, set up CI/CD, and track metrics"
+  ]
+}

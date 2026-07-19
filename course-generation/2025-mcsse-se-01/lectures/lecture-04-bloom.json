@@ -1,0 +1,165 @@
+{
+  "alignmentScore": 88,
+  "dominantLevel": "analyze",
+  "distribution": {
+    "remember": 5,
+    "understand": 10,
+    "apply": 30,
+    "analyze": 35,
+    "evaluate": 15,
+    "create": 5
+  },
+  "objectiveAlignments": [
+    {
+      "objective": "Understand the fundamental principles and philosophy of Design by Contract",
+      "expectedLevel": "understand",
+      "observedLevel": "evaluate",
+      "status": "aligned",
+      "rationale": "Slides 1, 4, and 17 go beyond explanation to critical analysis. Slide 4 requires evaluating DbC vs. defensive programming trade-offs, and slide 17 requires judging when DbC is appropriate across contexts. This exceeds the 'understand' objective by engaging students in justifying design choices, which demonstrates deep comprehension through evaluation."
+    },
+    {
+      "objective": "Write and apply preconditions, postconditions, and class invariants to specify software behavior",
+      "expectedLevel": "apply",
+      "observedLevel": "apply",
+      "status": "aligned",
+      "rationale": "Slides 5-7 (preconditions), 8-10 (postconditions), and 11-12 (invariants) provide extensive apply-level practice. Students write contracts for Stack.pop(), PriorityQueue, Matrix, BankAccount, CircularBuffer, and BoundedQueue. Activities require producing formal specifications and applying them to concrete scenarios, directly matching the apply-level objective."
+    },
+    {
+      "objective": "Use assertions for runtime monitoring and debugging",
+      "expectedLevel": "apply",
+      "observedLevel": "evaluate",
+      "status": "aligned",
+      "rationale": "Slides 13-14 elevate beyond basic application. Slide 13 requires designing monitoring strategies with performance constraints and revising decisions based on measurement data—evaluate-level work. Slide 14 requires analyzing multi-method contract failures to localize bugs. This exceeds apply by requiring judgment about when and how to use assertions effectively."
+    },
+    {
+      "objective": "Apply contract inheritance rules and understand behavioral subtyping",
+      "expectedLevel": "apply",
+      "observedLevel": "analyze",
+      "status": "aligned",
+      "rationale": "Slides 15-16 require analyzing LSP violations (Square/Rectangle, ReadOnlyList) and designing contracted hierarchies (BankAccount/PremiumAccount). Slide 16's activity requires tracing how preconditions compose through inheritance and evaluating whether RestrictedAccount violates LSP by analyzing polymorphic substitution failures. This analyze-level work exceeds the apply objective."
+    },
+    {
+      "objective": "Evaluate how contracts contribute to program reliability and correctness",
+      "expectedLevel": "evaluate",
+      "observedLevel": "evaluate",
+      "status": "aligned",
+      "rationale": "Slides 1-2 (Ariane 5 analysis), 4 (DbC vs. defensive programming), 13 (monitoring strategy with cost/benefit analysis), and 17 (context-dependent DbC appropriateness) all require evaluate-level reasoning. Students must justify design choices, assess trade-offs, and critique approaches using evidence—precisely matching the evaluate objective."
+    },
+    {
+      "objective": "Integrate DbC techniques into object-oriented software construction practices",
+      "expectedLevel": "apply",
+      "observedLevel": "create",
+      "status": "aligned",
+      "rationale": "Slides 3, 8, 12, and 16 require synthesizing complete contracted designs. Slide 3 requires designing BankAccount with transfer() that composes withdraw/deposit contracts. Slide 12 requires creating replace() by composing existing contracts. Slide 16 requires designing a complete hierarchy with inheritance rules. This create-level integration exceeds the apply objective."
+    }
+  ],
+  "slideTags": [
+    {
+      "slideTitle": "Design by Contract: Assertions and Program Correctness",
+      "primaryLevel": "apply",
+      "evidence": "Students propose a check for Ariane 5 overflow and decide placement (caller vs. callee), applying problem-solving to a real failure case before formal concepts are introduced."
+    },
+    {
+      "slideTitle": "Diagnosing the Ariane 5 Failure",
+      "primaryLevel": "evaluate",
+      "evidence": "Students write a precondition and evaluate responsibility assignment (client vs. supplier) with justification considering reusability and fault localization—evaluate-level trade-off analysis."
+    },
+    {
+      "slideTitle": "The Contract Metaphor",
+      "primaryLevel": "create",
+      "evidence": "Students design complete contracts for BankAccount.withdraw() and transfer(), analyze how contracts compose, and identify specification gaps (missing atomicity guarantee)—create-level synthesis with completeness debugging."
+    },
+    {
+      "slideTitle": "DbC Core Principles",
+      "primaryLevel": "evaluate",
+      "evidence": "Students compare DbC vs. defensive programming across multiple dimensions (bug localization, performance, API clarity) and justify when to use each approach—evaluate-level critical analysis."
+    },
+    {
+      "slideTitle": "Preconditions: Client Obligations",
+      "primaryLevel": "apply",
+      "evidence": "Students trace buggy Stack.pop() code to identify precondition violations, locate the bug in caller code, and analyze why defensive checks mask rather than fix contract violations—apply-level debugging."
+    },
+    {
+      "slideTitle": "Practice: Writing Preconditions",
+      "primaryLevel": "apply",
+      "evidence": "Students write preconditions for PriorityQueue.removeHighest(), Matrix.multiply(), and FileProcessor.processLines(), justifying why each constraint is caller responsibility—apply-level contract writing."
+    },
+    {
+      "slideTitle": "Writing Effective Preconditions",
+      "primaryLevel": "evaluate",
+      "evidence": "Students evaluate three precondition options (A/B/C) for Account.withdraw() using four criteria (precise, complete, minimal, pure) and justify the best choice considering reusability vs. correctness—evaluate-level design judgment."
+    },
+    {
+      "slideTitle": "Postconditions: Supplier Guarantees",
+      "primaryLevel": "analyze",
+      "evidence": "Students identify missing guarantees in transfer() postcondition, trace how preconditions propagate through withdraw() calls, and analyze contract composition—analyze-level completeness debugging and compositional reasoning."
+    },
+    {
+      "slideTitle": "Postconditions with 'old': Specifying State Changes",
+      "primaryLevel": "analyze",
+      "evidence": "Students debug incomplete postconditions (withdraw, merge) to identify missing guarantees, then analyze contract propagation in transferFunds() that calls withdraw() and deposit()—analyze-level compositional reasoning."
+    },
+    {
+      "slideTitle": "Complete Behavioral Specification",
+      "primaryLevel": "analyze",
+      "evidence": "Students systematically identify missing guarantees in merge(), authenticate(), and remove() using a completeness checklist, then synthesize a complete corrected specification—analyze-level debugging with systematic verification."
+    },
+    {
+      "slideTitle": "Class Invariants: Designing Object Consistency",
+      "primaryLevel": "apply",
+      "evidence": "Students design 2-3 invariants for CircularBuffer relating count, capacity, head, and tail fields, applying the invariant concept to a concrete data structure with multiple related constraints."
+    },
+    {
+      "slideTitle": "Invariant Preservation Analysis",
+      "primaryLevel": "create",
+      "evidence": "Students trace invariant preservation through dequeue/enqueue sequence, then design replace() method by composing existing contracts, discovering that it inherits both preconditions—create-level contract synthesis through composition."
+    },
+    {
+      "slideTitle": "Assertion Monitoring: Strategy Design Exercise",
+      "primaryLevel": "evaluate",
+      "evidence": "Students design monitoring strategy with performance constraints, then revise decisions based on measurement data showing OrderValidator caught $2M bug but RiskAnalyzer exceeds budget—evaluate-level data-driven decision-making with cost/benefit analysis."
+    },
+    {
+      "slideTitle": "Contract-Based Debugging",
+      "primaryLevel": "analyze",
+      "evidence": "Students analyze four failure cases in BankAccount.transfer() to identify which contract failed, which component has the bug, and what fix is needed—analyze-level fault localization through multi-method contract composition."
+    },
+    {
+      "slideTitle": "The Liskov Substitution Principle",
+      "primaryLevel": "analyze",
+      "evidence": "Students analyze Square/Rectangle, ReadOnlyList, and SortedSet to determine LSP violations, identify which client expectations break, and explain how contracts would expose violations—analyze-level behavioral subtyping reasoning."
+    },
+    {
+      "slideTitle": "Contract Inheritance Rules",
+      "primaryLevel": "create",
+      "evidence": "Students design BankAccount hierarchy with transfer() composing withdraw/deposit, create PremiumAccount with weakened invariants, analyze precondition composition, and evaluate whether RestrictedAccount violates LSP by tracing polymorphic calls—create-level hierarchy design with compositional analysis."
+    },
+    {
+      "slideTitle": "Evaluating DbC Trade-offs",
+      "primaryLevel": "evaluate",
+      "evidence": "Students evaluate whether DbC should be used in three contexts (public API, internal module, real-time system), comparing DbC to defensive programming/static typing/formal verification with justified recommendations—evaluate-level critical analysis of appropriateness."
+    },
+    {
+      "slideTitle": "Summary and Next Steps",
+      "primaryLevel": "understand",
+      "evidence": "Summary slide reinforces key concepts (preconditions, postconditions, invariants, inheritance rules) and points to resources—understand-level consolidation without new cognitive demands."
+    }
+  ],
+  "gaps": [
+    "Limited remember-level foundation: The deck jumps immediately into apply/analyze activities (Ariane 5 problem-solving in slide 1) without establishing basic terminology. Students unfamiliar with 'precondition' or 'postcondition' may struggle. Consider adding a brief definitions slide before slide 5.",
+    "Uneven create-level distribution: Only 5% create-level content, concentrated in slides 3, 12, and 16. The 'Integrate DbC techniques' objective suggests more synthesis opportunities. Consider adding a capstone activity requiring students to design a complete contracted class from scratch.",
+    "Missing explicit connection between assertion monitoring (slides 13-14) and contract inheritance (slides 15-16): These topics are taught separately but interact in practice—how do inherited contracts affect monitoring strategy? A bridging activity could strengthen integration.",
+    "Contract completeness analysis is strong (slides 8-10) but could benefit from a systematic checklist or heuristic: Students debug incomplete specifications but aren't given a reusable framework for ensuring completeness in future work.",
+    "Limited metacognitive scaffolding: Activities provide strong cognitive engagement but rarely ask students to reflect on their reasoning process (e.g., 'What made this specification hard to complete?' or 'How did you decide which contract to strengthen?'). Metacognitive prompts could deepen learning."
+  ],
+  "suggestions": [
+    "Add a brief 'Contract Vocabulary' slide (remember-level) before slide 5 defining precondition, postcondition, invariant, and 'old' keyword with minimal examples. This provides a foundation for students encountering DbC for the first time without disrupting the apply/analyze flow.",
+    "Expand slide 16's activity to include a create-level capstone: After designing the BankAccount hierarchy, ask students to design a complete TransactionLog class that observes account operations, specifying all contracts and explaining how it integrates with existing contracts. This would raise create-level content to ~10% and better address the 'integrate DbC techniques' objective.",
+    "Add a bridging question to slide 15 or 16: 'How does contract inheritance affect your monitoring strategy from slide 13? If a subclass weakens preconditions, which assertions must remain enabled to catch violations?' This connects two major topics and reinforces compositional reasoning.",
+    "Provide a 'Contract Completeness Checklist' in slide 10: (1) All input cases covered? (2) All output cases specified? (3) All state changes documented? (4) Edge cases handled? (5) Return value semantics clear? (6) Exception conditions specified? Students can apply this heuristic in future activities and assignments.",
+    "Add metacognitive prompts to 2-3 activities: In slide 7, after evaluating preconditions A/B/C, ask 'What criteria did you prioritize? How would you explain your reasoning to a teammate?' In slide 14, after debugging, ask 'What pattern helped you localize the bug? How could you apply this pattern to other failures?' This builds transferable debugging skills.",
+    "Consider adding a 'Common DbC Mistakes' slide (analyze-level) after slide 10: Present 3-4 flawed contracts (e.g., precondition with side effects, postcondition that doesn't use 'old', invariant that can't be maintained) and have students diagnose the errors. This would strengthen error recognition skills and provide formative assessment.",
+    "Strengthen the connection between slides 1-2 (Ariane 5) and slide 17 (trade-offs): In slide 17, explicitly revisit Ariane 5 and ask 'Given what we now know, how would you have instrumented the Ariane 4->5 code reuse? What contracts and monitoring strategy would have caught the overflow?' This creates narrative closure and reinforces learning transfer.",
+    "Add a peer review component to slide 16's hierarchy design: After students design their BankAccount hierarchy, have them exchange with a partner and critique each other's contracts for LSP compliance, completeness, and inheritance rule adherence. This adds evaluate-level peer assessment and surfaces common misconceptions."
+  ]
+}

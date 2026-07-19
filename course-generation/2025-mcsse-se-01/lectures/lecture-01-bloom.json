@@ -1,0 +1,164 @@
+{
+  "alignmentScore": 88,
+  "dominantLevel": "analyze",
+  "distribution": {
+    "remember": 5,
+    "understand": 15,
+    "apply": 25,
+    "analyze": 35,
+    "evaluate": 12,
+    "create": 8
+  },
+  "objectiveAlignments": [
+    {
+      "objective": "Articulate the key challenges in modern software engineering and explain why systematic approaches are necessary for industrial-scale systems",
+      "expectedLevel": "understand",
+      "observedLevel": "analyze",
+      "status": "partially_aligned",
+      "rationale": "Objective asks students to 'articulate' and 'explain' (understand level), but slide-03 activity requires analyzing Ariane 5 failure to diagnose root causes and map to quality framework, elevating to analyze level. Slide-01 activity also pushes to analyze by diagnosing gaps between working code and engineered systems. Content exceeds objective's cognitive demand."
+    },
+    {
+      "objective": "Define and distinguish between the four critical quality attributes: correctness, robustness, extendibility, and reusability",
+      "expectedLevel": "understand",
+      "observedLevel": "evaluate",
+      "status": "partially_aligned",
+      "rationale": "Objective uses 'define and distinguish' (understand level), but slides 04-09 require evaluating designs against quality criteria, proposing solutions, and justifying trade-offs. Slide-04 asks students to classify violations AND propose prevention strategies. Slide-09 requires ranking attributes and proposing concrete design decisions. Activities consistently operate at evaluate level, significantly exceeding the stated objective."
+    },
+    {
+      "objective": "Explain the fundamental concepts of object-oriented programming and why object technology is the approach of choice for high-quality systems",
+      "expectedLevel": "understand",
+      "observedLevel": "evaluate",
+      "status": "partially_aligned",
+      "rationale": "Objective asks to 'explain' (understand level), but slide-10 activity requires evaluating OO vs. procedural designs against quality attributes and justifying design recommendations. Students must critically assess paradigm trade-offs rather than simply explaining OO concepts. Observed level exceeds expected by two levels."
+    },
+    {
+      "objective": "Describe the relationship between classes and objects, and explain the principle of encapsulation",
+      "expectedLevel": "understand",
+      "observedLevel": "analyze",
+      "status": "partially_aligned",
+      "rationale": "Objective uses 'describe' and 'explain' (understand level). Slides 11-13 provide definitions and diagrams at understand level. However, slide-16 activity requires analyzing why specific features are public/private and what quality attributes this supports, pushing to analyze level. Mixed delivery with some content at expected level and activities exceeding it."
+    },
+    {
+      "objective": "Recognize basic Eiffel notation and understand its role in expressing object-oriented concepts",
+      "expectedLevel": "understand",
+      "observedLevel": "create",
+      "status": "misaligned",
+      "rationale": "Objective asks to 'recognize' and 'understand' (understand level), but slide-15 activity requires students to design a complete CIRCLE class from scratch, making decisions about public/private features, preconditions, and quality trade-offs. This is create level (synthesizing new structures). Slide-16 also requires extending BANK_ACCOUNT with overdraft functionality. Observed level exceeds expected by three levels, indicating significant misalignment."
+    },
+    {
+      "objective": "Understand the course structure, assessment components, and learning trajectory for the semester",
+      "expectedLevel": "understand",
+      "observedLevel": "evaluate",
+      "status": "partially_aligned",
+      "rationale": "Objective uses 'understand' (understand level), but slide-02 activity requires self-assessing past projects against three pillars using criteria and proposing targeted improvements. Slide-17 requires predicting which quality attributes future topics support and connecting to current foundations. Both activities require evaluation and metacognitive analysis, exceeding the stated objective."
+    }
+  ],
+  "slideTags": [
+    {
+      "slideTitle": "Introduction to Software Engineering and Object-Oriented Fundamentals",
+      "primaryLevel": "analyze",
+      "evidence": "Activity requires analyzing past projects to diagnose gaps between working code and engineered systems, identifying specific issues like tight coupling or unclear structure."
+    },
+    {
+      "slideTitle": "Course Structure and Objectives",
+      "primaryLevel": "evaluate",
+      "evidence": "Activity requires evaluating past projects against three pillars using 1-5 scale, identifying weakest pillar, and proposing concrete improvements with justification."
+    },
+    {
+      "slideTitle": "The Software Engineering Challenge",
+      "primaryLevel": "analyze",
+      "evidence": "Activity requires analyzing Ariane 5 failure to diagnose which quality attributes were violated and proposing specific verification steps to prevent recurrence."
+    },
+    {
+      "slideTitle": "Quality Attributes: The Foundation",
+      "primaryLevel": "evaluate",
+      "evidence": "Activity requires classifying violations AND proposing concrete design decisions to prevent extendibility failures, moving beyond classification to solution design."
+    },
+    {
+      "slideTitle": "Correctness: Doing the Right Thing",
+      "primaryLevel": "analyze",
+      "evidence": "Activity requires analyzing code against specification to identify whether implementation correctly satisfies requirements, testing specification-implementation alignment."
+    },
+    {
+      "slideTitle": "Robustness: Handling the Unexpected",
+      "primaryLevel": "analyze",
+      "evidence": "Activity requires diagnosing which abnormal conditions are mishandled in two implementations and proposing robustness enhancements for critical gaps."
+    },
+    {
+      "slideTitle": "Extendibility: Embracing Change",
+      "primaryLevel": "understand",
+      "evidence": "Slide presents definitions and diagrams explaining extendibility concept with modular vs. tangled architecture comparison. No activity requiring higher-order thinking."
+    },
+    {
+      "slideTitle": "Reusability: Leveraging Existing Solutions",
+      "primaryLevel": "understand",
+      "evidence": "Slide presents definitions and reusability spectrum diagram. Content explains concepts but does not require application, analysis, or evaluation."
+    },
+    {
+      "slideTitle": "Quality Attributes: Trade-offs in Practice",
+      "primaryLevel": "evaluate",
+      "evidence": "Activity requires ranking quality attributes by priority for three systems AND proposing concrete design decisions reflecting those rankings, with justification of choices."
+    },
+    {
+      "slideTitle": "Why Object-Oriented Programming?",
+      "primaryLevel": "evaluate",
+      "evidence": "Activity requires comparing OO vs. procedural designs against four quality attributes, identifying specific advantages, and recommending a design with justification."
+    },
+    {
+      "slideTitle": "Classes: Blueprints for Objects",
+      "primaryLevel": "understand",
+      "evidence": "Slide presents class definition with UML diagram showing BANK_ACCOUNT structure. Content explains concept but does not require higher-order cognitive engagement."
+    },
+    {
+      "slideTitle": "Objects: Runtime Instances",
+      "primaryLevel": "understand",
+      "evidence": "Slide presents object definition with diagram showing three BANK_ACCOUNT instances. Content explains class-object relationship but remains at comprehension level."
+    },
+    {
+      "slideTitle": "Encapsulation: Information Hiding",
+      "primaryLevel": "understand",
+      "evidence": "Slide presents encapsulation definition with conceptual diagram of public interface vs. private implementation. Explanatory content without application or analysis."
+    },
+    {
+      "slideTitle": "Introduction to Eiffel",
+      "primaryLevel": "analyze",
+      "evidence": "Activity requires analyzing language choice trade-offs for two scenarios, justifying whether Eiffel or mainstream languages better serve each purpose based on quality attributes."
+    },
+    {
+      "slideTitle": "Eiffel Class Structure",
+      "primaryLevel": "create",
+      "evidence": "Activity requires designing complete CIRCLE class from scratch, making decisions about public/private features, preconditions, and quality trade-offs with design rationale."
+    },
+    {
+      "slideTitle": "Eiffel Example: BANK_ACCOUNT",
+      "primaryLevel": "analyze",
+      "evidence": "Activity requires analyzing encapsulation rationale (why balance is private) and applying by extending with overdraft functionality, including precondition modifications."
+    },
+    {
+      "slideTitle": "Course Roadmap: Your Learning Path",
+      "primaryLevel": "analyze",
+      "evidence": "Activity requires predicting which quality attributes future topics support and connecting them to encapsulation foundations, demonstrating metacognitive analysis."
+    },
+    {
+      "slideTitle": "Summary and Next Steps",
+      "primaryLevel": "remember",
+      "evidence": "Slide recaps main points and lists action items. Content focuses on recall of key concepts covered without requiring application or higher-order thinking."
+    }
+  ],
+  "gaps": [
+    "Systematic misalignment: All six learning objectives are stated at understand level, but 100% of slides with activities operate at analyze/evaluate/create levels. This creates expectation mismatch between stated objectives and actual cognitive demands.",
+    "Missing scaffolding for create-level tasks: Slide-15 jumps directly to designing a complete class without intermediate apply-level practice. Students need guided application of Eiffel syntax patterns before synthesizing original designs.",
+    "Slides 07-08 (extendibility, reusability) lack activities: These slides remain at understand level while surrounding slides engage analyze/evaluate. This creates uneven cognitive demand distribution and missed opportunities to apply quality attribute analysis.",
+    "No explicit remember-level foundation for Eiffel syntax: Slide-15 presents code example but doesn't isolate basic syntax elements (assignment operator, Result keyword, feature clauses) for recognition before requiring design synthesis.",
+    "Objective 5 (Eiffel notation) shows three-level gap: Stated as 'recognize and understand' but assessed through class design creation. Either revise objective to 'Design classes using Eiffel notation' or add intermediate apply-level activities."
+  ],
+  "suggestions": [
+    "Revise learning objectives to match actual cognitive demands: Change objective 2 to 'Evaluate software designs against the four quality attributes and propose improvements'; change objective 5 to 'Apply Eiffel notation to design classes demonstrating encapsulation and quality principles.' This aligns expectations with MSc-level rigor.",
+    "Add apply-level scaffolding before slide-15: Insert activity where students complete partially-written Eiffel class (fill in missing features, fix syntax errors) to practice notation application before creating original designs.",
+    "Enhance slides 07-08 with analysis activities: For extendibility, provide two architectures and ask students to predict change impact. For reusability, analyze existing library components to classify reusability level and identify design decisions enabling reuse.",
+    "Create explicit Eiffel syntax reference: Add slide between 14-15 with annotated code highlighting key notation elements (feature clauses, access control, Result, assignment). Include brief recognition quiz before design activity.",
+    "Balance evaluate/create with more apply activities: Add intermediate exercises like 'Implement deposit method given class skeleton' or 'Add get_account_number query to existing class' to build confidence before complex design tasks.",
+    "Strengthen objective-assessment alignment: Slide-02 activity (evaluate projects against pillars) directly assesses course structure objective but at wrong level. Either revise objective to 'Evaluate personal learning needs against course pillars' or change activity to mapping course topics to personal goals (understand level).",
+    "Add metacognitive closure to high-demand activities: After slide-15 CIRCLE design, explicitly ask 'Which Bloom level did this activity require? How does designing a class differ from explaining encapsulation?' This helps students recognize cognitive progression and builds self-regulated learning."
+  ]
+}

@@ -1,0 +1,418 @@
+{
+  "title": "Lecture 8: Requirements Engineering Fundamentals",
+  "summary": "This lecture introduces the fundamental concepts and practices of requirements engineering in software development. Students will learn systematic approaches to eliciting, analyzing, documenting, and validating software requirements. The lecture covers the requirements engineering process, various elicitation techniques, the distinction between functional and non-functional requirements, documentation methods including use cases and scenarios, and requirements validation and management strategies.",
+  "learningObjectives": [
+    "Understand the requirements engineering process and its role in software development lifecycle",
+    "Apply various requirements elicitation techniques to gather stakeholder needs effectively",
+    "Distinguish between functional and non-functional requirements and categorize them appropriately",
+    "Document requirements using industry-standard techniques including use cases and scenarios",
+    "Validate requirements for completeness, consistency, and feasibility",
+    "Manage requirements changes throughout the software development process"
+  ],
+  "targetSlideCount": 18,
+  "estimatedStudyMinutes": 120,
+  "sections": [
+    {
+      "title": "Introduction to Requirements Engineering",
+      "learningGoals": [
+        "Define requirements engineering and its importance in software projects",
+        "Understand the consequences of poor requirements engineering",
+        "Recognize requirements engineering as a systematic process"
+      ],
+      "subsections": [
+        {
+          "title": "What is Requirements Engineering?",
+          "keyPoints": [
+            "Definition: Systematic process of defining, documenting, and maintaining software requirements",
+            "Bridge between stakeholder needs and system implementation",
+            "Critical success factor: 60-70% of software failures trace to requirements issues",
+            "Involves multiple stakeholders with different perspectives and needs"
+          ],
+          "examples": [
+            "Case study: Therac-25 radiation therapy machine failures due to incomplete safety requirements",
+            "Denver International Airport baggage system failure ($560M loss) due to unclear requirements"
+          ],
+          "suggestedDiagram": "Flow diagram showing stakeholders → requirements engineering → system specification → implementation"
+        },
+        {
+          "title": "The Requirements Engineering Process",
+          "keyPoints": [
+            "Iterative process with four main activities: elicitation, analysis, specification, validation",
+            "Continuous requirements management throughout project lifecycle",
+            "Feedback loops between all activities",
+            "Integration with agile and traditional development methodologies"
+          ],
+          "examples": [
+            "Waterfall approach: Sequential requirements phase before design",
+            "Agile approach: Continuous requirements refinement through user stories and sprints"
+          ],
+          "suggestedDiagram": "Circular process diagram showing elicitation → analysis → specification → validation → management with feedback arrows"
+        }
+      ],
+      "exercises": [
+        "Identify three software systems you use daily and discuss what happens when their requirements are unclear",
+        "Map the requirements engineering activities to phases in both waterfall and agile methodologies"
+      ]
+    },
+    {
+      "title": "Requirements Elicitation Techniques",
+      "learningGoals": [
+        "Master various techniques for gathering requirements from stakeholders",
+        "Select appropriate elicitation techniques for different project contexts",
+        "Recognize challenges in requirements elicitation and strategies to overcome them"
+      ],
+      "subsections": [
+        {
+          "title": "Stakeholder Interviews and Workshops",
+          "keyPoints": [
+            "Structured vs. unstructured interviews: when to use each approach",
+            "Open-ended questions to discover unstated needs",
+            "Workshop facilitation techniques for group elicitation",
+            "Active listening and probing techniques to uncover hidden requirements"
+          ],
+          "examples": [
+            "Interview script for e-commerce system: 'Describe your current order processing workflow'",
+            "Requirements workshop agenda for hospital management system with doctors, nurses, and administrators"
+          ],
+          "suggestedDiagram": "Table comparing structured vs. unstructured interview approaches with pros/cons"
+        },
+        {
+          "title": "Observation and Ethnographic Studies",
+          "keyPoints": [
+            "Observing users in their natural work environment",
+            "Discovering tacit knowledge and workarounds",
+            "Protocol analysis: think-aloud techniques",
+            "Contextual inquiry: combining observation with interviews"
+          ],
+          "examples": [
+            "Observing warehouse workers to understand inventory management system requirements",
+            "Shadowing customer service representatives to identify CRM system needs"
+          ],
+          "suggestedDiagram": "Illustration of ethnographic study setup showing observer, user, and work environment"
+        },
+        {
+          "title": "Prototyping and Document Analysis",
+          "keyPoints": [
+            "Throwaway vs. evolutionary prototypes for requirements discovery",
+            "Paper prototypes, wireframes, and interactive mockups",
+            "Analyzing existing documentation: business processes, legacy systems, regulations",
+            "Reverse engineering existing systems to understand current requirements"
+          ],
+          "examples": [
+            "Low-fidelity paper prototype for mobile banking app to elicit UI requirements",
+            "Analyzing GDPR regulations to derive privacy requirements for data management system"
+          ],
+          "suggestedDiagram": "Progression from paper sketch → wireframe → interactive prototype with increasing fidelity"
+        }
+      ],
+      "exercises": [
+        "Design an interview guide with 10 questions for eliciting requirements for a university course registration system",
+        "Create a low-fidelity prototype for a task management application and identify 5 requirements it helps clarify"
+      ]
+    },
+    {
+      "title": "Functional vs. Non-Functional Requirements",
+      "learningGoals": [
+        "Distinguish clearly between functional and non-functional requirements",
+        "Categorize non-functional requirements using standard taxonomies",
+        "Understand the impact of non-functional requirements on system architecture"
+      ],
+      "subsections": [
+        {
+          "title": "Functional Requirements",
+          "keyPoints": [
+            "Definition: What the system must do - specific behaviors and functions",
+            "Describe system inputs, outputs, and transformations",
+            "Typically expressed as 'The system shall...' statements",
+            "Directly testable through functional testing"
+          ],
+          "examples": [
+            "FR-001: The system shall allow users to search products by name, category, or price range",
+            "FR-002: The system shall calculate shipping costs based on weight and destination",
+            "FR-003: The system shall send email confirmation within 5 minutes of order placement"
+          ],
+          "suggestedDiagram": "Example functional requirements specification table with ID, description, priority, and source columns"
+        },
+        {
+          "title": "Non-Functional Requirements",
+          "keyPoints": [
+            "Definition: How well the system performs its functions - quality attributes",
+            "Categories: Performance, Security, Usability, Reliability, Maintainability, Portability",
+            "Often have system-wide impact and affect architectural decisions",
+            "Can be more challenging to specify and verify than functional requirements"
+          ],
+          "examples": [
+            "NFR-001 (Performance): System shall respond to user queries within 2 seconds for 95% of requests",
+            "NFR-002 (Security): System shall encrypt all sensitive data using AES-256",
+            "NFR-003 (Usability): New users shall complete first transaction within 5 minutes without training",
+            "NFR-004 (Availability): System shall maintain 99.9% uptime during business hours"
+          ],
+          "suggestedDiagram": "ISO 25010 quality model showing eight quality characteristics and their sub-characteristics"
+        },
+        {
+          "title": "Constraints and Domain Requirements",
+          "keyPoints": [
+            "Constraints: Fixed design decisions and limitations (technology, budget, regulations)",
+            "Domain requirements: Requirements from the application domain (e.g., medical, financial)",
+            "Distinction from functional/non-functional requirements",
+            "Impact on solution space and architectural choices"
+          ],
+          "examples": [
+            "Constraint: System must be implemented using Java and run on existing Oracle database",
+            "Domain requirement: Medical records system must comply with HIPAA regulations",
+            "Constraint: Mobile app must support iOS 14+ and Android 10+"
+          ],
+          "suggestedDiagram": "Venn diagram showing relationships between functional, non-functional, constraints, and domain requirements"
+        }
+      ],
+      "exercises": [
+        "Classify 15 given requirements as functional, non-functional, or constraints for an online learning platform",
+        "Write 5 functional and 5 non-functional requirements for a smart home automation system"
+      ]
+    },
+    {
+      "title": "Requirements Documentation and Specification",
+      "learningGoals": [
+        "Create well-structured requirements specifications",
+        "Apply standard templates and formats for requirements documentation",
+        "Write clear, unambiguous, and testable requirements statements"
+      ],
+      "subsections": [
+        {
+          "title": "Requirements Specification Documents",
+          "keyPoints": [
+            "IEEE 830 / ISO/IEC/IEEE 29148 standard structure for SRS (Software Requirements Specification)",
+            "Key sections: Introduction, Overall Description, Specific Requirements, Appendices",
+            "Characteristics of good requirements: Clear, Unambiguous, Testable, Consistent, Complete",
+            "Levels of detail appropriate for different audiences"
+          ],
+          "examples": [
+            "SRS outline for e-commerce platform with sections for user management, product catalog, ordering, payment",
+            "Comparison of vague requirement 'System should be fast' vs. specific 'System shall load product pages in < 1.5 seconds'"
+          ],
+          "suggestedDiagram": "IEEE 830 SRS document structure template with main sections and subsections"
+        },
+        {
+          "title": "Writing Quality Requirements",
+          "keyPoints": [
+            "Use of modal verbs: 'shall' (mandatory), 'should' (desirable), 'may' (optional)",
+            "Avoiding ambiguous terms: 'user-friendly', 'fast', 'reliable' without quantification",
+            "Atomic requirements: one requirement per statement",
+            "Testability: each requirement must be verifiable"
+          ],
+          "examples": [
+            "Poor: 'The system should be secure and easy to use'",
+            "Good: 'The system shall require authentication using username and password before accessing user data'",
+            "Poor: 'The system will handle lots of users'",
+            "Good: 'The system shall support 10,000 concurrent users with response time < 3 seconds'"
+          ],
+          "suggestedDiagram": "Checklist for evaluating requirement quality with examples of good vs. poor requirements"
+        }
+      ],
+      "exercises": [
+        "Rewrite 5 poorly-written requirements to meet quality criteria",
+        "Create a mini-SRS document (2-3 pages) for a library management system"
+      ]
+    },
+    {
+      "title": "Use Cases and Scenarios",
+      "learningGoals": [
+        "Model functional requirements using use case diagrams and descriptions",
+        "Write detailed use case scenarios including main and alternative flows",
+        "Understand the relationship between use cases and requirements"
+      ],
+      "subsections": [
+        {
+          "title": "Use Case Fundamentals",
+          "keyPoints": [
+            "Definition: Description of system behavior from user perspective to achieve a goal",
+            "Components: Actors (users/external systems), Use Cases (goals), Relationships",
+            "UML use case diagram notation: actors, use cases, associations, include/extend",
+            "Granularity: user-goal level vs. subfunction level use cases"
+          ],
+          "examples": [
+            "ATM system use cases: Withdraw Cash, Check Balance, Transfer Funds",
+            "Actors: Customer, Bank System, Maintenance Staff",
+            "Include relationship: 'Withdraw Cash' includes 'Authenticate User'"
+          ],
+          "suggestedDiagram": "UML use case diagram for online shopping system showing customer, admin actors and their use cases"
+        },
+        {
+          "title": "Use Case Descriptions and Scenarios",
+          "keyPoints": [
+            "Structured template: Use Case Name, Actors, Preconditions, Postconditions, Main Flow, Alternative Flows",
+            "Main success scenario: step-by-step interaction for normal case",
+            "Alternative flows: exceptions, errors, and variations",
+            "Scenarios as concrete instances of use cases with specific data"
+          ],
+          "examples": [
+            "Detailed use case: 'Process Online Order' with steps from cart to payment confirmation",
+            "Alternative flow: 'Payment declined' - system notifies user and retains cart",
+            "Scenario: John orders 2 books ($45.99) using Visa, ships to home address"
+          ],
+          "suggestedDiagram": "Use case description template with example filled in for 'Book Flight' use case"
+        },
+        {
+          "title": "User Stories in Agile Context",
+          "keyPoints": [
+            "User story format: 'As a [role], I want [feature] so that [benefit]'",
+            "INVEST criteria: Independent, Negotiable, Valuable, Estimable, Small, Testable",
+            "Acceptance criteria: conditions that must be met for story completion",
+            "Relationship to use cases: user stories as lightweight, conversation-focused requirements"
+          ],
+          "examples": [
+            "User story: 'As a registered user, I want to save items to a wishlist so that I can purchase them later'",
+            "Acceptance criteria: User can add/remove items, view wishlist, wishlist persists across sessions",
+            "Epic: 'User Account Management' decomposed into stories for registration, login, profile editing"
+          ],
+          "suggestedDiagram": "Comparison table showing use cases vs. user stories with examples and when to use each"
+        }
+      ],
+      "exercises": [
+        "Create a use case diagram with 5-7 use cases for a hospital appointment scheduling system",
+        "Write a detailed use case description for 'Register New Patient' including 2 alternative flows",
+        "Convert 3 use cases into user stories with acceptance criteria"
+      ]
+    },
+    {
+      "title": "Requirements Validation and Management",
+      "learningGoals": [
+        "Apply validation techniques to ensure requirements quality",
+        "Manage requirements changes throughout the project lifecycle",
+        "Use requirements traceability to maintain consistency"
+      ],
+      "subsections": [
+        {
+          "title": "Requirements Validation Techniques",
+          "keyPoints": [
+            "Reviews and inspections: peer review, walkthroughs, formal inspections",
+            "Prototyping validation: stakeholder feedback on mockups and demos",
+            "Model validation: checking models for completeness and consistency",
+            "Test case generation: deriving tests from requirements to verify testability"
+          ],
+          "examples": [
+            "Requirements review checklist: completeness, consistency, feasibility, testability",
+            "Validation meeting agenda: present requirements, gather feedback, resolve conflicts",
+            "Prototype demonstration to validate UI requirements with end users"
+          ],
+          "suggestedDiagram": "Requirements validation process flowchart showing review → feedback → revision cycle"
+        },
+        {
+          "title": "Requirements Management and Traceability",
+          "keyPoints": [
+            "Change management: process for requesting, evaluating, and approving changes",
+            "Version control for requirements documents",
+            "Traceability: linking requirements to sources, design, code, and tests",
+            "Impact analysis: understanding effects of requirement changes",
+            "Tools: JIRA, IBM DOORS, Azure DevOps for requirements management"
+          ],
+          "examples": [
+            "Traceability matrix: mapping requirements to design components and test cases",
+            "Change request form: proposed change, rationale, impact assessment, priority",
+            "Backward traceability: test case → requirement → stakeholder need",
+            "Forward traceability: requirement → design element → code module"
+          ],
+          "suggestedDiagram": "Requirements traceability matrix showing relationships between stakeholder needs, requirements, design, implementation, and tests"
+        },
+        {
+          "title": "Requirements Prioritization",
+          "keyPoints": [
+            "Prioritization techniques: MoSCoW (Must/Should/Could/Won't), Kano model, Value vs. Effort matrix",
+            "Stakeholder negotiation when priorities conflict",
+            "Release planning based on requirement priorities",
+            "Balancing business value, technical risk, and dependencies"
+          ],
+          "examples": [
+            "MoSCoW analysis for MVP (Minimum Viable Product): Must-have features for first release",
+            "Value-Effort matrix: plotting requirements to identify quick wins and low-priority items",
+            "Conflicting priorities: Marketing wants feature X, Engineering recommends Y for technical debt"
+          ],
+          "suggestedDiagram": "2x2 matrix showing Value (high/low) vs. Effort (high/low) with example requirements plotted"
+        }
+      ],
+      "exercises": [
+        "Conduct a requirements review of a provided SRS excerpt and identify 5 issues",
+        "Create a traceability matrix for 10 requirements linking them to design components and test cases",
+        "Prioritize 15 requirements using MoSCoW method and justify your categorization"
+      ]
+    },
+    {
+      "title": "Summary and Best Practices",
+      "learningGoals": [
+        "Synthesize key concepts from requirements engineering",
+        "Recognize common pitfalls and how to avoid them",
+        "Connect requirements engineering to overall software engineering process"
+      ],
+      "subsections": [
+        {
+          "title": "Requirements Engineering Best Practices",
+          "keyPoints": [
+            "Involve stakeholders early and continuously throughout the process",
+            "Use multiple elicitation techniques to triangulate requirements",
+            "Document requirements at appropriate level of detail for audience",
+            "Validate requirements before committing to design and implementation",
+            "Manage requirements as living artifacts that evolve with the project",
+            "Maintain traceability to support impact analysis and verification"
+          ],
+          "examples": [
+            "Success story: Incremental requirements refinement in agile project reduced rework by 40%",
+            "Lesson learned: Early prototype validation prevented costly redesign in later phases"
+          ],
+          "suggestedDiagram": "Mind map of requirements engineering best practices organized by process phase"
+        },
+        {
+          "title": "Common Pitfalls and How to Avoid Them",
+          "keyPoints": [
+            "Gold plating: adding unnecessary features - mitigate with strict prioritization",
+            "Scope creep: uncontrolled requirement additions - enforce change control process",
+            "Ambiguous requirements: unclear specifications - use structured templates and reviews",
+            "Stakeholder misalignment: conflicting needs - facilitate negotiation and document decisions",
+            "Insufficient validation: assuming requirements are correct - implement systematic validation"
+          ],
+          "examples": [
+            "Scope creep example: Project timeline doubled due to uncontrolled feature additions",
+            "Ambiguity cost: 'User-friendly interface' interpreted differently by developers and users"
+          ],
+          "suggestedDiagram": "Table listing pitfalls, their symptoms, and mitigation strategies"
+        },
+        {
+          "title": "Integration with Software Development Lifecycle",
+          "keyPoints": [
+            "Requirements engineering in waterfall: dedicated phase with formal documentation",
+            "Requirements engineering in agile: continuous refinement through user stories and sprints",
+            "Requirements inform architecture decisions and design patterns",
+            "Connection to quality engineering: requirements as basis for test planning",
+            "Alignment with module learning outcomes: foundation for applying software engineering techniques"
+          ],
+          "examples": [
+            "Tracing non-functional requirements to architectural patterns (e.g., performance → caching strategy)",
+            "User stories driving sprint planning and acceptance testing in Scrum"
+          ],
+          "suggestedDiagram": "V-model showing requirements phases on left and corresponding validation/testing on right"
+        }
+      ],
+      "exercises": [
+        "Analyze a failed software project case study and identify requirements engineering failures",
+        "Design a requirements engineering process for a 6-month agile project with distributed team"
+      ]
+    }
+  ],
+  "suggestedResources": [
+    "Sommerville, I. (2015). Software Engineering (10th Edition), Chapters 4-5 on Requirements Engineering",
+    "Wiegers, K. & Beatty, J. (2013). Software Requirements (3rd Edition), Microsoft Press",
+    "Pohl, K. (2010). Requirements Engineering: Fundamentals, Principles, and Techniques, Springer",
+    "IEEE 29148-2018: Systems and software engineering — Life cycle processes — Requirements engineering",
+    "Cockburn, A. (2000). Writing Effective Use Cases, Addison-Wesley",
+    "Cohn, M. (2004). User Stories Applied: For Agile Software Development, Addison-Wesley",
+    "Online resource: Requirements Engineering Body of Knowledge (REBOK)",
+    "Tool tutorials: JIRA for requirements management, Lucidchart for use case diagrams"
+  ],
+  "assessmentIdeas": [
+    "Individual assignment: Create a complete SRS document for a medium-sized system (e.g., online food delivery platform) including functional/non-functional requirements, use cases, and traceability matrix",
+    "Group project: Conduct requirements elicitation for a real or simulated client, document findings, and present requirements specification",
+    "Case study analysis: Evaluate a provided requirements document, identify defects, and propose improvements",
+    "Practical exercise: Given a set of stakeholder interviews, extract and categorize requirements, create use case diagram and detailed descriptions",
+    "Written examination questions: Distinguish functional vs. non-functional requirements, critique poorly-written requirements, explain validation techniques",
+    "Portfolio component: Requirements engineering process plan for a hypothetical project including elicitation strategy, documentation templates, and validation approach"
+  ]
+}

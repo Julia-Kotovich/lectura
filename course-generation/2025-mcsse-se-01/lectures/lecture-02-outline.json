@@ -1,0 +1,419 @@
+{
+  "title": "Lecture 2: Inheritance, Polymorphism and Dynamic Binding",
+  "summary": "This lecture provides a comprehensive exploration of advanced object-oriented programming mechanisms essential for building flexible and reusable software architectures. Students will master single and multiple inheritance hierarchies, understand polymorphism and substitutability principles, and learn how dynamic binding enables runtime flexibility. Through practical examples in Eiffel and theoretical foundations, students will gain the skills to design extensible class hierarchies and apply these mechanisms to real-world software construction challenges.",
+  "learningObjectives": [
+    "Understand and apply single inheritance to create class hierarchies that promote code reuse and logical organization",
+    "Evaluate the benefits and challenges of multiple inheritance and apply appropriate design strategies",
+    "Master polymorphism and substitutability principles to write flexible, extensible code",
+    "Explain dynamic binding mechanisms and their role in achieving late binding and runtime flexibility",
+    "Distinguish between method redefinition and overriding, applying each appropriately",
+    "Implement inheritance hierarchies in Eiffel demonstrating best practices in object-oriented design"
+  ],
+  "targetSlideCount": 18,
+  "estimatedStudyMinutes": 120,
+  "sections": [
+    {
+      "title": "Introduction and Motivation",
+      "learningGoals": [
+        "Understand the role of inheritance in software reuse and extensibility",
+        "Recognize the connection between inheritance and software architecture quality attributes"
+      ],
+      "subsections": [
+        {
+          "title": "The Need for Inheritance",
+          "keyPoints": [
+            "Code reuse through inheritance vs. composition",
+            "Modeling 'is-a' relationships in domain models",
+            "Inheritance as a foundation for extensible architectures",
+            "Connection to module learning outcomes: high-quality, extendible, reusable systems"
+          ],
+          "examples": [
+            "Vehicle hierarchy: Car, Truck, Motorcycle inheriting from Vehicle",
+            "GUI components: Button, TextField, Label inheriting from Widget"
+          ],
+          "suggestedDiagram": "Simple class hierarchy diagram showing Vehicle as parent with Car and Truck as children, highlighting inherited attributes and methods"
+        }
+      ],
+      "exercises": [
+        "Identify three real-world scenarios where inheritance would be appropriate vs. inappropriate"
+      ]
+    },
+    {
+      "title": "Single Inheritance: Foundations",
+      "learningGoals": [
+        "Master the concepts and mechanics of single inheritance",
+        "Apply single inheritance to design effective class hierarchies"
+      ],
+      "subsections": [
+        {
+          "title": "Single Inheritance Concepts",
+          "keyPoints": [
+            "Definition: one parent class, creating a tree structure",
+            "Inheritance of attributes (fields) and methods",
+            "Protected vs. private vs. public visibility in inheritance",
+            "The 'is-a' relationship and Liskov Substitution Principle preview"
+          ],
+          "examples": [
+            "Employee hierarchy: Manager, Engineer, Intern inheriting from Employee",
+            "Shape hierarchy: Circle, Rectangle, Triangle inheriting from Shape"
+          ],
+          "suggestedDiagram": "UML class diagram showing Employee parent class with attributes (name, id, salary) and Manager, Engineer children with specialized attributes"
+        },
+        {
+          "title": "Single Inheritance in Eiffel",
+          "keyPoints": [
+            "Eiffel syntax: inherit clause",
+            "Feature inheritance and visibility rules",
+            "Deferred (abstract) classes and effective (concrete) classes",
+            "Invariant inheritance and contract strengthening"
+          ],
+          "examples": [
+            "Eiffel code: ACCOUNT parent class with SAVINGS_ACCOUNT and CHECKING_ACCOUNT children",
+            "Deferred class COMPARABLE with effective descendants"
+          ],
+          "suggestedDiagram": "Code snippet showing Eiffel class declaration with inherit clause and feature definitions"
+        }
+      ],
+      "exercises": [
+        "Design a single inheritance hierarchy for a university system (Person, Student, Faculty, Staff)",
+        "Write Eiffel code for a simple Shape hierarchy with area calculation"
+      ]
+    },
+    {
+      "title": "Multiple Inheritance: Power and Complexity",
+      "learningGoals": [
+        "Understand multiple inheritance mechanisms and use cases",
+        "Recognize and resolve common multiple inheritance challenges"
+      ],
+      "subsections": [
+        {
+          "title": "Multiple Inheritance Concepts",
+          "keyPoints": [
+            "Definition: inheriting from multiple parent classes",
+            "Motivation: combining orthogonal features (mixins, interfaces)",
+            "Multiple inheritance creates DAG (Directed Acyclic Graph) structures",
+            "Languages supporting multiple inheritance: C++, Eiffel, Python vs. single inheritance with interfaces: Java, C#"
+          ],
+          "examples": [
+            "TeachingAssistant inheriting from both Student and Employee",
+            "AmphibiousVehicle inheriting from LandVehicle and WaterVehicle"
+          ],
+          "suggestedDiagram": "Diamond diagram showing multiple inheritance with TeachingAssistant inheriting from Student and Employee, both inheriting from Person"
+        },
+        {
+          "title": "The Diamond Problem and Solutions",
+          "keyPoints": [
+            "Name conflicts: same method/attribute in multiple parents",
+            "Repeated inheritance: shared ancestor appears multiple times",
+            "Resolution strategies: renaming, selection, virtual inheritance",
+            "Eiffel's approach: explicit renaming and selection"
+          ],
+          "examples": [
+            "Classic diamond: Person → Student, Employee → TeachingAssistant with conflicting 'id' attribute",
+            "Eiffel rename and select clauses to resolve conflicts"
+          ],
+          "suggestedDiagram": "Diamond inheritance diagram with conflict highlighted and resolution shown through renaming"
+        },
+        {
+          "title": "Best Practices and Alternatives",
+          "keyPoints": [
+            "When to use multiple inheritance vs. composition",
+            "Interface inheritance vs. implementation inheritance",
+            "Favor shallow, wide hierarchies over deep, narrow ones",
+            "Design patterns as alternatives: Decorator, Strategy"
+          ],
+          "examples": [
+            "Java interfaces as constrained multiple inheritance",
+            "Composition-based alternative to multiple inheritance for mixins"
+          ],
+          "suggestedDiagram": "Comparison diagram showing multiple inheritance vs. composition for achieving similar functionality"
+        }
+      ],
+      "exercises": [
+        "Identify the diamond problem in a given hierarchy and propose two different solutions",
+        "Refactor a multiple inheritance design to use composition and interfaces"
+      ]
+    },
+    {
+      "title": "Polymorphism and Substitutability",
+      "learningGoals": [
+        "Master polymorphic programming techniques",
+        "Apply the Liskov Substitution Principle to ensure correct inheritance hierarchies"
+      ],
+      "subsections": [
+        {
+          "title": "Polymorphism Fundamentals",
+          "keyPoints": [
+            "Definition: one interface, multiple implementations",
+            "Subtype polymorphism (inheritance-based)",
+            "Parametric polymorphism (generics) - brief mention, detailed in later lectures",
+            "Ad-hoc polymorphism (overloading) - distinction from subtype polymorphism"
+          ],
+          "examples": [
+            "Array of Shape references containing Circle, Rectangle, Triangle objects",
+            "Processing different Employee types through common interface"
+          ],
+          "suggestedDiagram": "Memory diagram showing polymorphic array with references to different object types"
+        },
+        {
+          "title": "Liskov Substitution Principle (LSP)",
+          "keyPoints": [
+            "Formal definition: objects of subtype should be substitutable for supertype",
+            "Behavioral subtyping: preserving invariants and contracts",
+            "Precondition weakening and postcondition strengthening",
+            "Common LSP violations and how to avoid them"
+          ],
+          "examples": [
+            "Rectangle-Square problem as LSP violation",
+            "Correct design: immutable shapes vs. mutable shapes"
+          ],
+          "suggestedDiagram": "Contract diagram showing precondition/postcondition relationships in inheritance"
+        },
+        {
+          "title": "Polymorphism in Practice",
+          "keyPoints": [
+            "Writing polymorphic code: programming to interfaces",
+            "Benefits: extensibility, maintainability, testability",
+            "Static type vs. dynamic type distinction",
+            "Type safety and polymorphism"
+          ],
+          "examples": [
+            "Eiffel code: polymorphic iteration over collection of ANIMAL objects",
+            "Plugin architecture using polymorphism"
+          ],
+          "suggestedDiagram": "Code example showing polymorphic method calls with static and dynamic types annotated"
+        }
+      ],
+      "exercises": [
+        "Identify LSP violations in provided code examples",
+        "Write polymorphic code to process a heterogeneous collection in Eiffel"
+      ]
+    },
+    {
+      "title": "Dynamic Binding and Late Binding",
+      "learningGoals": [
+        "Understand the mechanism of dynamic binding and its implementation",
+        "Distinguish between static and dynamic binding and their performance implications"
+      ],
+      "subsections": [
+        {
+          "title": "Binding Concepts",
+          "keyPoints": [
+            "Static (early) binding: resolved at compile time",
+            "Dynamic (late) binding: resolved at runtime",
+            "Dynamic dispatch mechanism: vtable/virtual method table",
+            "Performance trade-offs: flexibility vs. efficiency"
+          ],
+          "examples": [
+            "Method call resolution with and without dynamic binding",
+            "C++ virtual vs. non-virtual methods comparison"
+          ],
+          "suggestedDiagram": "Vtable diagram showing how method calls are resolved at runtime through indirection"
+        },
+        {
+          "title": "Dynamic Binding in Eiffel",
+          "keyPoints": [
+            "All feature calls are dynamically bound by default in Eiffel",
+            "Frozen features: preventing redefinition for optimization",
+            "CAT-call problem and void-safety",
+            "Runtime type identification and conformance checking"
+          ],
+          "examples": [
+            "Eiffel code demonstrating dynamic binding with redefined features",
+            "Performance comparison: frozen vs. non-frozen features"
+          ],
+          "suggestedDiagram": "Execution trace showing dynamic binding resolution for a polymorphic call"
+        },
+        {
+          "title": "Implementation Mechanics",
+          "keyPoints": [
+            "Virtual method table (vtable) structure and layout",
+            "Object layout in memory with vtable pointer",
+            "Method lookup algorithm at runtime",
+            "Optimization techniques: inline caching, devirtualization"
+          ],
+          "examples": [
+            "Memory layout diagram for objects with vtable",
+            "Step-by-step method resolution through vtable"
+          ],
+          "suggestedDiagram": "Detailed memory layout showing object instances, vtable pointers, and vtable structures for a class hierarchy"
+        }
+      ],
+      "exercises": [
+        "Trace the execution of polymorphic method calls through vtable lookup",
+        "Analyze performance implications of dynamic binding in a given scenario"
+      ]
+    },
+    {
+      "title": "Method Redefinition and Overriding",
+      "learningGoals": [
+        "Master the techniques of method redefinition and overriding",
+        "Apply appropriate redefinition strategies while maintaining contracts"
+      ],
+      "subsections": [
+        {
+          "title": "Redefinition vs. Overriding",
+          "keyPoints": [
+            "Terminology clarification across languages",
+            "Redefinition: providing new implementation in subclass",
+            "Signature compatibility requirements",
+            "Covariant return types and contravariant parameter types"
+          ],
+          "examples": [
+            "Shape.area redefined in Circle and Rectangle",
+            "Employee.calculateSalary redefined in Manager and Contractor"
+          ],
+          "suggestedDiagram": "Class hierarchy showing method signatures and redefinitions with type relationships"
+        },
+        {
+          "title": "Redefinition in Eiffel",
+          "keyPoints": [
+            "Redefine clause syntax and semantics",
+            "Effective implementation of deferred features",
+            "Precursor calls: invoking parent implementation",
+            "Combining inheritance and redefinition with rename"
+          ],
+          "examples": [
+            "Eiffel LINKED_LIST redefining features from LIST",
+            "Using Precursor to extend rather than replace behavior"
+          ],
+          "suggestedDiagram": "Eiffel code snippet showing redefine clause and Precursor usage"
+        },
+        {
+          "title": "Design Considerations",
+          "keyPoints": [
+            "When to allow redefinition vs. making methods final/frozen",
+            "Template Method pattern: controlled redefinition points",
+            "Fragile base class problem",
+            "Documentation and contracts for redefinable methods"
+          ],
+          "examples": [
+            "Template Method pattern in framework design",
+            "Fragile base class example with unexpected redefinition consequences"
+          ],
+          "suggestedDiagram": "Template Method pattern diagram showing abstract class with template method and hook methods"
+        }
+      ],
+      "exercises": [
+        "Implement a class hierarchy with appropriate method redefinitions in Eiffel",
+        "Identify potential fragile base class issues in a given design"
+      ]
+    },
+    {
+      "title": "Practical Applications and Design Patterns",
+      "learningGoals": [
+        "Apply inheritance, polymorphism, and dynamic binding to solve real-world problems",
+        "Recognize common design patterns that leverage these mechanisms"
+      ],
+      "subsections": [
+        {
+          "title": "Design Patterns Using Inheritance",
+          "keyPoints": [
+            "Template Method: defining algorithm skeleton with customizable steps",
+            "Factory Method: polymorphic object creation",
+            "Strategy pattern: inheritance vs. composition approaches",
+            "Preview of Observer pattern (detailed in later lectures)"
+          ],
+          "examples": [
+            "Template Method in data processing pipeline",
+            "Factory Method for creating different document types"
+          ],
+          "suggestedDiagram": "UML diagram showing Template Method pattern structure with abstract class and concrete implementations"
+        },
+        {
+          "title": "Real-World Case Studies",
+          "keyPoints": [
+            "GUI framework hierarchies (widgets, events, layouts)",
+            "Collection libraries (lists, sets, maps with common interfaces)",
+            "Persistence frameworks (ORM with entity hierarchies)",
+            "Game engine component systems"
+          ],
+          "examples": [
+            "Analysis of Java Swing component hierarchy",
+            "Eiffel EiffelBase library structure"
+          ],
+          "suggestedDiagram": "Simplified class diagram of a real framework showing inheritance relationships"
+        },
+        {
+          "title": "Common Pitfalls and Anti-Patterns",
+          "keyPoints": [
+            "Deep inheritance hierarchies: maintenance and understanding challenges",
+            "Yo-yo problem: excessive jumping between classes",
+            "Inappropriate use of inheritance for code reuse (favor composition)",
+            "Breaking encapsulation through protected members"
+          ],
+          "examples": [
+            "Refactoring deep hierarchy to flatter structure with composition",
+            "Converting inheritance-based design to composition-based design"
+          ],
+          "suggestedDiagram": "Before/after diagram showing refactoring from deep inheritance to composition"
+        }
+      ],
+      "exercises": [
+        "Design a plugin system using inheritance and polymorphism",
+        "Refactor a provided inheritance hierarchy to address identified anti-patterns"
+      ]
+    },
+    {
+      "title": "Summary and Integration",
+      "learningGoals": [
+        "Synthesize understanding of inheritance, polymorphism, and dynamic binding",
+        "Connect these concepts to broader software architecture and engineering principles"
+      ],
+      "subsections": [
+        {
+          "title": "Concept Integration",
+          "keyPoints": [
+            "How inheritance, polymorphism, and dynamic binding work together",
+            "Trade-offs: flexibility vs. complexity vs. performance",
+            "Connection to SOLID principles (especially LSP and OCP)",
+            "Role in achieving extendible and reusable architectures (module goals)"
+          ],
+          "examples": [
+            "Complete example integrating all concepts in a cohesive design",
+            "Analysis of how these mechanisms support software quality attributes"
+          ],
+          "suggestedDiagram": "Concept map showing relationships between inheritance, polymorphism, dynamic binding, and design principles"
+        },
+        {
+          "title": "Looking Ahead",
+          "keyPoints": [
+            "Preview of genericity and parametric polymorphism (next lectures)",
+            "Connection to Design by Contract (upcoming topic)",
+            "Role in design patterns (future lectures)",
+            "Preparation for advanced software engineering topics"
+          ],
+          "examples": [
+            "Teaser: combining inheritance with generics for maximum flexibility",
+            "Preview of how contracts enhance inheritance hierarchies"
+          ],
+          "suggestedDiagram": "Course roadmap showing current lecture in context of overall module"
+        }
+      ],
+      "exercises": [
+        "Design a complete system using all concepts from this lecture",
+        "Prepare questions for tutorial session on challenging aspects"
+      ]
+    }
+  ],
+  "suggestedResources": [
+    "Meyer, B. (2009). Touch of Class: Learning to Program Well Using Objects and Contracts - Chapters on inheritance and polymorphism",
+    "Eiffel Software Documentation: Inheritance and polymorphism tutorials",
+    "Liskov, B. & Wing, J. (1994). A behavioral notion of subtyping - Original LSP paper",
+    "Gamma et al. (1994). Design Patterns - Template Method and Factory Method patterns",
+    "Martin, R. (2017). Clean Architecture - SOLID principles, especially LSP and OCP",
+    "Online Eiffel compiler and IDE for hands-on practice",
+    "Video lectures on vtable implementation and dynamic dispatch mechanisms",
+    "Case studies from open-source Eiffel projects demonstrating inheritance hierarchies"
+  ],
+  "assessmentIdeas": [
+    "Design and implement a class hierarchy in Eiffel demonstrating single and multiple inheritance with appropriate use of polymorphism",
+    "Analyze a provided inheritance hierarchy for LSP violations and propose corrections",
+    "Trace dynamic binding execution through vtable lookup for given polymorphic code",
+    "Compare and contrast multiple inheritance solutions to the diamond problem with code examples",
+    "Refactor a code example from inheritance-based to composition-based design, justifying the decision",
+    "Written examination questions on theoretical concepts: LSP, dynamic binding mechanisms, when to use inheritance vs. composition",
+    "Portfolio assignment: Document a real-world system design using inheritance hierarchies with justification for design decisions",
+    "Peer review exercise: Evaluate classmates' inheritance designs against SOLID principles"
+  ]
+}

@@ -1,0 +1,270 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8" />
+<title>Lecture 2. Inheritance, Polymorphism and Dynamic Binding — Bloom preview</title>
+<style>
+body{margin:0;font:14px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#111827;background:#f8fafc}
+.page{max-width:1100px;margin:0 auto;padding:32px 24px 80px}
+.hero,.card,.panel{background:#fff;border:1px solid #e5e7eb;border-radius:16px;padding:22px;margin-bottom:18px}
+h1{margin:0 0 6px;font-size:28px} h2{margin:2px 0 0;font-size:20px}
+.muted{color:#6b7280}
+.metrics{display:flex;gap:24px;margin-top:14px}
+.metrics b{font-size:24px;display:block}
+table{border-collapse:collapse} td{padding:6px 10px;border-bottom:1px solid #e5e7eb}
+.bar{height:8px;width:140px;background:#e5e7eb;border-radius:99px;overflow:hidden}
+.bar span{display:block;height:100%;border-radius:99px}
+.card header{display:flex;justify-content:space-between;gap:16px;border-bottom:1px solid #e5e7eb;padding-bottom:12px;margin-bottom:12px}
+.kicker{color:#6b7280;font-size:12px;text-transform:uppercase;letter-spacing:.08em}
+.level{border:1px solid;border-radius:99px;padding:5px 10px;font-weight:700;font-size:12px;white-space:nowrap;align-self:flex-start}
+.evidence{padding:10px 12px;border-left:4px solid #8b5cf6;background:#f5f3ff;border-radius:8px;margin:10px 0}
+.block{border:1px solid #e5e7eb;border-radius:10px;padding:10px 12px;margin:8px 0}
+.block-label{color:#6b7280;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px}
+pre{white-space:pre-wrap;background:#0f172a;color:#e5e7eb;padding:10px;border-radius:8px;overflow:auto}
+ul{margin:4px 0 0 20px;padding:0} p{margin:6px 0}
+details{margin-top:10px;color:#374151} summary{cursor:pointer;color:#6b7280;font-weight:700}
+@media print{body{background:#fff}.card{break-inside:avoid}}
+</style></head><body><div class="page">
+<section class="hero"><h1>Lecture 2. Inheritance, Polymorphism and Dynamic Binding</h1>
+<p class="muted">Slide-by-slide Bloom preview · generated 2026-07-12 12:10 UTC</p>
+<div class="metrics">
+<div><span class="muted">Bloom score</span><b>88</b></div>
+<div><span class="muted">Dominant level</span><b>Apply</b></div>
+<div><span class="muted">Slides</span><b>20</b></div>
+</div></section>
+<section class="panel"><h2>Bloom distribution</h2><table><tr><td>Remember</td><td>5%</td><td><div class="bar"><span style="width:5%;background:#64748b"></span></div></td></tr><tr><td>Understand</td><td>15%</td><td><div class="bar"><span style="width:15%;background:#3b82f6"></span></div></td></tr><tr><td>Apply</td><td>50%</td><td><div class="bar"><span style="width:50%;background:#10b981"></span></div></td></tr><tr><td>Analyze</td><td>15%</td><td><div class="bar"><span style="width:15%;background:#f59e0b"></span></div></td></tr><tr><td>Evaluate</td><td>15%</td><td><div class="bar"><span style="width:15%;background:#f97316"></span></div></td></tr><tr><td>Create</td><td>0%</td><td><div class="bar"><span style="width:0%;background:#8b5cf6"></span></div></td></tr></table></section>
+<article class="card">
+<header><div><div class="kicker">Slide 01 · title</div>
+<h2>Lecture 2: Inheritance, Polymorphism and Dynamic Binding</h2></div>
+<span class="level" style="border-color:#10b981;color:#10b981">Apply</span></header>
+<div class="evidence"><strong>Bloom evidence:</strong> 90-second activation challenge asks students to sketch class hierarchies from real systems—immediate application of &#x27;is-a&#x27; relationships before formal instruction.</div>
+<div class="block"><div class="block-label">heading</div><p>Lecture 2: Inheritance, Polymorphism and Dynamic Binding</p></div><div class="block"><div class="block-label">text</div><p>Building Flexible and Reusable Software Architectures</p></div><div class="block"><div class="block-label">activity</div></div><div class="block"><div class="block-label">text</div><p>Today you&#x27;ll design hierarchies, evaluate inheritance strategies, and implement polymorphic solutions in Eiffel.</p></div>
+<details open><summary>Speaker notes</summary><p>Welcome to Lecture 2. Before diving in, activate prior knowledge with the 90-second challenge. This primes students to think about inheritance as a design tool, not just a language feature. After time expires, ask 2-3 volunteers to share examples (e.g., User→Customer/Admin, Vehicle→Car/Truck). Acknowledge responses briefly without critique. Set expectations: today moves beyond understanding concepts to applying them in design scenarios and evaluating trade-offs. This opening shifts from passive introduction to active engagement, targeting apply-level thinking from the start.</p></details>
+</article><article class="card">
+<header><div><div class="kicker">Slide 02 · content</div>
+<h2>Why Inheritance Matters: Design Challenge</h2></div>
+<span class="level" style="border-color:#10b981;color:#10b981">Apply</span></header>
+<div class="evidence"><strong>Bloom evidence:</strong> University system scenario requires students to design inheritance hierarchy, decide parent class, attribute placement, and whether TA needs multiple inheritance—core application activity.</div>
+<div class="block"><div class="block-label">text</div><p>**Scenario:** You&#x27;re building a university management system. You need classes for Student, Faculty, and TeachingAssistant. All share name, ID, email. Students have GPA and enroll in courses. Faculty teach courses and have research areas. TAs both take and teach courses.</p></div><div class="block"><div class="block-label">activity</div></div><div class="block"><div class="block-label">bullets</div><ul><li>Code reuse: Shared attributes in parent class</li><li>Models &#x27;is-a&#x27; relationships naturally</li><li>Enables polymorphism: treat all as Person</li><li>Foundation for extensible systems</li></ul></div>
+<details open><summary>Speaker notes</summary><p>Present the scenario and give students 2 minutes to sketch individually. Then pair-share for 1-2 minutes. Poll for solutions: Who used single inheritance with Person parent? Who needed multiple inheritance for TA? Discuss trade-offs. This applies inheritance concepts to a realistic problem, addressing the &#x27;apply single inheritance&#x27; objective. Reveal that TA motivates multiple inheritance (covered in slides 6-9). Emphasize that inheritance models real relationships, not just code sharing.</p></details>
+</article><article class="card">
+<header><div><div class="kicker">Slide 03 · split</div>
+<h2>Inheritance in Action: Design Exercise</h2></div>
+<span class="level" style="border-color:#10b981;color:#10b981">Apply</span></header>
+<div class="evidence"><strong>Bloom evidence:</strong> Students extend Vehicle hierarchy by adding ElectricCar and Bicycle, identifying LSP violations and refactoring needs—applies inheritance design principles to novel cases.</div>
+<div class="block"><div class="block-label">diagram</div><p><strong>Prompt:</strong> UML class diagram showing Vehicle as parent class at top with attributes (speed: INTEGER, fuel: REAL) and methods (start, stop, refuel). Three child classes below: Car, Truck, Motorcycle, each inheriting from Vehicle with specialized attributes. Use arrows pointing upward from children to parent. Clean, educational style.</p></div><div class="block"><div class="block-label">activity</div></div><div class="block"><div class="block-label">bullets</div><ul><li>Does ElectricCar inherit fuel attribute? (LSP issue)</li><li>Does Bicycle IS-A Vehicle if it has no engine?</li><li>Should Vehicle be more abstract?</li><li>When to use inheritance vs. composition?</li></ul></div>
+<details open><summary>Speaker notes</summary><p>Show the diagram, then present the challenge. Give students 2 minutes to sketch solutions individually. Poll responses: Who added ElectricCar as direct Vehicle child? Who refactored Vehicle to be more abstract (e.g., removing fuel)? Highlight that this exposes real design tensions—ElectricCar inheriting unused fuel violates LSP. Bicycle challenges the &#x27;is-a&#x27; test. This applies inheritance design skills and previews LSP (slide 11). Emphasize that good hierarchies require thinking about future extensions, not just current needs.</p></details>
+</article><article class="card">
+<header><div><div class="kicker">Slide 04 · split</div>
+<h2>Single Inheritance: Apply the Principles</h2></div>
+<span class="level" style="border-color:#f97316;color:#f97316">Evaluate</span></header>
+<div class="evidence"><strong>Bloom evidence:</strong> Students evaluate three proposed hierarchies (Employee→Manager, Shape→Square→Rectangle, Animal→Dog→Puppy) to identify LSP violations and justify corrections—requires judgment against principles.</div>
+<div class="block"><div class="block-label">bullets</div><ul><li>One parent class → tree structure</li><li>&#x27;Is-a&#x27; relationship must hold</li><li>Children inherit all features (visibility rules apply)</li><li>Foundation: Liskov Substitution Principle</li></ul></div><div class="block"><div class="block-label">activity</div></div><div class="block"><div class="block-label">bullets</div><ul><li>Does the child truly &#x27;is-a&#x27; parent in all contexts?</li><li>Can child substitute for parent without breaking behavior?</li><li>Are inherited attributes meaningful for the child?</li></ul></div>
+<details open><summary>Speaker notes</summary><p>Present the three hierarchies. Give 90 seconds individual thinking, then 90 seconds pair discussion. Poll for answers—hierarchy B (Square→Rectangle) violates LSP because Square constrains Rectangle&#x27;s behavior (width must equal height). The &#x27;is-a&#x27; test fails: a Square cannot substitute for Rectangle in all contexts. Correct approach: make both inherit from Shape. This activity directly applies the principles just introduced and prepares students for the Vehicle design challenge on slide 3. Emphasize that recognizing violations is the first step toward creating correct hierarchies.</p></details>
+</article><article class="card">
+<header><div><div class="kicker">Slide 05 · split</div>
+<h2>Single Inheritance in Eiffel: Apply It</h2></div>
+<span class="level" style="border-color:#10b981;color:#10b981">Apply</span></header>
+<div class="evidence"><strong>Bloom evidence:</strong> Students implement CHECKING_ACCOUNT class with inheritance, features, and contracts in Eiffel syntax—direct code application with design decisions about preconditions.</div>
+<div class="block"><div class="block-label">code</div><pre>class ACCOUNT
+feature
+    balance: REAL
+    deposit (amount: REAL)
+        require amount &gt; 0
+        do
+            balance := balance + amount
+        end
+end
+
+class SAVINGS_ACCOUNT
+inherit
+    ACCOUNT
+feature
+    interest_rate: REAL
+    apply_interest
+        do
+            deposit(balance * interest_rate)
+        end
+end</pre></div><div class="block"><div class="block-label">activity</div></div><div class="block"><div class="block-label">bullets</div><ul><li>Which features does CHECKING_ACCOUNT inherit?</li><li>Should deduct_fee call deposit with negative amount?</li><li>What contract (require/ensure) protects balance integrity?</li></ul></div>
+<details open><summary>Speaker notes</summary><p>Give 2 minutes for students to sketch CHECKING_ACCOUNT code on paper or laptops. Then discuss solutions. Key points: inherits balance and deposit; deduct_fee needs &#x27;require balance &gt;= monthly_fee&#x27; to prevent negative balance; should NOT use deposit (violates its precondition). This directly applies Eiffel inheritance syntax and contracts, moving from observation to implementation. Connects to LSP discussion on next slides—proper preconditions ensure substitutability. Addresses the &#x27;implement inheritance hierarchies in Eiffel&#x27; objective at apply level.</p></details>
+</article><article class="card">
+<header><div><div class="kicker">Slide 06 · content</div>
+<h2>Multiple Inheritance: Power and Complexity</h2></div>
+<span class="level" style="border-color:#3b82f6;color:#3b82f6">Understand</span></header>
+<div class="evidence"><strong>Bloom evidence:</strong> Introduces MI concepts, DAG structures, and language support differences—explanatory content without application activities on this slide.</div>
+<div class="block"><div class="block-label">bullets</div><ul><li>Inherit from multiple parent classes</li><li>Combine orthogonal features (mixins)</li><li>Creates DAG (Directed Acyclic Graph) structures</li><li>Supported: C++, Eiffel, Python</li><li>Not supported: Java, C# (use interfaces instead)</li></ul></div>
+<details open><summary>Speaker notes</summary><p>Multiple inheritance is powerful but complex. It allows combining features from multiple sources—useful for mixins or when an object genuinely has multiple roles. Emphasize the structural difference: no longer a tree, but a DAG. Many languages avoid it due to complexity; Java/C# use single inheritance + interfaces as a compromise.</p></details>
+</article><article class="card">
+<header><div><div class="kicker">Slide 07 · split</div>
+<h2>The Diamond Problem: Analysis Challenge</h2></div>
+<span class="level" style="border-color:#f59e0b;color:#f59e0b">Analyze</span></header>
+<div class="evidence"><strong>Bloom evidence:</strong> Students identify all ambiguities (attributes, methods, initialization) in diamond scenario and break down the structural problem—analysis of components and relationships.</div>
+<div class="block"><div class="block-label">diagram</div><p><strong>Prompt:</strong> Diamond inheritance diagram showing Person class at top with &#x27;id&#x27; attribute, Student and Employee classes in middle both inheriting from Person, and TeachingAssistant class at bottom inheriting from both Student and Employee. Highlight the conflict: which &#x27;id&#x27; does TeachingAssistant inherit? Use red highlight or question mark to show ambiguity. Clean UML style.</p></div><div class="block"><div class="block-label">activity</div><p><strong>Activity:</strong> Analyze &amp; Propose</p><p><strong>Instructions:</strong> Given this TeachingAssistant scenario: (1) Identify all ambiguities that arise (attributes, methods, initialization). (2) Propose TWO different resolution strategies and explain trade-offs of each. (3) Which would you choose and why?</p></div>
+<details open><summary>Speaker notes</summary><p>Present the diamond problem, then engage students in analysis. They should identify: attribute conflicts (id), potential method conflicts (display_info), and initialization issues. Expected strategies: rename both ids, select one id, use composition instead. After pair discussion, poll the room for preferences and discuss trade-offs: clarity vs. simplicity, memory duplication vs. shared state. This prepares them for Eiffel&#x27;s explicit resolution approach in the next slide and addresses the evaluate objective for multiple inheritance design strategies.</p></details>
+</article><article class="card">
+<header><div><div class="kicker">Slide 08 · code</div>
+<h2>Resolving the Diamond: Eiffel Approach</h2></div>
+<span class="level" style="border-color:#3b82f6;color:#3b82f6">Understand</span></header>
+<div class="evidence"><strong>Bloom evidence:</strong> Demonstrates Eiffel&#x27;s rename solution with code example and explains trade-offs—explanatory rather than requiring students to implement or evaluate.</div>
+<div class="block"><div class="block-label">code</div><pre>class TEACHING_ASSISTANT
+inherit
+    STUDENT
+        rename
+            id as student_id
+        end
+    EMPLOYEE
+        rename
+            id as employee_id
+        end
+feature
+    student_id: STRING
+    employee_id: STRING
+    
+    -- Now both IDs are accessible
+    -- No ambiguity
+end</pre></div>
+<details open><summary>Speaker notes</summary><p>Eiffel&#x27;s solution: explicit renaming. The programmer must decide how to handle conflicts. Here we rename both &#x27;id&#x27; attributes to make them distinct. Alternative: use &#x27;select&#x27; to choose one. This makes the programmer&#x27;s intent clear and prevents silent errors. Discuss trade-off: more verbose but safer.</p></details>
+</article><article class="card">
+<header><div><div class="kicker">Slide 09 · content</div>
+<h2>Evaluating Multiple Inheritance Design Decisions</h2></div>
+<span class="level" style="border-color:#f97316;color:#f97316">Evaluate</span></header>
+<div class="evidence"><strong>Bloom evidence:</strong> Students compare MI vs. composition for TA scenario using explicit criteria (code reuse, maintainability, diamond risk, semantic clarity), vote, and justify choice—classic evaluation activity.</div>
+<div class="block"><div class="block-label">text</div><p>**Design Challenge:** You&#x27;re building a university system. A TeachingAssistant needs properties from both Student (courses, GPA) and Employee (salary, department). Consider two approaches:
+
+**A)** Multiple inheritance: `class TA inherit STUDENT; EMPLOYEE`
+
+**B)** Composition: `class TA inherit STUDENT` with `employment_info: EMPLOYEE_RECORD`</p></div><div class="block"><div class="block-label">activity</div><p><strong>Activity:</strong> Think-Pair-Share (3 min)</p><p><strong>Instructions:</strong> 1. Individually: Which design would you choose? List 2 pros and 2 cons for your choice (1 min)
+2. Pair: Compare reasoning with a neighbor (1 min)
+3. Share: Vote and justify (1 min)</p></div><div class="block"><div class="block-label">bullets</div><ul><li>Is-a vs. has-a: Does TA fundamentally *be* both roles?</li><li>Diamond risk: Could STUDENT and EMPLOYEE share ancestors?</li><li>Interface vs. implementation: Need behaviors or just data?</li><li>Language support: Does your language handle MI conflicts well?</li></ul></div>
+<details open><summary>Speaker notes</summary><p>This activity targets the &#x27;evaluate benefits and challenges of MI&#x27; objective. After voting, reveal that both can work but composition often wins for orthogonal concerns like employment. MI better when TA must substitute for both Student AND Employee polymorphically. Highlight that design choice depends on substitutability needs and language features. Connect back to slide 8&#x27;s renaming solution if MI chosen. Emphasize no single right answer—justification matters.</p></details>
+</article><article class="card">
+<header><div><div class="kicker">Slide 10 · split</div>
+<h2>Polymorphism: One Interface, Many Forms</h2></div>
+<span class="level" style="border-color:#3b82f6;color:#3b82f6">Understand</span></header>
+<div class="evidence"><strong>Bloom evidence:</strong> Explains polymorphism concept with memory diagram showing static vs. dynamic types—conceptual explanation without application task.</div>
+<div class="block"><div class="block-label">bullets</div><ul><li>Single interface, multiple implementations</li><li>Subtype polymorphism (inheritance-based)</li><li>Write code that works with any subtype</li><li>Enables extensibility without modification</li></ul></div><div class="block"><div class="block-label">diagram</div><p><strong>Prompt:</strong> Memory diagram showing an array labeled &#x27;shapes: ARRAY[SHAPE]&#x27; containing references pointing to different objects: a Circle object, a Rectangle object, and a Triangle object. Show the array holding references (arrows) to these different concrete types. Label static type as SHAPE and dynamic types as Circle, Rectangle, Triangle.</p></div>
+<details open><summary>Speaker notes</summary><p>Polymorphism is the ability to treat objects of different types uniformly through a common interface. The array has static type ARRAY[SHAPE], but contains objects of dynamic types Circle, Rectangle, Triangle. This is the power of polymorphism: write code once (iterate over shapes), works with any shape type, including types not yet invented.</p></details>
+</article><article class="card">
+<header><div><div class="kicker">Slide 11 · content</div>
+<h2>Liskov Substitution Principle (LSP)</h2></div>
+<span class="level" style="border-color:#3b82f6;color:#3b82f6">Understand</span></header>
+<div class="evidence"><strong>Bloom evidence:</strong> Defines LSP, explains behavioral subtyping and contract rules—conceptual understanding with Square/Rectangle example but no application activity.</div>
+<div class="block"><div class="block-label">quote</div><p>Objects of a subtype should be substitutable for objects of the supertype without altering program correctness.</p></div><div class="block"><div class="block-label">bullets</div><ul><li>Behavioral subtyping, not just structural</li><li>Preserve invariants and contracts</li><li>Weaken preconditions, strengthen postconditions</li><li>Violations lead to subtle bugs</li></ul></div>
+<details open><summary>Speaker notes</summary><p>LSP is crucial for correct inheritance. It&#x27;s not enough that a Square IS-A Rectangle structurally—it must behave correctly in all contexts where Rectangle is used. Classic violation: if Rectangle has setWidth/setHeight that work independently, but Square must keep width=height, substituting Square breaks code expecting Rectangle behavior. Always think: can I use the child wherever the parent is expected?</p></details>
+</article><article class="card">
+<header><div><div class="kicker">Slide 12 · code</div>
+<h2>Polymorphism in Eiffel</h2></div>
+<span class="level" style="border-color:#3b82f6;color:#3b82f6">Understand</span></header>
+<div class="evidence"><strong>Bloom evidence:</strong> Shows polymorphic code example (zoo feeding) with explanation of dynamic dispatch—students read and comprehend code rather than write it.</div>
+<div class="block"><div class="block-label">code</div><pre>class ZOO
+feature
+    animals: LINKED_LIST[ANIMAL]
+    
+    feed_all
+        local
+            animal: ANIMAL
+        do
+            from animals.start
+            until animals.after
+            loop
+                animal := animals.item
+                animal.eat  -- Polymorphic call
+                animals.forth
+            end
+        end
+end
+
+-- Works with Dog, Cat, Bird, etc.
+-- Each implements &#x27;eat&#x27; differently</pre></div>
+<details open><summary>Speaker notes</summary><p>This demonstrates polymorphic programming. The feed_all method works with any ANIMAL subtype. The call to animal.eat is polymorphic—which implementation runs depends on the dynamic type (Dog.eat, Cat.eat, etc.). Note that static type is ANIMAL, but dynamic type varies. This is resolved at runtime through dynamic binding, our next topic.</p></details>
+</article><article class="card">
+<header><div><div class="kicker">Slide 13 · content</div>
+<h2>Dynamic Binding: Runtime Method Resolution</h2></div>
+<span class="level" style="border-color:#3b82f6;color:#3b82f6">Understand</span></header>
+<div class="evidence"><strong>Bloom evidence:</strong> Explains static vs. dynamic binding, vtable mechanism, and trade-offs—conceptual explanation of the mechanism.</div>
+<div class="block"><div class="block-label">bullets</div><ul><li>Static binding: resolved at compile time</li><li>Dynamic binding: resolved at runtime</li><li>Enables polymorphism to work</li><li>Uses virtual method table (vtable)</li><li>Trade-off: flexibility vs. performance</li></ul></div>
+<details open><summary>Speaker notes</summary><p>Dynamic binding is the mechanism that makes polymorphism work. When you call animal.eat, the compiler doesn&#x27;t know which eat method to call—it depends on the runtime type. Dynamic binding defers this decision to runtime using a vtable. This adds a small performance cost (indirection) but gives enormous flexibility. In Eiffel, all calls are dynamically bound by default.</p></details>
+</article><article class="card">
+<header><div><div class="kicker">Slide 14 · split</div>
+<h2>Virtual Method Table (vtable)</h2></div>
+<span class="level" style="border-color:#3b82f6;color:#3b82f6">Understand</span></header>
+<div class="evidence"><strong>Bloom evidence:</strong> Detailed explanation of vtable implementation with memory diagram showing lookup process—understanding the mechanism rather than analyzing performance or implementing.</div>
+<div class="block"><div class="block-label">diagram</div><p><strong>Prompt:</strong> Detailed memory layout diagram showing: 1) A Dog object in memory with a vtable pointer at the top, followed by data fields. 2) The vtable pointer (arrow) pointing to Dog&#x27;s vtable. 3) Dog&#x27;s vtable as a table with entries: eat -&gt; Dog.eat, sleep -&gt; Dog.sleep, speak -&gt; Dog.speak. 4) Show similar structure for Cat object pointing to Cat&#x27;s vtable. Label clearly: &#x27;vtable pointer&#x27;, &#x27;Dog vtable&#x27;, &#x27;method addresses&#x27;.</p></div><div class="block"><div class="block-label">bullets</div><ul><li>Each object has vtable pointer</li><li>Vtable maps method names to addresses</li><li>Runtime: follow pointer, lookup method, call</li><li>One vtable per class, shared by all instances</li></ul></div>
+<details open><summary>Speaker notes</summary><p>This is how dynamic binding works under the hood. Each object has a hidden pointer to its class&#x27;s vtable. When you call animal.eat: (1) follow the vtable pointer, (2) look up &#x27;eat&#x27; in the table, (3) call the address found. This is fast (two indirections) but slower than static calls. One vtable per class, not per object, so memory overhead is minimal.</p></details>
+</article><article class="card">
+<header><div><div class="kicker">Slide 15 · split</div>
+<h2>Method Redefinition: Apply It</h2></div>
+<span class="level" style="border-color:#10b981;color:#10b981">Apply</span></header>
+<div class="evidence"><strong>Bloom evidence:</strong> Students design RECTANGLE and TRIANGLE classes with redefined area methods, deciding on features and implementations—hands-on application of redefinition.</div>
+<div class="block"><div class="block-label">code</div><pre>class SHAPE
+feature
+    area: REAL
+        deferred
+        end
+end
+
+class CIRCLE
+inherit
+    SHAPE
+        redefine area end
+feature
+    radius: REAL
+    area: REAL
+        do
+            Result := 3.14159 * radius * radius
+        end
+end</pre></div><div class="block"><div class="block-label">activity</div></div>
+<details open><summary>Speaker notes</summary><p>Students now apply redefinition to new shapes. Walk through CIRCLE first: deferred means no implementation in parent; redefine clause signals override; effective implementation required. Then give 3 minutes for the activity. Circulate and check designs. Common solution: RECTANGLE needs width, height; area = width * height. TRIANGLE needs base, height; area = 0.5 * base * height. Some may suggest adding perimeter as deferred. Debrief 2-3 solutions, emphasizing the redefine clause and that each subclass provides appropriate calculations.</p></details>
+</article><article class="card">
+<header><div><div class="kicker">Slide 16 · code</div>
+<h2>Using Precursor: Extending Parent Behavior</h2></div>
+<span class="level" style="border-color:#3b82f6;color:#3b82f6">Understand</span></header>
+<div class="evidence"><strong>Bloom evidence:</strong> Demonstrates Precursor usage in MANAGER.calculate_salary example—shows how to extend behavior but students don&#x27;t implement it themselves on this slide.</div>
+<div class="block"><div class="block-label">code</div><pre>class EMPLOYEE
+feature
+    calculate_salary: REAL
+        do
+            Result := base_salary
+        end
+end
+
+class MANAGER
+inherit
+    EMPLOYEE
+        redefine calculate_salary end
+feature
+    calculate_salary: REAL
+        do
+            Result := Precursor + bonus
+            -- Calls EMPLOYEE.calculate_salary
+            -- then adds bonus
+        end
+end</pre></div>
+<details open><summary>Speaker notes</summary><p>Precursor calls the parent&#x27;s implementation. This is crucial for extending rather than replacing behavior. MANAGER.calculate_salary builds on EMPLOYEE.calculate_salary by adding a bonus. This promotes code reuse and maintains the parent&#x27;s logic. Without Precursor, you&#x27;d have to duplicate the base_salary calculation. Similar to &#x27;super&#x27; in Java or Python.</p></details>
+</article><article class="card">
+<header><div><div class="kicker">Slide 17 · split</div>
+<h2>Design Patterns: Template Method</h2></div>
+<span class="level" style="border-color:#3b82f6;color:#3b82f6">Understand</span></header>
+<div class="evidence"><strong>Bloom evidence:</strong> Explains Template Method pattern with UML diagram and describes how it leverages inheritance—conceptual understanding of pattern structure.</div>
+<div class="block"><div class="block-label">diagram</div><p><strong>Prompt:</strong> UML class diagram showing Template Method pattern. Abstract class DataProcessor at top with template method &#x27;process()&#x27; that calls abstract methods &#x27;read_data()&#x27;, &#x27;process_data()&#x27;, &#x27;write_data()&#x27;. Two concrete classes below: CSVProcessor and JSONProcessor, each implementing the three abstract methods. Show the sequence: process() calls the three steps in order.</p></div><div class="block"><div class="block-label">bullets</div><ul><li>Define algorithm skeleton in parent</li><li>Subclasses customize specific steps</li><li>Parent controls overall flow</li><li>Promotes consistency and reuse</li></ul></div>
+<details open><summary>Speaker notes</summary><p>Template Method is a classic pattern leveraging inheritance and redefinition. The parent defines the algorithm structure (process = read, then process, then write), but leaves specific steps abstract. Each subclass provides concrete implementations. This ensures all processors follow the same flow while allowing customization. Common in frameworks. Note how this relies on dynamic binding to call the right implementations.</p></details>
+</article><article class="card">
+<header><div><div class="kicker">Slide 18 · content</div>
+<h2>Common Pitfalls and Best Practices</h2></div>
+<span class="level" style="border-color:#64748b;color:#64748b">Remember</span></header>
+<div class="evidence"><strong>Bloom evidence:</strong> Lists best practices and pitfalls to avoid—primarily recall of guidelines without application or evaluation activities.</div>
+<div class="block"><div class="block-label">bullets</div><ul><li>Avoid deep hierarchies (&gt; 4-5 levels)</li><li>Favor composition over inheritance for &#x27;has-a&#x27;</li><li>Don&#x27;t break encapsulation with protected members</li><li>Ensure LSP compliance—test substitutability</li><li>Document redefinable methods clearly</li></ul></div>
+<details open><summary>Speaker notes</summary><p>Common mistakes: deep hierarchies become hard to understand (yo-yo problem). Use composition when objects have parts, not when they are subtypes. Protected members can break encapsulation—prefer private with protected accessors. Always test that subclasses can substitute for parents. These practices prevent the &#x27;fragile base class&#x27; problem where changes to parents break children.</p></details>
+</article><article class="card">
+<header><div><div class="kicker">Slide 19 · content</div>
+<h2>Summary: Key Takeaways</h2></div>
+<span class="level" style="border-color:#64748b;color:#64748b">Remember</span></header>
+<div class="evidence"><strong>Bloom evidence:</strong> Recaps main concepts covered in lecture—recall and consolidation of learned material.</div>
+<div class="block"><div class="block-label">bullets</div><ul><li>Inheritance: Code reuse and modeling &#x27;is-a&#x27; relationships</li><li>Multiple inheritance: Powerful but requires careful design</li><li>Polymorphism + LSP: Write flexible, substitutable code</li><li>Dynamic binding: Runtime method resolution via vtables</li><li>Redefinition: Customize behavior while maintaining contracts</li><li>Apply thoughtfully: Balance flexibility with complexity</li></ul></div>
+<details open><summary>Speaker notes</summary><p>Recap the key concepts. Inheritance is a powerful tool for reuse and modeling, but must be used thoughtfully. Polymorphism and LSP ensure correct, flexible designs. Dynamic binding is the mechanism enabling polymorphism. These concepts work together to create extendible, maintainable systems. Next lecture: genericity and parametric polymorphism. Encourage students to practice with the exercises and come to tutorial with questions.</p></details>
+</article><article class="card">
+<header><div><div class="kicker">Slide 20 · content</div>
+<h2>Looking Ahead</h2></div>
+<span class="level" style="border-color:#64748b;color:#64748b">Remember</span></header>
+<div class="evidence"><strong>Bloom evidence:</strong> Previews upcoming topics and assigns practice exercises—informational content about future learning.</div>
+<div class="block"><div class="block-label">heading</div><p>Next Topics</p></div><div class="block"><div class="block-label">bullets</div><ul><li>Genericity and parametric polymorphism</li><li>Design by Contract: Strengthening inheritance with contracts</li><li>Advanced design patterns using these mechanisms</li><li>Real-world case studies and applications</li></ul></div><div class="block"><div class="block-label">text</div><p>Practice: Implement the exercise hierarchies in Eiffel. Prepare questions for tutorial.</p></div>
+<details open><summary>Speaker notes</summary><p>Preview upcoming topics to show how today&#x27;s concepts fit into the bigger picture. Genericity will add another dimension of flexibility. Design by Contract will show how to make inheritance hierarchies more robust. Emphasize the importance of hands-on practice—implement the suggested exercises. Remind students of tutorial times and encourage them to bring specific questions about challenging concepts.</p></details>
+</article>
+</div></body></html>

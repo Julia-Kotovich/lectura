@@ -1,0 +1,198 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8" />
+<title>Lecture 7. Software Architecture: Structuring Large-Scale Programs — Bloom preview</title>
+<style>
+body{margin:0;font:14px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#111827;background:#f8fafc}
+.page{max-width:1100px;margin:0 auto;padding:32px 24px 80px}
+.hero,.card,.panel{background:#fff;border:1px solid #e5e7eb;border-radius:16px;padding:22px;margin-bottom:18px}
+h1{margin:0 0 6px;font-size:28px} h2{margin:2px 0 0;font-size:20px}
+.muted{color:#6b7280}
+.metrics{display:flex;gap:24px;margin-top:14px}
+.metrics b{font-size:24px;display:block}
+table{border-collapse:collapse} td{padding:6px 10px;border-bottom:1px solid #e5e7eb}
+.bar{height:8px;width:140px;background:#e5e7eb;border-radius:99px;overflow:hidden}
+.bar span{display:block;height:100%;border-radius:99px}
+.card header{display:flex;justify-content:space-between;gap:16px;border-bottom:1px solid #e5e7eb;padding-bottom:12px;margin-bottom:12px}
+.kicker{color:#6b7280;font-size:12px;text-transform:uppercase;letter-spacing:.08em}
+.level{border:1px solid;border-radius:99px;padding:5px 10px;font-weight:700;font-size:12px;white-space:nowrap;align-self:flex-start}
+.evidence{padding:10px 12px;border-left:4px solid #8b5cf6;background:#f5f3ff;border-radius:8px;margin:10px 0}
+.block{border:1px solid #e5e7eb;border-radius:10px;padding:10px 12px;margin:8px 0}
+.block-label{color:#6b7280;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px}
+pre{white-space:pre-wrap;background:#0f172a;color:#e5e7eb;padding:10px;border-radius:8px;overflow:auto}
+ul{margin:4px 0 0 20px;padding:0} p{margin:6px 0}
+details{margin-top:10px;color:#374151} summary{cursor:pointer;color:#6b7280;font-weight:700}
+@media print{body{background:#fff}.card{break-inside:avoid}}
+</style></head><body><div class="page">
+<section class="hero"><h1>Lecture 7. Software Architecture: Structuring Large-Scale Programs</h1>
+<p class="muted">Slide-by-slide Bloom preview · generated 2026-07-12 13:22 UTC</p>
+<div class="metrics">
+<div><span class="muted">Bloom score</span><b>88</b></div>
+<div><span class="muted">Dominant level</span><b>Apply</b></div>
+<div><span class="muted">Slides</span><b>18</b></div>
+</div></section>
+<section class="panel"><h2>Bloom distribution</h2><table><tr><td>Remember</td><td>5%</td><td><div class="bar"><span style="width:5%;background:#64748b"></span></div></td></tr><tr><td>Understand</td><td>15%</td><td><div class="bar"><span style="width:15%;background:#3b82f6"></span></div></td></tr><tr><td>Apply</td><td>45%</td><td><div class="bar"><span style="width:45%;background:#10b981"></span></div></td></tr><tr><td>Analyze</td><td>20%</td><td><div class="bar"><span style="width:20%;background:#f59e0b"></span></div></td></tr><tr><td>Evaluate</td><td>10%</td><td><div class="bar"><span style="width:10%;background:#f97316"></span></div></td></tr><tr><td>Create</td><td>5%</td><td><div class="bar"><span style="width:5%;background:#8b5cf6"></span></div></td></tr></table></section>
+<article class="card">
+<header><div><div class="kicker">Slide 01 · title</div>
+<h2>Software Architecture: Structuring Large-Scale Programs</h2></div>
+<span class="level" style="border-color:#71717a;color:#71717a">Untagged</span></header>
+<div class="evidence"><strong>Bloom evidence:</strong> No Bloom tag for this slide.</div>
+<div class="block"><div class="block-label">heading</div><p>Lecture 7: Software Architecture</p></div><div class="block"><div class="block-label">text</div><p>Structuring Large-Scale Programs</p></div>
+<details open><summary>Speaker notes</summary><p>Welcome to Lecture 7 on Software Architecture. Today we shift from detailed design to strategic, system-wide thinking. This lecture is foundational for building maintainable, scalable systems. Emphasize that architecture decisions are costly to change, so getting them right early matters. Set expectations: we&#x27;ll cover layering, components, dependencies, packaging, and complexity management.</p></details>
+</article><article class="card">
+<header><div><div class="kicker">Slide 02 · content</div>
+<h2>What is Software Architecture?</h2></div>
+<span class="level" style="border-color:#f97316;color:#f97316">Evaluate</span></header>
+<div class="evidence"><strong>Bloom evidence:</strong> Activity requires students to classify decisions as architectural vs. tactical and justify reasoning based on cost to change and system-wide impact—evaluation of decision significance</div>
+<div class="block"><div class="block-label">bullets</div><ul><li>Fundamental organization of a system</li><li>High-level structure: components, relationships, principles</li><li>Strategic decisions vs. tactical design</li><li>Addresses non-functional requirements (performance, scalability, security)</li></ul></div><div class="block"><div class="block-label">quote</div><p>Architecture is about the important stuff... whatever that is. — Ralph Johnson</p></div><div class="block"><div class="block-label">activity</div><ul><li>A. Choosing PostgreSQL vs. MongoDB for data storage</li><li>B. Naming a variable &#x27;userCount&#x27; vs. &#x27;numUsers&#x27;</li><li>C. Deciding REST API vs. message queue for service communication</li><li>D. Selecting a sorting algorithm for a single function</li></ul></div>
+<details open><summary>Speaker notes</summary><p>Define architecture as the system skeleton—strategic, costly to change, addressing non-functional requirements. Use building analogy: floor plan vs. paint color. After presenting the definition, run the evaluation activity. Poll students or discuss: A and C are architectural (expensive reversal, system-wide impact); B and D are tactical (local, cheap to change). This evaluation task develops judgment about what makes decisions architectural, addressing the need for higher-order thinking and preparing students to make informed architectural choices in later design exercises.</p></details>
+</article><article class="card">
+<header><div><div class="kicker">Slide 03 · content</div>
+<h2>Architecture vs. Design vs. Implementation</h2></div>
+<span class="level" style="border-color:#10b981;color:#10b981">Apply</span></header>
+<div class="evidence"><strong>Bloom evidence:</strong> Students classify decisions by abstraction level and justify classifications based on scope and cost of change—applying abstraction hierarchy to concrete decisions</div>
+<div class="block"><div class="block-label">diagram</div><p><strong>Prompt:</strong> Create a pyramid diagram with three layers. Top layer (smallest): &#x27;Architecture&#x27; with label &#x27;Strategic, Long-term, System-wide&#x27;. Middle layer: &#x27;Design&#x27; with label &#x27;Tactical, Module-level&#x27;. Bottom layer (largest): &#x27;Implementation&#x27; with label &#x27;Detailed, Code-level&#x27;. Use distinct colors for each layer and show decreasing abstraction from top to bottom.</p></div><div class="block"><div class="block-label">activity</div><ul><li>A. Choosing between monolithic vs. microservices deployment</li><li>B. Defining the UserService class interface with methods login() and register()</li><li>C. Writing a for-loop vs. stream API to iterate over a collection</li><li>D. Deciding authentication will use JWT tokens passed via HTTP headers</li><li>E. Selecting variable names following camelCase convention</li></ul></div>
+<details open><summary>Speaker notes</summary><p>Present the pyramid to establish the abstraction hierarchy. Then run the classification activity to move students from understanding to application. Expected answers: A=Architecture (system-wide, strategic), B=Design (module interface, tactical), C=Implementation (code detail), D=Architecture (cross-cutting security decision), E=Implementation (code convention). Discuss why D is architectural despite seeming detailed—it affects all services and is costly to change. This exercise develops judgment about abstraction levels and prepares students to operate at the appropriate level when making decisions in later design tasks.</p></details>
+</article><article class="card">
+<header><div><div class="kicker">Slide 04 · content</div>
+<h2>Architectural Thinking</h2></div>
+<span class="level" style="border-color:#f97316;color:#f97316">Evaluate</span></header>
+<div class="evidence"><strong>Bloom evidence:</strong> Students evaluate two architectural approaches for startup scenario, considering trade-offs across multiple quality attributes and stakeholder perspectives—judgment and justification of competing approaches</div>
+<div class="block"><div class="block-label">bullets</div><ul><li>System-wide concerns over local optimization</li><li>Balancing competing quality attributes (trade-offs)</li><li>Components and their interactions</li><li>Evolution and change over time</li></ul></div><div class="block"><div class="block-label">activity</div><ul></ul></div>
+<details open><summary>Speaker notes</summary><p>Present architectural thinking principles briefly, then immediately move to the evaluation activity. This develops decision-making skills central to architectural thinking. Expected reasoning: Approach A suits startup constraints (small team, tight timeline, uncertain product-market fit), while B addresses scale but adds premature complexity. Guide discussion toward context-dependent decisions, quality attribute trade-offs (performance vs. maintainability, speed vs. scalability), and stakeholder perspectives (developers want simplicity, investors want scalability). Emphasize that architectural thinking means justifying choices with explicit trade-off analysis, not seeking perfect solutions. This prepares students for later design tasks requiring similar judgment.</p></details>
+</article><article class="card">
+<header><div><div class="kicker">Slide 05 · content</div>
+<h2>Layered Architecture: Core Principles</h2></div>
+<span class="level" style="border-color:#10b981;color:#10b981">Apply</span></header>
+<div class="evidence"><strong>Bloom evidence:</strong> Students organize library system components into layers and justify placement with dependency flow—applying layering pattern to concrete scenario</div>
+<div class="block"><div class="block-label">bullets</div><ul><li>Horizontal separation of concerns by responsibility</li><li>Each layer depends only on layers below (strict layering)</li><li>Abstraction hides implementation details between layers</li><li>Common pattern: Presentation → Business Logic → Data Access → Database</li></ul></div><div class="block"><div class="block-label">activity</div><ul></ul></div>
+<details open><summary>Speaker notes</summary><p>Briefly review layered architecture principles: separation by concern, downward dependencies, abstraction between layers. Then move to the application activity. Students should organize components into layers and explain their reasoning. Expected structure: Presentation (search UI, catalog display), Business Logic (checkout logic, late fee calculator, authentication, email notifications), Data Access (database queries), Database (SQL database). Guide discussion on dependency direction and why certain components belong in specific layers. Emphasize that authentication and notifications are business logic, not presentation. This applies the layering pattern to a concrete scenario, addressing the &#x27;apply layered architecture&#x27; objective.</p></details>
+</article><article class="card">
+<header><div><div class="kicker">Slide 06 · content</div>
+<h2>Apply: Design a Layered Architecture</h2></div>
+<span class="level" style="border-color:#10b981;color:#10b981">Apply</span></header>
+<div class="evidence"><strong>Bloom evidence:</strong> Students design complete layered architecture for e-commerce order system, organizing components, drawing dependencies, and justifying layer assignments—applying pattern to realistic design problem</div>
+<div class="block"><div class="block-label">diagram</div><p><strong>Prompt:</strong> Simple reference diagram showing four horizontal layers: Presentation Layer (top), Business Logic Layer, Data Access Layer, Database Layer (bottom). Downward arrows between layers. Minimal, clean design with layer names only.</p></div><div class="block"><div class="block-label">activity</div><ul></ul></div>
+<details open><summary>Speaker notes</summary><p>Students now apply layered architecture to a realistic scenario. Provide 5-7 minutes for design work (pairs or small groups). Expected structure: Presentation (product browsing UI, cart display), Business Logic (discount calculation, shipping calculation, payment processing, email service, inventory tracking), Data Access (order repository, product repository), Database (persistent storage). During discussion, probe: Why is payment processing business logic, not data access? Where do validation rules belong? What happens if presentation directly queries the database? This directly addresses the &#x27;apply layered architecture&#x27; objective by requiring students to structure a system using the pattern.</p></details>
+</article><article class="card">
+<header><div><div class="kicker">Slide 07 · content</div>
+<h2>Analyze: Layer Violations and Coupling</h2></div>
+<span class="level" style="border-color:#f59e0b;color:#f59e0b">Analyze</span></header>
+<div class="evidence"><strong>Bloom evidence:</strong> Students diagnose coupling problems in code examples, identify layer violations, predict maintenance consequences, and propose refactoring—breaking down architectural problems and analyzing dependencies</div>
+<div class="block"><div class="block-label">code</div><pre>// Example A
+public class OrderService {
+    public Order getOrder(int id) {
+        return orderRepo.findById(id);
+    }
+}
+
+// Example B
+public class OrderService {
+    public ResultSet getOrder(int id) {
+        return db.executeQuery(
+            &quot;SELECT * FROM orders WHERE id=&quot; + id);
+    }
+}</pre></div><div class="block"><div class="block-label">activity</div><p><strong>Activity:</strong> Diagnosis Exercise: Identify Architectural Problems</p><p><strong>Instructions:</strong> Analyze both code examples above:
+
+1. Identify which example violates layering principles and explain why
+2. Diagnose the coupling problems: what types of dependencies exist?
+3. Predict maintenance consequences: what breaks if the database changes from SQL to MongoDB?
+4. Propose a refactoring strategy to fix violations in the problematic example</p></div>
+<details open><summary>Speaker notes</summary><p>This analysis activity directly addresses the dependency management objective by having students diagnose coupling problems in layered architectures. Students must identify that Example B violates layering by exposing ResultSet (data layer detail) through business layer, creating tight coupling to database implementation. Expected analysis: Example B has implementation dependency on JDBC, forces presentation layer to understand SQL result handling, breaks encapsulation. Consequences: changing databases requires modifying both business and presentation layers. Refactoring: introduce domain objects (Order) and repository abstraction. Debrief common answers and connect to dependency inversion principle covered later.</p></details>
+</article><article class="card">
+<header><div><div class="kicker">Slide 08 · content</div>
+<h2>Component-Based Design</h2></div>
+<span class="level" style="border-color:#10b981;color:#10b981">Apply</span></header>
+<div class="evidence"><strong>Bloom evidence:</strong> Students decompose e-commerce system into components, define provided/required interfaces, and justify component boundaries—applying component design principles to system decomposition</div>
+<div class="block"><div class="block-label">bullets</div><ul><li>Independently deployable units with well-defined interfaces</li><li>Encapsulation of internal implementation details</li><li>Right-sized granularity (larger than classes, smaller than systems)</li><li>Component ≠ Module ≠ Class</li></ul></div><div class="block"><div class="block-label">activity</div><p><strong>Activity:</strong> Design Exercise: E-Commerce System</p><p><strong>Instructions:</strong> Given an e-commerce platform with user accounts, product catalog, shopping cart, payment processing, order fulfillment, and notifications:
+
+1. Identify 4-5 components with appropriate granularity
+2. For each component, define provided interfaces (what it offers)
+3. Define required interfaces (what it needs from others)
+4. Justify your component boundaries and interface choices</p></div>
+<details open><summary>Speaker notes</summary><p>Introduce component-based architecture as building blocks with clear contracts. After presenting key properties, transition to design exercise. Students apply component thinking to decompose a realistic system, practicing the &#x27;design component-based systems&#x27; objective. Walk around during activity; common issues: components too fine-grained (one per entity) or too coarse (single e-commerce component). Debrief: discuss granularity choices, interface design decisions, and how components enable independent deployment. Example solution: UserManagement (provides IAuth, IUserProfile), ProductCatalog (provides IProductSearch), OrderProcessing (requires IPayment, INotification), PaymentGateway (provides IPayment), NotificationService (provides INotification). This exercise moves from understanding to create-level synthesis.</p></details>
+</article><article class="card">
+<header><div><div class="kicker">Slide 09 · split</div>
+<h2>Component Diagram: Interface Analysis</h2></div>
+<span class="level" style="border-color:#f59e0b;color:#f59e0b">Analyze</span></header>
+<div class="evidence"><strong>Bloom evidence:</strong> Students identify substitutable components, analyze responsibility placement for new requirements, and extend architecture—analyzing component relationships and design decisions</div>
+<div class="block"><div class="block-label">diagram</div><p><strong>Prompt:</strong> Create a UML component diagram showing a &#x27;Payment Processing&#x27; component in the center. Show provided interfaces using lollipop notation on the left: &#x27;IPaymentProcessor&#x27;, &#x27;IRefundHandler&#x27;. Show required interfaces using socket notation on the right: &#x27;INotificationService&#x27;, &#x27;ITransactionLogger&#x27;. Include two other components: &#x27;Notification Service&#x27; (providing INotificationService) and &#x27;Transaction Logger&#x27; (providing ITransactionLogger) connected to the required interfaces. Use standard UML component notation.</p></div><div class="block"><div class="block-label">activity</div><p><strong>Activity:</strong> Analyze &amp; Extend</p><p><strong>Instructions:</strong> 1. Identify which components could be substituted without changing Payment Processing. Why?
+2. A new requirement: Payment Processing must validate fraud. Should this be a new provided interface, required interface, or internal responsibility? Justify your choice.
+3. Sketch how you&#x27;d add a &#x27;Fraud Detection&#x27; component to this diagram.</p></div>
+<details open><summary>Speaker notes</summary><p>Start by explaining UML notation: lollipops (provided interfaces) vs. sockets (required interfaces). Payment Processing depends on abstractions, enabling substitution—any component implementing INotificationService can plug in. The activity elevates to analyze and apply levels. Question 1 tests dependency inversion understanding. Question 2 requires analyzing responsibility placement and interface design trade-offs. Question 3 applies component design principles to extend the architecture. Debrief: Fraud Detection should provide IFraudValidator (required by Payment Processing), keeping concerns separated and enabling independent deployment. This bridges understanding notation with applying component design thinking.</p></details>
+</article><article class="card">
+<header><div><div class="kicker">Slide 10 · split</div>
+<h2>Component Design Principles</h2></div>
+<span class="level" style="border-color:#10b981;color:#10b981">Apply</span></header>
+<div class="evidence"><strong>Bloom evidence:</strong> Students decompose monolithic component applying Single Responsibility, design interfaces using dependency inversion, and justify abstraction choices—applying SOLID principles at component scale</div>
+<div class="block"><div class="block-label">bullets</div><ul><li>Single Responsibility (component level)</li><li>High cohesion within components</li><li>Low coupling between components</li><li>Interface segregation</li><li>Dependency inversion</li><li>Clear contracts &amp; substitutability</li></ul></div><div class="block"><div class="block-label">activity</div><p><strong>Activity:</strong> Design Challenge</p><p><strong>Instructions:</strong> Given: A monolithic &#x27;UserManagement&#x27; component handles authentication, profile storage, email notifications, and activity logging.
+
+1. Apply Single Responsibility: decompose into separate components with clear responsibilities.
+2. Design interfaces between components using dependency inversion.
+3. Identify which components should depend on abstractions vs. concrete implementations. Justify your choices.</p></div>
+<details open><summary>Speaker notes</summary><p>Briefly review SOLID at component scale: Single Responsibility (one reason to change), high cohesion (related functionality together), low coupling (minimal dependencies), interface segregation (specific interfaces), dependency inversion (depend on abstractions). The activity elevates to create/analyze levels, addressing the &#x27;design component-based systems&#x27; objective. Students must decompose a monolith, design interfaces, and apply dependency inversion—synthesizing new architecture while analyzing responsibility placement. Debrief: Likely components are Authenticator, ProfileStore, Notifier, Logger. Authenticator might require INotifier (abstraction), enabling substitution. This bridges principles to practical component design thinking.</p></details>
+</article><article class="card">
+<header><div><div class="kicker">Slide 11 · split</div>
+<h2>Module Dependencies &amp; Analysis</h2></div>
+<span class="level" style="border-color:#f59e0b;color:#f59e0b">Analyze</span></header>
+<div class="evidence"><strong>Bloom evidence:</strong> Students draw dependency graph, identify cycles, calculate coupling metrics, and propose refactoring to break cycles—analyzing dependency structure and diagnosing problems</div>
+<div class="block"><div class="block-label">bullets</div><ul><li>Compile-time, runtime, data dependencies</li><li>Dependency graphs reveal structure</li><li>Cyclic dependencies prevent independent deployment</li><li>Coupling metrics: afferent (incoming) &amp; efferent (outgoing)</li></ul></div><div class="block"><div class="block-label">activity</div><p><strong>Activity:</strong> Dependency Analysis Challenge</p><p><strong>Instructions:</strong> Given: A system with modules Auth, Orders, Payments, Inventory, Notifications. Dependencies: Auth→Notifications, Orders→Auth, Orders→Inventory, Orders→Payments, Payments→Notifications, Inventory→Orders (cycle!), Notifications→Auth (cycle!).
+
+1. Draw the dependency graph and identify all cycles.
+2. Calculate efferent coupling for Orders module.
+3. Propose refactoring to break cycles using dependency inversion or events.</p></div>
+<details open><summary>Speaker notes</summary><p>Dependencies are the &#x27;wiring&#x27; of architecture. Types: compile-time (imports), runtime (dynamic loading), data (shared schemas). Dependency graphs visualize relationships. Cycles create tight coupling—can&#x27;t test or deploy independently. Metrics: afferent (how many depend on you), efferent (how many you depend on). The activity addresses the analyze-level dependency management objective. Students must analyze a real graph, identify problematic cycles (Inventory→Orders→Inventory and Notifications→Auth→Notifications), calculate coupling, and propose solutions like introducing interfaces or event-driven decoupling. Debrief: Orders has efferent coupling of 3. Break cycles by having Inventory depend on IOrderEvents interface or use messaging.</p></details>
+</article><article class="card">
+<header><div><div class="kicker">Slide 12 · split</div>
+<h2>Dependency Analysis Exercise</h2></div>
+<span class="level" style="border-color:#f59e0b;color:#f59e0b">Analyze</span></header>
+<div class="evidence"><strong>Bloom evidence:</strong> Students identify all cycles in complex graph, calculate coupling metrics, determine stability, and propose specific refactoring strategies—comprehensive dependency analysis with solution proposals</div>
+<div class="block"><div class="block-label">diagram</div><p><strong>Prompt:</strong> Create a directed graph showing module dependencies. Include 6 nodes labeled: UI, UserService, OrderService, PaymentService, Database, Logger. Show directed edges: UI→UserService, UI→OrderService, UserService→Database, OrderService→PaymentService, PaymentService→Database, Logger→Database, OrderService→UserService, PaymentService→UserService, UserService→Logger, Logger→UserService. Use different colors for nodes. Make this a complex graph for analysis.</p></div><div class="block"><div class="block-label">activity</div><p><strong>Activity:</strong> Analyze &amp; Fix Dependencies</p><p><strong>Instructions:</strong> Examine the dependency graph shown.
+
+1. Identify ALL cycles in the graph and mark them.
+2. Calculate efferent coupling for UserService (count outgoing dependencies).
+3. Which module is most stable (highest afferent coupling)? Most volatile?
+4. Propose TWO specific refactoring strategies to break the cycles using dependency inversion, interfaces, or event-driven patterns.</p></div>
+<details open><summary>Speaker notes</summary><p>This analyze-level activity addresses the dependency management objective. Students must diagnose multiple problems: UserService↔Logger cycle, and potential circular paths through PaymentService. UserService has efferent coupling of 2 (Database, Logger). Database has highest afferent coupling (most stable). Solutions include: introduce IUserRepository interface to invert Database dependency, use event bus for Logger (UserService emits events, Logger subscribes), or create IPaymentValidator interface to break PaymentService→UserService. Debrief focuses on how cycles prevent independent testing and deployment, and how inversion/abstraction restores modularity.</p></details>
+</article><article class="card">
+<header><div><div class="kicker">Slide 13 · content</div>
+<h2>Managing Dependencies: Key Principles</h2></div>
+<span class="level" style="border-color:#3b82f6;color:#3b82f6">Understand</span></header>
+<div class="evidence"><strong>Bloom evidence:</strong> Presentation of ADP, SDP, SAP principles with explanations and examples—conceptual understanding of dependency management principles without application activity</div>
+<div class="block"><div class="block-label">bullets</div><ul><li>Acyclic Dependencies Principle (ADP)</li><li>Stable Dependencies Principle (SDP)</li><li>Stable Abstractions Principle (SAP)</li><li>Break cycles: inversion, interfaces, events</li></ul></div>
+<details open><summary>Speaker notes</summary><p>Three key principles for managing dependencies. ADP: No cycles in dependency graph—ensures clean structure. SDP: Depend in the direction of stability—don&#x27;t depend on volatile modules. Stable modules are hard to change (many depend on them), so they should be dependable. SAP: Stable modules should be abstract (interfaces/base classes)—this allows flexibility. Concrete implementations should be unstable (easy to change). Techniques to break cycles: dependency inversion (introduce interface), merge packages if they&#x27;re cohesive, use events/observers for decoupling. Example: UI shouldn&#x27;t depend on specific business logic—use interfaces.</p></details>
+</article><article class="card">
+<header><div><div class="kicker">Slide 14 · content</div>
+<h2>Package Organization Strategies</h2></div>
+<span class="level" style="border-color:#10b981;color:#10b981">Apply</span></header>
+<div class="evidence"><strong>Bloom evidence:</strong> Students reorganize codebase from layer-based to feature-based packages using CCP/CRP, justifying grouping decisions—applying package organization strategies to improve structure</div>
+<div class="block"><div class="block-label">bullets</div><ul><li>Package by Layer: technical grouping (controllers, services, repositories)</li><li>Package by Feature: business capability grouping (user, billing, inventory)</li><li>Package by Component: architectural unit grouping</li><li>Screaming Architecture: structure reveals business intent, not framework</li></ul></div><div class="block"><div class="block-label">activity</div><p><strong>Activity:</strong> Apply: Reorganize Package Structure</p></div>
+<details open><summary>Speaker notes</summary><p>Package organization strategies reflect architectural thinking. Package by layer groups technically (all controllers together)—simple but hides business domain. Package by feature groups by business capability—better for feature teams and domain understanding. Package by component groups architectural units. Screaming architecture means structure reveals what system does, not what framework it uses. The activity applies these concepts: students reorganize a poorly structured codebase, practicing CCP (classes changing together) and CRP (classes used together). They must justify grouping decisions, connecting strategy choice to maintainability goals. This bridges understanding strategies to applying them for real organization problems.</p></details>
+</article><article class="card">
+<header><div><div class="kicker">Slide 15 · content</div>
+<h2>Package Principles</h2></div>
+<span class="level" style="border-color:#10b981;color:#10b981">Apply</span></header>
+<div class="evidence"><strong>Bloom evidence:</strong> Students analyze package structure for principle violations (CCP, CRP, ADP), identify specific violations, and propose refactoring moves with principle-based justification—applying package cohesion principles diagnostically</div>
+<div class="block"><div class="block-label">bullets</div><ul><li>Common Closure Principle (CCP): change together → package together</li><li>Common Reuse Principle (CRP): use together → package together</li><li>Release Reuse Equivalency (REP): reuse granularity = release granularity</li><li>Acyclic Dependencies Principle (ADP): no cycles in package dependency graph</li></ul></div><div class="block"><div class="block-label">activity</div><p><strong>Activity:</strong> Apply: Evaluate Package Structure</p></div>
+<details open><summary>Speaker notes</summary><p>Package cohesion principles guide organization decisions. CCP minimizes ripple effects by co-locating classes that change for the same reasons. CRP ensures you don&#x27;t depend on things you don&#x27;t use by packaging classes used together. REP means packages should be versioned and released as units matching reuse boundaries. ADP prevents circular dependencies that complicate builds and testing. These principles balance competing forces. The activity requires students to apply principles diagnostically: analyze a concrete package structure, identify which principles are violated, and propose refactoring moves. This bridges understanding principles to applying them for real architectural decisions, directly supporting the package organization objective at apply level.</p></details>
+</article><article class="card">
+<header><div><div class="kicker">Slide 16 · content</div>
+<h2>Managing Complexity</h2></div>
+<span class="level" style="border-color:#10b981;color:#10b981">Apply</span></header>
+<div class="evidence"><strong>Bloom evidence:</strong> Students decompose complex 450-line class, define interfaces using information hiding, calculate complexity metrics, and justify maintainability improvements—applying decomposition and abstraction techniques</div>
+<div class="block"><div class="block-label">bullets</div><ul><li>Essential vs. accidental complexity</li><li>Complexity drivers: size, dependencies, state, distribution</li><li>Management techniques: abstraction, decomposition, modularity, information hiding</li></ul></div><div class="block"><div class="block-label">activity</div><p><strong>Activity:</strong> Apply: Simplify Complex Component</p></div>
+<details open><summary>Speaker notes</summary><p>Complexity is the enemy of maintainability. Essential complexity comes from problem domain requirements; accidental complexity from poor design choices. Drivers include system size, tangled dependencies, mutable state, and distribution. Management techniques: abstraction hides details, decomposition breaks problems into smaller pieces, modularity creates independent units, information hiding minimizes exposed internals. The activity requires applying these techniques to a realistic complex component. Students must decompose responsibilities, design clean interfaces, and measure improvement using concrete metrics. This directly addresses the complexity management objective at apply level, moving beyond conceptual understanding to hands-on simplification of complex systems.</p></details>
+</article><article class="card">
+<header><div><div class="kicker">Slide 17 · content</div>
+<h2>Architecture Decision Records (ADRs)</h2></div>
+<span class="level" style="border-color:#8b5cf6;color:#8b5cf6">Create</span></header>
+<div class="evidence"><strong>Bloom evidence:</strong> Students write complete ADR for dependency injection decision, synthesizing context forces, justifying decision, and documenting trade-offs—creating decision documentation that synthesizes multiple concerns</div>
+<div class="block"><div class="block-label">bullets</div><ul><li>ADR Template: Title | Status (proposed/accepted/deprecated) | Context (forces at play) | Decision (what we decided) | Consequences (positive &amp; negative)</li><li>Documents architectural decisions and rationale for future developers</li><li>Creates institutional memory, prevents revisiting settled decisions</li></ul></div><div class="block"><div class="block-label">activity</div><p><strong>Activity:</strong> Create: Write ADR for Dependency Decision</p></div>
+<details open><summary>Speaker notes</summary><p>ADRs document why architectural decisions were made, not just what was decided. Critical for long-term maintainability when original developers move on. The activity elevates this from passive understanding to active creation—students must synthesize multiple concerns (team context, quality attributes, trade-offs) into a coherent decision document. This connects to earlier component design work and requires evaluating competing approaches. Writing ADRs is a professional practice that makes implicit reasoning explicit. Students practice the meta-skill of documenting their architectural thinking, which supports all other objectives by making decisions reviewable and improvable.</p></details>
+</article><article class="card">
+<header><div><div class="kicker">Slide 18 · content</div>
+<h2>Synthesis: Architectural Analysis &amp; Decision-Making</h2></div>
+<span class="level" style="border-color:#f59e0b;color:#f59e0b">Analyze</span></header>
+<div class="evidence"><strong>Bloom evidence:</strong> Students analyze four interconnected architectural problems (layering, dependencies, packages, complexity), propose solutions, and create ADR—comprehensive analysis integrating all lecture concepts with synthesis element</div>
+<div class="block"><div class="block-label">activity</div><p><strong>Activity:</strong> Analyze &amp; Synthesize: Comprehensive Architectural Evaluation</p></div>
+<details open><summary>Speaker notes</summary><p>This synthesis activity integrates all lecture objectives at higher cognitive levels: analyze architectural violations across layering, dependencies, packages, and complexity; evaluate trade-offs in solutions; apply principles to propose fixes; create ADR synthesizing decision rationale. Students must diagnose multiple interconnected problems and propose coherent improvements, demonstrating system-level architectural thinking. This addresses gaps in dependency analysis, package organization application, complexity management, and ADR creation. The scenario mirrors real-world architectural reviews where multiple issues coexist and solutions must be prioritized and justified.</p></details>
+</article>
+</div></body></html>

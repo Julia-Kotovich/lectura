@@ -1,0 +1,165 @@
+{
+  "alignmentScore": 88,
+  "dominantLevel": "apply",
+  "distribution": {
+    "remember": 0,
+    "understand": 8,
+    "apply": 38,
+    "analyze": 32,
+    "evaluate": 18,
+    "create": 4
+  },
+  "objectiveAlignments": [
+    {
+      "objective": "Understand the purpose and motivation behind design patterns in software construction",
+      "expectedLevel": "understand",
+      "observedLevel": "analyze",
+      "status": "partially_aligned",
+      "rationale": "Slides 1-3 engage students at analyze level (identifying patterns in real frameworks, analyzing design forces) rather than just explaining purpose. Slide 2 requires pattern recognition in Collections.unmodifiableList and Calendar.getInstance, and slide 3 requires analyzing framework code to categorize patterns—both exceed understand-level explanation."
+    },
+    {
+      "objective": "Apply creational patterns (Singleton, Factory Method, Abstract Factory) to solve object creation problems",
+      "expectedLevel": "apply",
+      "observedLevel": "apply",
+      "status": "aligned",
+      "rationale": "Slides 4-9 provide extensive apply-level activities: implementing ThreadPoolManager Singleton (slide 4), coding ConfigManager (slide 5), implementing Factory Method for notifications/payments (slides 6-7), and implementing Abstract Factory for document families (slides 8-9). Students write actual code and extend implementations with new types."
+    },
+    {
+      "objective": "Apply structural patterns (Adapter, Composite, Decorator) to organize class and object composition",
+      "expectedLevel": "apply",
+      "observedLevel": "apply",
+      "status": "aligned",
+      "rationale": "Slides 10-15 deliver apply-level practice: evaluating Adapter solutions for Logger interface (slide 11), implementing Composite's recursive draw() method (slide 13), and implementing CompressionDecorator with stacking considerations (slide 15). Each pattern receives hands-on implementation activities."
+    },
+    {
+      "objective": "Evaluate and select appropriate patterns based on design requirements and trade-offs",
+      "expectedLevel": "evaluate",
+      "observedLevel": "evaluate",
+      "status": "aligned",
+      "rationale": "Slides 5, 6, 9, 11, 15, and 16 engage evaluate-level thinking: comparing Singleton vs. DI trade-offs (slide 5), justifying Factory Method vs. alternatives for context-dependent scenarios (slide 6), evaluating Abstract Factory vs. Factory Method for extensibility (slide 9), ranking Adapter solutions against OO principles (slide 11), justifying decorator ordering (slide 15), and selecting patterns using explicit criteria for logging scenario (slide 16)."
+    },
+    {
+      "objective": "Implement design patterns using object-oriented principles including inheritance, polymorphism, and encapsulation",
+      "expectedLevel": "apply",
+      "observedLevel": "apply",
+      "status": "aligned",
+      "rationale": "Implementation activities throughout slides 4-15 require applying OO principles: private constructors and static methods for Singleton (slide 4), inheritance hierarchies for Factory Method (slides 6-7), composition for Abstract Factory (slides 8-9), wrapping for Adapter (slide 11), recursive composition for Composite (slide 13), and interface implementation with delegation for Decorator (slide 15)."
+    },
+    {
+      "objective": "Recognize design patterns in real-world software systems and frameworks",
+      "expectedLevel": "analyze",
+      "observedLevel": "analyze",
+      "status": "aligned",
+      "rationale": "Slides 2, 3, and 17 develop pattern recognition through analyzing real code: identifying Decorator in Collections.unmodifiableList and Factory Method in Calendar.getInstance (slide 2), categorizing patterns in Spring BeanFactory and Java Arrays.asList (slide 3), and identifying multiple collaborating patterns in WebApp code with evidence citation (slide 17)."
+    }
+  ],
+  "slideTags": [
+    {
+      "slideTitle": "Fundamental Design Patterns I: Creational and Structural Patterns",
+      "primaryLevel": "analyze",
+      "evidence": "Design challenge preview requires students to anticipate design problems from sketched solutions, analyzing design forces before pattern introduction—exceeds simple recall or understanding."
+    },
+    {
+      "slideTitle": "What Are Design Patterns?",
+      "primaryLevel": "analyze",
+      "evidence": "Pattern recognition activity requires analyzing Collections.unmodifiableList and Calendar.getInstance to identify patterns with structural evidence. Create-level synthesis activity requires designing notification system combining multiple patterns."
+    },
+    {
+      "slideTitle": "Pattern Categories: Analyzing Design Intent",
+      "primaryLevel": "analyze",
+      "evidence": "Framework pattern recognition requires analyzing Spring BeanFactory, Arrays.asList, and file systems to categorize patterns. Create-level plugin system design requires synthesizing multi-pattern architectures."
+    },
+    {
+      "slideTitle": "Singleton Pattern: Ensuring One Instance",
+      "primaryLevel": "apply",
+      "evidence": "Students implement ThreadPoolManager Singleton with private constructor and getInstance() method, then analyze appropriateness for resource coordination and testing challenges."
+    },
+    {
+      "slideTitle": "Singleton Implementation: Analyze & Redesign",
+      "primaryLevel": "create",
+      "evidence": "Part 2 requires students to redesign ConfigManager using dependency injection as alternative to Singleton, then compare trade-offs—synthesizing new implementation approach rather than evaluating given options."
+    },
+    {
+      "slideTitle": "Factory Method: Create & Evaluate Solutions",
+      "primaryLevel": "create",
+      "evidence": "Students design their own solution before seeing Factory Method pattern, then compare their design against Factory Method and Simple Factory alternatives—create-level synthesis followed by evaluate-level comparison."
+    },
+    {
+      "slideTitle": "Factory Method: Create, Apply & Evaluate",
+      "primaryLevel": "create",
+      "evidence": "Students create extensible payment design without using named patterns, then apply Factory Method implementation, then evaluate all three approaches for context-dependent scenarios—engages create, apply, and evaluate levels."
+    },
+    {
+      "slideTitle": "Abstract Factory: Creating Product Families",
+      "primaryLevel": "apply",
+      "evidence": "Students implement DocumentFactory interface with createParser() and createExtractor() methods, then extend with RTF format, then analyze family extension vs. product extension trade-offs."
+    },
+    {
+      "slideTitle": "Abstract Factory vs Factory Method: Pattern Selection",
+      "primaryLevel": "evaluate",
+      "evidence": "Students implement Abstract Factory, extend with RTF, create alternative using Factory Method, then evaluate both designs for extensibility trade-offs—balances apply implementation with evaluate-level justification."
+    },
+    {
+      "slideTitle": "Adapter Pattern: Interface Conversion",
+      "primaryLevel": "understand",
+      "evidence": "Slide presents Adapter intent, structure, and variants through bullets and diagram without requiring students to apply, analyze, or evaluate—primarily explanatory content."
+    },
+    {
+      "slideTitle": "Adapter Pattern: Evaluate & Create Solutions",
+      "primaryLevel": "evaluate",
+      "evidence": "Students evaluate four competing Adapter solutions against OO principles and pattern intent, then create hybrid solution combining strengths—engages evaluate-level comparison and create-level synthesis."
+    },
+    {
+      "slideTitle": "Composite Pattern: Part-Whole Hierarchies",
+      "primaryLevel": "understand",
+      "evidence": "Slide explains Composite intent, roles, and structure through bullets and diagram without requiring application or analysis—conceptual introduction level."
+    },
+    {
+      "slideTitle": "Composite Pattern: Implementation Challenge",
+      "primaryLevel": "apply",
+      "evidence": "Students complete draw() method using recursive delegation, then analyze transparency vs. safety trade-off for add/remove method placement—apply-level implementation with analyze-level design decision."
+    },
+    {
+      "slideTitle": "Decorator Pattern: Dynamic Responsibilities",
+      "primaryLevel": "understand",
+      "evidence": "Slide presents Decorator intent, wrapping mechanism, and stacking capability through bullets and diagram without hands-on application—explanatory content."
+    },
+    {
+      "slideTitle": "Decorator Implementation: Design Challenge",
+      "primaryLevel": "apply",
+      "evidence": "Students implement CompressionDecorator following pattern structure, then evaluate decorator ordering trade-offs (compress-then-encrypt vs. encrypt-then-compress)—apply-level coding with evaluate-level justification."
+    },
+    {
+      "slideTitle": "Pattern Selection: Apply the Criteria",
+      "primaryLevel": "evaluate",
+      "evidence": "Students evaluate three competing approaches (inheritance, Decorator, Proxy) for logging scenario using explicit criteria (runtime flexibility, extensibility, coupling, complexity), justifying selection against alternatives."
+    },
+    {
+      "slideTitle": "Pattern Recognition in Real Systems",
+      "primaryLevel": "analyze",
+      "evidence": "Students analyze WebApp code to identify multiple patterns with evidence citation, explain pattern collaboration, then evaluate which pattern is least essential if requirements simplified—analyze-level recognition with evaluate-level assessment."
+    },
+    {
+      "slideTitle": "Summary and Next Steps",
+      "primaryLevel": "understand",
+      "evidence": "Recap of patterns covered, preview of behavioral patterns, and action items—primarily summarizing and organizing content without higher-order cognitive demands."
+    }
+  ],
+  "gaps": [
+    "Create-level activities constitute only 4% of deck despite two objectives requiring synthesis (designing solutions, proposing architectures). Slides 5, 6, 7, and 11 include create-level components, but most activities stop at evaluate level.",
+    "Understand-level content (8%) is appropriately minimal for MSc-level, but slides 10, 12, 14 present pattern introductions without immediate application, creating passive segments between active learning.",
+    "Abstract Factory receives less hands-on implementation practice (slides 8-9) compared to Singleton (slides 4-5) and Factory Method (slides 6-7), despite being equally important creational pattern per objectives.",
+    "Pattern combination and collaboration appears only in slides 2, 3, and 17, missing opportunities to practice synthesizing multiple patterns within individual pattern sections (e.g., combining Singleton with Factory, Adapter with Decorator).",
+    "Evaluate-level activities (18%) focus heavily on pattern selection criteria but provide limited practice evaluating quality of student-generated implementations against design principles—most evaluation compares pre-defined alternatives rather than critiquing original designs."
+  ],
+  "suggestions": [
+    "Elevate slides 10, 12, 14 from understand to apply by adding brief implementation challenges immediately after pattern introduction—e.g., 'Implement StreamAdapter converting InputStream to Reader interface' on slide 10 before moving to evaluation activity on slide 11.",
+    "Increase create-level engagement to 10-15% by adding synthesis activities requiring students to design novel pattern combinations: e.g., on slide 9, after Abstract Factory implementation, ask students to design a system combining Abstract Factory with Decorator to add features to product families dynamically.",
+    "Balance implementation practice across creational patterns by adding hands-on Abstract Factory coding to slide 8 before the comparison table on slide 9—currently students implement Singleton and Factory Method but only sketch Abstract Factory structure.",
+    "Strengthen pattern collaboration throughout deck by adding 'Pattern Pairing' activities after each structural pattern: e.g., on slide 13 after Composite implementation, ask 'How would you combine Composite with Factory Method to create complex graphics hierarchies? Sketch the collaboration.'",
+    "Enhance evaluate-level depth by requiring students to critique peer implementations against SOLID principles: e.g., on slide 15 after Decorator implementation, have pairs exchange code and evaluate whether designs violate Single Responsibility or Open/Closed principles, providing written feedback.",
+    "Add create-level capstone activity on slide 16 or 17: 'Design a complete document processing system using 4+ patterns from today. Justify each pattern choice, show how they collaborate, and defend against alternative designs.' This synthesizes all patterns into novel architecture.",
+    "Integrate more real-world framework analysis throughout: after each pattern section, show 2-3 lines of actual Spring/Java/Android framework code using that pattern and ask students to identify the pattern with evidence—strengthens objective 6 (recognize patterns in real systems) beyond slides 2, 3, 17.",
+    "Convert slide 18 summary from understand to evaluate by adding: 'Rank today's 6 patterns by difficulty to implement correctly. Justify your ranking citing specific implementation challenges (thread safety, interface design, recursive delegation). Compare rankings with neighbor—what criteria drove differences?'"
+  ]
+}

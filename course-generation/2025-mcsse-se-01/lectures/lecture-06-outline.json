@@ -1,0 +1,514 @@
+{
+  "title": "Lecture 6. Fundamental Design Patterns II: Behavioral Patterns",
+  "summary": "This lecture examines behavioral design patterns that manage object interactions and responsibilities in complex software systems. Students will explore the Observer, Visitor, Strategy, Command, and Template Method patterns, understanding their motivations, implementations, and trade-offs. The lecture emphasizes practical application of these patterns in object-oriented software construction and their role in creating flexible, maintainable architectures.",
+  "learningObjectives": [
+    "Understand the purpose and characteristics of behavioral design patterns in managing object interactions",
+    "Apply the Observer pattern to implement event handling and notification systems",
+    "Utilize the Visitor pattern to add operations to object structures without modifying them",
+    "Implement the Strategy pattern to encapsulate and interchange algorithms",
+    "Apply the Command pattern to encapsulate actions and support undo/redo functionality",
+    "Recognize the Template Method pattern for defining algorithm skeletons",
+    "Evaluate trade-offs between different behavioral patterns and select appropriate patterns for specific design problems",
+    "Combine multiple patterns effectively in complex software systems"
+  ],
+  "targetSlideCount": 18,
+  "estimatedStudyMinutes": 120,
+  "sections": [
+    {
+      "title": "Introduction to Behavioral Patterns",
+      "learningGoals": [
+        "Distinguish behavioral patterns from structural and creational patterns",
+        "Understand how behavioral patterns manage object communication and responsibility distribution"
+      ],
+      "subsections": [
+        {
+          "title": "What Are Behavioral Patterns?",
+          "keyPoints": [
+            "Behavioral patterns focus on algorithms and responsibility assignment between objects",
+            "They characterize complex control flow that's difficult to follow at runtime",
+            "Shift focus from flow of control to object interconnections",
+            "Complement structural patterns by defining how objects collaborate"
+          ],
+          "examples": [
+            "Comparison with structural patterns (Adapter, Decorator) and creational patterns (Factory, Singleton)",
+            "Real-world analogy: organizational communication patterns in companies"
+          ],
+          "suggestedDiagram": "Taxonomy diagram showing three pattern categories with behavioral patterns highlighted and their subcategories"
+        },
+        {
+          "title": "Overview of Key Behavioral Patterns",
+          "keyPoints": [
+            "Observer: one-to-many dependency for event notification",
+            "Strategy: encapsulating interchangeable algorithms",
+            "Command: encapsulating requests as objects",
+            "Visitor: adding operations to object structures",
+            "Template Method: defining algorithm skeleton with customizable steps"
+          ],
+          "examples": [
+            "Quick preview of each pattern's primary use case",
+            "Pattern selection decision tree"
+          ],
+          "suggestedDiagram": "Mind map showing relationships between the five main behavioral patterns and their primary concerns"
+        }
+      ],
+      "exercises": [
+        "Identify which category (creational, structural, behavioral) various design problems belong to",
+        "Match real-world scenarios to appropriate behavioral pattern categories"
+      ]
+    },
+    {
+      "title": "Observer Pattern: Event Handling and Notifications",
+      "learningGoals": [
+        "Implement the Observer pattern to establish one-to-many dependencies",
+        "Apply Observer pattern for event-driven architectures",
+        "Understand the publish-subscribe mechanism"
+      ],
+      "subsections": [
+        {
+          "title": "Observer Pattern Fundamentals",
+          "keyPoints": [
+            "Intent: define one-to-many dependency so when one object changes state, dependents are notified automatically",
+            "Key participants: Subject (Observable) and Observer",
+            "Subject maintains list of observers and provides attach/detach methods",
+            "Observers implement update interface to receive notifications",
+            "Promotes loose coupling between subject and observers"
+          ],
+          "examples": [
+            "GUI event handling: button clicks notifying multiple listeners",
+            "Model-View-Controller (MVC): model notifying views of data changes",
+            "Stock market ticker: price changes notifying multiple displays"
+          ],
+          "suggestedDiagram": "UML class diagram showing Subject-Observer relationship with concrete implementations; sequence diagram showing notification flow"
+        },
+        {
+          "title": "Observer Pattern Implementation",
+          "keyPoints": [
+            "Subject interface: attach(Observer), detach(Observer), notify()",
+            "Observer interface: update() or update(Subject)",
+            "Push model: subject sends detailed data to observers",
+            "Pull model: subject notifies, observers query for data",
+            "Managing observer registration and lifecycle"
+          ],
+          "examples": [
+            "Code example in Eiffel or Java showing weather station notifying displays",
+            "Implementation of both push and pull notification models",
+            "Thread-safety considerations in concurrent environments"
+          ],
+          "suggestedDiagram": "Code structure diagram showing interface definitions and concrete implementations with notification flow arrows"
+        },
+        {
+          "title": "Observer Pattern Trade-offs",
+          "keyPoints": [
+            "Benefits: loose coupling, dynamic relationships, broadcast communication",
+            "Drawbacks: unexpected updates, potential performance issues with many observers",
+            "Memory leaks from forgotten observer registrations",
+            "Update cascades and ordering dependencies",
+            "Modern variations: event buses, reactive programming"
+          ],
+          "examples": [
+            "Memory leak scenario with GUI components",
+            "Performance analysis with 1 vs 1000 observers",
+            "Comparison with modern reactive frameworks (RxJava, ReactiveX)"
+          ],
+          "suggestedDiagram": "Comparison table showing benefits vs drawbacks; diagram showing potential cascade problem"
+        }
+      ],
+      "exercises": [
+        "Design an Observer-based notification system for a social media application",
+        "Identify and fix observer-related memory leaks in provided code",
+        "Compare push vs pull models for a specific use case"
+      ]
+    },
+    {
+      "title": "Strategy Pattern: Algorithm Encapsulation",
+      "learningGoals": [
+        "Apply Strategy pattern to make algorithms interchangeable",
+        "Eliminate conditional statements by using polymorphism",
+        "Configure objects with different behavioral variants"
+      ],
+      "subsections": [
+        {
+          "title": "Strategy Pattern Fundamentals",
+          "keyPoints": [
+            "Intent: define family of algorithms, encapsulate each one, make them interchangeable",
+            "Strategy varies independently from clients that use it",
+            "Key participants: Strategy interface, ConcreteStrategy classes, Context",
+            "Context maintains reference to Strategy and delegates algorithm execution",
+            "Replaces inheritance with composition for algorithm variation"
+          ],
+          "examples": [
+            "Sorting algorithms: QuickSort, MergeSort, BubbleSort as strategies",
+            "Payment processing: CreditCard, PayPal, Bitcoin payment strategies",
+            "Route calculation: fastest, shortest, scenic route strategies"
+          ],
+          "suggestedDiagram": "UML class diagram showing Context, Strategy interface, and multiple ConcreteStrategy implementations"
+        },
+        {
+          "title": "Strategy Pattern Implementation and Use Cases",
+          "keyPoints": [
+            "Strategy interface defines common algorithm interface",
+            "Context configured with ConcreteStrategy at runtime or construction",
+            "Eliminating switch/if-else statements through polymorphism",
+            "Strategy selection: client choice, factory, configuration",
+            "Combining with Factory pattern for strategy creation"
+          ],
+          "examples": [
+            "Text formatting: different strategies for HTML, Markdown, Plain text",
+            "Compression algorithms: ZIP, GZIP, BZIP2 strategies",
+            "Validation strategies: email, phone, credit card validators"
+          ],
+          "suggestedDiagram": "Code example showing before/after refactoring from conditionals to Strategy pattern; sequence diagram of strategy execution"
+        },
+        {
+          "title": "Strategy vs State and Template Method",
+          "keyPoints": [
+            "Strategy: clients choose algorithm; State: context changes behavior based on internal state",
+            "Strategy: composition-based; Template Method: inheritance-based",
+            "Strategy provides full algorithm replacement; Template Method allows step customization",
+            "When to use each pattern based on variability needs",
+            "Performance considerations: object creation vs inheritance overhead"
+          ],
+          "examples": [
+            "Side-by-side comparison of Strategy and Template Method for same problem",
+            "State pattern example showing automatic strategy switching",
+            "Decision matrix for pattern selection"
+          ],
+          "suggestedDiagram": "Comparison table highlighting key differences; parallel UML diagrams showing structural differences"
+        }
+      ],
+      "exercises": [
+        "Refactor a class with multiple conditional branches into Strategy pattern",
+        "Design a plugin system using Strategy pattern",
+        "Implement a game AI with different difficulty strategies"
+      ]
+    },
+    {
+      "title": "Command Pattern: Action Encapsulation",
+      "learningGoals": [
+        "Encapsulate requests as objects to enable parameterization and queuing",
+        "Implement undo/redo functionality using Command pattern",
+        "Apply Command pattern for transaction management and logging"
+      ],
+      "subsections": [
+        {
+          "title": "Command Pattern Fundamentals",
+          "keyPoints": [
+            "Intent: encapsulate request as object, allowing parameterization and queuing",
+            "Key participants: Command, ConcreteCommand, Invoker, Receiver",
+            "Command interface defines execute() method",
+            "ConcreteCommand binds Receiver with action",
+            "Invoker stores and executes commands without knowing details",
+            "Decouples sender from receiver of request"
+          ],
+          "examples": [
+            "GUI buttons and menu items executing commands",
+            "Text editor operations: cut, copy, paste, type",
+            "Remote control: each button is a command",
+            "Database transactions as commands"
+          ],
+          "suggestedDiagram": "UML class diagram showing Command pattern structure; sequence diagram showing command execution flow"
+        },
+        {
+          "title": "Undo/Redo and Command History",
+          "keyPoints": [
+            "Adding unexecute() or undo() method to Command interface",
+            "Maintaining command history stack for undo/redo",
+            "Memento pattern integration for state restoration",
+            "Handling non-reversible commands",
+            "Command composition for macro commands",
+            "Transaction boundaries and rollback"
+          ],
+          "examples": [
+            "Text editor with full undo/redo stack implementation",
+            "Graphics editor: move, resize, rotate commands with undo",
+            "Macro command combining multiple operations",
+            "Financial transaction system with rollback capability"
+          ],
+          "suggestedDiagram": "State diagram showing command execution and undo flow; stack visualization for command history"
+        },
+        {
+          "title": "Advanced Command Pattern Applications",
+          "keyPoints": [
+            "Command queuing and scheduling",
+            "Logging and auditing through command serialization",
+            "Remote command execution (distributed systems)",
+            "Command pattern in CQRS (Command Query Responsibility Segregation)",
+            "Combining with other patterns: Factory, Composite, Chain of Responsibility"
+          ],
+          "examples": [
+            "Job queue system processing commands asynchronously",
+            "Event sourcing: storing commands as event log",
+            "Network protocol: serializing commands for remote execution",
+            "Wizard/multi-step process using command chain"
+          ],
+          "suggestedDiagram": "Architecture diagram showing command queue system; flowchart for command processing pipeline"
+        }
+      ],
+      "exercises": [
+        "Implement a simple text editor with undo/redo using Command pattern",
+        "Design a task scheduler that queues and executes commands",
+        "Create a macro recording system using composite commands"
+      ]
+    },
+    {
+      "title": "Visitor Pattern: Operations on Object Structures",
+      "learningGoals": [
+        "Apply Visitor pattern to add operations to object structures without modification",
+        "Implement double dispatch mechanism",
+        "Understand when Visitor pattern is appropriate vs alternatives"
+      ],
+      "subsections": [
+        {
+          "title": "Visitor Pattern Fundamentals",
+          "keyPoints": [
+            "Intent: represent operation to be performed on elements of object structure",
+            "Separates algorithm from object structure it operates on",
+            "Key participants: Visitor, ConcreteVisitor, Element, ConcreteElement, ObjectStructure",
+            "Double dispatch: operation depends on both visitor type and element type",
+            "Elements accept visitors and call back visitor's visit method",
+            "Adding new operations without modifying element classes"
+          ],
+          "examples": [
+            "Compiler AST: type checking, code generation, optimization as visitors",
+            "File system: size calculation, search, permission check as visitors",
+            "Shopping cart: pricing, tax calculation, shipping as visitors",
+            "Document structure: rendering, spell-check, word count as visitors"
+          ],
+          "suggestedDiagram": "UML class diagram showing Visitor pattern structure with double dispatch; collaboration diagram showing visitor traversal"
+        },
+        {
+          "title": "Visitor Pattern Implementation",
+          "keyPoints": [
+            "Visitor interface with visit methods for each concrete element type",
+            "Element interface with accept(Visitor) method",
+            "ConcreteElement implements accept by calling visitor.visit(this)",
+            "ObjectStructure provides iteration over elements",
+            "Traversal strategies: depth-first, breadth-first",
+            "Accumulating results during traversal"
+          ],
+          "examples": [
+            "Expression tree evaluation using visitor",
+            "HTML DOM manipulation with different visitors",
+            "Graph traversal with visitor pattern",
+            "Code example showing visitor implementation in Eiffel/Java"
+          ],
+          "suggestedDiagram": "Sequence diagram showing double dispatch mechanism; code structure showing visitor and element implementations"
+        },
+        {
+          "title": "Visitor Pattern Trade-offs and Alternatives",
+          "keyPoints": [
+            "Benefits: easy to add new operations, related operations grouped together",
+            "Drawbacks: difficult to add new element types (breaks all visitors)",
+            "Violates encapsulation: visitor needs access to element internals",
+            "When to use: stable element hierarchy, frequently changing operations",
+            "Alternatives: instanceof checks, method overloading, pattern matching",
+            "Modern language features: pattern matching, multimethods"
+          ],
+          "examples": [
+            "Comparison with adding methods directly to element classes",
+            "Impact analysis: adding new operation vs adding new element type",
+            "Visitor pattern in languages with pattern matching (Scala, Rust)",
+            "Acyclic Visitor pattern for more flexibility"
+          ],
+          "suggestedDiagram": "Decision tree for choosing Visitor vs alternatives; comparison table showing trade-offs"
+        }
+      ],
+      "exercises": [
+        "Implement visitors for an expression tree (evaluate, print, optimize)",
+        "Design a file system visitor for different operations",
+        "Analyze the impact of adding a new element type to an existing visitor hierarchy"
+      ]
+    },
+    {
+      "title": "Template Method Pattern",
+      "learningGoals": [
+        "Define algorithm skeleton in base class with customizable steps",
+        "Apply Template Method for code reuse through inheritance",
+        "Distinguish Template Method from Strategy pattern"
+      ],
+      "subsections": [
+        {
+          "title": "Template Method Pattern Overview",
+          "keyPoints": [
+            "Intent: define skeleton of algorithm, defer some steps to subclasses",
+            "Base class implements template method calling abstract/hook methods",
+            "Subclasses override specific steps without changing algorithm structure",
+            "Hollywood Principle: 'Don't call us, we'll call you'",
+            "Hook methods provide optional extension points",
+            "Primitive operations must be implemented by subclasses"
+          ],
+          "examples": [
+            "Framework lifecycle methods: initialize(), process(), cleanup()",
+            "Data processing pipeline: read(), parse(), validate(), store()",
+            "Game AI: collectInput(), update(), render()",
+            "HTTP request handling: authenticate(), authorize(), execute(), respond()"
+          ],
+          "suggestedDiagram": "UML class diagram showing abstract class with template method and primitive operations; flowchart showing algorithm steps"
+        },
+        {
+          "title": "Template Method vs Strategy",
+          "keyPoints": [
+            "Template Method: inheritance-based, compile-time binding",
+            "Strategy: composition-based, runtime flexibility",
+            "Template Method: partial algorithm customization; Strategy: full algorithm replacement",
+            "Template Method: simpler for closely related variants",
+            "Strategy: better for independent, interchangeable algorithms",
+            "Combining both patterns for maximum flexibility"
+          ],
+          "examples": [
+            "Same problem solved with both patterns",
+            "Migration path from Template Method to Strategy",
+            "Hybrid approach using both patterns together"
+          ],
+          "suggestedDiagram": "Side-by-side comparison of Template Method and Strategy implementations; decision flowchart for pattern selection"
+        }
+      ],
+      "exercises": [
+        "Implement a data import framework using Template Method",
+        "Refactor duplicate code in subclasses using Template Method",
+        "Compare Template Method and Strategy implementations for the same problem"
+      ]
+    },
+    {
+      "title": "Pattern Combinations and Trade-offs",
+      "learningGoals": [
+        "Combine multiple behavioral patterns effectively",
+        "Evaluate trade-offs when selecting patterns",
+        "Recognize anti-patterns and over-engineering"
+      ],
+      "subsections": [
+        {
+          "title": "Combining Behavioral Patterns",
+          "keyPoints": [
+            "Observer + Command: undoable operations with notification",
+            "Strategy + Factory: creating and selecting strategies",
+            "Visitor + Composite: operations on composite structures",
+            "Command + Memento: undo with state restoration",
+            "Chain of Responsibility + Command: request handling pipeline",
+            "Patterns working together in MVC architecture"
+          ],
+          "examples": [
+            "GUI framework combining Observer, Command, and Strategy",
+            "Compiler using Visitor, Strategy, and Template Method",
+            "Workflow engine using Command, Chain of Responsibility, and Observer",
+            "Game engine architecture with multiple behavioral patterns"
+          ],
+          "suggestedDiagram": "Architecture diagram showing multiple patterns working together; interaction diagram for combined pattern scenario"
+        },
+        {
+          "title": "Pattern Selection and Trade-offs",
+          "keyPoints": [
+            "Evaluating complexity vs flexibility trade-offs",
+            "Performance implications: object creation, indirection overhead",
+            "Maintainability: when patterns help vs when they hinder",
+            "Team expertise and learning curve considerations",
+            "Avoiding over-engineering: YAGNI principle",
+            "Refactoring to patterns vs designing with patterns upfront"
+          ],
+          "examples": [
+            "Case study: when NOT to use a pattern",
+            "Performance benchmarks: pattern overhead measurements",
+            "Evolution of design: simple solution → pattern-based solution",
+            "Anti-patterns: pattern abuse examples"
+          ],
+          "suggestedDiagram": "Decision matrix for pattern selection; complexity vs benefit graph; refactoring timeline"
+        },
+        {
+          "title": "Best Practices and Guidelines",
+          "keyPoints": [
+            "Start simple, refactor to patterns when needed",
+            "Document pattern usage and rationale",
+            "Consistent naming conventions for pattern participants",
+            "Testing strategies for pattern-based designs",
+            "Pattern catalogs and team knowledge sharing",
+            "Balancing flexibility with simplicity"
+          ],
+          "examples": [
+            "Code review checklist for pattern usage",
+            "Documentation template for design decisions",
+            "Refactoring catalog: problem → pattern solution",
+            "Team pattern library and examples"
+          ],
+          "suggestedDiagram": "Best practices checklist; pattern application workflow; documentation template example"
+        }
+      ],
+      "exercises": [
+        "Design a system combining at least three behavioral patterns with justification",
+        "Analyze a given design and identify opportunities for pattern application or removal",
+        "Create a pattern selection guide for a specific domain"
+      ]
+    },
+    {
+      "title": "Summary and Practical Application",
+      "learningGoals": [
+        "Synthesize understanding of all five behavioral patterns",
+        "Apply patterns to real-world software construction scenarios",
+        "Prepare for pattern application in course projects"
+      ],
+      "subsections": [
+        {
+          "title": "Behavioral Patterns Recap",
+          "keyPoints": [
+            "Observer: event-driven communication, loose coupling",
+            "Strategy: algorithm encapsulation, runtime flexibility",
+            "Command: action encapsulation, undo/redo, queuing",
+            "Visitor: operations on structures, double dispatch",
+            "Template Method: algorithm skeleton, inheritance-based customization",
+            "Common themes: encapsulation, flexibility, separation of concerns"
+          ],
+          "examples": [
+            "Quick reference table of all patterns",
+            "Pattern selection decision tree",
+            "Real-world systems using these patterns"
+          ],
+          "suggestedDiagram": "Comprehensive comparison table of all five patterns; pattern relationship map"
+        },
+        {
+          "title": "Integration with Software Construction",
+          "keyPoints": [
+            "Patterns in object-oriented design and architecture",
+            "Design by Contract compatibility with patterns",
+            "Patterns supporting SOLID principles",
+            "Role in building maintainable, extensible systems",
+            "Connection to upcoming course topics and projects",
+            "Patterns in modern frameworks and libraries"
+          ],
+          "examples": [
+            "Eiffel language features supporting pattern implementation",
+            "Patterns in popular frameworks (Spring, .NET, Qt)",
+            "Course project scenarios where patterns apply",
+            "Industry case studies"
+          ],
+          "suggestedDiagram": "Concept map connecting patterns to course themes; architecture diagram showing patterns in layered system"
+        }
+      ],
+      "exercises": [
+        "Design a complete subsystem using appropriate behavioral patterns",
+        "Analyze open-source project for behavioral pattern usage",
+        "Prepare pattern application plan for course project"
+      ]
+    }
+  ],
+  "suggestedResources": [
+    "Gamma, E., Helm, R., Johnson, R., & Vlissides, J. (1994). Design Patterns: Elements of Reusable Object-Oriented Software (GoF book) - Chapters on behavioral patterns",
+    "Meyer, B. (2009). Touch of Class: Learning to Program Well Using Objects and Contracts - Chapters on design patterns and object-oriented design",
+    "Freeman, E., & Freeman, E. (2004). Head First Design Patterns - Chapters on Observer, Strategy, Command, Template Method",
+    "Martin, R. C. (2017). Clean Architecture - Sections on design patterns and architectural principles",
+    "Refactoring.Guru - Behavioral Patterns section (online resource with interactive examples)",
+    "SourceMaking.com - Design Patterns catalog with code examples",
+    "Eiffel Software documentation on design patterns implementation",
+    "IEEE Software magazine articles on pattern applications in industry"
+  ],
+  "assessmentIdeas": [
+    "Pattern identification exercise: analyze code snippets and identify which behavioral patterns are used",
+    "Design problem: given requirements, select and justify appropriate behavioral patterns",
+    "Implementation task: refactor procedural code to use Observer and Strategy patterns",
+    "Comparison essay: analyze trade-offs between different patterns for a specific scenario",
+    "Code review simulation: evaluate pattern usage in provided codebase and suggest improvements",
+    "Mini-project: implement a small system (e.g., text editor, game) using at least three behavioral patterns",
+    "Pattern combination exercise: design system integrating multiple behavioral patterns with justification",
+    "Anti-pattern identification: find and fix pattern misuse in provided examples",
+    "Portfolio component: document pattern applications in student's own project with rationale",
+    "Exam questions: pattern selection, UML diagram interpretation, code completion for pattern implementation"
+  ]
+}

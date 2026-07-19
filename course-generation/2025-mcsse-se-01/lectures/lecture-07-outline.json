@@ -1,0 +1,377 @@
+{
+  "title": "Lecture 7. Software Architecture: Structuring Large-Scale Programs",
+  "summary": "This lecture explores fundamental techniques for organizing and structuring large software systems. Students will learn architectural thinking principles, examine common architectural styles including layered and component-based architectures, understand module dependencies and coupling, explore package organization strategies, and discover techniques for managing complexity in large-scale systems. The lecture emphasizes practical application of architectural principles to real-world software construction challenges.",
+  "learningObjectives": [
+    "Understand the principles of architectural thinking and how it differs from detailed design",
+    "Apply layered architecture patterns to organize large-scale systems effectively",
+    "Design component-based systems with clear interfaces and responsibilities",
+    "Analyze and manage module dependencies to minimize coupling",
+    "Implement effective package organization strategies for maintainability",
+    "Apply complexity management techniques to large software systems"
+  ],
+  "targetSlideCount": 18,
+  "estimatedStudyMinutes": 120,
+  "sections": [
+    {
+      "title": "Introduction to Software Architecture",
+      "learningGoals": [
+        "Distinguish between architecture and detailed design",
+        "Understand the role of architecture in large-scale systems",
+        "Recognize architectural decisions and their long-term impact"
+      ],
+      "subsections": [
+        {
+          "title": "What is Software Architecture?",
+          "keyPoints": [
+            "Architecture as the fundamental organization of a system",
+            "High-level structure: components, relationships, and principles",
+            "Architecture vs. design: strategic vs. tactical decisions",
+            "Architectural decisions are costly to change later",
+            "Architecture addresses non-functional requirements (scalability, maintainability, performance)"
+          ],
+          "examples": [
+            "Building architecture analogy: floor plans vs. electrical wiring details",
+            "E-commerce system: presentation, business logic, data layers vs. individual class design"
+          ],
+          "suggestedDiagram": "Pyramid showing architecture at top (strategic, long-term), design in middle (tactical), and implementation at bottom (detailed)"
+        },
+        {
+          "title": "Architectural Thinking",
+          "keyPoints": [
+            "Focus on system-wide concerns rather than local optimization",
+            "Balancing competing quality attributes (performance vs. maintainability)",
+            "Thinking in terms of components and their interactions",
+            "Considering evolution and change over time",
+            "Stakeholder concerns: developers, operators, business owners"
+          ],
+          "examples": [
+            "Choosing microservices vs. monolith based on team structure and deployment needs",
+            "Trading database normalization for query performance in read-heavy systems"
+          ],
+          "suggestedDiagram": "Mind map showing architectural concerns: performance, scalability, maintainability, security, cost, team structure"
+        }
+      ],
+      "exercises": [
+        "Identify three architectural decisions in a system you've worked on and their consequences",
+        "List stakeholder concerns for a university course management system"
+      ]
+    },
+    {
+      "title": "Layered Architectures",
+      "learningGoals": [
+        "Understand the principles and benefits of layered architecture",
+        "Apply layering to separate concerns in large systems",
+        "Recognize common layering patterns and anti-patterns"
+      ],
+      "subsections": [
+        {
+          "title": "Layering Principles",
+          "keyPoints": [
+            "Separation of concerns through horizontal layers",
+            "Each layer depends only on layers below (strict layering)",
+            "Layers provide abstraction and hide implementation details",
+            "Common layers: presentation, application/business logic, data access, infrastructure",
+            "Benefits: maintainability, testability, team organization, technology independence"
+          ],
+          "examples": [
+            "Three-tier web application: UI layer, business logic layer, database layer",
+            "Operating system: application layer, system call interface, kernel, hardware abstraction"
+          ],
+          "suggestedDiagram": "Classic layered architecture diagram showing presentation → business logic → data access → database, with dependency arrows pointing downward"
+        },
+        {
+          "title": "Implementing Layered Systems",
+          "keyPoints": [
+            "Strict vs. relaxed layering (skipping layers)",
+            "Layer interfaces and contracts",
+            "Avoiding layer leakage (exposing lower-layer details)",
+            "Performance considerations: layer overhead",
+            "Package/namespace organization reflecting layers"
+          ],
+          "examples": [
+            "Good: Business layer returns domain objects; Bad: Business layer returns SQL ResultSet",
+            "Repository pattern isolating data access from business logic",
+            "MVC pattern as a layered architecture variant"
+          ],
+          "suggestedDiagram": "Code example showing proper layer separation with interfaces, contrasted with layer violation example"
+        }
+      ],
+      "exercises": [
+        "Design a layered architecture for an online banking system, identifying at least 4 layers",
+        "Identify layer violations in provided code snippets"
+      ]
+    },
+    {
+      "title": "Component-Based Design",
+      "learningGoals": [
+        "Understand components as architectural building blocks",
+        "Design components with clear interfaces and responsibilities",
+        "Apply component composition to build complex systems"
+      ],
+      "subsections": [
+        {
+          "title": "Component Fundamentals",
+          "keyPoints": [
+            "Components as independently deployable units with well-defined interfaces",
+            "Encapsulation: hiding internal implementation",
+            "Contracts: required and provided interfaces",
+            "Component granularity: finding the right size",
+            "Component vs. module vs. class: different levels of abstraction"
+          ],
+          "examples": [
+            "Payment processing component with interfaces for different payment methods",
+            "Logging component used across multiple applications",
+            "UI components in modern frameworks (React, Angular)"
+          ],
+          "suggestedDiagram": "Component diagram showing a component with provided interfaces (lollipop notation) and required interfaces (socket notation)"
+        },
+        {
+          "title": "Component Design Principles",
+          "keyPoints": [
+            "Single Responsibility Principle at component level",
+            "High cohesion within components",
+            "Low coupling between components",
+            "Interface segregation: multiple specific interfaces over one general interface",
+            "Dependency inversion: depend on abstractions, not concretions"
+          ],
+          "examples": [
+            "Email notification component separated from SMS notification component",
+            "Authentication component with separate interfaces for different authentication methods",
+            "Plugin architecture allowing component replacement"
+          ],
+          "suggestedDiagram": "Before/after comparison showing tightly coupled components refactored to use interfaces"
+        }
+      ],
+      "exercises": [
+        "Identify components and their interfaces for a hotel reservation system",
+        "Refactor a monolithic system diagram into well-defined components"
+      ]
+    },
+    {
+      "title": "Module Dependencies and Coupling",
+      "learningGoals": [
+        "Analyze dependency structures in large systems",
+        "Identify and resolve problematic dependencies",
+        "Apply principles to minimize coupling"
+      ],
+      "subsections": [
+        {
+          "title": "Understanding Dependencies",
+          "keyPoints": [
+            "Types of dependencies: compile-time, runtime, data dependencies",
+            "Dependency graphs and their analysis",
+            "Cyclic dependencies and their problems",
+            "Transitive dependencies and dependency chains",
+            "Measuring coupling: afferent and efferent coupling"
+          ],
+          "examples": [
+            "Module A uses classes from Module B (compile-time dependency)",
+            "Circular dependency between User and Order modules",
+            "Dependency explosion in poorly structured systems"
+          ],
+          "suggestedDiagram": "Dependency graph showing modules as nodes and dependencies as directed edges, highlighting a cycle"
+        },
+        {
+          "title": "Managing and Reducing Coupling",
+          "keyPoints": [
+            "Acyclic Dependencies Principle (ADP)",
+            "Stable Dependencies Principle (SDP): depend in direction of stability",
+            "Stable Abstractions Principle (SAP): stable packages should be abstract",
+            "Breaking cycles: dependency inversion, introducing interfaces, merging packages",
+            "The cost of coupling: ripple effects, testing difficulty, reuse barriers"
+          ],
+          "examples": [
+            "Breaking UI-Business Logic cycle by introducing events/observers",
+            "Using dependency injection to invert dependencies",
+            "Facade pattern reducing coupling to subsystems"
+          ],
+          "suggestedDiagram": "Dependency structure matrix (DSM) showing module dependencies, with cycle highlighted"
+        }
+      ],
+      "exercises": [
+        "Analyze a dependency graph and identify all cycles",
+        "Propose refactorings to break identified dependency cycles"
+      ]
+    },
+    {
+      "title": "Package Organization Strategies",
+      "learningGoals": [
+        "Apply effective package organization principles",
+        "Choose appropriate packaging strategies for different contexts",
+        "Understand the relationship between packages and architecture"
+      ],
+      "subsections": [
+        {
+          "title": "Package Organization Approaches",
+          "keyPoints": [
+            "Package by layer vs. package by feature vs. package by component",
+            "Package by layer: groups by technical role (controllers, services, repositories)",
+            "Package by feature: groups by business capability (user management, billing)",
+            "Package by component: groups by architectural component",
+            "Screaming architecture: structure reveals intent"
+          ],
+          "examples": [
+            "Package by layer: com.app.controllers, com.app.services, com.app.repositories",
+            "Package by feature: com.app.user, com.app.billing, com.app.inventory",
+            "Hexagonal architecture package structure with ports and adapters"
+          ],
+          "suggestedDiagram": "Side-by-side comparison of package-by-layer vs. package-by-feature directory structures"
+        },
+        {
+          "title": "Package Principles and Best Practices",
+          "keyPoints": [
+            "Common Closure Principle (CCP): classes that change together, package together",
+            "Common Reuse Principle (CRP): classes that are used together, package together",
+            "Release Reuse Equivalency Principle (REP): reuse granularity = release granularity",
+            "Package cohesion: keeping related things together",
+            "Package naming conventions and hierarchy"
+          ],
+          "examples": [
+            "Packaging all database migration utilities together (CCP)",
+            "Separating rarely-changed core from frequently-changed features",
+            "Maven/Gradle module structure reflecting architectural components"
+          ],
+          "suggestedDiagram": "Package diagram showing proper cohesion with related classes grouped together"
+        }
+      ],
+      "exercises": [
+        "Reorganize a given package structure from package-by-layer to package-by-feature",
+        "Evaluate package cohesion in a provided system and suggest improvements"
+      ]
+    },
+    {
+      "title": "Managing Complexity in Large Systems",
+      "learningGoals": [
+        "Recognize sources of complexity in software systems",
+        "Apply techniques to manage and reduce complexity",
+        "Design systems that remain maintainable as they grow"
+      ],
+      "subsections": [
+        {
+          "title": "Sources and Types of Complexity",
+          "keyPoints": [
+            "Essential complexity (problem domain) vs. accidental complexity (solution)",
+            "Complexity drivers: size, dependencies, state, concurrency, distribution",
+            "Cognitive load: how much developers must understand",
+            "Technical debt and its compounding effects",
+            "Measuring complexity: cyclomatic complexity, coupling metrics, lines of code"
+          ],
+          "examples": [
+            "Essential: tax calculation rules; Accidental: over-engineered framework",
+            "Spaghetti code with high cyclomatic complexity",
+            "Microservices adding distributed system complexity"
+          ],
+          "suggestedDiagram": "Graph showing complexity growth over time with and without active management"
+        },
+        {
+          "title": "Complexity Management Techniques",
+          "keyPoints": [
+            "Abstraction: hiding details behind simpler interfaces",
+            "Decomposition: breaking large problems into smaller ones",
+            "Modularity: independent, replaceable components",
+            "Information hiding: minimizing what modules expose",
+            "Separation of concerns: orthogonal responsibilities",
+            "Incremental development: managing complexity over time"
+          ],
+          "examples": [
+            "Database abstraction layer hiding SQL complexity",
+            "Microkernel architecture isolating core from plugins",
+            "Domain-Driven Design bounded contexts reducing cognitive load",
+            "Strangler Fig pattern for gradual legacy system replacement"
+          ],
+          "suggestedDiagram": "Complexity management strategy diagram showing abstraction layers, module boundaries, and information hiding"
+        },
+        {
+          "title": "Architectural Patterns for Complexity",
+          "keyPoints": [
+            "Pipes and Filters: decomposing data processing",
+            "Event-Driven Architecture: decoupling through events",
+            "Microservices: independent deployment and scaling",
+            "Monorepo vs. polyrepo: managing code organization",
+            "Conway's Law: architecture reflects organizational structure"
+          ],
+          "examples": [
+            "Unix pipes composing simple tools",
+            "Event sourcing separating write and read models",
+            "Netflix microservices architecture",
+            "Team structure aligned with bounded contexts"
+          ],
+          "suggestedDiagram": "Event-driven architecture diagram showing loosely coupled components communicating via event bus"
+        }
+      ],
+      "exercises": [
+        "Identify sources of accidental complexity in a provided system design",
+        "Propose an architectural refactoring to reduce complexity in a monolithic application",
+        "Design a complexity management strategy for a growing startup's codebase"
+      ]
+    },
+    {
+      "title": "Conclusion and Practical Application",
+      "learningGoals": [
+        "Synthesize architectural concepts into coherent design approach",
+        "Apply learned principles to real-world scenarios",
+        "Understand the relationship to design patterns and advanced topics"
+      ],
+      "subsections": [
+        {
+          "title": "Architectural Decision Making",
+          "keyPoints": [
+            "Architecture Decision Records (ADRs): documenting key decisions",
+            "Trade-off analysis: evaluating alternatives",
+            "Fitness functions: automated architectural governance",
+            "Evolutionary architecture: designing for change",
+            "Connection to design patterns (Observer, Visitor, etc.)"
+          ],
+          "examples": [
+            "ADR example: choosing REST over GraphQL for API",
+            "Trade-off matrix comparing monolith vs. microservices",
+            "Fitness function checking dependency rules in CI/CD"
+          ],
+          "suggestedDiagram": "ADR template showing structure: context, decision, consequences, status"
+        },
+        {
+          "title": "Summary and Next Steps",
+          "keyPoints": [
+            "Architecture as foundation for software construction",
+            "Key principles: separation of concerns, low coupling, high cohesion",
+            "Architectural styles as reusable solutions",
+            "Continuous architectural refinement",
+            "Preview: design patterns as micro-architectural solutions",
+            "Connection to Architectural Strategy course (2025-MCSSE-SE-03)"
+          ],
+          "examples": [
+            "Case study: refactoring a real system using learned principles",
+            "Architecture evolution timeline of a successful product"
+          ],
+          "suggestedDiagram": "Concept map connecting all lecture topics: layering, components, dependencies, packages, complexity management"
+        }
+      ],
+      "exercises": [
+        "Write an ADR for an architectural decision in your current or past project",
+        "Complete a comprehensive architectural design for a medium-scale system incorporating all learned principles"
+      ]
+    }
+  ],
+  "suggestedResources": [
+    "Martin, R.C. (2017). Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+    "Bass, L., Clements, P., & Kazman, R. (2012). Software Architecture in Practice (3rd Edition)",
+    "Evans, E. (2003). Domain-Driven Design: Tackling Complexity in the Heart of Software",
+    "Fowler, M. (2002). Patterns of Enterprise Application Architecture",
+    "Meyer, B. (2009). Touch of Class: Learning to Program Well Using Objects and Contracts (Chapters on large-scale organization)",
+    "Ghezzi, C., Jazayeri, M., & Mandrioli, D. (2003). Fundamentals of Software Engineering (Architecture chapters)",
+    "Online: Martin Fowler's articles on software architecture (martinfowler.com)",
+    "Online: ThoughtWorks Technology Radar for current architectural trends"
+  ],
+  "assessmentIdeas": [
+    "Design a layered architecture for a specified system (e.g., online learning platform) with justification for layer boundaries",
+    "Analyze a provided codebase and identify architectural violations, proposing refactorings",
+    "Create a component diagram for a complex system showing interfaces and dependencies",
+    "Perform dependency analysis on a real codebase, identify cycles, and propose solutions",
+    "Compare package-by-layer vs. package-by-feature for a given scenario with trade-off analysis",
+    "Write Architecture Decision Records for three key decisions in a system design",
+    "Develop a complexity management plan for a growing software product",
+    "Portfolio assessment: Document architectural decisions made during tutorial project work",
+    "Group exercise: Debate architectural choices for a case study system (monolith vs. microservices, SQL vs. NoSQL, etc.)",
+    "Practical exam: Refactor a poorly structured codebase to improve architectural quality"
+  ]
+}

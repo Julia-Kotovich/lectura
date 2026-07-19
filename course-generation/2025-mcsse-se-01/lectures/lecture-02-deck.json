@@ -1,0 +1,721 @@
+{
+  "slides": [
+    {
+      "id": "slide-01",
+      "title": "Lecture 2: Inheritance, Polymorphism and Dynamic Binding",
+      "layout": "title",
+      "blocks": [
+        {
+          "id": "title-block",
+          "type": "heading",
+          "content": "Lecture 2: Inheritance, Polymorphism and Dynamic Binding"
+        },
+        {
+          "id": "subtitle-block",
+          "type": "text",
+          "content": "Building Flexible and Reusable Software Architectures"
+        },
+        {
+          "id": "preview-activity",
+          "type": "activity",
+          "content": {
+            "instruction": "Quick challenge: Think of a real-world system you've built or used (e.g., e-commerce, social media, game). What entities share common behavior? Sketch 2-3 classes in a hierarchy showing 'is-a' relationships.",
+            "format": "individual-reflection",
+            "duration": "90 seconds"
+          }
+        },
+        {
+          "id": "learning-focus",
+          "type": "text",
+          "content": "Today you'll design hierarchies, evaluate inheritance strategies, and implement polymorphic solutions in Eiffel."
+        }
+      ],
+      "speakerNotes": "Welcome to Lecture 2. Before diving in, activate prior knowledge with the 90-second challenge. This primes students to think about inheritance as a design tool, not just a language feature. After time expires, ask 2-3 volunteers to share examples (e.g., User→Customer/Admin, Vehicle→Car/Truck). Acknowledge responses briefly without critique. Set expectations: today moves beyond understanding concepts to applying them in design scenarios and evaluating trade-offs. This opening shifts from passive introduction to active engagement, targeting apply-level thinking from the start.",
+      "metadata": {
+        "transition": "fade",
+        "animation": "none",
+        "tags": [
+          "introduction",
+          "title",
+          "apply",
+          "activation"
+        ]
+      }
+    },
+    {
+      "id": "slide-02",
+      "title": "Why Inheritance Matters: Design Challenge",
+      "layout": "content",
+      "blocks": [
+        {
+          "id": "scenario-block",
+          "type": "text",
+          "content": "**Scenario:** You're building a university management system. You need classes for Student, Faculty, and TeachingAssistant. All share name, ID, email. Students have GPA and enroll in courses. Faculty teach courses and have research areas. TAs both take and teach courses."
+        },
+        {
+          "id": "design-activity",
+          "type": "activity",
+          "content": {
+            "instruction": "Sketch an inheritance hierarchy for this system (2 minutes). Consider: What's the parent class? Which attributes/methods belong where? How does TA fit—single or multiple inheritance?",
+            "format": "think-pair-share",
+            "duration": "3-4 minutes total"
+          }
+        },
+        {
+          "id": "key-benefits",
+          "type": "bullets",
+          "content": {
+            "items": [
+              "Code reuse: Shared attributes in parent class",
+              "Models 'is-a' relationships naturally",
+              "Enables polymorphism: treat all as Person",
+              "Foundation for extensible systems"
+            ]
+          }
+        }
+      ],
+      "speakerNotes": "Present the scenario and give students 2 minutes to sketch individually. Then pair-share for 1-2 minutes. Poll for solutions: Who used single inheritance with Person parent? Who needed multiple inheritance for TA? Discuss trade-offs. This applies inheritance concepts to a realistic problem, addressing the 'apply single inheritance' objective. Reveal that TA motivates multiple inheritance (covered in slides 6-9). Emphasize that inheritance models real relationships, not just code sharing.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fade-in",
+        "tags": [
+          "apply",
+          "activity",
+          "design-challenge"
+        ]
+      }
+    },
+    {
+      "id": "slide-03",
+      "title": "Inheritance in Action: Design Exercise",
+      "layout": "split",
+      "blocks": [
+        {
+          "id": "vehicle-diagram",
+          "type": "diagram",
+          "content": {
+            "prompt": "UML class diagram showing Vehicle as parent class at top with attributes (speed: INTEGER, fuel: REAL) and methods (start, stop, refuel). Three child classes below: Car, Truck, Motorcycle, each inheriting from Vehicle with specialized attributes. Use arrows pointing upward from children to parent. Clean, educational style."
+          }
+        },
+        {
+          "id": "design-challenge",
+          "type": "activity",
+          "content": {
+            "instruction": "Given this Vehicle hierarchy, sketch how you would add: (1) ElectricCar (no fuel, has batteryLevel), (2) Bicycle (no fuel/engine). Where do they fit? What attributes move or change? Does the parent class need refactoring?",
+            "format": "individual-sketch",
+            "duration": "2 minutes"
+          }
+        },
+        {
+          "id": "key-questions",
+          "type": "bullets",
+          "content": {
+            "items": [
+              "Does ElectricCar inherit fuel attribute? (LSP issue)",
+              "Does Bicycle IS-A Vehicle if it has no engine?",
+              "Should Vehicle be more abstract?",
+              "When to use inheritance vs. composition?"
+            ]
+          }
+        }
+      ],
+      "speakerNotes": "Show the diagram, then present the challenge. Give students 2 minutes to sketch solutions individually. Poll responses: Who added ElectricCar as direct Vehicle child? Who refactored Vehicle to be more abstract (e.g., removing fuel)? Highlight that this exposes real design tensions—ElectricCar inheriting unused fuel violates LSP. Bicycle challenges the 'is-a' test. This applies inheritance design skills and previews LSP (slide 11). Emphasize that good hierarchies require thinking about future extensions, not just current needs.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fade-in",
+        "tags": [
+          "apply",
+          "activity",
+          "single-inheritance",
+          "design-challenge"
+        ]
+      }
+    },
+    {
+      "id": "slide-04",
+      "title": "Single Inheritance: Apply the Principles",
+      "layout": "split",
+      "blocks": [
+        {
+          "id": "core-principles",
+          "type": "bullets",
+          "content": {
+            "items": [
+              "One parent class → tree structure",
+              "'Is-a' relationship must hold",
+              "Children inherit all features (visibility rules apply)",
+              "Foundation: Liskov Substitution Principle"
+            ]
+          }
+        },
+        {
+          "id": "design-evaluation",
+          "type": "activity",
+          "content": {
+            "instruction": "Evaluate these proposed hierarchies. Which violates single inheritance principles? Why? (A) Employee → Manager → Director, (B) Shape → Square → Rectangle, (C) Animal → Dog → Puppy. Identify the problematic design and explain how to fix it using 'is-a' and LSP.",
+            "format": "think-pair-share",
+            "duration": "3 minutes"
+          }
+        },
+        {
+          "id": "key-questions",
+          "type": "bullets",
+          "content": {
+            "items": [
+              "Does the child truly 'is-a' parent in all contexts?",
+              "Can child substitute for parent without breaking behavior?",
+              "Are inherited attributes meaningful for the child?"
+            ]
+          }
+        }
+      ],
+      "speakerNotes": "Present the three hierarchies. Give 90 seconds individual thinking, then 90 seconds pair discussion. Poll for answers—hierarchy B (Square→Rectangle) violates LSP because Square constrains Rectangle's behavior (width must equal height). The 'is-a' test fails: a Square cannot substitute for Rectangle in all contexts. Correct approach: make both inherit from Shape. This activity directly applies the principles just introduced and prepares students for the Vehicle design challenge on slide 3. Emphasize that recognizing violations is the first step toward creating correct hierarchies.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fade-in",
+        "tags": [
+          "apply",
+          "evaluate",
+          "single-inheritance",
+          "LSP"
+        ]
+      }
+    },
+    {
+      "id": "slide-05",
+      "title": "Single Inheritance in Eiffel: Apply It",
+      "layout": "split",
+      "blocks": [
+        {
+          "id": "eiffel-reference",
+          "type": "code",
+          "content": {
+            "language": "eiffel",
+            "code": "class ACCOUNT\nfeature\n    balance: REAL\n    deposit (amount: REAL)\n        require amount > 0\n        do\n            balance := balance + amount\n        end\nend\n\nclass SAVINGS_ACCOUNT\ninherit\n    ACCOUNT\nfeature\n    interest_rate: REAL\n    apply_interest\n        do\n            deposit(balance * interest_rate)\n        end\nend"
+          }
+        },
+        {
+          "id": "implementation-challenge",
+          "type": "activity",
+          "content": {
+            "instruction": "Using the ACCOUNT hierarchy as reference, implement a CHECKING_ACCOUNT class that: (1) inherits from ACCOUNT, (2) adds a monthly_fee attribute, (3) implements deduct_fee that reduces balance by monthly_fee. Write the Eiffel code structure (class header, inherit clause, features). What precondition should deduct_fee have?",
+            "format": "individual-then-discuss",
+            "duration": "4 minutes"
+          }
+        },
+        {
+          "id": "design-questions",
+          "type": "bullets",
+          "content": {
+            "items": [
+              "Which features does CHECKING_ACCOUNT inherit?",
+              "Should deduct_fee call deposit with negative amount?",
+              "What contract (require/ensure) protects balance integrity?"
+            ]
+          }
+        }
+      ],
+      "speakerNotes": "Give 2 minutes for students to sketch CHECKING_ACCOUNT code on paper or laptops. Then discuss solutions. Key points: inherits balance and deposit; deduct_fee needs 'require balance >= monthly_fee' to prevent negative balance; should NOT use deposit (violates its precondition). This directly applies Eiffel inheritance syntax and contracts, moving from observation to implementation. Connects to LSP discussion on next slides—proper preconditions ensure substitutability. Addresses the 'implement inheritance hierarchies in Eiffel' objective at apply level.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fade-in",
+        "tags": [
+          "apply",
+          "eiffel",
+          "single-inheritance",
+          "implementation"
+        ]
+      }
+    },
+    {
+      "id": "slide-06",
+      "title": "Multiple Inheritance: Power and Complexity",
+      "layout": "content",
+      "blocks": [
+        {
+          "id": "multiple-inheritance-intro",
+          "type": "bullets",
+          "content": {
+            "items": [
+              "Inherit from multiple parent classes",
+              "Combine orthogonal features (mixins)",
+              "Creates DAG (Directed Acyclic Graph) structures",
+              "Supported: C++, Eiffel, Python",
+              "Not supported: Java, C# (use interfaces instead)"
+            ]
+          }
+        }
+      ],
+      "speakerNotes": "Multiple inheritance is powerful but complex. It allows combining features from multiple sources—useful for mixins or when an object genuinely has multiple roles. Emphasize the structural difference: no longer a tree, but a DAG. Many languages avoid it due to complexity; Java/C# use single inheritance + interfaces as a compromise.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fade-in",
+        "tags": [
+          "concepts",
+          "multiple-inheritance"
+        ]
+      }
+    },
+    {
+      "id": "slide-07",
+      "title": "The Diamond Problem: Analysis Challenge",
+      "layout": "split",
+      "blocks": [
+        {
+          "id": "diamond-diagram",
+          "type": "diagram",
+          "content": {
+            "prompt": "Diamond inheritance diagram showing Person class at top with 'id' attribute, Student and Employee classes in middle both inheriting from Person, and TeachingAssistant class at bottom inheriting from both Student and Employee. Highlight the conflict: which 'id' does TeachingAssistant inherit? Use red highlight or question mark to show ambiguity. Clean UML style."
+          }
+        },
+        {
+          "id": "diamond-analysis-activity",
+          "type": "activity",
+          "content": {
+            "title": "Analyze & Propose",
+            "instructions": "Given this TeachingAssistant scenario: (1) Identify all ambiguities that arise (attributes, methods, initialization). (2) Propose TWO different resolution strategies and explain trade-offs of each. (3) Which would you choose and why?",
+            "duration": "3 minutes",
+            "format": "Think-pair-share"
+          }
+        }
+      ],
+      "speakerNotes": "Present the diamond problem, then engage students in analysis. They should identify: attribute conflicts (id), potential method conflicts (display_info), and initialization issues. Expected strategies: rename both ids, select one id, use composition instead. After pair discussion, poll the room for preferences and discuss trade-offs: clarity vs. simplicity, memory duplication vs. shared state. This prepares them for Eiffel's explicit resolution approach in the next slide and addresses the evaluate objective for multiple inheritance design strategies.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fade-in",
+        "tags": [
+          "multiple-inheritance",
+          "diamond-problem",
+          "analyze",
+          "evaluate",
+          "activity"
+        ]
+      }
+    },
+    {
+      "id": "slide-08",
+      "title": "Resolving the Diamond: Eiffel Approach",
+      "layout": "code",
+      "blocks": [
+        {
+          "id": "diamond-resolution-code",
+          "type": "code",
+          "content": {
+            "language": "eiffel",
+            "code": "class TEACHING_ASSISTANT\ninherit\n    STUDENT\n        rename\n            id as student_id\n        end\n    EMPLOYEE\n        rename\n            id as employee_id\n        end\nfeature\n    student_id: STRING\n    employee_id: STRING\n    \n    -- Now both IDs are accessible\n    -- No ambiguity\nend"
+          }
+        }
+      ],
+      "speakerNotes": "Eiffel's solution: explicit renaming. The programmer must decide how to handle conflicts. Here we rename both 'id' attributes to make them distinct. Alternative: use 'select' to choose one. This makes the programmer's intent clear and prevents silent errors. Discuss trade-off: more verbose but safer.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fade-in",
+        "tags": [
+          "code",
+          "eiffel",
+          "multiple-inheritance",
+          "diamond-problem"
+        ]
+      }
+    },
+    {
+      "id": "slide-09",
+      "title": "Evaluating Multiple Inheritance Design Decisions",
+      "layout": "content",
+      "blocks": [
+        {
+          "id": "mi-scenario",
+          "type": "text",
+          "content": "**Design Challenge:** You're building a university system. A TeachingAssistant needs properties from both Student (courses, GPA) and Employee (salary, department). Consider two approaches:\n\n**A)** Multiple inheritance: `class TA inherit STUDENT; EMPLOYEE`\n\n**B)** Composition: `class TA inherit STUDENT` with `employment_info: EMPLOYEE_RECORD`"
+        },
+        {
+          "id": "evaluation-activity",
+          "type": "activity",
+          "content": {
+            "title": "Think-Pair-Share (3 min)",
+            "instructions": "1. Individually: Which design would you choose? List 2 pros and 2 cons for your choice (1 min)\n2. Pair: Compare reasoning with a neighbor (1 min)\n3. Share: Vote and justify (1 min)",
+            "deliverable": "Be ready to defend your choice based on: code reuse, maintainability, diamond problem risk, and semantic clarity"
+          }
+        },
+        {
+          "id": "evaluation-criteria",
+          "type": "bullets",
+          "content": {
+            "items": [
+              "Is-a vs. has-a: Does TA fundamentally *be* both roles?",
+              "Diamond risk: Could STUDENT and EMPLOYEE share ancestors?",
+              "Interface vs. implementation: Need behaviors or just data?",
+              "Language support: Does your language handle MI conflicts well?"
+            ]
+          }
+        }
+      ],
+      "speakerNotes": "This activity targets the 'evaluate benefits and challenges of MI' objective. After voting, reveal that both can work but composition often wins for orthogonal concerns like employment. MI better when TA must substitute for both Student AND Employee polymorphically. Highlight that design choice depends on substitutability needs and language features. Connect back to slide 8's renaming solution if MI chosen. Emphasize no single right answer—justification matters.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fade-in",
+        "tags": [
+          "evaluate",
+          "multiple-inheritance",
+          "design",
+          "activity"
+        ]
+      }
+    },
+    {
+      "id": "slide-10",
+      "title": "Polymorphism: One Interface, Many Forms",
+      "layout": "split",
+      "blocks": [
+        {
+          "id": "polymorphism-concept",
+          "type": "bullets",
+          "content": {
+            "items": [
+              "Single interface, multiple implementations",
+              "Subtype polymorphism (inheritance-based)",
+              "Write code that works with any subtype",
+              "Enables extensibility without modification"
+            ]
+          }
+        },
+        {
+          "id": "polymorphism-diagram",
+          "type": "diagram",
+          "content": {
+            "prompt": "Memory diagram showing an array labeled 'shapes: ARRAY[SHAPE]' containing references pointing to different objects: a Circle object, a Rectangle object, and a Triangle object. Show the array holding references (arrows) to these different concrete types. Label static type as SHAPE and dynamic types as Circle, Rectangle, Triangle."
+          }
+        }
+      ],
+      "speakerNotes": "Polymorphism is the ability to treat objects of different types uniformly through a common interface. The array has static type ARRAY[SHAPE], but contains objects of dynamic types Circle, Rectangle, Triangle. This is the power of polymorphism: write code once (iterate over shapes), works with any shape type, including types not yet invented.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fade-in",
+        "tags": [
+          "polymorphism",
+          "concepts",
+          "visualization"
+        ]
+      }
+    },
+    {
+      "id": "slide-11",
+      "title": "Liskov Substitution Principle (LSP)",
+      "layout": "content",
+      "blocks": [
+        {
+          "id": "lsp-definition",
+          "type": "quote",
+          "content": "Objects of a subtype should be substitutable for objects of the supertype without altering program correctness."
+        },
+        {
+          "id": "lsp-bullets",
+          "type": "bullets",
+          "content": {
+            "items": [
+              "Behavioral subtyping, not just structural",
+              "Preserve invariants and contracts",
+              "Weaken preconditions, strengthen postconditions",
+              "Violations lead to subtle bugs"
+            ]
+          }
+        }
+      ],
+      "speakerNotes": "LSP is crucial for correct inheritance. It's not enough that a Square IS-A Rectangle structurally—it must behave correctly in all contexts where Rectangle is used. Classic violation: if Rectangle has setWidth/setHeight that work independently, but Square must keep width=height, substituting Square breaks code expecting Rectangle behavior. Always think: can I use the child wherever the parent is expected?",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fade-in",
+        "tags": [
+          "polymorphism",
+          "LSP",
+          "principles"
+        ]
+      }
+    },
+    {
+      "id": "slide-12",
+      "title": "Polymorphism in Eiffel",
+      "layout": "code",
+      "blocks": [
+        {
+          "id": "polymorphism-code",
+          "type": "code",
+          "content": {
+            "language": "eiffel",
+            "code": "class ZOO\nfeature\n    animals: LINKED_LIST[ANIMAL]\n    \n    feed_all\n        local\n            animal: ANIMAL\n        do\n            from animals.start\n            until animals.after\n            loop\n                animal := animals.item\n                animal.eat  -- Polymorphic call\n                animals.forth\n            end\n        end\nend\n\n-- Works with Dog, Cat, Bird, etc.\n-- Each implements 'eat' differently"
+          }
+        }
+      ],
+      "speakerNotes": "This demonstrates polymorphic programming. The feed_all method works with any ANIMAL subtype. The call to animal.eat is polymorphic—which implementation runs depends on the dynamic type (Dog.eat, Cat.eat, etc.). Note that static type is ANIMAL, but dynamic type varies. This is resolved at runtime through dynamic binding, our next topic.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fade-in",
+        "tags": [
+          "code",
+          "eiffel",
+          "polymorphism"
+        ]
+      }
+    },
+    {
+      "id": "slide-13",
+      "title": "Dynamic Binding: Runtime Method Resolution",
+      "layout": "content",
+      "blocks": [
+        {
+          "id": "binding-concepts",
+          "type": "bullets",
+          "content": {
+            "items": [
+              "Static binding: resolved at compile time",
+              "Dynamic binding: resolved at runtime",
+              "Enables polymorphism to work",
+              "Uses virtual method table (vtable)",
+              "Trade-off: flexibility vs. performance"
+            ]
+          }
+        }
+      ],
+      "speakerNotes": "Dynamic binding is the mechanism that makes polymorphism work. When you call animal.eat, the compiler doesn't know which eat method to call—it depends on the runtime type. Dynamic binding defers this decision to runtime using a vtable. This adds a small performance cost (indirection) but gives enormous flexibility. In Eiffel, all calls are dynamically bound by default.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fade-in",
+        "tags": [
+          "dynamic-binding",
+          "concepts"
+        ]
+      }
+    },
+    {
+      "id": "slide-14",
+      "title": "Virtual Method Table (vtable)",
+      "layout": "split",
+      "blocks": [
+        {
+          "id": "vtable-diagram",
+          "type": "diagram",
+          "content": {
+            "prompt": "Detailed memory layout diagram showing: 1) A Dog object in memory with a vtable pointer at the top, followed by data fields. 2) The vtable pointer (arrow) pointing to Dog's vtable. 3) Dog's vtable as a table with entries: eat -> Dog.eat, sleep -> Dog.sleep, speak -> Dog.speak. 4) Show similar structure for Cat object pointing to Cat's vtable. Label clearly: 'vtable pointer', 'Dog vtable', 'method addresses'."
+          }
+        },
+        {
+          "id": "vtable-explanation",
+          "type": "bullets",
+          "content": {
+            "items": [
+              "Each object has vtable pointer",
+              "Vtable maps method names to addresses",
+              "Runtime: follow pointer, lookup method, call",
+              "One vtable per class, shared by all instances"
+            ]
+          }
+        }
+      ],
+      "speakerNotes": "This is how dynamic binding works under the hood. Each object has a hidden pointer to its class's vtable. When you call animal.eat: (1) follow the vtable pointer, (2) look up 'eat' in the table, (3) call the address found. This is fast (two indirections) but slower than static calls. One vtable per class, not per object, so memory overhead is minimal.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fade-in",
+        "tags": [
+          "dynamic-binding",
+          "implementation",
+          "visualization"
+        ]
+      }
+    },
+    {
+      "id": "slide-15",
+      "title": "Method Redefinition: Apply It",
+      "layout": "split",
+      "blocks": [
+        {
+          "id": "redefinition-example",
+          "type": "code",
+          "content": {
+            "language": "eiffel",
+            "code": "class SHAPE\nfeature\n    area: REAL\n        deferred\n        end\nend\n\nclass CIRCLE\ninherit\n    SHAPE\n        redefine area end\nfeature\n    radius: REAL\n    area: REAL\n        do\n            Result := 3.14159 * radius * radius\n        end\nend"
+          }
+        },
+        {
+          "id": "apply-activity",
+          "type": "activity",
+          "content": {
+            "activityType": "think-pair-share",
+            "duration": "3 minutes",
+            "instruction": "Design RECTANGLE and TRIANGLE classes inheriting from SHAPE. What features do they need? Implement their area methods. Would you add any deferred features to SHAPE? Discuss with a partner.",
+            "deliverable": "Sketch class structure with features and area calculations"
+          }
+        }
+      ],
+      "speakerNotes": "Students now apply redefinition to new shapes. Walk through CIRCLE first: deferred means no implementation in parent; redefine clause signals override; effective implementation required. Then give 3 minutes for the activity. Circulate and check designs. Common solution: RECTANGLE needs width, height; area = width * height. TRIANGLE needs base, height; area = 0.5 * base * height. Some may suggest adding perimeter as deferred. Debrief 2-3 solutions, emphasizing the redefine clause and that each subclass provides appropriate calculations.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fade-in",
+        "tags": [
+          "code",
+          "eiffel",
+          "redefinition",
+          "apply"
+        ]
+      }
+    },
+    {
+      "id": "slide-16",
+      "title": "Using Precursor: Extending Parent Behavior",
+      "layout": "code",
+      "blocks": [
+        {
+          "id": "precursor-code",
+          "type": "code",
+          "content": {
+            "language": "eiffel",
+            "code": "class EMPLOYEE\nfeature\n    calculate_salary: REAL\n        do\n            Result := base_salary\n        end\nend\n\nclass MANAGER\ninherit\n    EMPLOYEE\n        redefine calculate_salary end\nfeature\n    calculate_salary: REAL\n        do\n            Result := Precursor + bonus\n            -- Calls EMPLOYEE.calculate_salary\n            -- then adds bonus\n        end\nend"
+          }
+        }
+      ],
+      "speakerNotes": "Precursor calls the parent's implementation. This is crucial for extending rather than replacing behavior. MANAGER.calculate_salary builds on EMPLOYEE.calculate_salary by adding a bonus. This promotes code reuse and maintains the parent's logic. Without Precursor, you'd have to duplicate the base_salary calculation. Similar to 'super' in Java or Python.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fade-in",
+        "tags": [
+          "code",
+          "eiffel",
+          "redefinition",
+          "precursor"
+        ]
+      }
+    },
+    {
+      "id": "slide-17",
+      "title": "Design Patterns: Template Method",
+      "layout": "split",
+      "blocks": [
+        {
+          "id": "template-method-diagram",
+          "type": "diagram",
+          "content": {
+            "prompt": "UML class diagram showing Template Method pattern. Abstract class DataProcessor at top with template method 'process()' that calls abstract methods 'read_data()', 'process_data()', 'write_data()'. Two concrete classes below: CSVProcessor and JSONProcessor, each implementing the three abstract methods. Show the sequence: process() calls the three steps in order."
+          }
+        },
+        {
+          "id": "template-method-explanation",
+          "type": "bullets",
+          "content": {
+            "items": [
+              "Define algorithm skeleton in parent",
+              "Subclasses customize specific steps",
+              "Parent controls overall flow",
+              "Promotes consistency and reuse"
+            ]
+          }
+        }
+      ],
+      "speakerNotes": "Template Method is a classic pattern leveraging inheritance and redefinition. The parent defines the algorithm structure (process = read, then process, then write), but leaves specific steps abstract. Each subclass provides concrete implementations. This ensures all processors follow the same flow while allowing customization. Common in frameworks. Note how this relies on dynamic binding to call the right implementations.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fade-in",
+        "tags": [
+          "design-patterns",
+          "template-method",
+          "visualization"
+        ]
+      }
+    },
+    {
+      "id": "slide-18",
+      "title": "Common Pitfalls and Best Practices",
+      "layout": "content",
+      "blocks": [
+        {
+          "id": "pitfalls-bullets",
+          "type": "bullets",
+          "content": {
+            "items": [
+              "Avoid deep hierarchies (> 4-5 levels)",
+              "Favor composition over inheritance for 'has-a'",
+              "Don't break encapsulation with protected members",
+              "Ensure LSP compliance—test substitutability",
+              "Document redefinable methods clearly"
+            ]
+          }
+        }
+      ],
+      "speakerNotes": "Common mistakes: deep hierarchies become hard to understand (yo-yo problem). Use composition when objects have parts, not when they are subtypes. Protected members can break encapsulation—prefer private with protected accessors. Always test that subclasses can substitute for parents. These practices prevent the 'fragile base class' problem where changes to parents break children.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fade-in",
+        "tags": [
+          "best-practices",
+          "pitfalls"
+        ]
+      }
+    },
+    {
+      "id": "slide-19",
+      "title": "Summary: Key Takeaways",
+      "layout": "content",
+      "blocks": [
+        {
+          "id": "summary-bullets",
+          "type": "bullets",
+          "content": {
+            "items": [
+              "Inheritance: Code reuse and modeling 'is-a' relationships",
+              "Multiple inheritance: Powerful but requires careful design",
+              "Polymorphism + LSP: Write flexible, substitutable code",
+              "Dynamic binding: Runtime method resolution via vtables",
+              "Redefinition: Customize behavior while maintaining contracts",
+              "Apply thoughtfully: Balance flexibility with complexity"
+            ]
+          }
+        }
+      ],
+      "speakerNotes": "Recap the key concepts. Inheritance is a powerful tool for reuse and modeling, but must be used thoughtfully. Polymorphism and LSP ensure correct, flexible designs. Dynamic binding is the mechanism enabling polymorphism. These concepts work together to create extendible, maintainable systems. Next lecture: genericity and parametric polymorphism. Encourage students to practice with the exercises and come to tutorial with questions.",
+      "metadata": {
+        "transition": "slide",
+        "animation": "fade-in",
+        "tags": [
+          "summary",
+          "conclusion"
+        ]
+      }
+    },
+    {
+      "id": "slide-20",
+      "title": "Looking Ahead",
+      "layout": "content",
+      "blocks": [
+        {
+          "id": "preview-heading",
+          "type": "heading",
+          "content": "Next Topics"
+        },
+        {
+          "id": "preview-bullets",
+          "type": "bullets",
+          "content": {
+            "items": [
+              "Genericity and parametric polymorphism",
+              "Design by Contract: Strengthening inheritance with contracts",
+              "Advanced design patterns using these mechanisms",
+              "Real-world case studies and applications"
+            ]
+          }
+        },
+        {
+          "id": "action-items",
+          "type": "text",
+          "content": "Practice: Implement the exercise hierarchies in Eiffel. Prepare questions for tutorial."
+        }
+      ],
+      "speakerNotes": "Preview upcoming topics to show how today's concepts fit into the bigger picture. Genericity will add another dimension of flexibility. Design by Contract will show how to make inheritance hierarchies more robust. Emphasize the importance of hands-on practice—implement the suggested exercises. Remind students of tutorial times and encourage them to bring specific questions about challenging concepts.",
+      "metadata": {
+        "transition": "fade",
+        "animation": "fade-out",
+        "tags": [
+          "conclusion",
+          "preview"
+        ]
+      }
+    }
+  ]
+}

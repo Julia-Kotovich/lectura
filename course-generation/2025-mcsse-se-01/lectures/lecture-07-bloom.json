@@ -1,0 +1,159 @@
+{
+  "alignmentScore": 88,
+  "dominantLevel": "apply",
+  "distribution": {
+    "remember": 5,
+    "understand": 15,
+    "apply": 45,
+    "analyze": 20,
+    "evaluate": 10,
+    "create": 5
+  },
+  "objectiveAlignments": [
+    {
+      "objective": "Understand the principles of architectural thinking and how it differs from detailed design",
+      "expectedLevel": "understand",
+      "observedLevel": "evaluate",
+      "status": "aligned",
+      "rationale": "Slides 2-4 exceed expectations by requiring students to evaluate and classify decisions as architectural vs. tactical, analyze trade-offs in competing approaches, and justify choices based on context. The evaluation activities (classifying decisions, analyzing startup trade-offs) demonstrate understanding through higher-order application and judgment, which is appropriate for MSc-level architectural thinking."
+    },
+    {
+      "objective": "Apply layered architecture patterns to organize large-scale systems effectively",
+      "expectedLevel": "apply",
+      "observedLevel": "apply",
+      "status": "aligned",
+      "rationale": "Slides 5-7 directly address this objective at the apply level. Students organize library system components into layers (slide 5), design a complete e-commerce layered architecture (slide 6), and analyze layer violations with coupling diagnosis (slide 7). The progression from guided application to independent design with analysis of violations demonstrates solid apply-level engagement."
+    },
+    {
+      "objective": "Design component-based systems with clear interfaces and responsibilities",
+      "expectedLevel": "create",
+      "observedLevel": "apply",
+      "status": "partially_aligned",
+      "rationale": "Slides 8-10 engage students in component design activities, but primarily at the apply level rather than full create level. Slide 8 has students identify components and define interfaces for e-commerce (applying component thinking to given requirements). Slide 10 requires decomposing a monolith and designing interfaces (higher-level application). While these are substantial design tasks, they follow established patterns rather than requiring synthesis of novel architectural solutions. To reach create level, students would need more open-ended scenarios requiring original architectural innovation."
+    },
+    {
+      "objective": "Analyze and manage module dependencies to minimize coupling",
+      "expectedLevel": "analyze",
+      "observedLevel": "analyze",
+      "status": "aligned",
+      "rationale": "Slides 11-13 thoroughly address dependency analysis at the appropriate level. Students identify cycles in dependency graphs, calculate coupling metrics, diagnose problems in complex graphs with multiple cycles, and propose refactoring strategies using dependency inversion. The activities require breaking down dependency structures, identifying problematic patterns, and evaluating solutions—all core analyze-level tasks. The progression from simple to complex dependency scenarios builds analytical capability effectively."
+    },
+    {
+      "objective": "Implement effective package organization strategies for maintainability",
+      "expectedLevel": "apply",
+      "observedLevel": "apply",
+      "status": "aligned",
+      "rationale": "Slides 14-15 address package organization at the apply level. Students reorganize codebases from layer-based to feature-based structure (slide 14) and evaluate package structures against CCP/CRP/ADP principles, identifying violations and proposing refactoring moves (slide 15). These activities require applying package principles to concrete organizational decisions and justifying choices based on cohesion and coupling goals, which matches the apply-level expectation."
+    },
+    {
+      "objective": "Apply complexity management techniques to large software systems",
+      "expectedLevel": "apply",
+      "observedLevel": "apply",
+      "status": "aligned",
+      "rationale": "Slide 16 directly addresses complexity management at the apply level. Students decompose a complex 450-line class into components with clear interfaces, apply abstraction and information hiding techniques, calculate complexity metrics, and justify how their design reduces cognitive load. This hands-on simplification task requires applying decomposition, abstraction, and modularity techniques to a realistic complex component, matching the objective's apply-level expectation."
+    }
+  ],
+  "slideTags": [
+    {
+      "slideTitle": "What is Software Architecture?",
+      "primaryLevel": "evaluate",
+      "evidence": "Activity requires students to classify decisions as architectural vs. tactical and justify reasoning based on cost to change and system-wide impact—evaluation of decision significance"
+    },
+    {
+      "slideTitle": "Architecture vs. Design vs. Implementation",
+      "primaryLevel": "apply",
+      "evidence": "Students classify decisions by abstraction level and justify classifications based on scope and cost of change—applying abstraction hierarchy to concrete decisions"
+    },
+    {
+      "slideTitle": "Architectural Thinking",
+      "primaryLevel": "evaluate",
+      "evidence": "Students evaluate two architectural approaches for startup scenario, considering trade-offs across multiple quality attributes and stakeholder perspectives—judgment and justification of competing approaches"
+    },
+    {
+      "slideTitle": "Layered Architecture: Core Principles",
+      "primaryLevel": "apply",
+      "evidence": "Students organize library system components into layers and justify placement with dependency flow—applying layering pattern to concrete scenario"
+    },
+    {
+      "slideTitle": "Apply: Design a Layered Architecture",
+      "primaryLevel": "apply",
+      "evidence": "Students design complete layered architecture for e-commerce order system, organizing components, drawing dependencies, and justifying layer assignments—applying pattern to realistic design problem"
+    },
+    {
+      "slideTitle": "Analyze: Layer Violations and Coupling",
+      "primaryLevel": "analyze",
+      "evidence": "Students diagnose coupling problems in code examples, identify layer violations, predict maintenance consequences, and propose refactoring—breaking down architectural problems and analyzing dependencies"
+    },
+    {
+      "slideTitle": "Component-Based Design",
+      "primaryLevel": "apply",
+      "evidence": "Students decompose e-commerce system into components, define provided/required interfaces, and justify component boundaries—applying component design principles to system decomposition"
+    },
+    {
+      "slideTitle": "Component Diagram: Interface Analysis",
+      "primaryLevel": "analyze",
+      "evidence": "Students identify substitutable components, analyze responsibility placement for new requirements, and extend architecture—analyzing component relationships and design decisions"
+    },
+    {
+      "slideTitle": "Component Design Principles",
+      "primaryLevel": "apply",
+      "evidence": "Students decompose monolithic component applying Single Responsibility, design interfaces using dependency inversion, and justify abstraction choices—applying SOLID principles at component scale"
+    },
+    {
+      "slideTitle": "Module Dependencies & Analysis",
+      "primaryLevel": "analyze",
+      "evidence": "Students draw dependency graph, identify cycles, calculate coupling metrics, and propose refactoring to break cycles—analyzing dependency structure and diagnosing problems"
+    },
+    {
+      "slideTitle": "Dependency Analysis Exercise",
+      "primaryLevel": "analyze",
+      "evidence": "Students identify all cycles in complex graph, calculate coupling metrics, determine stability, and propose specific refactoring strategies—comprehensive dependency analysis with solution proposals"
+    },
+    {
+      "slideTitle": "Managing Dependencies: Key Principles",
+      "primaryLevel": "understand",
+      "evidence": "Presentation of ADP, SDP, SAP principles with explanations and examples—conceptual understanding of dependency management principles without application activity"
+    },
+    {
+      "slideTitle": "Package Organization Strategies",
+      "primaryLevel": "apply",
+      "evidence": "Students reorganize codebase from layer-based to feature-based packages using CCP/CRP, justifying grouping decisions—applying package organization strategies to improve structure"
+    },
+    {
+      "slideTitle": "Package Principles",
+      "primaryLevel": "apply",
+      "evidence": "Students analyze package structure for principle violations (CCP, CRP, ADP), identify specific violations, and propose refactoring moves with principle-based justification—applying package cohesion principles diagnostically"
+    },
+    {
+      "slideTitle": "Managing Complexity",
+      "primaryLevel": "apply",
+      "evidence": "Students decompose complex 450-line class, define interfaces using information hiding, calculate complexity metrics, and justify maintainability improvements—applying decomposition and abstraction techniques"
+    },
+    {
+      "slideTitle": "Architecture Decision Records (ADRs)",
+      "primaryLevel": "create",
+      "evidence": "Students write complete ADR for dependency injection decision, synthesizing context forces, justifying decision, and documenting trade-offs—creating decision documentation that synthesizes multiple concerns"
+    },
+    {
+      "slideTitle": "Synthesis: Architectural Analysis & Decision-Making",
+      "primaryLevel": "analyze",
+      "evidence": "Students analyze four interconnected architectural problems (layering, dependencies, packages, complexity), propose solutions, and create ADR—comprehensive analysis integrating all lecture concepts with synthesis element"
+    }
+  ],
+  "gaps": [
+    "Limited create-level engagement: Only 5% of deck cognitive demand reaches create level (slides 17-18), despite 'Design component-based systems' objective implying synthesis of novel solutions. Most design activities apply established patterns rather than requiring architectural innovation.",
+    "Component design objective partially underserved: While slides 8-10 provide substantial component design practice, activities primarily involve applying component thinking to given requirements rather than synthesizing original architectural solutions from ambiguous or competing constraints.",
+    "Missing scaffolding for architectural trade-off evaluation: While slide 4 introduces trade-off thinking for monolith vs. microservices, subsequent slides don't systematically develop this critical skill. Students would benefit from more activities explicitly comparing competing architectural approaches across quality attributes.",
+    "Limited integration before final synthesis: Slides 2-16 address objectives somewhat independently. Only slide 18 integrates layering, dependencies, packages, and complexity. Earlier integration activities would help students see how architectural decisions interact across concerns.",
+    "Evaluate-level underrepresented: Only 10% of deck at evaluate level, despite architectural decision-making requiring constant judgment of competing approaches. More activities critiquing existing architectures or justifying design choices against explicit criteria would strengthen evaluation skills."
+  ],
+  "suggestions": [
+    "Elevate slide 8-10 component activities to create level: Provide more open-ended scenarios with competing constraints (e.g., 'Design component architecture for healthcare system balancing HIPAA compliance, real-time performance, and third-party integration'). Require students to synthesize novel solutions rather than apply standard decomposition patterns, better aligning with 'Design component-based systems' objective.",
+    "Add comparative evaluation activities: Insert slide after slide 6 or 10 asking students to evaluate 2-3 alternative architectures for the same requirements, explicitly comparing trade-offs across quality attributes (performance, maintainability, scalability, cost). This would develop critical evaluation skills and architectural judgment.",
+    "Introduce mid-lecture integration checkpoint: After slide 10, add activity requiring students to design a small system applying both layering AND component principles simultaneously, managing dependencies between layers and components. This scaffolds toward the comprehensive synthesis in slide 18.",
+    "Strengthen ADR practice throughout: Rather than introducing ADRs only in slide 17, have students write mini-ADRs for key decisions in earlier activities (e.g., layer organization choice in slide 6, dependency breaking strategy in slide 12). This distributes create-level work and builds documentation skills progressively.",
+    "Add architecture critique activity: Insert slide with flawed architecture (violating multiple principles) and have students conduct comprehensive critique, identifying problems, prioritizing fixes, and justifying remediation sequence. This develops evaluate-level skills for assessing architectural quality systematically.",
+    "Expand complexity management coverage: Slide 16 is the only slide addressing complexity management objective. Add follow-up slide with activity analyzing how layering, components, and dependency management collectively reduce complexity, connecting techniques to complexity drivers (size, dependencies, state).",
+    "Include real-world architecture case study: Add slide analyzing production system architecture (e.g., Netflix, Spotify) where students identify applied principles, evaluate trade-offs made, and critique decisions. This contextualizes abstract principles in professional practice and develops evaluation skills."
+  ]
+}

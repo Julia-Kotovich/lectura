@@ -1,0 +1,564 @@
+{
+  "title": "Lecture 4. Design by Contract: Assertions and Program Correctness",
+  "summary": "This lecture introduces Design by Contract (DbC) methodology as a systematic approach to building reliable software. Students will learn to specify software behavior using preconditions, postconditions, and class invariants, understand how contracts guarantee program correctness, and apply assertion-based reasoning to ensure software quality. The lecture emphasizes practical application of DbC principles in object-oriented programming and their role in achieving program reliability.",
+  "learningObjectives": [
+    "Understand the fundamental principles and philosophy of Design by Contract",
+    "Write and apply preconditions, postconditions, and class invariants to specify software behavior",
+    "Use assertions for runtime monitoring and debugging",
+    "Apply contract inheritance rules and understand behavioral subtyping",
+    "Evaluate how contracts contribute to program reliability and correctness",
+    "Integrate DbC techniques into object-oriented software construction practices"
+  ],
+  "targetSlideCount": 18,
+  "estimatedStudyMinutes": 120,
+  "sections": [
+    {
+      "title": "Introduction to Design by Contract",
+      "learningGoals": [
+        "Understand the motivation for formal contracts in software",
+        "Grasp the philosophical foundation of DbC",
+        "Recognize the relationship between contracts and program correctness"
+      ],
+      "subsections": [
+        {
+          "title": "The Software Reliability Challenge",
+          "keyPoints": [
+            "Software defects cost billions annually and can cause catastrophic failures",
+            "Traditional testing catches errors but cannot prove correctness",
+            "Need for systematic methods to specify and verify software behavior",
+            "DbC provides a bridge between informal specifications and formal verification"
+          ],
+          "examples": [
+            "Ariane 5 rocket failure due to contract violation (overflow)",
+            "Medical device failures from unspecified preconditions",
+            "Financial system errors from missing postconditions"
+          ],
+          "suggestedDiagram": "Timeline showing evolution from ad-hoc testing to formal methods, highlighting DbC's position"
+        },
+        {
+          "title": "The Contract Metaphor",
+          "keyPoints": [
+            "Contracts as agreements between software components (client and supplier)",
+            "Each party has obligations and benefits",
+            "Client obligation: satisfy precondition; Benefit: postcondition guaranteed",
+            "Supplier obligation: establish postcondition; Benefit: assume precondition",
+            "Contracts make implicit assumptions explicit and verifiable"
+          ],
+          "examples": [
+            "Real-world contract: hiring a contractor to build a house",
+            "Software contract: sqrt function requires non-negative input",
+            "Library checkout system with borrowing rules"
+          ],
+          "suggestedDiagram": "Two-party contract diagram showing obligations and benefits for client and supplier"
+        },
+        {
+          "title": "DbC Principles and Benefits",
+          "keyPoints": [
+            "Principle 1: Separate concerns (what vs. how)",
+            "Principle 2: Make contracts explicit and checkable",
+            "Principle 3: Fail fast when contracts are violated",
+            "Benefits: documentation, debugging, testing, reliability, reusability",
+            "DbC as a design methodology, not just an implementation technique"
+          ],
+          "examples": [
+            "Self-documenting code through contracts",
+            "Automatic test oracle generation from postconditions",
+            "Contract-based component composition"
+          ],
+          "suggestedDiagram": "Mind map showing DbC principles and their benefits radiating outward"
+        }
+      ],
+      "exercises": [
+        "Identify implicit contracts in existing code snippets",
+        "Discuss scenarios where contracts would have prevented real-world software failures",
+        "Compare DbC with defensive programming approaches"
+      ]
+    },
+    {
+      "title": "Preconditions: Specifying Client Obligations",
+      "learningGoals": [
+        "Define and write effective preconditions",
+        "Understand when and how to check preconditions",
+        "Apply preconditions to prevent invalid operations"
+      ],
+      "subsections": [
+        {
+          "title": "What Are Preconditions?",
+          "keyPoints": [
+            "Preconditions define the valid states for calling a routine",
+            "Express constraints on arguments and object state",
+            "Client responsibility: ensure precondition before calling",
+            "Supplier right: assume precondition holds (no defensive checks needed)",
+            "Syntax: require clause in Eiffel, @requires in JML, assert at method start"
+          ],
+          "examples": [
+            "Stack.pop requires not stack.is_empty",
+            "Array access requires valid index: 0 <= i < array.length",
+            "Bank withdrawal requires balance >= amount and amount > 0",
+            "File operations require file.is_open"
+          ],
+          "suggestedDiagram": "Flowchart showing precondition check before method execution"
+        },
+        {
+          "title": "Writing Effective Preconditions",
+          "keyPoints": [
+            "Be precise: use boolean expressions, not natural language",
+            "Be complete: cover all necessary conditions",
+            "Be minimal: don't over-specify (allow maximum flexibility)",
+            "Use pure expressions: no side effects in contract clauses",
+            "Consider both argument validity and object state"
+          ],
+          "examples": [
+            "Good: require x > 0 and y > 0",
+            "Bad: require x is positive (ambiguous)",
+            "Over-specified: require x == 5 (too restrictive when x > 0 suffices)",
+            "Side-effect error: require list.remove(item) (modifies state)"
+          ],
+          "suggestedDiagram": "Code comparison showing weak vs. strong preconditions with examples"
+        },
+        {
+          "title": "Precondition Violations and Error Handling",
+          "keyPoints": [
+            "Precondition violation indicates client error (bug in caller)",
+            "Should not be caught and handled (unlike exceptions)",
+            "Fail fast: detect violations as early as possible",
+            "Runtime monitoring: enable during development, optionally disable in production",
+            "Clear error messages help identify the faulty caller"
+          ],
+          "examples": [
+            "Assertion failure with stack trace pointing to caller",
+            "Precondition violation in sqrt(-1) caught during testing",
+            "Production deployment strategies: monitoring levels"
+          ],
+          "suggestedDiagram": "Sequence diagram showing precondition violation detection and program termination"
+        }
+      ],
+      "exercises": [
+        "Write preconditions for common data structure operations (insert, delete, search)",
+        "Identify missing preconditions in buggy code examples",
+        "Debate: Should preconditions be checked in production code?"
+      ]
+    },
+    {
+      "title": "Postconditions: Guaranteeing Results",
+      "learningGoals": [
+        "Define and write comprehensive postconditions",
+        "Use postconditions to specify method behavior",
+        "Understand the relationship between postconditions and correctness"
+      ],
+      "subsections": [
+        {
+          "title": "Postcondition Fundamentals",
+          "keyPoints": [
+            "Postconditions specify what must be true after routine execution",
+            "Express guarantees about return values and state changes",
+            "Supplier responsibility: establish postcondition",
+            "Client benefit: rely on postcondition without inspecting implementation",
+            "Syntax: ensure clause in Eiffel, @ensures in JML"
+          ],
+          "examples": [
+            "Stack.push(x) ensures not is_empty and top = x",
+            "List.sort ensures is_sorted and same_elements(old list)",
+            "Account.deposit(amount) ensures balance = old balance + amount",
+            "Search function ensures (result >= 0 implies array[result] = key) and (result = -1 implies key not in array)"
+          ],
+          "suggestedDiagram": "Before/after state diagram showing postcondition satisfaction"
+        },
+        {
+          "title": "The 'old' Keyword and State Comparison",
+          "keyPoints": [
+            "'old' refers to value at routine entry (pre-state)",
+            "Essential for specifying state changes",
+            "Captures snapshot of mutable objects",
+            "Enables relational postconditions (new vs. old state)",
+            "Implementation: runtime stores old values when monitoring enabled"
+          ],
+          "examples": [
+            "ensure balance = old balance + amount",
+            "ensure count = old count + 1",
+            "ensure list.has(item) and list.count = old list.count + 1",
+            "ensure array is permutation of old array"
+          ],
+          "suggestedDiagram": "Timeline showing pre-state (old values) and post-state with postcondition verification"
+        },
+        {
+          "title": "Complete Behavioral Specification",
+          "keyPoints": [
+            "Postconditions should fully characterize routine behavior",
+            "Specify both positive effects (what changes) and frame conditions (what doesn't)",
+            "Handle all cases: normal execution and boundary conditions",
+            "Combine multiple clauses for complex specifications",
+            "Balance completeness with readability"
+          ],
+          "examples": [
+            "Binary search: ensures (found implies array[result] = key) and (not found implies key not in array)",
+            "Queue operations: enqueue/dequeue with count and element preservation",
+            "Sorting with stability: ensures is_sorted and preserves_relative_order",
+            "Graph algorithms: ensures path_exists implies path_found and path_is_shortest"
+          ],
+          "suggestedDiagram": "Decision tree showing different postcondition clauses for different execution paths"
+        }
+      ],
+      "exercises": [
+        "Write complete postconditions for sorting algorithms",
+        "Identify incomplete postconditions and add missing guarantees",
+        "Create postconditions that specify both functional and performance properties"
+      ]
+    },
+    {
+      "title": "Class Invariants: Maintaining Object Consistency",
+      "learningGoals": [
+        "Understand the role of class invariants in object-oriented design",
+        "Write invariants that capture object consistency constraints",
+        "Apply invariant preservation rules across all class methods"
+      ],
+      "subsections": [
+        {
+          "title": "Class Invariant Concept",
+          "keyPoints": [
+            "Invariant: property that must hold for all instances at all stable times",
+            "Stable time: before and after any public method call (not during execution)",
+            "Captures the consistency constraints of the class abstraction",
+            "Every public method must preserve the invariant",
+            "Constructor must establish the invariant"
+          ],
+          "examples": [
+            "BankAccount: invariant balance >= 0",
+            "Date: invariant 1 <= day <= days_in_month(month, year)",
+            "BinarySearchTree: invariant is_binary_search_tree",
+            "Stack: invariant (is_empty implies count = 0) and (count >= 0)"
+          ],
+          "suggestedDiagram": "State diagram showing invariant holding at stable points, potentially violated during method execution"
+        },
+        {
+          "title": "Writing and Checking Invariants",
+          "keyPoints": [
+            "Syntax: invariant clause in class definition",
+            "Should be pure boolean expressions over object state",
+            "Automatically checked after constructor and after each public method",
+            "Private methods may temporarily violate invariant",
+            "Invariant strengthens postcondition and weakens precondition of all methods"
+          ],
+          "examples": [
+            "Bounded queue: invariant 0 <= count <= capacity",
+            "Linked list: invariant count = actual_node_count",
+            "Circle: invariant radius > 0",
+            "Sorted collection: invariant is_sorted"
+          ],
+          "suggestedDiagram": "Class diagram with invariant clause and method contracts showing invariant integration"
+        },
+        {
+          "title": "Invariants and Object-Oriented Design",
+          "keyPoints": [
+            "Invariants define the valid states of an abstraction",
+            "Guide the design of constructors and methods",
+            "Help identify which operations are valid for a class",
+            "Invariants must be preserved by all public operations",
+            "Strong invariants lead to simpler method contracts"
+          ],
+          "examples": [
+            "Designing a bounded buffer with capacity invariant",
+            "Date class with complex day/month/year relationships",
+            "Graph class maintaining edge consistency",
+            "Cache with size and validity invariants"
+          ],
+          "suggestedDiagram": "UML class diagram annotated with invariants and showing how they constrain method implementations"
+        }
+      ],
+      "exercises": [
+        "Write invariants for common data structures (queue, priority queue, hash table)",
+        "Identify invariant violations in buggy class implementations",
+        "Design a class where the invariant guides the choice of operations"
+      ]
+    },
+    {
+      "title": "Assertion Monitoring and Debugging",
+      "learningGoals": [
+        "Configure and use assertion monitoring effectively",
+        "Apply DbC for systematic debugging",
+        "Understand performance trade-offs of runtime checking"
+      ],
+      "subsections": [
+        {
+          "title": "Runtime Assertion Checking",
+          "keyPoints": [
+            "Assertions can be monitored at runtime for validation",
+            "Multiple monitoring levels: none, preconditions only, all contracts",
+            "Development: enable all checks for maximum safety",
+            "Production: selective checking based on performance requirements",
+            "Assertion violations indicate bugs, not exceptional conditions"
+          ],
+          "examples": [
+            "Eiffel assertion monitoring levels: no, require, ensure, invariant, all",
+            "Java assert statement with -ea flag",
+            "C assert macro with NDEBUG flag",
+            "Custom assertion frameworks with configurable levels"
+          ],
+          "suggestedDiagram": "Configuration matrix showing different assertion levels and when to use them"
+        },
+        {
+          "title": "Contract-Based Debugging",
+          "keyPoints": [
+            "Contracts pinpoint the exact location of bugs",
+            "Precondition violation: bug in caller",
+            "Postcondition violation: bug in callee implementation",
+            "Invariant violation: bug in class implementation",
+            "Systematic debugging: follow the contract trail"
+          ],
+          "examples": [
+            "Stack overflow detected by precondition on push",
+            "Sorting bug revealed by postcondition failure",
+            "Invariant violation after delete operation reveals corruption",
+            "Debugging workflow: violation → identify responsible party → fix"
+          ],
+          "suggestedDiagram": "Debugging flowchart using contract violations to locate bugs"
+        },
+        {
+          "title": "Performance Considerations",
+          "keyPoints": [
+            "Assertion checking has runtime cost (typically 5-30% overhead)",
+            "Cost varies by assertion complexity and frequency of calls",
+            "Strategies: disable in production, selective checking, sampling",
+            "Some critical contracts may be kept in production",
+            "Modern compilers can optimize some assertions away"
+          ],
+          "examples": [
+            "Expensive invariant: is_sorted on large collections",
+            "Cheap precondition: x != null",
+            "Production strategy: keep preconditions, disable postconditions",
+            "Critical systems: keep all checks despite performance cost"
+          ],
+          "suggestedDiagram": "Performance graph showing overhead vs. assertion level with deployment recommendations"
+        }
+      ],
+      "exercises": [
+        "Configure assertion monitoring for a sample project",
+        "Use contract violations to debug intentionally buggy code",
+        "Measure and analyze performance impact of different assertion levels"
+      ]
+    },
+    {
+      "title": "Contract Inheritance and Behavioral Subtyping",
+      "learningGoals": [
+        "Understand how contracts interact with inheritance",
+        "Apply the Liskov Substitution Principle through contracts",
+        "Write correct contracts in inheritance hierarchies"
+      ],
+      "subsections": [
+        {
+          "title": "The Liskov Substitution Principle",
+          "keyPoints": [
+            "LSP: subtype objects must be substitutable for supertype objects",
+            "Behavioral compatibility, not just structural compatibility",
+            "Contracts formalize behavioral subtyping requirements",
+            "Subtype must honor supertype's contract with clients",
+            "Foundation for polymorphism and safe code reuse"
+          ],
+          "examples": [
+            "Rectangle/Square problem: violates LSP without proper contracts",
+            "Bird/Penguin hierarchy: flying behavior",
+            "Collection hierarchy: different performance guarantees",
+            "Payment method hierarchy with different validation rules"
+          ],
+          "suggestedDiagram": "Class hierarchy showing LSP violation and correction through contracts"
+        },
+        {
+          "title": "Contract Inheritance Rules",
+          "keyPoints": [
+            "Precondition rule: may only weaken (or-logic with parent)",
+            "Postcondition rule: may only strengthen (and-logic with parent)",
+            "Invariant rule: may only strengthen (and-logic with parent)",
+            "Rationale: preserve substitutability and client expectations",
+            "Formal: subtype contract ⊆ supertype contract"
+          ],
+          "examples": [
+            "Weakening precondition: PositiveInteger.set(x) requires x > 0, Integer.set(x) requires x >= 0 (invalid!)",
+            "Strengthening postcondition: SortedList.add ensures is_sorted (valid)",
+            "Invariant strengthening: BoundedStack adds capacity constraint",
+            "Valid override: relaxing input constraints, tightening output guarantees"
+          ],
+          "suggestedDiagram": "Contract lattice showing valid and invalid contract refinements in inheritance"
+        },
+        {
+          "title": "Practical Contract Inheritance",
+          "keyPoints": [
+            "Use 'require else' for precondition weakening",
+            "Use 'ensure then' for postcondition strengthening",
+            "Inherited invariants automatically conjoined",
+            "Check contract compatibility during design",
+            "Tool support for verifying contract inheritance rules"
+          ],
+          "examples": [
+            "Shape hierarchy with area calculation contracts",
+            "File system hierarchy: ReadOnlyFile vs. WritableFile",
+            "Collection hierarchy: List, Set, Bag with different contracts",
+            "Account hierarchy: CheckingAccount, SavingsAccount with different rules"
+          ],
+          "suggestedDiagram": "Code example showing proper contract inheritance syntax and semantics"
+        }
+      ],
+      "exercises": [
+        "Identify LSP violations in class hierarchies and fix with contracts",
+        "Design a class hierarchy with proper contract inheritance",
+        "Analyze real-world framework hierarchies for contract compliance"
+      ]
+    },
+    {
+      "title": "Reliability Through Contracts",
+      "learningGoals": [
+        "Understand how DbC contributes to software reliability",
+        "Apply contracts throughout the software development lifecycle",
+        "Evaluate the effectiveness of DbC in quality assurance"
+      ],
+      "subsections": [
+        {
+          "title": "Contracts and Software Quality",
+          "keyPoints": [
+            "Correctness: contracts specify what correct behavior means",
+            "Robustness: fail fast when assumptions violated",
+            "Reliability: systematic approach to preventing defects",
+            "Maintainability: contracts document design decisions",
+            "Testability: contracts provide test oracles automatically"
+          ],
+          "examples": [
+            "Mission-critical systems using DbC (Ariane, medical devices)",
+            "Financial systems with contract-based validation",
+            "Comparing defect rates: DbC vs. traditional approaches",
+            "Long-term maintenance benefits of contract documentation"
+          ],
+          "suggestedDiagram": "Quality attribute spider diagram comparing DbC vs. non-DbC approaches"
+        },
+        {
+          "title": "DbC in the Development Lifecycle",
+          "keyPoints": [
+            "Requirements: contracts capture functional requirements formally",
+            "Design: contracts guide interface design and component interaction",
+            "Implementation: contracts provide implementation guidance and validation",
+            "Testing: contracts enable automated oracle generation",
+            "Maintenance: contracts preserve design intent and prevent regressions"
+          ],
+          "examples": [
+            "Requirements specification using contract notation",
+            "API design driven by contract thinking",
+            "Automatic test generation from postconditions",
+            "Regression testing with contract monitoring",
+            "Documentation generation from contracts"
+          ],
+          "suggestedDiagram": "Software lifecycle diagram showing DbC integration at each phase"
+        },
+        {
+          "title": "Limitations and Complementary Techniques",
+          "keyPoints": [
+            "Contracts cannot express all properties (e.g., performance, security)",
+            "Some properties are undecidable or too complex to specify",
+            "DbC complements, not replaces, testing and other verification",
+            "Need for integration with type systems, static analysis, formal methods",
+            "Practical adoption challenges: learning curve, tool support, legacy code"
+          ],
+          "examples": [
+            "Properties hard to specify: thread safety, real-time constraints",
+            "Combining DbC with unit testing for comprehensive validation",
+            "Static verification of contracts using theorem provers",
+            "Gradual adoption strategy for legacy systems",
+            "Industry case studies: successes and challenges"
+          ],
+          "suggestedDiagram": "Venn diagram showing DbC, testing, static analysis, and formal methods overlap"
+        }
+      ],
+      "exercises": [
+        "Develop a contract-based specification for a small system",
+        "Compare DbC with other quality assurance techniques for a given scenario",
+        "Propose an adoption strategy for introducing DbC to an existing project"
+      ]
+    },
+    {
+      "title": "Conclusion and Looking Forward",
+      "learningGoals": [
+        "Synthesize key DbC concepts and their applications",
+        "Connect DbC to broader software engineering practices",
+        "Identify areas for further study and practice"
+      ],
+      "subsections": [
+        {
+          "title": "Summary and Key Takeaways",
+          "keyPoints": [
+            "DbC provides systematic method for specifying and verifying software behavior",
+            "Preconditions, postconditions, and invariants form complete contract specification",
+            "Contracts enable early bug detection, better documentation, and improved reliability",
+            "Contract inheritance ensures behavioral subtyping and safe polymorphism",
+            "DbC integrates throughout development lifecycle for quality assurance"
+          ],
+          "examples": [
+            "Recap of stack example with complete contracts",
+            "Real-world success story: Eiffel in production systems",
+            "Student projects applying DbC principles"
+          ],
+          "suggestedDiagram": "Concept map connecting all major DbC topics covered in lecture"
+        },
+        {
+          "title": "Connections to Other Topics",
+          "keyPoints": [
+            "Relationship to formal methods and program verification",
+            "Connection to design patterns (especially Template Method, Strategy)",
+            "Integration with agile development and continuous integration",
+            "Foundation for advanced topics: specification languages, model checking",
+            "Relevance to concurrent and distributed systems"
+          ],
+          "examples": [
+            "DbC in design patterns course",
+            "Contracts in concurrent programming (thread safety)",
+            "Specification languages: JML, Spec#, Dafny",
+            "Automated verification tools: ESC/Java, Why3"
+          ],
+          "suggestedDiagram": "Knowledge graph showing DbC connections to other CS topics"
+        },
+        {
+          "title": "Next Steps and Practice",
+          "keyPoints": [
+            "Apply DbC in upcoming programming assignments",
+            "Experiment with assertion monitoring in your projects",
+            "Read Meyer's 'Object-Oriented Software Construction' for depth",
+            "Explore modern contract tools and languages",
+            "Practice writing contracts for existing code"
+          ],
+          "examples": [
+            "Tutorial exercises: contract-based design problems",
+            "Recommended tools: Eiffel Studio, JML, Code Contracts",
+            "Open-source projects using DbC to study",
+            "Research papers on advanced contract topics"
+          ],
+          "suggestedDiagram": "Learning path showing progression from basic DbC to advanced applications"
+        }
+      ],
+      "exercises": [
+        "Design a small library with complete contracts",
+        "Refactor existing code to add contracts",
+        "Prepare questions for tutorial session on challenging DbC scenarios"
+      ]
+    }
+  ],
+  "suggestedResources": [
+    "Meyer, B. (2009). Touch of Class: Learning to Program Well Using Objects and Contracts - Chapters on Design by Contract",
+    "Meyer, B. (1997). Object-Oriented Software Construction, 2nd Edition - Comprehensive DbC treatment",
+    "Liskov, B. & Wing, J. (1994). A Behavioral Notion of Subtyping - Original LSP paper",
+    "Eiffel Software Documentation: Design by Contract tutorial and examples",
+    "JML (Java Modeling Language) Reference Manual and tutorials",
+    "Leavens, G. et al. (2006). JML Reference Manual - Practical contract specification",
+    "Chalin, P. et al. (2006). Beyond Assertions: Advanced Use of JML",
+    "Microsoft Code Contracts documentation for C#",
+    "Online resources: Contract-based programming examples in various languages",
+    "Video lectures: Bertrand Meyer's presentations on Design by Contract"
+  ],
+  "assessmentIdeas": [
+    "Written exam question: Write complete contracts for a given class specification",
+    "Practical assignment: Implement a data structure with full DbC annotations",
+    "Code review exercise: Identify missing or incorrect contracts in provided code",
+    "Design problem: Create class hierarchy with proper contract inheritance",
+    "Debugging exercise: Use contract violations to locate and fix bugs",
+    "Essay question: Discuss how DbC contributes to software reliability with examples",
+    "Multiple choice: Contract inheritance rules and LSP applications",
+    "Portfolio task: Refactor a legacy module to add contracts and document improvements",
+    "Group project: Design and implement a small system using DbC methodology",
+    "Presentation: Analyze a real-world system failure that contracts could have prevented"
+  ]
+}

@@ -1,0 +1,363 @@
+{
+  "title": "Lecture 1: Introduction to Software Engineering and Object-Oriented Fundamentals",
+  "summary": "This foundational lecture introduces modern software engineering principles and the critical role of object technology in building high-quality industrial software systems. Students will explore the challenges of contemporary software development, understand essential quality attributes (correctness, robustness, extendibility, reusability), and learn fundamental object-oriented programming concepts including classes, objects, and encapsulation. The lecture establishes the course framework and introduces Eiffel notation as the practical vehicle for learning.",
+  "learningObjectives": [
+    "Articulate the key challenges in modern software engineering and explain why systematic approaches are necessary for industrial-scale systems",
+    "Define and distinguish between the four critical quality attributes: correctness, robustness, extendibility, and reusability",
+    "Explain the fundamental concepts of object-oriented programming and why object technology is the approach of choice for high-quality systems",
+    "Describe the relationship between classes and objects, and explain the principle of encapsulation",
+    "Recognize basic Eiffel notation and understand its role in expressing object-oriented concepts",
+    "Understand the course structure, assessment components, and learning trajectory for the semester"
+  ],
+  "targetSlideCount": 18,
+  "estimatedStudyMinutes": 120,
+  "sections": [
+    {
+      "title": "Course Introduction and Motivation",
+      "learningGoals": [
+        "Understand the scope and objectives of the Software Construction, Architecture and Engineering module",
+        "Recognize the importance of systematic software engineering in modern development"
+      ],
+      "subsections": [
+        {
+          "title": "Welcome and Course Overview",
+          "keyPoints": [
+            "Module structure: Construction, Architecture, and Engineering components",
+            "35 hours lecture + 35 hours tutorial + 55 hours independent study",
+            "Assessment: 50% written examination (120 min) + 50% portfolio assessment",
+            "Prerequisite for advanced software engineering courses (MCSSE-SE-04-A)",
+            "Focus on object technology using Eiffel notation"
+          ],
+          "examples": [
+            "Course roadmap showing progression from fundamentals through design patterns to agile methods",
+            "Timeline of weekly topics and major assessment milestones"
+          ],
+          "suggestedDiagram": "Course structure diagram showing three pillars: Construction, Architecture, Engineering with key topics under each"
+        },
+        {
+          "title": "The Software Engineering Challenge",
+          "keyPoints": [
+            "Modern software systems: size, complexity, and ambition",
+            "Industrial software vs. academic programming exercises",
+            "Need for systematic approaches based on best practices",
+            "Evolution of software engineering over past decades",
+            "Why ad-hoc approaches fail at scale"
+          ],
+          "examples": [
+            "Comparison: simple calculator program (100 lines) vs. enterprise ERP system (millions of lines)",
+            "Case study: Software failures due to lack of engineering discipline (e.g., Ariane 5 rocket failure)",
+            "Statistics on software project success rates and common failure factors"
+          ],
+          "suggestedDiagram": "Graph showing exponential growth in software complexity over time, with annotation of major engineering challenges"
+        }
+      ],
+      "exercises": [
+        "Reflect on your largest programming project: What challenges did you face that a more systematic approach might have addressed?",
+        "Research one famous software failure and identify which engineering principles were violated"
+      ]
+    },
+    {
+      "title": "Quality Attributes: The Foundation of Software Excellence",
+      "learningGoals": [
+        "Define and distinguish the four critical quality attributes",
+        "Understand why quality must be designed in, not tested in",
+        "Recognize trade-offs between different quality attributes"
+      ],
+      "subsections": [
+        {
+          "title": "Correctness: Does the Software Do What It Should?",
+          "keyPoints": [
+            "Definition: Ability to perform exact tasks as defined by specification",
+            "Correctness is absolute: software either meets spec or doesn't",
+            "Formal specifications vs. informal requirements",
+            "Verification and validation approaches",
+            "Correctness as the most fundamental quality attribute"
+          ],
+          "examples": [
+            "Banking system: transferring exactly the specified amount between accounts",
+            "Medical device: delivering precise dosage as prescribed",
+            "Compiler: generating code that faithfully implements source semantics"
+          ],
+          "suggestedDiagram": "Venn diagram showing specification space vs. implementation behavior, with correctness as complete overlap"
+        },
+        {
+          "title": "Robustness: Graceful Handling of Abnormal Conditions",
+          "keyPoints": [
+            "Definition: Ability to react appropriately to abnormal conditions",
+            "Difference between correctness (normal cases) and robustness (exceptional cases)",
+            "Error handling, exception management, defensive programming",
+            "Fail-safe vs. fail-secure approaches",
+            "User experience during error conditions"
+          ],
+          "examples": [
+            "Web server handling malformed HTTP requests without crashing",
+            "Text editor auto-saving work when system runs out of memory",
+            "Database system maintaining consistency despite power failure",
+            "Mobile app providing meaningful error messages for network timeouts"
+          ],
+          "suggestedDiagram": "Flowchart showing normal execution path vs. exception handling paths with recovery mechanisms"
+        },
+        {
+          "title": "Extendibility: Adapting to Change",
+          "keyPoints": [
+            "Definition: Ease of adapting software to changes in specification",
+            "Change is inevitable in software systems",
+            "Modular design and separation of concerns",
+            "Impact analysis: localized vs. ripple effects of changes",
+            "Design for change from the beginning"
+          ],
+          "examples": [
+            "E-commerce system adding new payment methods without restructuring checkout",
+            "Game engine supporting new character types through inheritance",
+            "Report generator adding new output formats via plugin architecture",
+            "Tax calculation software adapting to new tax laws through configuration"
+          ],
+          "suggestedDiagram": "Before/after comparison showing well-designed system (localized change) vs. poorly-designed system (cascading changes)"
+        },
+        {
+          "title": "Reusability: Leveraging Existing Solutions",
+          "keyPoints": [
+            "Definition: Ability to use software elements in multiple applications",
+            "Economic benefits: reduce development time and cost",
+            "Libraries, frameworks, and components",
+            "Generality vs. specificity trade-offs",
+            "Reusability requires upfront investment in design"
+          ],
+          "examples": [
+            "Standard library collections (lists, sets, maps) used across thousands of applications",
+            "Authentication module reused across multiple enterprise applications",
+            "UI component library shared across product family",
+            "Mathematical algorithms packaged for multiple domains"
+          ],
+          "suggestedDiagram": "Pyramid showing reusability spectrum from application-specific code to widely-reusable libraries"
+        },
+        {
+          "title": "Quality Attributes Interplay",
+          "keyPoints": [
+            "Quality attributes can reinforce or conflict with each other",
+            "Extendibility and reusability often go hand-in-hand",
+            "Performance vs. extendibility trade-offs",
+            "Correctness and robustness as complementary properties",
+            "Object-oriented design supports all four quality attributes"
+          ],
+          "examples": [
+            "Highly optimized code may sacrifice extendibility for performance",
+            "Generic reusable components may be harder to verify for correctness",
+            "Robust error handling adds complexity but improves reliability"
+          ],
+          "suggestedDiagram": "Matrix showing positive and negative interactions between quality attributes"
+        }
+      ],
+      "exercises": [
+        "For a system you know well (e.g., email client), rate it on each quality attribute and justify your ratings",
+        "Design a simple stack data structure: identify one design decision that affects each quality attribute"
+      ]
+    },
+    {
+      "title": "Object-Oriented Programming Fundamentals",
+      "learningGoals": [
+        "Understand why object technology is the approach of choice for quality software",
+        "Grasp the fundamental concepts of classes and objects",
+        "Explain encapsulation and information hiding principles"
+      ],
+      "subsections": [
+        {
+          "title": "Why Object Technology?",
+          "keyPoints": [
+            "Object-oriented programming as established approach for high-quality systems",
+            "Natural modeling of real-world entities and relationships",
+            "Support for all four quality attributes through OO mechanisms",
+            "Industry adoption and ecosystem maturity",
+            "Evolution from procedural to object-oriented paradigms"
+          ],
+          "examples": [
+            "Modeling a university system: students, courses, enrollments as objects",
+            "GUI frameworks: buttons, windows, menus as objects with behavior",
+            "Simulation systems: agents, environments as interacting objects"
+          ],
+          "suggestedDiagram": "Comparison table: procedural vs. object-oriented approaches for the same problem domain"
+        },
+        {
+          "title": "Classes: Templates for Objects",
+          "keyPoints": [
+            "Class as a blueprint or template defining structure and behavior",
+            "Attributes (data) and methods (operations) as class members",
+            "Class as a type in the type system",
+            "Abstract data types and implementation hiding",
+            "Class as unit of modularity and reuse"
+          ],
+          "examples": [
+            "BANK_ACCOUNT class with balance attribute and deposit/withdraw methods",
+            "POINT class with x, y coordinates and distance calculation method",
+            "STUDENT class with name, ID, grades and GPA calculation method"
+          ],
+          "suggestedDiagram": "UML class diagram showing class notation with attributes and methods sections"
+        },
+        {
+          "title": "Objects: Runtime Instances",
+          "keyPoints": [
+            "Object as runtime instance of a class",
+            "Object identity: each object is distinct",
+            "Object state: current values of all attributes",
+            "Object lifecycle: creation, use, destruction",
+            "Multiple objects from same class with different states"
+          ],
+          "examples": [
+            "Three BANK_ACCOUNT objects for Alice, Bob, and Carol with different balances",
+            "Multiple POINT objects representing vertices of a polygon",
+            "Student objects in a course management system, each with unique data"
+          ],
+          "suggestedDiagram": "Object diagram showing multiple instances of same class with different attribute values, linked to class definition"
+        },
+        {
+          "title": "Encapsulation: Information Hiding",
+          "keyPoints": [
+            "Encapsulation as bundling data with operations that manipulate it",
+            "Information hiding: separating interface from implementation",
+            "Public interface vs. private implementation details",
+            "Access control: public, private, protected visibility",
+            "Benefits: reduced coupling, easier maintenance, enforced invariants"
+          ],
+          "examples": [
+            "BANK_ACCOUNT: balance is private, accessed only through deposit/withdraw methods",
+            "STACK: internal array hidden, only push/pop/top operations exposed",
+            "DATE: internal representation (Julian day number) hidden behind day/month/year interface"
+          ],
+          "suggestedDiagram": "Conceptual diagram showing object boundary with public interface (visible) and private implementation (hidden)"
+        }
+      ],
+      "exercises": [
+        "Design a BOOK class for a library system: identify appropriate attributes and methods",
+        "Explain why making all attributes public would violate encapsulation and harm quality attributes"
+      ]
+    },
+    {
+      "title": "Introduction to Eiffel Notation",
+      "learningGoals": [
+        "Recognize basic Eiffel syntax for class definitions",
+        "Understand why Eiffel is used as the teaching language",
+        "Read simple Eiffel class examples"
+      ],
+      "subsections": [
+        {
+          "title": "Eiffel: A Language for Quality Software",
+          "keyPoints": [
+            "Eiffel designed specifically for software engineering principles",
+            "Strong support for Design by Contract (preview of future lectures)",
+            "Clear, readable syntax emphasizing concepts over syntax tricks",
+            "Multiple inheritance, genericity, and other advanced features",
+            "Concepts learned in Eiffel transfer to any OO language"
+          ],
+          "examples": [
+            "Comparison: same concept in Eiffel, Java, C++, Python",
+            "Eiffel's role in teaching: clarity and precision over popularity"
+          ],
+          "suggestedDiagram": "Timeline showing Eiffel's development and key design principles"
+        },
+        {
+          "title": "Basic Eiffel Class Structure",
+          "keyPoints": [
+            "Class declaration: class CLASS_NAME",
+            "Feature clauses for grouping related features",
+            "Attributes declared with type annotations",
+            "Methods (routines) with signatures and implementations",
+            "Creation procedures for object initialization",
+            "Syntax conventions: uppercase class names, lowercase feature names"
+          ],
+          "examples": [
+            "Simple POINT class in Eiffel with x, y attributes and distance method",
+            "COUNTER class with increment, decrement, and reset operations",
+            "RECTANGLE class with width, height, and area calculation"
+          ],
+          "suggestedDiagram": "Annotated Eiffel code example with callouts explaining each syntactic element"
+        },
+        {
+          "title": "Reading Eiffel Code: A First Example",
+          "keyPoints": [
+            "Feature visibility: exported vs. hidden features",
+            "Type declarations and type safety",
+            "Assignment and method calls",
+            "Object creation syntax",
+            "Comments and documentation style"
+          ],
+          "examples": [
+            "Complete BANK_ACCOUNT class in Eiffel with deposit, withdraw, balance query",
+            "Client code creating and using BANK_ACCOUNT objects",
+            "Demonstration of encapsulation through feature export control"
+          ],
+          "suggestedDiagram": "Side-by-side comparison of Eiffel class definition and corresponding object interactions"
+        }
+      ],
+      "exercises": [
+        "Read provided Eiffel CIRCLE class and identify attributes, methods, and creation procedure",
+        "Sketch how you would implement a TEMPERATURE class in Eiffel with Celsius and Fahrenheit conversions"
+      ]
+    },
+    {
+      "title": "Looking Ahead: Course Roadmap",
+      "learningGoals": [
+        "Understand the learning trajectory for the semester",
+        "See how today's fundamentals connect to advanced topics",
+        "Prepare for upcoming lectures and assessments"
+      ],
+      "subsections": [
+        {
+          "title": "The Journey Ahead",
+          "keyPoints": [
+            "Construction: inheritance, polymorphism, dynamic binding, genericity",
+            "Architecture: design patterns, large-scale program structure",
+            "Engineering: agile methods, requirements engineering, quality processes",
+            "Progressive complexity: each topic builds on previous ones",
+            "Integration of theory and practice through tutorials"
+          ],
+          "examples": [
+            "Preview: how inheritance extends the class concept from today",
+            "Preview: design patterns as reusable architectural solutions",
+            "Preview: agile methods as engineering process framework"
+          ],
+          "suggestedDiagram": "Course dependency graph showing how topics build on each other throughout the semester"
+        },
+        {
+          "title": "Practical Advice and Next Steps",
+          "keyPoints": [
+            "Importance of hands-on practice with Eiffel in tutorials",
+            "Portfolio assessment: regular assignments throughout semester",
+            "Study strategies: concepts first, then syntax and tools",
+            "Recommended reading: Touch of Class chapters 1-3",
+            "Office hours and support resources",
+            "Preparation for next lecture: review class and object concepts"
+          ],
+          "examples": [
+            "Sample portfolio assignment: implementing a simple class hierarchy",
+            "Study group formation and collaboration guidelines",
+            "Tutorial session preview: setting up Eiffel environment"
+          ],
+          "suggestedDiagram": "Weekly schedule template showing lecture, tutorial, and independent study time allocation"
+        }
+      ],
+      "exercises": [
+        "Install Eiffel development environment and compile a 'Hello World' program",
+        "Read Touch of Class chapter 1 and note questions for tutorial discussion"
+      ]
+    }
+  ],
+  "suggestedResources": [
+    "Meyer, B. (2009). Touch of Class: Learning to Program Well Using Objects and Contracts - Chapters 1-3",
+    "Ghezzi, C., Jazayeri, M., & Mandrioli, D. (2003). Fundamentals of Software Engineering (2nd Edition) - Chapter 1: Introduction",
+    "Eiffel Software Documentation: Basic Language Mechanisms (online reference)",
+    "Module handbook: Software Construction, Architecture and Engineering (2025-MCSSE-SE-01)",
+    "Supplementary: Martin, R. C. (2008). Clean Code - Chapter 1 for motivation on code quality",
+    "Video resource: 'The Ariane 5 Failure' - case study on software engineering importance",
+    "Interactive tutorial: Eiffel Studio Quick Start Guide"
+  ],
+  "assessmentIdeas": [
+    "Formative quiz: Match quality attributes to system scenarios (correctness, robustness, extendibility, reusability)",
+    "Concept check: Given a class description, identify which features should be public vs. private and justify",
+    "Code reading: Analyze a simple Eiffel class and explain its purpose, attributes, and methods",
+    "Design exercise: Sketch a class for a real-world entity (e.g., library book, car rental) with appropriate encapsulation",
+    "Reflection prompt: How does object-oriented design support the four quality attributes? Provide specific examples",
+    "Portfolio starter: Implement a simple PERSON class in Eiffel with proper encapsulation (to be extended in future assignments)",
+    "Discussion question: Why might a company choose to invest in systematic software engineering despite higher upfront costs?",
+    "Comparative analysis: Take a procedural code snippet and explain how it could be restructured using classes and objects"
+  ]
+}

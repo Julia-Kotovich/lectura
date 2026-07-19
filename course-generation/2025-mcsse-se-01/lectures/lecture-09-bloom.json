@@ -1,0 +1,183 @@
+{
+  "alignmentScore": 82,
+  "dominantLevel": "apply",
+  "distribution": {
+    "remember": 5,
+    "understand": 15,
+    "apply": 35,
+    "analyze": 20,
+    "evaluate": 15,
+    "create": 10
+  },
+  "objectiveAlignments": [
+    {
+      "objective": "Understand the core values and principles of the Agile Manifesto and their impact on modern software development",
+      "expectedLevel": "understand",
+      "observedLevel": "evaluate",
+      "status": "aligned",
+      "rationale": "Slides 5-6 exceed expectations by requiring students to evaluate Team A vs Team B approaches against all four Manifesto values, then design hybrid methodologies with justified value prioritization. This demonstrates understanding through application and evaluation rather than passive explanation."
+    },
+    {
+      "objective": "Apply the Scrum framework including roles, artifacts, and ceremonies to organize software projects",
+      "expectedLevel": "apply",
+      "observedLevel": "create",
+      "status": "aligned",
+      "rationale": "Slides 7-10 and 17 require students to design complete Scrum implementations for realistic scenarios (campus food delivery app, 20-person distributed team, sprint planning simulation). Students create role structures, sprint cadences, backlog prioritization, and task breakdowns rather than just identifying Scrum components in examples."
+    },
+    {
+      "objective": "Implement Extreme Programming (XP) practices to improve code quality and team collaboration",
+      "expectedLevel": "apply",
+      "observedLevel": "apply",
+      "status": "aligned",
+      "rationale": "Slides 11-12 provide hands-on implementation through pair programming + TDD exercise where students write actual test code and implementations. Slide 12 elevates to analyze level by comparing test-first vs code-first approaches to examine design impact. Activities require doing XP practices, not just describing them."
+    },
+    {
+      "objective": "Design and execute iterative and incremental development cycles",
+      "expectedLevel": "create",
+      "observedLevel": "create",
+      "status": "aligned",
+      "rationale": "Slides 10 and 14 require students to design multi-sprint strategies and iteration plans for complex scenarios with regulatory constraints, dependencies, and stakeholder demos. Students must synthesize constraints into coherent iteration structures and justify sequencing decisions, directly addressing the create-level design objective."
+    },
+    {
+      "objective": "Create effective user stories and conduct sprint planning sessions",
+      "expectedLevel": "create",
+      "observedLevel": "create",
+      "status": "aligned",
+      "rationale": "Slide 16 requires students to write 3 original user stories with acceptance criteria, then peer-review against INVEST criteria. Slide 17 simulates sprint planning where students select stories, create sprint goals, and break stories into tasks. Both activities involve creating artifacts rather than analyzing provided examples."
+    },
+    {
+      "objective": "Compare and contrast agile versus traditional development approaches and select appropriate methodologies for different contexts",
+      "expectedLevel": "evaluate",
+      "observedLevel": "evaluate",
+      "status": "aligned",
+      "rationale": "Slides 4, 5-6, and 18 require methodology evaluation and selection. Slide 4 has students evaluate methodology fit for banking/startup/NASA scenarios with justification. Slides 5-6 require evaluating approaches against Manifesto values and designing hybrid methodologies. Slide 18 provides comparison framework. Activities demand justified selection based on context analysis."
+    }
+  ],
+  "slideTags": [
+    {
+      "slideTitle": "Lecture 9: Agile Development Methods and Practices",
+      "primaryLevel": "evaluate",
+      "evidence": "Opening activity requires students to evaluate which agile practice addresses their specific project challenge and justify the selection, establishing evaluate-level engagement from the start."
+    },
+    {
+      "slideTitle": "Your Agile Journey: From Concepts to Practice",
+      "primaryLevel": "create",
+      "evidence": "Students design their own learning path by sequencing objectives, creating concrete deliverables, and sketching iteration timelines—synthesizing course structure into personalized strategy."
+    },
+    {
+      "slideTitle": "The Software Crisis: Why Agile Emerged",
+      "primaryLevel": "analyze",
+      "evidence": "Students analyze methodology-context mismatch in e-commerce scenario, diagnosing why waterfall fails and how agile principles address the problem through 2-week iterations."
+    },
+    {
+      "slideTitle": "Evolution Timeline: Waterfall to Agile",
+      "primaryLevel": "evaluate",
+      "evidence": "Students evaluate methodology fit for three scenarios (banking, startup, NASA), selecting appropriate approaches and justifying with project characteristics and risk analysis."
+    },
+    {
+      "slideTitle": "The Agile Manifesto: Four Core Values",
+      "primaryLevel": "evaluate",
+      "evidence": "Students evaluate Team A vs Team B against all four values, then design hybrid methodology with justified value prioritization—requires evaluation and creation synthesis."
+    },
+    {
+      "slideTitle": "Agile Values in Practice",
+      "primaryLevel": "create",
+      "evidence": "Healthcare startup scenario requires students to design hybrid methodology balancing agility with regulatory compliance, selecting elements from both approaches with context-appropriate justification."
+    },
+    {
+      "slideTitle": "Scrum Framework Overview",
+      "primaryLevel": "create",
+      "evidence": "Students design complete Scrum implementation for campus food delivery app including role structure, sprint cadence, prioritized backlog, and pillar application—coherent strategy synthesis."
+    },
+    {
+      "slideTitle": "Scrum Roles and Interactions",
+      "primaryLevel": "create",
+      "evidence": "Students design organizational structure for 20-person distributed team, making architectural decisions about team composition, PO allocation, and coordination mechanisms with principle-based justification."
+    },
+    {
+      "slideTitle": "Scrum Artifacts: Transparency Through Visibility",
+      "primaryLevel": "understand",
+      "evidence": "Content explains artifact flow and Definition of Done concept with examples but lacks activity requiring students to apply or create artifacts."
+    },
+    {
+      "slideTitle": "Sprint Cycle: Design Your Sprint Strategy",
+      "primaryLevel": "create",
+      "evidence": "Students design 3-sprint plan for healthcare compliance app, sequencing stories considering dependencies and regulatory reviews, writing sprint goals—multi-sprint strategy creation."
+    },
+    {
+      "slideTitle": "Extreme Programming: Implement Core Practices",
+      "primaryLevel": "apply",
+      "evidence": "Hands-on pair programming + TDD exercise where students write failing tests and minimal implementation code, experiencing practices directly through implementation."
+    },
+    {
+      "slideTitle": "Test-Driven Development: Analyze Design Impact",
+      "primaryLevel": "analyze",
+      "evidence": "Students implement email validator both ways (code-first vs test-first), then analyze how TDD shaped design decisions, modularity, and edge case handling—comparative structural analysis."
+    },
+    {
+      "slideTitle": "XP Practices: Reinforcing Quality",
+      "primaryLevel": "understand",
+      "evidence": "Mind map shows practice relationships and reinforcement patterns with explanation but lacks activity requiring students to apply or analyze the integration."
+    },
+    {
+      "slideTitle": "Iterative vs. Incremental Development",
+      "primaryLevel": "create",
+      "evidence": "Students design iteration plan for healthcare patient portal with regulatory constraints, specifying iteration length, feature mapping, feedback points, and justified timeline choices."
+    },
+    {
+      "slideTitle": "Managing Technical Debt",
+      "primaryLevel": "analyze",
+      "evidence": "Students identify debt items in code snippet, estimate interest costs, prioritize which to address with justification, and propose spike questions—debt diagnosis and prioritization analysis."
+    },
+    {
+      "slideTitle": "User Stories: INVEST Criteria",
+      "primaryLevel": "create",
+      "evidence": "Students write 3 original user stories with acceptance criteria, then peer-review against INVEST criteria identifying violations and suggesting improvements—artifact creation with evaluation."
+    },
+    {
+      "slideTitle": "Sprint Planning Process",
+      "primaryLevel": "apply",
+      "evidence": "Students conduct sprint planning simulation: select stories based on velocity, create sprint goal, break story into tasks with estimates, identify dependencies—applying planning process."
+    },
+    {
+      "slideTitle": "Agile vs. Traditional: Choosing the Right Approach",
+      "primaryLevel": "understand",
+      "evidence": "Comparison table and examples explain when each approach works best but lack activity requiring students to evaluate or select methodologies for specific scenarios."
+    },
+    {
+      "slideTitle": "Agile Supporting Software Quality",
+      "primaryLevel": "evaluate",
+      "evidence": "Students analyze scenario with quality problems, select 3 practices to address issues, explain quality attribute improvements, estimate effort, and prioritize—multi-criteria evaluation with justification."
+    },
+    {
+      "slideTitle": "Agile in Object-Oriented Development",
+      "primaryLevel": "apply",
+      "evidence": "Students design notification system, refactor when requirements change applying SOLID principles, then apply design pattern—evolutionary design through iterative implementation."
+    },
+    {
+      "slideTitle": "Summary: Agile Ecosystem",
+      "primaryLevel": "understand",
+      "evidence": "Synthesis diagram shows relationships between Manifesto, methodologies, practices, and benefits but lacks activity requiring students to synthesize or evaluate the ecosystem."
+    },
+    {
+      "slideTitle": "Key Takeaways and Next Steps",
+      "primaryLevel": "understand",
+      "evidence": "Actionable takeaways and application guidance provided but no activity requiring students to demonstrate understanding or plan application."
+    }
+  ],
+  "gaps": [
+    "Slide 9 (Scrum Artifacts) presents concepts at understand level without activity to apply artifact creation or analysis, creating passive learning gap in otherwise hands-on Scrum sequence",
+    "Slide 13 (XP Practices map) explains practice integration at understand level but misses opportunity for students to analyze how practices reinforce each other in specific scenarios or design practice adoption sequences",
+    "Slide 18 (Agile vs Traditional comparison) provides framework at understand level without requiring students to evaluate methodology selection for cases, despite this being explicit learning objective",
+    "Limited opportunities for students to evaluate trade-offs between competing agile practices or critique agile methodology limitations—most evaluation focuses on methodology selection rather than critical assessment of agile itself",
+    "No activities requiring students to create original agile process adaptations or evaluate when agile practices should be modified for specific organizational contexts beyond provided scenarios"
+  ],
+  "suggestions": [
+    "Slide 9: Add activity where students create Definition of Done for specific project type (e.g., mobile app vs embedded system), then evaluate how DoD affects sprint planning and increment acceptance—elevates from understand to create/evaluate",
+    "Slide 13: Replace passive mind map with activity requiring students to analyze a failing project scenario, diagnose which practice gaps caused problems, then design practice adoption sequence with justification of dependencies—elevates to analyze/create",
+    "Slide 18: Add case study activity where students evaluate 3 different project contexts (varying requirement stability, team size, criticality), select methodology for each with multi-criteria justification, and identify hybrid elements needed—aligns with evaluate-level objective",
+    "Add slide requiring students to critique agile methodology limitations: analyze scenarios where agile practices fail (e.g., distributed teams, safety-critical systems, fixed-bid contracts), evaluate which agile principles conflict with constraints, propose adaptations—develops critical evaluation skills",
+    "Slide 21-22: Replace passive summary with synthesis activity where students design agile adoption plan for realistic organization (e.g., traditional enterprise transitioning to agile), selecting which practices to introduce in which order, justifying sequencing based on organizational constraints and practice dependencies—creates capstone create-level synthesis",
+    "Consider adding reflection activity where students revisit their opening hypothesis from Slide 1, evaluate whether they would change their practice selection based on lecture content, and justify what new understanding influenced their thinking—closes metacognitive loop and reinforces evaluate-level learning"
+  ]
+}
