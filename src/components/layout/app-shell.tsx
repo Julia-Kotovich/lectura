@@ -8,7 +8,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 sm:px-6">
           <Link href="/" className="flex items-center gap-2 font-semibold tracking-tight">
             <GraduationCap className="h-5 w-5 text-violet-600" />
-            Lectura
+            ProfDeck
           </Link>
           <nav className="flex items-center gap-1">
             <Link

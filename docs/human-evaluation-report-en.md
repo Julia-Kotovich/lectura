@@ -1,7 +1,7 @@
-# Human Evaluation Report — Lectura Generated Lectures
+# Human Evaluation Report — ProfDeck Generated Lectures
 
 **Module:** MCSSE-SE-01 — Software Construction, Architecture and Engineering  
-**System:** Lectura (AI-assisted lecture deck generation)  
+**System:** ProfDeck (AI-assisted lecture deck generation)  
 **Evaluators:** 3 independent human reviewers (E1, E2, E3)  
 **Lectures evaluated:** 10  
 **Scale:** 1–5 for Correctness, Completeness, Clarity, Ready-to-teach  
@@ -94,7 +94,7 @@ This suggests:
 ## 6. Main findings (English commentary)
 
 ### Overall conclusion
-Human evaluation indicates that Lectura currently produces **useful lecture drafts**, but **not classroom-ready lecture decks**. The average quality is around the mid-low range of the 1–5 scale (**~2.8**). No lecture was judged ready for direct student use without edits by a majority of reviewers.
+Human evaluation indicates that ProfDeck currently produces **useful lecture drafts**, but **not classroom-ready lecture decks**. The average quality is around the mid-low range of the 1–5 scale (**~2.8**). No lecture was judged ready for direct student use without edits by a majority of reviewers.
 
 ### What works relatively well
 **Correctness** is the strongest criterion (**~3.4**).  
@@ -112,7 +112,7 @@ The weakest areas are:
 3. **Completeness (~2.8)**  
    Coverage is uneven; important parts of a lecture may be missing or underdeveloped.
 
-**Interpretation:** Lectura is better at producing *content fragments / draft slides* than at producing *polished instructional decks*.
+**Interpretation:** ProfDeck is better at producing *content fragments / draft slides* than at producing *polished instructional decks*.
 
 ### Lecture-level pattern
 - Relatively stronger: **Lecture 8** (overall mean **3.25**), then **Lecture 3** (**3.00**)
@@ -120,7 +120,7 @@ The weakest areas are:
 - Even the best lecture remains only modestly above “acceptable draft” and still needs editing
 
 ### Practical implication for the project
-For the next iteration of Lectura, improvement effort should prioritize:
+For the next iteration of ProfDeck, improvement effort should prioritize:
 
 1. **clarity / slide readability / structure**
 2. **classroom readiness** (pacing, examples, activities, teachable flow)
@@ -132,7 +132,7 @@ Correctness should still be monitored, but it is not the primary bottleneck acco
 
 ## 7. Suggested one-paragraph summary (for email / report)
 
-> We conducted a small human evaluation of 10 AI-generated MCSSE-SE-01 lecture decks with three independent reviewers. Using a 1–5 rubric for Correctness, Completeness, Clarity, and Ready-to-teach, the overall mean score was approximately 2.8/5. Correctness was the strongest criterion (~3.4), while Ready-to-teach (~2.3) and Clarity (~2.6) were the weakest. No lecture received a majority “Yes” for use after light editing; most lectures were judged “No”, and only lectures 8–9 reached a majority of “With edits”. These results suggest that Lectura currently generates promising drafts, but substantial human revision is still required before classroom use. Next development should focus less on raw content generation alone and more on clarity, pedagogical structure, and teachability.
+> We conducted a small human evaluation of 10 AI-generated MCSSE-SE-01 lecture decks with three independent reviewers. Using a 1–5 rubric for Correctness, Completeness, Clarity, and Ready-to-teach, the overall mean score was approximately 2.8/5. Correctness was the strongest criterion (~3.4), while Ready-to-teach (~2.3) and Clarity (~2.6) were the weakest. No lecture received a majority “Yes” for use after light editing; most lectures were judged “No”, and only lectures 8–9 reached a majority of “With edits”. These results suggest that ProfDeck currently generates promising drafts, but substantial human revision is still required before classroom use. Next development should focus less on raw content generation alone and more on clarity, pedagogical structure, and teachability.
 
 ---
 

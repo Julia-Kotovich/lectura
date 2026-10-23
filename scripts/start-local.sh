@@ -19,7 +19,7 @@ if command -v docker &>/dev/null; then
 else
   echo "Docker not found. Start PostgreSQL manually or install Docker Desktop."
   echo "  brew services start postgresql@14"
-  echo "  Then create DB: createdb lectura  (or use docker compose)"
+  echo "  Then create DB: createdb profdeck  (or use docker compose)"
 fi
 
 echo "==> Waiting for Postgres on :5433..."

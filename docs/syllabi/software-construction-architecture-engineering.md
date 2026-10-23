@@ -31,7 +31,7 @@ By the end of the course, students should be able to:
 - **18-24 slides per lecture**
 - **Mix of concept slides, diagrams, code examples, and short in-class exercises**
 
-This delivery model keeps the course rigorous without turning each lecture into an overloaded slide deck. It also maps well to later slide generation in Lectura.
+This delivery model keeps the course rigorous without turning each lecture into an overloaded slide deck. It also maps well to later slide generation in ProfDeck.
 
 ## Lecture Plan
 
@@ -327,6 +327,6 @@ This course can be expanded in several directions:
 - Frank Buschmann et al., *Pattern-Oriented Software Architecture*
 - Len Bass, Paul Clements, Rick Kazman, *Software Architecture in Practice*
 
-## Status in Lectura
+## Status in ProfDeck
 
-At the moment, the Lectura catalog stores this module as a **single module-level outline**, not yet as a full lecture-by-lecture course. This syllabus is the bridge between the current module representation and a future full course model with separate lectures and slide decks.
+At the moment, the ProfDeck catalog stores this module as a **single module-level outline**, not yet as a full lecture-by-lecture course. This syllabus is the bridge between the current module representation and a future full course model with separate lectures and slide decks.

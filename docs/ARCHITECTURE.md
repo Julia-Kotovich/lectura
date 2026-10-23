@@ -1,10 +1,10 @@
-# Lectura — System Architecture
+# ProfDeck — System Architecture
 
 > AI-powered lecture slide creation platform for university CS professors.
 
 ## 1. Executive Summary
 
-Lectura is a **modular monolith** built on **Next.js 16 (App Router)** with **TypeScript**, **PostgreSQL**, **Prisma**, and **tRPC**. The architecture optimizes for:
+ProfDeck is a **modular monolith** built on **Next.js 16 (App Router)** with **TypeScript**, **PostgreSQL**, **Prisma**, and **tRPC**. The architecture optimizes for:
 
 - Fast local MVP development
 - End-to-end type safety

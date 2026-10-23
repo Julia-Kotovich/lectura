@@ -33,7 +33,7 @@ export async function exportDeckToPdf(
     margin: 48,
     size: "LETTER",
     info: {
-      Author: "Lectura",
+      Author: "ProfDeck",
       Title: title,
     },
   });

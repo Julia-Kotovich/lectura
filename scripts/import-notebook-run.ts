@@ -1,5 +1,5 @@
 /**
- * Import course-generation notebook output into the Lectura database,
+ * Import course-generation notebook output into the ProfDeck database,
  * so notebook runs can be viewed in the web UI like regular lectures.
  *
  * Usage:

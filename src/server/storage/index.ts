@@ -49,7 +49,7 @@ async function ensureBucket(client: S3Client, bucket: string) {
 }
 
 async function storeS3(buffer: Buffer, ext: string, contentType: string): Promise<StoredAsset> {
-  const bucket = process.env.S3_BUCKET ?? "lectura";
+  const bucket = process.env.S3_BUCKET ?? "profdeck";
   const client = getS3();
   await ensureBucket(client, bucket);
   const key = `slides/${nanoid()}.${ext}`;

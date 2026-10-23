@@ -21,7 +21,7 @@ async function processJob(job: Job<QueueJobPayload>) {
 const worker = createGenerationWorker(processJob);
 
 if (worker) {
-  console.log("Lectura generation worker started");
+  console.log("ProfDeck generation worker started");
   worker.on("completed", (job) => console.log(`Job ${job.id} completed`));
   worker.on("failed", (job, err) => console.error(`Job ${job?.id} failed`, err));
 } else {

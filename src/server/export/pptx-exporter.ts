@@ -17,7 +17,7 @@ export async function exportDeckToPptx(
   slides: SlideDocument[],
 ): Promise<Buffer> {
   const pptx = new PptxGenJS();
-  pptx.author = "Lectura";
+  pptx.author = "ProfDeck";
   pptx.title = title;
 
   for (const slide of slides) {

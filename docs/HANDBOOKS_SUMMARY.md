@@ -1,6 +1,6 @@
 # Constructor University — выжимка по программам CS
 
-Краткая сводка по handbook-файлам в корне проекта Lectura. Источники:
+Краткая сводка по handbook-файлам в корне проекта ProfDeck. Источники:
 
 | Файл | Программа | Когорта | Страниц |
 |------|-----------|---------|---------|
@@ -268,7 +268,7 @@ Elective: Advances in Software Engineering, Advanced Databases.
 - English: TOEFL 90 / IELTS 6.5 / Duolingo 110
 - Recommendation letter (optional)
 
-### Примечание для Lectura
+### Примечание для ProfDeck
 
 Первый SE-модуль ведёт **Prof. Dr. Bertrand Meyer** (Eiffel, Design by Contract, object-oriented programming) — пересекается с курсом OOP Peter Müller в проекте.
 

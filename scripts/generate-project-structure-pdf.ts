@@ -1,5 +1,5 @@
 /**
- * Generate docs/project-structure.pdf — an English overview of the Lectura
+ * Generate docs/project-structure.pdf — an English overview of the ProfDeck
  * repository layout and module responsibilities.
  *
  * Usage:  npx tsx scripts/generate-project-structure-pdf.ts
@@ -51,8 +51,8 @@ function renderPdf() {
     size: "A4",
     margin: 56,
     info: {
-      Title: "Lectura — Project Structure",
-      Author: "Lectura",
+      Title: "ProfDeck — Project Structure",
+      Author: "ProfDeck",
       Subject: "Repository layout and module overview",
     },
   });
@@ -60,7 +60,7 @@ function renderPdf() {
   doc.font("Helvetica");
 
   // ── Cover ───────────────────────────────────────────────────────────────
-  doc.font("Helvetica-Bold").fontSize(24).text("Lectura");
+  doc.font("Helvetica-Bold").fontSize(24).text("ProfDeck");
   doc.moveDown(0.3);
   doc.font("Helvetica").fontSize(14).fillColor("#444").text("Project Structure Overview");
   doc.moveDown(0.8);
@@ -71,11 +71,11 @@ function renderPdf() {
   doc.text(`Generated: ${new Date().toISOString().slice(0, 10)}`);
   doc.fillColor("#000");
 
-  // ── 1. What is Lectura ──────────────────────────────────────────────────
-  heading(doc, "1. What is Lectura?");
+  // ── 1. What is ProfDeck ──────────────────────────────────────────────────
+  heading(doc, "1. What is ProfDeck?");
   para(
     doc,
-    "Lectura is a web application that helps university professors plan lectures, " +
+    "ProfDeck is a web application that helps university professors plan lectures, " +
       "generate structured outlines with AI, convert them into presentation slides, " +
       "create visuals, evaluate teaching quality, and present in fullscreen mode. " +
       "It is built as a modular monolith on Next.js 16 with end-to-end TypeScript type safety.",
@@ -102,7 +102,7 @@ function renderPdf() {
   heading(doc, "3. Repository Layout");
   codeBlock(
     doc,
-    `lectura/
+    `profdeck/
 ├── docs/                  Documentation (architecture, roadmap, PDFs)
 ├── OOP_Peter_Muller/      Source lecture PDFs + generated course plan
 ├── prisma/                Database schema, migrations, seed

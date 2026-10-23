@@ -31,7 +31,7 @@ export function getGenerationQueue(): Queue<QueueJobPayload> | null {
   const conn = getConnection();
   if (!conn) return null;
   if (!queue) {
-    queue = new Queue<QueueJobPayload>("lectura-generation", { connection: conn });
+    queue = new Queue<QueueJobPayload>("profdeck-generation", { connection: conn });
   }
   return queue;
 }
@@ -53,7 +53,7 @@ export function createGenerationWorker(
 ): Worker<QueueJobPayload> | null {
   const conn = getConnection();
   if (!conn) return null;
-  return new Worker<QueueJobPayload>("lectura-generation", processor, {
+  return new Worker<QueueJobPayload>("profdeck-generation", processor, {
     connection: conn,
   });
 }

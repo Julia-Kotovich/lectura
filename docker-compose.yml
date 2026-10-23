@@ -1,41 +1,41 @@
 services:
   postgres:
     image: postgres:16-alpine
-    container_name: lectura-postgres
+    container_name: profdeck-postgres
     restart: unless-stopped
     ports:
       - "5433:5432"
     environment:
-      POSTGRES_USER: lectura
-      POSTGRES_PASSWORD: lectura_dev
-      POSTGRES_DB: lectura
+      POSTGRES_USER: profdeck
+      POSTGRES_PASSWORD: profdeck_dev
+      POSTGRES_DB: profdeck
     volumes:
-      - lectura_pg_data:/var/lib/postgresql/data
+      - profdeck_pg_data:/var/lib/postgresql/data
 
   redis:
     image: redis:7-alpine
-    container_name: lectura-redis
+    container_name: profdeck-redis
     restart: unless-stopped
     ports:
       - "6379:6379"
     volumes:
-      - lectura_redis_data:/data
+      - profdeck_redis_data:/data
 
   minio:
     image: minio/minio:latest
-    container_name: lectura-minio
+    container_name: profdeck-minio
     restart: unless-stopped
     ports:
       - "9000:9000"
       - "9001:9001"
     environment:
-      MINIO_ROOT_USER: lectura
-      MINIO_ROOT_PASSWORD: lectura_dev_secret
+      MINIO_ROOT_USER: profdeck
+      MINIO_ROOT_PASSWORD: profdeck_dev_secret
     command: server /data --console-address ":9001"
     volumes:
-      - lectura_minio_data:/data
+      - profdeck_minio_data:/data
 
 volumes:
-  lectura_pg_data:
-  lectura_redis_data:
-  lectura_minio_data:
+  profdeck_pg_data:
+  profdeck_redis_data:
+  profdeck_minio_data:

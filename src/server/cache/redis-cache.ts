@@ -23,7 +23,7 @@ export async function cacheGet(key: string): Promise<string | null> {
   const client = getRedis();
   if (client) {
     try {
-      return await client.get(`lectura:${key}`);
+      return await client.get(`profdeck:${key}`);
     } catch {
       /* fallback */
     }
@@ -45,7 +45,7 @@ export async function cacheSet(
   const client = getRedis();
   if (client) {
     try {
-      await client.set(`lectura:${key}`, value, "EX", ttlSeconds);
+      await client.set(`profdeck:${key}`, value, "EX", ttlSeconds);
       return;
     } catch {
       /* fallback */

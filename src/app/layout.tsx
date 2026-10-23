@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Lectura — AI Lecture Slides",
+  title: "ProfDeck — AI Lecture Slides",
   description:
     "AI-powered lecture planning and slide generation for university CS professors.",
 };

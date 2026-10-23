@@ -9,7 +9,7 @@ export default function SignInPage() {
   return (
     <div className="flex min-h-screen items-center justify-center p-6">
       <Card className="w-full max-w-md p-8 text-center">
-        <h1 className="text-2xl font-semibold">Sign in to Lectura</h1>
+        <h1 className="text-2xl font-semibold">Sign in to ProfDeck</h1>
         <p className="mt-2 text-sm text-zinc-500">
           {authDisabled
             ? "Auth is disabled in development. Use the app directly."

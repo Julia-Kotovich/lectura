@@ -1,7 +1,7 @@
 # Project Structure
 
 ```
-lectura/
+profdeck/
 ├── docs/
 │   ├── ARCHITECTURE.md       # System design (this repo)
 │   ├── ROADMAP.md            # Phased implementation plan

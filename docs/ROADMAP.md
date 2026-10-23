@@ -1,4 +1,4 @@
-# Lectura — Technical Roadmap
+# ProfDeck — Technical Roadmap
 
 ## Phase 1 — MVP ✅
 

@@ -1,5 +1,5 @@
 ---
-description: Keep course-generation notebook in sync with Lectura web app pipeline
+description: Keep course-generation notebook in sync with ProfDeck web app pipeline
 globs: course-generation-algorithm.ipynb,src/lib/bloom/**,src/lib/cqi/**,src/server/services/bloom-improve.ts,src/server/ai/prompts/**
 alwaysApply: false
 ---

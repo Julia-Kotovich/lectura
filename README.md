@@ -1,8 +1,8 @@
-# Lectura
+# ProfDeck
 
 **AI-powered lecture slide creation for university CS professors.**
 
-Lectura helps professors plan lectures, generate structured outlines, convert them into presentation slides, create visuals, evaluate teaching quality, and present — with a production-oriented architecture ready for cloud deployment.
+ProfDeck helps professors plan lectures, generate structured outlines, convert them into presentation slides, create visuals, evaluate teaching quality, and present — with a production-oriented architecture ready for cloud deployment.
 
 ## Features
 
@@ -40,7 +40,8 @@ See [docs/ARCHITECTURE.md](./docs/ARCHITECTURE.md) for full system design.
 ## Quick start
 
 ```bash
-cd lectura
+git clone https://github.com/Julia-Kotovich/lectura.git
+cd lectura   # GitHub folder name; the product is ProfDeck
 cp .env.example .env
 
 # Start infrastructure (Postgres + Redis + MinIO)
@@ -64,7 +65,7 @@ Open [http://localhost:3000](http://localhost:3000).
 ### Jupyter notebook (all-in-one)
 
 ```bash
-jupyter notebook run-lectura.ipynb
+jupyter notebook run-profdeck.ipynb
 ```
 
 Run cells top-to-bottom to install deps, start Docker, migrate, seed, and launch the dev server.

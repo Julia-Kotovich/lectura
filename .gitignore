@@ -39,6 +39,8 @@ docs/project-structure.pdf
 .env*.local
 .lectura-dev.pid
 .lectura-dev.log
+.profdeck-dev.pid
+.profdeck-dev.log
 
 # debug
 npm-debug.log*

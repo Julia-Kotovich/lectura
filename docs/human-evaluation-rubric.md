@@ -1,4 +1,4 @@
-# Human Evaluation Checklist — Lectura Lecture Decks
+# Human Evaluation Checklist — ProfDeck Lecture Decks
 
 **Module:** MCSSE-SE-01 Software Construction, Architecture and Engineering  
 **Scale:** 1–5 (integer scores only)  
